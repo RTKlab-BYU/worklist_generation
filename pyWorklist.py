@@ -30,6 +30,22 @@ def read_excel_to_df(filename):
     except Exception as e:
         raise ValueError(f"Unexpected error reading Excel file: {e}")
 
+# def condition_dict(dataframe, cond_range=None):
+#     conditions = {}
+#     if cond_range:
+#         try:
+#             values = re.findall(r'(\d+)-(\d+)', cond_range)[0]
+#         except TypeError:
+#             return conditions # returns empty dict if range is blank
+#     else:
+#         values = ['0', '30']
+#     for i in range(int(values[0])-1, int(values[1])):
+#         key = dataframe.iloc[i, 29]
+#         if pd.notna(dataframe.iloc[i, 30]):
+#             value = dataframe.iloc[i,30:40].tolist()
+#             conditions[key] = value
+#     return conditions
+
 def condition_dict(dataframe, cond_range=None):
     conditions = {}
     if cond_range:
@@ -43,8 +59,11 @@ def condition_dict(dataframe, cond_range=None):
         key = dataframe.iloc[i, 29]
         if pd.notna(dataframe.iloc[i, 30]):
             value = dataframe.iloc[i,30:40].tolist()
+            placings = dataframe.iloc[i,42:45].tolist()
+            value.extend(placings) # add before/after/between values to each condition in the list
             conditions[key] = value
     return conditions
+
 
 def separate_plates(dataframe):
     nbcode = dataframe.columns[1]
@@ -326,20 +345,50 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
     # divide them into their respective nonsample lists based on user inputs
     # add nonsamples to 'nonsample_before' list
     if QC_list:
-        nonsample_before.append(QC_list[:spacings[0][0]])
-        QC_list = QC_list[spacings[0][0]:]
+        for cond in QC_num: # QC_num is a list of the condition numbers of all QCs
+            one_QC = []
+            for well in QC_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            nonsample_before.append(QC_list[:int(conditions[cond][10])])
+        QC_list = QC_list[int(conditions[cond][10]):]
     if wet_QC_list:
-        nonsample_before.append(wet_QC_list[:spacings[1][0]])
-        wet_QC_list = wet_QC_list[spacings[1][0]:]
+        for cond in wet_QC_num:
+            one_QC = []
+            for well in wet_QC_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            nonsample_before.append(wet_QC_list[:int(conditions[cond][10])])
+        wet_QC_list = wet_QC_list[int(conditions[cond][10]):]
+        #nonsample_before.append(wet_QC_list[:spacings[1][0]])
+        #wet_QC_list = wet_QC_list[spacings[1][0]:]
     if Blank_list:
-        nonsample_before.append(Blank_list[:spacings[2][0]])
-        Blank_list = Blank_list[spacings[2][0]:]
+        for cond in Blank_num:
+            one_QC = []
+            for well in Blank_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            nonsample_before.append(Blank_list[:int(conditions[cond][10])])
+        Blank_list = Blank_list[int(conditions[cond][10]):]
+        # nonsample_before.append(Blank_list[:spacings[2][0]])
+        # Blank_list = Blank_list[spacings[2][0]:]
     if Lib_list and Lib_placement == "Before" and cond_range1.upper() == "ALL": #controls library placement
         nonsample_before.append(Lib_list)
     if TrueBlank_list:
-        nonsample_before.append(TrueBlank_list[:spacings[3][0]])
-        TrueBlank_list = TrueBlank_list[spacings[3][0]:]
-
+        print("TRUTH")
+        print(TrueBlank_num)
+        for cond in TrueBlank_num: # QC_num is a list of the condition numbers of all QCs
+            one_QC = []
+            for well in TrueBlank_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            for i in range(0, int(conditions[cond][10])):
+                nonsample_before.append(TrueBlank_list[:1])
+            #nonsample_before.append(TrueBlank_list[:int(conditions[cond][10])])
+        #TrueBlank_list = TrueBlank_list[int(conditions[cond][10]):]
+        #nonsample_before.append(TrueBlank_list[:spacings[3][0]])
+        #TrueBlank_list = TrueBlank_list[spacings[3][0]:]
+    print(nonsample_before)
     # add nonsamples to 'nonsample_after' list
     if QC_list:
         nonsample_after.append(QC_list[:spacings[0][1]])
@@ -837,7 +886,6 @@ def insert_sysQC(flattened_list, SysValid_list, SysValid_interval, lc_number, tw
     for well in SysValid_list:
         # for i in range(0, lc_number):
         well.append('SysQC')
-    print(f'Sysvalid list check insert_sysQC: {SysValid_list}')
     new_flat_list = []
     for i in range(0, lc_number):
         new_flat_list.append(SysValid_list[-1])
