@@ -353,12 +353,14 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
     # add nonsamples to 'nonsample_before' list
     if QC_list:
         for cond in QC_num: # QC_num is a list of the condition numbers of all QCs
-            one_QC = []
+            one_QC = [] # temporary list to sort different QCs by their number
             for well in QC_list:
                 if well[0] == cond:
                     one_QC.append(well)
-            nonsample_before.append(QC_list[:int(conditions[cond][10])])
-        QC_list = QC_list[int(conditions[cond][10]):]
+            nonsample_before.append(one_QC[:int(conditions[cond][10])])
+            for well in one_QC[:int(conditions[cond][10])]:
+                QC_list.remove(well)
+        #QC_list = QC_list[int(conditions[cond][10]):]
     if wet_QC_list:
         for cond in wet_QC_num:
             one_QC = []
@@ -366,7 +368,9 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
                 if well[0] == cond:
                     one_QC.append(well)
             nonsample_before.append(wet_QC_list[:int(conditions[cond][10])])
-        wet_QC_list = wet_QC_list[int(conditions[cond][10]):]
+            for well in one_QC[:int(conditions[cond][10])]:
+                wet_QC_list.remove(well)
+        #wet_QC_list = wet_QC_list[int(conditions[cond][10]):]
         #nonsample_before.append(wet_QC_list[:spacings[1][0]])
         #wet_QC_list = wet_QC_list[spacings[1][0]:]
     if Blank_list:
@@ -376,14 +380,14 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
                 if well[0] == cond:
                     one_QC.append(well)
             nonsample_before.append(Blank_list[:int(conditions[cond][10])])
-        Blank_list = Blank_list[int(conditions[cond][10]):]
+            for well in one_QC[:int(conditions[cond][10])]:
+                Blank_list.remove(well)
+        #Blank_list = Blank_list[int(conditions[cond][10]):]
         # nonsample_before.append(Blank_list[:spacings[2][0]])
         # Blank_list = Blank_list[spacings[2][0]:]
     if Lib_list and Lib_placement == "Before" and cond_range1.upper() == "ALL": #controls library placement
         nonsample_before.append(Lib_list)
     if TrueBlank_list:
-        print("TRUTH")
-        print(TrueBlank_num)
         for cond in TrueBlank_num: # QC_num is a list of the condition numbers of all QCs
             one_QC = []
             for well in TrueBlank_list:
@@ -391,40 +395,61 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
                     one_QC.append(well)
             for i in range(0, int(conditions[cond][10])):
                 nonsample_before.append(TrueBlank_list[:1])
-            #nonsample_before.append(TrueBlank_list[:int(conditions[cond][10])])
-        #TrueBlank_list = TrueBlank_list[int(conditions[cond][10]):]
-        #nonsample_before.append(TrueBlank_list[:spacings[3][0]])
-        #TrueBlank_list = TrueBlank_list[spacings[3][0]:]
-    print(nonsample_before)
     # add nonsamples to 'nonsample_after' list
     if QC_list:
-        nonsample_after.append(QC_list[:spacings[0][1]])
-        QC_list = QC_list[spacings[0][1]:]
+        for num in QC_num:
+            num_list = [well for well in QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                QC_list.remove(well)
     if wet_QC_list:
-        nonsample_after.append(wet_QC_list[:spacings[1][1]])
-        wet_QC_list = wet_QC_list[spacings[1][1]:]
+        for num in wet_QC_num:
+            num_list = [well for well in wet_QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                wet_QC_list.remove(well)
     if Blank_list:
-        nonsample_after.append(Blank_list[:spacings[2][1]])
-        Blank_list = Blank_list[spacings[2][1]:]
+        for num in Blank_num:
+            num_list = [well for well in Blank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                Blank_list.remove(well)
     if Lib_list and Lib_placement == "After" and cond_range1 == "ALL": #controls library placement
         nonsample_after.append(Lib_list)
     if TrueBlank_list:
-        nonsample_after.append(TrueBlank_list[:spacings[3][1]])
-        TrueBlank_list = TrueBlank_list[spacings[3][1]:]
+        for num in TrueBlank_num:
+            num_list = [well for well in TrueBlank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                TrueBlank_list.remove(well)
 
     # add nonsamples to 'nonsample_other' list
     if QC_list:
-        nonsample_other.append(QC_list[:spacings[0][2]])
-        QC_list = QC_list[spacings[0][2]:]
+        for num in QC_num:
+            num_list = [well for well in QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                QC_list.remove(well)
+        # nonsample_other.append(QC_list[:spacings[0][2]])
+        # QC_list = QC_list[spacings[0][2]:]
     if wet_QC_list:
-        nonsample_other.append(wet_QC_list[:spacings[1][2]])
-        wet_QC_list = wet_QC_list[spacings[1][2]:]
+        for num in wet_QC_num:
+            num_list = [well for well in wet_QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                wet_QC_list.remove(well)
     if Blank_list:
-        nonsample_other.append(Blank_list[:spacings[2][2]])
-        Blank_list = Blank_list[spacings[2][2]:]
+        for num in Blank_num:
+            num_list = [well for well in Blank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                Blank_list.remove(well)
     if TrueBlank_list:
-        nonsample_other.append(TrueBlank_list[:spacings[3][2]])
-        TrueBlank_list = TrueBlank_list[spacings[3][2]:]
+        for num in QC_num:
+            num_list = [well for well in TrueBlank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                QC_list.remove(well)
 
     # if library runs are not the same in a two experiment plate, they must be returned separately
     separate_Lib = []
