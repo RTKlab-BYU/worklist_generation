@@ -592,7 +592,7 @@ def blocker(conditions, even, column1, column2 = None):
         both_blocks.append(sample_blocks)
     return(both_blocks, num_of_blocks)
 
-def nonsample_blocker(nonsample_other, num_of_blocks, conditions, even):
+def nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, even):
     """ Will divide the QC, Blanks, Trueblanks etc, reserved to be between the runs, into blocks
         Make sure that number of nonsample blocks does not exceed number of sample blocks
         These blocks should not be randomized"""
@@ -1083,8 +1083,8 @@ def create_csv_to_send(csv_file, conditions, nbcode, lc_number, blank_method, sa
 
     return output_path
 
-if __name__ == "__main__":
-    df = read_excel_to_df(input_filename)
+def process(filepath):
+    df = read_excel_to_df(filepath)
     generate_seed()
     if df.shape[0] < 31 or df.shape[1] < 40:
         raise ValueError("Input file must have at least 31 rows and 40 columns. Please check that all required rows/columns are present and not hidden.")
@@ -1115,7 +1115,7 @@ if __name__ == "__main__":
             nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib2 = column_sorter(all_wells_flat, conditions, spacings, wet_amounts,
                                                                                                         num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
             both_blocks, num_of_blocks = blocker(conditions, even, column1, column2)
-        nonsample_blocks = nonsample_blocker(nonsample_other, num_of_blocks, conditions, even)
+        nonsample_blocks = nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, even)
         sample_blocks = zipper(both_blocks)
         non_flat_list = block_zipper(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, even)
         well_conditions, block_runs, positions, reps, msmethods = extract_file_info(non_flat_list, conditions, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location)
@@ -1140,8 +1140,8 @@ if __name__ == "__main__":
                                                                                     spacings, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1) #cond_range1 is correct, it checks of cond_range1.upper() == "ALL"
         both_blocks2, num_of_blocks2 = blocker(conditions2, even, exp2col1)
 
-        nonsample_blocks1 = nonsample_blocker(nonsample_other1, num_of_blocks1, conditions1, even)
-        nonsample_blocks2 = nonsample_blocker(nonsample_other2, num_of_blocks2, conditions2, even)
+        nonsample_blocks1 = nonsample_blocker(lc_number, nonsample_other1, num_of_blocks1, conditions1, even)
+        nonsample_blocks2 = nonsample_blocker(lc_number, nonsample_other2, num_of_blocks2, conditions2, even)
         sample_blocks1 = [item for block in both_blocks1 for item in block] # remove one layer of list from each list of list
         sample_blocks2 = [item for block in both_blocks2 for item in block]
 
@@ -1167,3 +1167,5 @@ if __name__ == "__main__":
                        sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
     print(f"Worksheet generation complete! Check the {output_folder} folder for your CSVs.")
+
+    return pd.read_csv(ms_path), pd.read_csv(lc_path)
