@@ -4,6 +4,7 @@ import csv
 import random
 import sys
 import re
+import math
 
 ### User Inputs
 input_filename = "input/worklist.xlsx"
@@ -24,11 +25,11 @@ def read_excel_to_df(filename):
         dataframe = pd.read_excel(filename)
         return dataframe
     except FileNotFoundError:
-        raise ValueError(f"File {filename} not found.")
+        raise ValueError(f"File '{filename}' not found. Please check that the file exists in the correct directory and has the expected extension.")
     except ValueError as e:
-        raise ValueError(f"Invalid file format: {e}")
+        raise ValueError(f"Invalid file format: {e}. Supported formats are .xlsx or .xls.")
     except Exception as e:
-        raise ValueError(f"Unexpected error reading Excel file: {e}")
+        raise ValueError(f"Unexpected error reading Excel file: {e}. Please ensure the file is not corrupted and is saved in a compatible Excel format.")
 
 def condition_dict(dataframe, cond_range=None):
     conditions = {}
@@ -101,7 +102,7 @@ def separate_plates(dataframe):
             try:
                 wet_amounts[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 40])
             except ValueError:
-                raise ValueError("Wet sample amount must be a whole number or blank")
+                raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
     num_to_run = {}
     for i in range(0, 31):
         if pd.notna(dataframe.iloc[i, 41]) & pd.notna(dataframe.iloc[i, 30]):
@@ -111,7 +112,7 @@ def separate_plates(dataframe):
                 try:
                     num_to_run[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 41])
                 except ValueError:
-                    raise ValueError("Number of sample to run must be 'all' or integer.")
+                    raise ValueError("Number of samples to run must be either 'all' (no quotes) or a whole number.")
     return nbcode, pathway, lc_column_number, wet_amounts, plates, num_to_run
 
 def validate_and_convert_spacing(lst, name):
@@ -120,7 +121,7 @@ def validate_and_convert_spacing(lst, name):
         if isinstance(val, (int, float)) and float(val).is_integer():
             converted.append(int(val))
         else:
-            raise ValueError(f"Invalid value in {name}[{i}]: {val} (not a whole number)")
+            raise ValueError(f"Invalid value in {name}[{i}]: '{val}'. Expected a whole number.")
     return converted
 
 def spacing(dataframe):
@@ -154,19 +155,31 @@ def process_plate(plate, plate_name, wet_amounts, cond_range = None):
             try:
                 col_num = int(col_name)
             except ValueError:
-                raise ValueError(f"Column name '{col_name}' is not convertible to int in plate '{plate_name}'. Change column name to a unique integer.")
+                raise ValueError(f"Column name '{col_name}' in plate '{plate_name}' must be a unique integer (e.g., 1, 2, 3). Please rename the column accordingly.")
             value = row_series[col_name]
             if pd.isna(row_series[col_name]):
                 continue
             plate_location = f"{r_idx}{col_num}" # well location (e.g. A1)
             abs_location = RGB + plate_location
             try:
-                for i in range(0, int(wet_amounts[int(value)])):
-                    if cond_range:
-                        if int(value) in range(int(ranges[0]), int(ranges[1])+1):
-                            wells_list.append([int(value), abs_location]) # value, absolute location (e.g. RA1)
+                try:
+                    # Try to coerce to float first, whether it's a number or a numeric string
+                    as_float = float(value)
+                    if math.isfinite(as_float) and as_float.is_integer():
+                        normalized_value = int(as_float)
                     else:
-                        wells_list.append([int(value), abs_location]) # value, absolute location (e.g. RA1)
+                        raise ValueError
+                except (ValueError, TypeError):
+                    raise ValueError(
+                        f"Invalid condition ID '{value}' in plate '{plate_name}' at location {abs_location}. "
+                        "Condition IDs must be whole numbers without extra symbols."
+                    )
+                for i in range(0, int(wet_amounts[normalized_value])):
+                    if cond_range:
+                        if normalized_value in range(int(ranges[0]), int(ranges[1]) + 1):
+                            wells_list.append([normalized_value, abs_location]) # value, absolute location (e.g. RA1)
+                    else:
+                        wells_list.append([normalized_value, abs_location]) # value, absolute location (e.g. RA1)
             except KeyError:
                 if cond_range:
                     continue # only adds wells to wells_list associated with the conditions specified in cond_range
@@ -215,7 +228,7 @@ def compare_wells_and_counts(wells_list, conditions, spacing, wet_amounts):
     # this code ensures that if there is at least one TrueBlank well, that it will be "drawn from" enough times to for all of the
     # Trueblank runs in the worklist
     if total_TrueBlank == 0 and (spacing[3][0] + spacing[3][1] + spacing[3][2]) != 0:
-        raise ValueError ("Error: At least one TrueBlank cell must be labeled.")
+        raise ValueError("At least one 'TrueBlank' cell must be labeled in the plate layout. Check your plate map and label accordingly.")
     elif total_TrueBlank < (spacing[3][0] + spacing[3][1] + spacing[3][2]):
         difference = (spacing[3][0] + spacing[3][1] + spacing[3][2]) - total_TrueBlank
         notfound = True
@@ -561,8 +574,7 @@ def nonsample_blocker(nonsample_other, num_of_blocks, conditions, even):
                 count += 1
         to_add = count // block_num
         if to_add == 1 and lc_number == 2:
-            raise ValueError("ValueError: If you want to include nonsample wells between sample/condition wells in a two column, " \
-            "system you must include at least two of each.")
+            raise ValueError("If you want to include nonsample wells between sample/condition wells in a two-column layout, you must include at least two of each nonsample well type.")
         sample_dict[sample] = [conditions[sample], to_add, count]
     nonsample_blocks = []
     blocks_created = 0
@@ -683,8 +695,7 @@ def two_xp_zipper(flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_loc
     TB_well = [two_xp_TB, two_xp_TB_location[0][1], "end"]
 
     if two_xp_TB is None or two_xp_TB == 'None':
-        raise ValueError("Error: When more than one experiment is run on one worklist," \
-        " a TrueBlank well must be specified in cell AM37 of the excel sheet.")
+        raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AM37 of the excel sheet.")
     # removes empty blocks from the lists
     flat_list_1 = [block for block in flat_list_1 if block != [[]]]
     flat_list_2 = [block for block in flat_list_2 if block != [[]]]
@@ -704,8 +715,8 @@ def two_xp_zipper(flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_loc
                     well.append(f"blo{index}")
 
     # flattens the lists
-    flat_list_1 = fully_flatten(flat_list_1)
-    flat_list_2 = fully_flatten(flat_list_2)
+    flat_list_1 = flattener(flat_list_1)
+    flat_list_2 = flattener(flat_list_2)
 
     # forces lists to be the same length by adding TrueBlank wells
     if len(flat_list_1) > len(flat_list_2):
@@ -722,15 +733,22 @@ def two_xp_zipper(flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_loc
         combined_list.append(flat_list_2[i])
     return combined_list
 
-def fully_flatten(final_list):
+def flattener(final_list):
+    """Flatten a three-layer nested list into a list of lists, ignoring empty lists."""
     while isinstance(final_list, list) and len(final_list) == 1 and isinstance(final_list[0], list):
         final_list = final_list[0]
-    return [
-        pair
-        for block in final_list
-        for group in block
-        for pair in group
-    ]
+
+    out = []
+    for block in final_list:
+        if not block:
+            continue
+        for group in block:
+            if not group:
+                continue
+            for pair in group:
+                if pair:  # skip completely empty elements
+                    out.append(pair)
+    return out
 
 def rep_tracker(flattened, conditions):
     reps = []
@@ -886,7 +904,7 @@ def extract_file_info(non_flat_list, conditions, SysValid_list, SysValid_interva
             for well in part:
                 if isinstance(well, list) and len(well) < 3:
                     well.append(f"blo{index}")
-    flattened = fully_flatten(non_flat_list)
+    flattened = flattener(non_flat_list)
     # inserts System QC wells into flattened list
     flattened = insert_sysQC(flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
     well_conditions, block_runs, positions, reps, msmethods = [], [], [], [], []
@@ -958,7 +976,7 @@ def create_csv_to_send(csv_file, conditions, nbcode, lc_number, blank_method, sa
         if index not in conditions:
             raise KeyError(f"Condition {index} not found.")
         if len(conditions[index]) < 10:
-            raise ValueError(f"Condition {index} is malformed: expected ≥10 fields, got {len(conditions[index])}.")
+            raise ValueError(f"Condition {index} is malformed: expected at least 10 fields, but got {len(conditions[index])}. Check the corresponding row in your Excel sheet for missing values.")
         if csv_file == 'MS':
             data_paths.append(conditions[index][2])
             #print(conditions[index][2])
@@ -1008,7 +1026,7 @@ if __name__ == "__main__":
     df = read_excel_to_df(input_filename)
     generate_seed()
     if df.shape[0] < 31 or df.shape[1] < 40:
-        raise ValueError("Input file must have at least 31 rows and 40 columns.")
+        raise ValueError("Input file must have at least 31 rows and 40 columns. Please check that all required rows/columns are present and not hidden.")
 
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = separate_plates(df)
 
@@ -1077,7 +1095,7 @@ if __name__ == "__main__":
         well_conditions, block_runs, positions, reps, msmethods = two_xp_extract_file_info(two_xp_flat_list, conditions, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location)
     else:
         print("If there is only one experiment the library values should be the same")
-        raise ValueError("Experiment conditions cannot be run!")
+        raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. Verify that all required experiment fields are correctly filled in the Excel sheet.")
 
     filenames = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     # Create and export MS CSV
@@ -1087,4 +1105,4 @@ if __name__ == "__main__":
     lc_path = create_csv_to_send("LC", conditions, nbcode, lc_number, blank_method,
                        sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
-    print("Worksheet generation complete! Check the 'files/output' folder for your CSVs.")
+    print(f"Worksheet generation complete! Check the {output_folder} folder for your CSVs.")
