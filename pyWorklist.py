@@ -917,7 +917,6 @@ def insert_sysQC(flattened_list, SysValid_list, SysValid_interval, lc_number, tw
     for well in SysValid_list:
         # for i in range(0, lc_number):
         well.append('SysQC')
-
     new_flat_list = []
     for i in range(0, lc_number):
         new_flat_list.append(SysValid_list[-1])
