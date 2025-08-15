@@ -44,6 +44,8 @@ def condition_dict(dataframe, cond_range=None):
         key = dataframe.iloc[i, 29]
         if pd.notna(dataframe.iloc[i, 30]):
             value = dataframe.iloc[i,30:40].tolist()
+            placings = dataframe.iloc[i,42:45].tolist()
+            value.extend(placings) # add before/after/between values to each condition in the list
             conditions[key] = value
     return conditions
 
@@ -190,59 +192,64 @@ def process_plate(plate, plate_name, wet_amounts, cond_range = None):
 
 def compare_wells_and_counts(wells_list, conditions, spacing, wet_amounts):
     # attaches 'QC', 'Blank', 'TrueBlank' and 'Lib' to their number in conditions dictionary
-    QC_num, wet_QC_num, Blank_num, TrueBlank_num = None, None, None, None
+    # QC_num, wet_QC_num, Blank_num, TrueBlank_num = None, None, None, None
+    # list_of_keys = list(conditions.keys())
+    # for key in list_of_keys:
+    #     if conditions[key][0] == 'QC':
+    #         QC_num = key
+    #     if conditions[key][0] == 'WetQC':
+    #         wet_QC_num = key
+    #     if conditions[key][0] == 'Blank':
+    #         Blank_num = key
+    #     if conditions[key][0] == 'TrueBlank':
+    #         TrueBlank_num = key
+
+    QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
+
+    # find number associated with each nonsample well type
     list_of_keys = list(conditions.keys())
     for key in list_of_keys:
         if conditions[key][0] == 'QC':
-            QC_num = key
+            QC_num.append(int(key))
         if conditions[key][0] == 'WetQC':
-            wet_QC_num = key
+            wet_QC_num.append(int(key))
         if conditions[key][0] == 'Blank':
-            Blank_num = key
+            Blank_num.append(int(key))
         if conditions[key][0] == 'TrueBlank':
-            TrueBlank_num = key
+            TrueBlank_num.append(int(key))
+        if conditions[key][0] == 'Lib':
+            Lib_num.append(int(key))
+        if conditions[key][0] == "SystemValidation":
+            SysValid_num.append(int(key))
     #check that QC, Blank, and TrueBlank numbers align with before/between/after inputs
     total_QC = 0
     total_wet_QC = 0
     total_Blank = 0
     total_TrueBlank = 0
     for well in wells_list:
-        if QC_num is not None and well[0] == QC_num:
+        if QC_num is not None and well[0] in QC_num:
             total_QC += 1
-        if wet_QC_num is not None and well[0] == wet_QC_num:
+        if wet_QC_num is not None and well[0] in wet_QC_num:
             total_wet_QC += 1
-        if Blank_num is not None and well[0] == Blank_num:
+        if Blank_num is not None and well[0] in Blank_num:
             total_Blank += 1
-        if TrueBlank_num is not None and well[0] == TrueBlank_num:
+        if TrueBlank_num is not None and well[0] in TrueBlank_num:
             total_TrueBlank += 1
+
+    print("What is wet amounts?")
+    print(wet_amounts)
+
     # some checks
-    if total_QC < (spacing[0][0] + spacing[0][1] + spacing[0][2]):
-        print(total_QC, spacing[0][0], spacing[0][1], spacing[0][2])
-        raise ValueError ("Error: Number of dry QCs does not match between wells and excel sheet input.")
-    if total_QC != None and wet_amounts != None and wet_QC_num != None:
-        if total_wet_QC * wet_amounts[wet_QC_num] < (spacing[1][0] + spacing[1][1] + spacing[1][2]):
-            raise ValueError ("Error: Number of wet QCs does not match between wells and excel sheet input.")
-    if total_Blank != None and wet_amounts != None and Blank_num != None:
-        if total_Blank * wet_amounts[Blank_num] < (spacing[2][0] + spacing[2][1] + spacing[2][2]):
-            raise ValueError ("Error: Number of blanks in wells does not match excel sheet input.")
-    # this code ensures that if there is at least one TrueBlank well, that it will be "drawn from" enough times to for all of the
-    # Trueblank runs in the worklist
-    if total_TrueBlank == 0 and (spacing[3][0] + spacing[3][1] + spacing[3][2]) != 0:
-        raise ValueError("At least one 'TrueBlank' cell must be labeled in the plate layout. Check your plate map and label accordingly.")
-    elif total_TrueBlank < (spacing[3][0] + spacing[3][1] + spacing[3][2]):
-        difference = (spacing[3][0] + spacing[3][1] + spacing[3][2]) - total_TrueBlank
-        notfound = True
-        index = 0
-        #while (notfound == True) and (index < len(wells_list)):
-        for well in wells_list.copy():
-            if well[0] == TrueBlank_num:
-                for i in range(0, difference):
-                    wells_list.append(well)
-                # notfound = False
-                break
-            index +=1
-
-
+    print("Testing Checks")
+    for num in QC_num:
+        if total_QC*wet_amounts[num] < sum([conditions[num][10], conditions[num][11], conditions[num][12]]):
+            raise ValueError ("Error: There are not enough QC wells in your plate diagrams corresponding to the conditions table.")
+    for num in wet_QC_num:
+        if total_wet_QC * wet_amounts[num] < sum([conditions[num][10], conditions[num][11], conditions[num][12]]):
+            raise ValueError ("Error: There are not enough wet QC wells in your plate diagrams corresponding to the conditions table.")
+    for num in Blank_num:
+        if total_Blank * wet_amounts[num] < sum([conditions[num][10], conditions[num][11], conditions[num][12]]):
+            raise ValueError ("Error: There are not enough Blank condition wells in your plate diagrams corresponding to the conditions table.") 
     return ("Alles gut und richtig")
 
 def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1): #split the wells list evenly between the two columns
@@ -339,49 +346,104 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
     # divide them into their respective nonsample lists based on user inputs
     # add nonsamples to 'nonsample_before' list
     if QC_list:
-        nonsample_before.append(QC_list[:spacings[0][0]])
-        QC_list = QC_list[spacings[0][0]:]
+        for cond in QC_num: # QC_num is a list of the condition numbers of all QCs
+            one_QC = [] # temporary list to sort different QCs by their number
+            for well in QC_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            nonsample_before.append(one_QC[:int(conditions[cond][10])])
+            for well in one_QC[:int(conditions[cond][10])]:
+                QC_list.remove(well)
+        #QC_list = QC_list[int(conditions[cond][10]):]
     if wet_QC_list:
-        nonsample_before.append(wet_QC_list[:spacings[1][0]])
-        wet_QC_list = wet_QC_list[spacings[1][0]:]
+        for cond in wet_QC_num:
+            one_QC = []
+            for well in wet_QC_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            nonsample_before.append(wet_QC_list[:int(conditions[cond][10])])
+            for well in one_QC[:int(conditions[cond][10])]:
+                wet_QC_list.remove(well)
+        #wet_QC_list = wet_QC_list[int(conditions[cond][10]):]
+        #nonsample_before.append(wet_QC_list[:spacings[1][0]])
+        #wet_QC_list = wet_QC_list[spacings[1][0]:]
     if Blank_list:
-        nonsample_before.append(Blank_list[:spacings[2][0]])
-        Blank_list = Blank_list[spacings[2][0]:]
+        for cond in Blank_num:
+            one_QC = []
+            for well in Blank_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            nonsample_before.append(Blank_list[:int(conditions[cond][10])])
+            for well in one_QC[:int(conditions[cond][10])]:
+                Blank_list.remove(well)
+        #Blank_list = Blank_list[int(conditions[cond][10]):]
+        # nonsample_before.append(Blank_list[:spacings[2][0]])
+        # Blank_list = Blank_list[spacings[2][0]:]
     if Lib_list and Lib_placement == "Before" and cond_range1.upper() == "ALL": #controls library placement
         nonsample_before.append(Lib_list)
     if TrueBlank_list:
-        nonsample_before.append(TrueBlank_list[:spacings[3][0]])
-        TrueBlank_list = TrueBlank_list[spacings[3][0]:]
-
+        for cond in TrueBlank_num: # QC_num is a list of the condition numbers of all QCs
+            one_QC = []
+            for well in TrueBlank_list:
+                if well[0] == cond:
+                    one_QC.append(well)
+            for i in range(0, int(conditions[cond][10])):
+                nonsample_before.append(TrueBlank_list[:1])
     # add nonsamples to 'nonsample_after' list
     if QC_list:
-        nonsample_after.append(QC_list[:spacings[0][1]])
-        QC_list = QC_list[spacings[0][1]:]
+        for num in QC_num:
+            num_list = [well for well in QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                QC_list.remove(well)
     if wet_QC_list:
-        nonsample_after.append(wet_QC_list[:spacings[1][1]])
-        wet_QC_list = wet_QC_list[spacings[1][1]:]
+        for num in wet_QC_num:
+            num_list = [well for well in wet_QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                wet_QC_list.remove(well)
     if Blank_list:
-        nonsample_after.append(Blank_list[:spacings[2][1]])
-        Blank_list = Blank_list[spacings[2][1]:]
+        for num in Blank_num:
+            num_list = [well for well in Blank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                Blank_list.remove(well)
     if Lib_list and Lib_placement == "After" and cond_range1 == "ALL": #controls library placement
         nonsample_after.append(Lib_list)
     if TrueBlank_list:
-        nonsample_after.append(TrueBlank_list[:spacings[3][1]])
-        TrueBlank_list = TrueBlank_list[spacings[3][1]:]
+        for num in TrueBlank_num:
+            num_list = [well for well in TrueBlank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][11])])
+            for well in num_list[:int(conditions[num][11])]:
+                TrueBlank_list.remove(well)
 
     # add nonsamples to 'nonsample_other' list
     if QC_list:
-        nonsample_other.append(QC_list[:spacings[0][2]])
-        QC_list = QC_list[spacings[0][2]:]
+        for num in QC_num:
+            num_list = [well for well in QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                QC_list.remove(well)
+        # nonsample_other.append(QC_list[:spacings[0][2]])
+        # QC_list = QC_list[spacings[0][2]:]
     if wet_QC_list:
-        nonsample_other.append(wet_QC_list[:spacings[1][2]])
-        wet_QC_list = wet_QC_list[spacings[1][2]:]
+        for num in wet_QC_num:
+            num_list = [well for well in wet_QC_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                wet_QC_list.remove(well)
     if Blank_list:
-        nonsample_other.append(Blank_list[:spacings[2][2]])
-        Blank_list = Blank_list[spacings[2][2]:]
+        for num in Blank_num:
+            num_list = [well for well in Blank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                Blank_list.remove(well)
     if TrueBlank_list:
-        nonsample_other.append(TrueBlank_list[:spacings[3][2]])
-        TrueBlank_list = TrueBlank_list[spacings[3][2]:]
+        for num in QC_num:
+            num_list = [well for well in TrueBlank_list if well[0] == num]
+            nonsample_after.append(num_list[:int(conditions[num][12])])
+            for well in num_list[:int(conditions[num][12])]:
+                QC_list.remove(well)
 
     # if library runs are not the same in a two experiment plate, they must be returned separately
     separate_Lib = []
@@ -855,7 +917,7 @@ def insert_sysQC(flattened_list, SysValid_list, SysValid_interval, lc_number, tw
     for well in SysValid_list:
         # for i in range(0, lc_number):
         well.append('SysQC')
-    print(f'Sysvalid list check insert_sysQC: {SysValid_list}')
+
     new_flat_list = []
     for i in range(0, lc_number):
         new_flat_list.append(SysValid_list[-1])
