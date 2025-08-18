@@ -8,7 +8,7 @@ import math
 
 ### User Inputs
 input_filename = "input/worklist.xlsx"
-output_folder = "output/worklist"
+output_folder = os.path.expanduser("~/Desktop/worklist_generation/output")  # Change this to your desired output folder
 # Create output folder if not exists
 os.makedirs(output_folder, exist_ok=True)
 
