@@ -1,3 +1,0 @@
-([('MyApp',
-   '/Users/gabewilson/Desktop/Worklist App/dist/MyApp',
-   'EXECUTABLE')],)
