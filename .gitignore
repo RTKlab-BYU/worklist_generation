@@ -1,10 +1,8 @@
 # Python
 __pycache__/
 *.pyc
-
-# PyInstaller
-dist/
-build/
+*.pyo
+*.pyd
 *.spec
 
 # Logs
@@ -14,5 +12,13 @@ worklist_generator_log.txt
 # VS Code
 .vscode/
 
-# macOS
+# Virtual env
+venv/
+.env/
+
+# Build artifacts
+dist/
+build/
+
+# MacOS junk
 .DS_Store

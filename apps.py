@@ -1,8 +1,8 @@
 import sys, os, traceback
 
 logfile = os.path.expanduser("~/worklist_generator_log.txt")
-sys.stderr = open(logfile, "w")
-sys.stdout = open(logfile, "w")
+sys.stderr = open(logfile, "a", buffering=1)  # line-buffered append
+sys.stdout = sys.stderr
 
 
 import tkinter as tk
@@ -47,22 +47,32 @@ def run_worklist():
         return
 
     try:
-        # Call your existing processing function
-        output1, output2 = pyWorklist.process(file_path)
+        # Call the processing function from pyWorklist
+        ms_pd, lc_pd, ms_filename, lc_filename = pyWorklist.process(file_path)
 
         save_dir = filedialog.askdirectory(title="Select folder to save results")
         if not save_dir:
             return
 
-        output1_path = os.path.join(save_dir, "output1.csv")
-        output2_path = os.path.join(save_dir, "output2.csv")
+        output1_path = os.path.join(save_dir, ms_filename)
+        output2_path = os.path.join(save_dir, lc_filename)
 
-        output1.to_csv(output1_path, index=False)
-        output2.to_csv(output2_path, index=False)
+        # Save in Excel-friendly CSV format
+        ms_pd.to_csv(output1_path, index=False, encoding="utf-8-sig", lineterminator="\r\n")
+        lc_pd.to_csv(output2_path, index=False, encoding="utf-8-sig", lineterminator="\r\n")
 
         messagebox.showinfo("Worklist Generator", "Files saved successfully!")
+
     except Exception as e:
-        messagebox.showerror("Worklist Generator", str(e))
+        # Write full traceback to logfile
+        traceback.print_exc(file=sys.stderr)
+
+        # Also show a popup with the simple message
+        messagebox.showerror(
+            "Worklist Generator",
+            f"An error occurred:\n{e}\n\nSee {logfile} for details."
+        )
+
 
 # --- UI Setup ---
 root = tk.Tk()

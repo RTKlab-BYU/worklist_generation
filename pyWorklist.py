@@ -5,6 +5,7 @@ import random
 import sys
 import re
 import math
+import numpy as np
 
 ### User Inputs
 input_filename = "input/worklist.xlsx"
@@ -31,13 +32,20 @@ def read_excel_to_df(filename):
     except Exception as e:
         raise ValueError(f"Unexpected error reading Excel file: {e}. Please ensure the file is not corrupted and is saved in a compatible Excel format.")
 
+def safe_int(val, default=0):
+    try:
+        if pd.isna(val):  # handles NaN from pandas
+            return default
+        return int(val)
+    except (ValueError, TypeError):
+        return default
+
 def condition_dict(dataframe, cond_range=None):
     conditions = {}
     if cond_range:
-        try:
-            values = re.findall(r'(\d+)-(\d+)', cond_range)[0]
-        except TypeError:
-            return conditions # returns empty dict if range is blank
+        values = parse_range(cond_range)
+        if not values:
+            return conditions   # skip if empty
     else:
         values = ['0', '30']
     for i in range(int(values[0])-1, int(values[1])):
@@ -102,7 +110,10 @@ def separate_plates(dataframe):
     for i in range(0, 31):
         if pd.notna(dataframe.iloc[i, 40]) & pd.notna(dataframe.iloc[i, 30]):
             try:
-                wet_amounts[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 40])
+                if dataframe.iloc[i, 40] is None or dataframe.iloc[i, 40] == '':
+                    wet_amounts[dataframe.iloc[i, 29]] = 1
+                else:
+                    wet_amounts[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 40])
             except ValueError:
                 raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
     num_to_run = {}
@@ -127,10 +138,10 @@ def validate_and_convert_spacing(lst, name):
     return converted
 
 def spacing(dataframe):
-    qc_spacing = validate_and_convert_spacing(dataframe.iloc[31:34, 30].tolist(), "qc_spacing")
-    wet_qc_spacing = validate_and_convert_spacing(dataframe.iloc[34:37, 30].tolist(), "wet_qc_spacing")
-    blank_spacing = validate_and_convert_spacing(dataframe.iloc[37:40, 30].tolist(), "blank_spacing")
-    true_blank_spacing = validate_and_convert_spacing(dataframe.iloc[40:43, 30].tolist(), "true_blank_spacing")
+    # qc_spacing = validate_and_convert_spacing(dataframe.iloc[31:34, 30].tolist(), "qc_spacing")
+    # wet_qc_spacing = validate_and_convert_spacing(dataframe.iloc[34:37, 30].tolist(), "wet_qc_spacing")
+    # blank_spacing = validate_and_convert_spacing(dataframe.iloc[37:40, 30].tolist(), "blank_spacing")
+    # true_blank_spacing = validate_and_convert_spacing(dataframe.iloc[40:43, 30].tolist(), "true_blank_spacing")
     # Each of the spacing lists should have 3 values: before, after, between
     # Retrieve Lib before or after value
     Lib_placement = dataframe.iloc[31,34] # are lib runs before or after samples?
@@ -140,14 +151,28 @@ def spacing(dataframe):
     experiment1 = dataframe.iloc[31,37] # if not "All", which conditions belong to experiment 1
     experiment2 = dataframe.iloc[32,37] # which conditions belong to experiment 2 if any
     lib_same = dataframe.iloc[33,37] # "Yes" or "No", indicates if lib runs are the same for both experiments
-    return [qc_spacing, wet_qc_spacing, blank_spacing, true_blank_spacing], Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even
+    return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even
+
+def parse_range(cond_range):
+    if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":
+        return [0,0]  # treat blank as no conditions
+
+    s = str(cond_range).strip()
+
+    # Try number-number
+    matches = re.findall(r'(\d+)-(\d+)', s)
+    if matches:
+        start, end = map(int, matches[0])
+        return [start, end]
+
+    raise ValueError(f"Invalid condition range: {cond_range!r}")
 
 def process_plate(plate, plate_name, wet_amounts, cond_range = None):
     wells_list = []
     RGB = plate_name.split("_")[0]
     if cond_range:
         try:
-            ranges = re.findall(r'(\d+)-(\d+)', cond_range)[0]
+            ranges = parse_range(cond_range)
         except TypeError:
             ranges = ['0', '0'] # range was defined as blank so conditions should return blank
 
@@ -173,7 +198,7 @@ def process_plate(plate, plate_name, wet_amounts, cond_range = None):
                         raise ValueError
                 except (ValueError, TypeError):
                     raise ValueError(
-                        f"Invalid condition ID '{value}' in plate '{plate_name}' at location {abs_location}. "
+                        f"Invalid condition ID '{value}' at location {abs_location}. "
                         "Condition IDs must be whole numbers without extra symbols."
                     )
                 for i in range(0, int(wet_amounts[normalized_value])):
@@ -190,7 +215,9 @@ def process_plate(plate, plate_name, wet_amounts, cond_range = None):
     return wells_list
 
 
-def compare_wells_and_counts(wells_list, conditions, spacing, wet_amounts):
+def compare_wells_and_counts(wells_list, conditions, wet_amounts):
+    if wet_amounts is None:
+        raise ValueError("Samples/well must be provided for validation")
     # attaches 'QC', 'Blank', 'TrueBlank' and 'Lib' to their number in conditions dictionary
     # QC_num, wet_QC_num, Blank_num, TrueBlank_num = None, None, None, None
     # list_of_keys = list(conditions.keys())
@@ -236,23 +263,30 @@ def compare_wells_and_counts(wells_list, conditions, spacing, wet_amounts):
         if TrueBlank_num is not None and well[0] in TrueBlank_num:
             total_TrueBlank += 1
 
-    print("What is wet amounts?")
-    print(wet_amounts)
+    # print("What is wet amounts?")
+    # print(wet_amounts)
 
-    # some checks
-    print("Testing Checks")
+    # for num in QC_num:
+    #     if total_QC * wet_amounts[num] < sum(spacings[0]):
+    #         raise ValueError ("Error: There are not enough QC wells in your plate diagrams corresponding to the conditions table.")
+    # for num in wet_QC_num:
+    #     if total_wet_QC * wet_amounts[num] < sum(spacings[1]):
+    #         raise ValueError ("Error: There are not enough wet QC wells in your plate diagrams corresponding to the conditions table.")
+    # for num in Blank_num:
+    #     if total_Blank * wet_amounts[num] < sum(spacings[2]):
+    #         raise ValueError ("Error: There are not enough Blank condition wells in your plate diagrams corresponding to the conditions table.")
+
     for num in QC_num:
-        if total_QC*wet_amounts[num] < sum([conditions[num][10], conditions[num][11], conditions[num][12]]):
+        if total_QC * wet_amounts[num] < sum([safe_int(conditions[num][10]), safe_int(conditions[num][11]), safe_int(conditions[num][12])]):
             raise ValueError ("Error: There are not enough QC wells in your plate diagrams corresponding to the conditions table.")
     for num in wet_QC_num:
-        if total_wet_QC * wet_amounts[num] < sum([conditions[num][10], conditions[num][11], conditions[num][12]]):
+        if total_wet_QC * wet_amounts[num] < sum([safe_int(conditions[num][10]), safe_int(conditions[num][11]), safe_int(conditions[num][12])]):
             raise ValueError ("Error: There are not enough wet QC wells in your plate diagrams corresponding to the conditions table.")
     for num in Blank_num:
-        if total_Blank * wet_amounts[num] < sum([conditions[num][10], conditions[num][11], conditions[num][12]]):
-            raise ValueError ("Error: There are not enough Blank condition wells in your plate diagrams corresponding to the conditions table.") 
-    return ("Alles gut und richtig")
+        if total_Blank * wet_amounts[num] < sum([safe_int(conditions[num][10]), safe_int(conditions[num][11]), safe_int(conditions[num][12])]):
+            raise ValueError ("Error: There are not enough Blank condition wells in your plate diagrams corresponding to the conditions table.")
 
-def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1): #split the wells list evenly between the two columns
+def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1): #split the wells list evenly between the two columns
     column1 = []
     column2 = []
     extras = [] # these are the odds ones out to attach at the end to run anyways if wanted
@@ -285,7 +319,8 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
     TrueBlank_list = []
     Lib_list = []
     SysValid_list = []
-    for well in wells_list[:]:
+    wells_list = wells_list.copy()  # make a copy to avoid modifying the original list
+    for well in wells_list:
         if QC_num:
             for num in QC_num:
                 if int(well[0]) == num:
@@ -351,8 +386,8 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
             for well in QC_list:
                 if well[0] == cond:
                     one_QC.append(well)
-            nonsample_before.append(one_QC[:int(conditions[cond][10])])
-            for well in one_QC[:int(conditions[cond][10])]:
+            nonsample_before.append(one_QC[:safe_int(conditions[cond][10], default=0)])
+            for well in one_QC[:safe_int(conditions[cond][10], default=0)]:
                 QC_list.remove(well)
         #QC_list = QC_list[int(conditions[cond][10]):]
     if wet_QC_list:
@@ -361,8 +396,8 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
             for well in wet_QC_list:
                 if well[0] == cond:
                     one_QC.append(well)
-            nonsample_before.append(wet_QC_list[:int(conditions[cond][10])])
-            for well in one_QC[:int(conditions[cond][10])]:
+            nonsample_before.append(wet_QC_list[:safe_int(conditions[cond][10], default=0)])
+            for well in one_QC[:safe_int(conditions[cond][10], default=0)]:
                 wet_QC_list.remove(well)
         #wet_QC_list = wet_QC_list[int(conditions[cond][10]):]
         #nonsample_before.append(wet_QC_list[:spacings[1][0]])
@@ -373,8 +408,8 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
             for well in Blank_list:
                 if well[0] == cond:
                     one_QC.append(well)
-            nonsample_before.append(Blank_list[:int(conditions[cond][10])])
-            for well in one_QC[:int(conditions[cond][10])]:
+            nonsample_before.append(Blank_list[:safe_int(conditions[cond][10], default=0)])
+            for well in one_QC[:safe_int(conditions[cond][10], default=0)]:
                 Blank_list.remove(well)
         #Blank_list = Blank_list[int(conditions[cond][10]):]
         # nonsample_before.append(Blank_list[:spacings[2][0]])
@@ -382,67 +417,67 @@ def column_sorter(wells_list, conditions, spacings, wet_amounts, num_to_run, lc_
     if Lib_list and Lib_placement == "Before" and cond_range1.upper() == "ALL": #controls library placement
         nonsample_before.append(Lib_list)
     if TrueBlank_list:
-        for cond in TrueBlank_num: # QC_num is a list of the condition numbers of all QCs
+        for cond in TrueBlank_num: # TrueBlank_num is a list of the condition numbers of all TrueBlanks
             one_QC = []
             for well in TrueBlank_list:
                 if well[0] == cond:
                     one_QC.append(well)
-            for i in range(0, int(conditions[cond][10])):
+            for i in range(0, safe_int(conditions[cond][10], default=0)):
                 nonsample_before.append(TrueBlank_list[:1])
     # add nonsamples to 'nonsample_after' list
     if QC_list:
         for num in QC_num:
             num_list = [well for well in QC_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][11])])
-            for well in num_list[:int(conditions[num][11])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][11], default=0)])
+            for well in num_list[:safe_int(conditions[num][11], default=0)]:
                 QC_list.remove(well)
     if wet_QC_list:
         for num in wet_QC_num:
             num_list = [well for well in wet_QC_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][11])])
-            for well in num_list[:int(conditions[num][11])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][11], default=0)])
+            for well in num_list[:safe_int(conditions[num][11], default=0)]:
                 wet_QC_list.remove(well)
     if Blank_list:
         for num in Blank_num:
             num_list = [well for well in Blank_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][11])])
-            for well in num_list[:int(conditions[num][11])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][11], default=0)])
+            for well in num_list[:safe_int(conditions[num][11], default=0)]:
                 Blank_list.remove(well)
     if Lib_list and Lib_placement == "After" and cond_range1 == "ALL": #controls library placement
         nonsample_after.append(Lib_list)
     if TrueBlank_list:
         for num in TrueBlank_num:
             num_list = [well for well in TrueBlank_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][11])])
-            for well in num_list[:int(conditions[num][11])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][11], default=0)])
+            for well in num_list[:safe_int(conditions[num][11], default=0)]:
                 TrueBlank_list.remove(well)
 
     # add nonsamples to 'nonsample_other' list
     if QC_list:
         for num in QC_num:
             num_list = [well for well in QC_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][12])])
-            for well in num_list[:int(conditions[num][12])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 QC_list.remove(well)
         # nonsample_other.append(QC_list[:spacings[0][2]])
         # QC_list = QC_list[spacings[0][2]:]
     if wet_QC_list:
         for num in wet_QC_num:
             num_list = [well for well in wet_QC_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][12])])
-            for well in num_list[:int(conditions[num][12])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 wet_QC_list.remove(well)
     if Blank_list:
         for num in Blank_num:
             num_list = [well for well in Blank_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][12])])
-            for well in num_list[:int(conditions[num][12])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 Blank_list.remove(well)
     if TrueBlank_list:
         for num in QC_num:
             num_list = [well for well in TrueBlank_list if well[0] == num]
-            nonsample_after.append(num_list[:int(conditions[num][12])])
-            for well in num_list[:int(conditions[num][12])]:
+            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 QC_list.remove(well)
 
     # if library runs are not the same in a two experiment plate, they must be returned separately
@@ -562,7 +597,7 @@ def blocker(conditions, even, column1, column2 = None):
             random.shuffle(block)
             sample_blocks.append(block)
             blocks_created += 1
-        print(f"Even = {even}")
+        # print(f"Even = {even}")
         num_of_blocks = len(sample_blocks)
         if blocks_created == sample_block_num and even.upper() == "NO":
             # assigns leftover samples randomly to blocks if the user does not want even blocks
@@ -843,65 +878,70 @@ def rep_tracker(flattened, conditions):
     return reps
 
 def attach_Lib(two_xp_flat_list, separate_Lib1, separate_Lib2, two_xp_TB, two_xp_TB_location, Lib_placement, lib_same):
-    """ Attaches library experiment in the case that there are two experiments with two different sets of libraries.
-    The libraries must run one at a time because otherwise they will interfere with each other's readings in the instrument."""
-    # reduce a level of nesting in the library lists
+    """Attach library experiments for two-experiment runs.
+    Inserts TB wells every other position during library runs.
+    """
+    # Flatten nested lists
     separate_Lib1 = [item for sublist in separate_Lib1 for item in sublist] if separate_Lib1 else []
     separate_Lib2 = [item for sublist in separate_Lib2 for item in sublist] if separate_Lib2 else []
-    # each well must have a third element to indicate the block
+
+    # Tag wells with their library identity
     if separate_Lib1:
         for well in separate_Lib1:
-            well.append('Lib1')
+            well.append("Lib1")
     if separate_Lib2:
         for well in separate_Lib2:
-            well.append('Lib2')
+            well.append("Lib2")
+
     TB_well = [two_xp_TB, two_xp_TB_location[0][1], "end"]
     to_add = []
+
+    def interleave_with_tb(lib):
+        """Insert TB wells every other element of a library list."""
+        seq = []
+        for i, well in enumerate(lib):
+            seq.append(well)
+            seq.append(TB_well)  # always follow with TB
+        return seq
+
     if lib_same.upper() == "NO":
+        # Run libraries separately, TB every other
         if separate_Lib1:
-            for i in range(0, len(separate_Lib1)):
-                to_add.append(separate_Lib1[i])
-                to_add.append(TB_well)
-            to_add.append(TB_well) # this will
+            to_add.extend(interleave_with_tb(separate_Lib1))
         if separate_Lib2:
-            for i in range(0, len(separate_Lib2)):
-                to_add.append(separate_Lib2[i])
-                to_add.append(TB_well)
-            to_add.append(TB_well)
+            to_add.extend(interleave_with_tb(separate_Lib2))
+
     elif lib_same.upper() == "YES":
         if separate_Lib1 and separate_Lib2:
+            # Balance lengths
             if len(separate_Lib1) > len(separate_Lib2):
-                difference = len(separate_Lib1) - len(separate_Lib2)
-                for i in range(0, difference):
-                    separate_Lib2.append(TB_well)
+                separate_Lib2.extend([TB_well] * (len(separate_Lib1) - len(separate_Lib2)))
             elif len(separate_Lib2) > len(separate_Lib1):
-                difference = len(separate_Lib2) - len(separate_Lib1)
-                for i in range(0, difference):
-                    separate_Lib1.append(TB_well)
-        for i in range(0, len(separate_Lib1)):
-            to_add.append(separate_Lib1[i])
-            to_add.append(separate_Lib2[i])
-        to_add.append(TB_well)
-        to_add.append(TB_well) # attaches two TrueBlanks at the end to clear the system
-    elif separate_Lib1 and not separate_Lib2:
-        for i in range(0, len(separate_Lib1)):
-            to_add.append(separate_Lib1[i])
-            to_add.append(TB_well)
-        to_add.append(TB_well)
-        to_add.append(TB_well)
-    elif separate_Lib2 and not separate_Lib1:
-        for i in range(0, len(separate_Lib2)):
-            to_add.append(separate_Lib2[i])
-            to_add.append(TB_well)
-        to_add.append(TB_well)
-        to_add.append(TB_well)
-        # adds the Libraries to the bigining or end of the list
+                separate_Lib1.extend([TB_well] * (len(separate_Lib2) - len(separate_Lib1)))
+            # Interleave across libraries with TBs
+            for i in range(len(separate_Lib1)):
+                to_add.append(separate_Lib1[i])
+                to_add.append(TB_well)
+                to_add.append(separate_Lib2[i])
+                to_add.append(TB_well)
+        elif separate_Lib1:
+            to_add.extend(interleave_with_tb(separate_Lib1))
+        elif separate_Lib2:
+            to_add.extend(interleave_with_tb(separate_Lib2))
+
+    else:  # Fallback
+        if separate_Lib1:
+            to_add.extend(interleave_with_tb(separate_Lib1))
+        if separate_Lib2:
+            to_add.extend(interleave_with_tb(separate_Lib2))
+        # safety flush
+        to_add.extend([TB_well, TB_well])
+    # Place libraries before or after main experiment
+
     if Lib_placement == "Before":
-        two_xp_flat_list = to_add + two_xp_flat_list
-    elif Lib_placement == "After":
-        two_xp_flat_list = two_xp_flat_list + to_add
-    return two_xp_flat_list
-    
+        return to_add + two_xp_flat_list
+    else:  # default After
+        return two_xp_flat_list + to_add
 
 def insert_sysQC(flattened_list, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions):
     # Counter to return how many more System Validation wells should be added
@@ -1027,7 +1067,7 @@ def create_instrument_methods(lc_number, methodpaths, methods, csv_file):
         counter+=1
     return inst_methods
 
-def create_csv_to_send(csv_file, conditions, nbcode, lc_number, blank_method, sample_type,
+def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method, sample_type,
                        filenames, well_conditions, positions, inj_vol):
     # Create instrument methods for MS and LC
     method_paths = []
@@ -1063,25 +1103,28 @@ def create_csv_to_send(csv_file, conditions, nbcode, lc_number, blank_method, sa
         positions.append(positions[-1])
         positions.append(positions[-1])
 
+    if not (len(filenames) == len(data_paths) == len(inst_methods) == len(positions)):
+        raise IndexError("Mismatched lengths when creating CSV data.")
+    
+    df = pd.DataFrame({
+        "Sample Type": [sample_type] * len(filenames),
+        "File Name": filenames,
+        "Path": data_paths,
+        "Instrument Method": inst_methods,
+        "Position": positions,
+        "Inj Vol": [inj_vol] * len(filenames)
+    })
+
+    # Convert to list-of-lists with exactly 6 columns
+    data_rows = df.values.tolist()
+
     rows = []
-    rows.append(['Bracket Type=4', '', '', '', '', ''])
-    rows.append(['Sample Type', 'File Name', 'Path', 'Instrument Method', 'Position', 'Inj Vol'])
-    for index, filename in enumerate(filenames):
-        if index >= len(data_paths) or index >= len(inst_methods) or index >= len(positions):
-            raise IndexError(f"More filenames than other fields when creating CSV.")
-        rows.append([sample_type, filename, data_paths[index],
-                        inst_methods[index], positions[index], inj_vol])
+    rows.append(["Bracket Type=4", "", "", "", "", ""])
+    rows.append(["Sample Type", "File Name", "Path", "Instrument Method", "Position", "Inj Vol"])
+    rows.extend(data_rows)
 
-    # According to chatGPT, the following is the exact format excel would give,
-    # which is what the undergrads use.
-    output_path = f"{output_folder}/{nbcode}_{csv_file}_file_for_export.csv"
-
-    with open(output_path, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_MINIMAL, lineterminator='\r\n')
-        writer.writerows(rows)
-
-    return output_path
+    # Build DataFrame with no column labels (just positional)
+    return pd.DataFrame(rows)
 
 def process(filepath):
     df = read_excel_to_df(filepath)
@@ -1091,7 +1134,7 @@ def process(filepath):
 
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = separate_plates(df)
 
-    spacings, Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, two_xp_TB, even = spacing(df)
+    Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, two_xp_TB, even = spacing(df)
                                                 # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}"
     sample_type = "Unknown"  # or "Sample", etc.
     blank_method = "Blank_Method"  # fill in with real method if needed
@@ -1106,13 +1149,13 @@ def process(filepath):
         for key in plates:
             all_wells_flat.extend(process_plate(plates[key], key, wet_amounts))
             two_xp_TB_location.extend(process_plate(plates[key], key, wet_amounts)) #, f"{two_xp_TB}-{two_xp_TB}"))
-        compare_wells_and_counts(all_wells_flat, conditions, spacings, wet_amounts)
+        compare_wells_and_counts(all_wells_flat, conditions, wet_amounts)
         if lc_number == 1:
-            nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib1 = column_sorter(all_wells_flat, conditions, spacings, wet_amounts,
+            nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib1 = column_sorter(all_wells_flat, conditions, wet_amounts,
                                                                                         num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
             both_blocks, num_of_blocks = blocker(conditions, even, column1)
         elif lc_number == 2:
-            nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib2 = column_sorter(all_wells_flat, conditions, spacings, wet_amounts,
+            nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib2 = column_sorter(all_wells_flat, conditions, wet_amounts,
                                                                                                         num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
             both_blocks, num_of_blocks = blocker(conditions, even, column1, column2)
         nonsample_blocks = nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, even)
@@ -1120,9 +1163,9 @@ def process(filepath):
         non_flat_list = block_zipper(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, even)
         well_conditions, block_runs, positions, reps, msmethods = extract_file_info(non_flat_list, conditions, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location)
 
-    elif cond_range1.upper() != "ALL": #and lib_same.upper() == "YES": # two experiments, 2 column system, same library values
+    elif cond_range1.upper() != "ALL": # two experiments, 2 column system
         lc_number = 1
-        print("Two experiments, same library values")
+        # print("Two experiments, same library values")
         conditions1 = condition_dict(df, cond_range1) # work as expected
         conditions2 = condition_dict(df, cond_range2)
         all_wells_flat1 = []
@@ -1134,10 +1177,10 @@ def process(filepath):
             two_xp_TB_location.extend(process_plate(plates[key], key, wet_amounts, f"{two_xp_TB}-{two_xp_TB}"))
         # sort the wells in groups so they can be processed according to run type
         nonsample_before1, nonsample_after1, nonsample_other1, exp1col1, SysValid_list, separate_Lib1 = column_sorter(all_wells_flat1, conditions1,
-                                                                                    spacings, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
+                                                                                    wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
         both_blocks1, num_of_blocks1 = blocker(conditions1, even, exp1col1)
         nonsample_before2, nonsample_after2, nonsample_other2, exp2col1, SysValid_list, separate_Lib2 = column_sorter(all_wells_flat2, conditions2,
-                                                                                    spacings, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1) #cond_range1 is correct, it checks of cond_range1.upper() == "ALL"
+                                                                                    wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1) #cond_range1 is correct, it checks of cond_range1.upper() == "ALL"
         both_blocks2, num_of_blocks2 = blocker(conditions2, even, exp2col1)
 
         nonsample_blocks1 = nonsample_blocker(lc_number, nonsample_other1, num_of_blocks1, conditions1, even)
@@ -1160,12 +1203,15 @@ def process(filepath):
 
     filenames = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     # Create and export MS CSV
-    ms_path = create_csv_to_send("MS", conditions, nbcode, lc_number, blank_method,
+    ms_pd = final_csv_format_as_pd("MS", conditions, nbcode, lc_number, blank_method,
                        sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     # Create and export LC CSV
-    lc_path = create_csv_to_send("LC", conditions, nbcode, lc_number, blank_method,
+    lc_pd = final_csv_format_as_pd("LC", conditions, nbcode, lc_number, blank_method,
                        sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
     print(f"Worksheet generation complete! Check the {output_folder} folder for your CSVs.")
 
-    return pd.read_csv(ms_path), pd.read_csv(lc_path)
+    ms_filename = f"{nbcode}_MS.csv"
+    lc_filename = f"{nbcode}_LC.csv"
+
+    return ms_pd, lc_pd, ms_filename, lc_filename

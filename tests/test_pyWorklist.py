@@ -120,12 +120,9 @@ def test_separate_plates_structure(worklist_df):
 def test_spacing_tuple_contents(worklist_df):
     mod = load_module()
     spacing_tuple = mod.spacing(worklist_df)
-    # spacing() returns an 8-tuple with the first element a list of 4 spacing triplets
-    assert isinstance(spacing_tuple, tuple) and len(spacing_tuple) == 8
-    spacings, Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = spacing_tuple
-    assert isinstance(spacings, list) and len(spacings) == 4
-    for tri in spacings:
-        assert isinstance(tri, list) and len(tri) == 3 and all(isinstance(x, int) for x in tri)
+    # spacing() returns a 7-tuple
+    assert isinstance(spacing_tuple, tuple) and len(spacing_tuple) == 7
+    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = spacing_tuple
     assert Lib_placement in ("Before", "After")
     assert isinstance(SysValid_interval, (int, float))
     assert lib_same in ("Yes", "No")
@@ -143,13 +140,13 @@ def test_process_plate_and_wells_format(worklist_df):
 def test_compare_wells_and_counts_detects_mismatch(worklist_df):
     mod = load_module()
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
-    spacings, Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = mod.spacing(worklist_df)
+    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = mod.spacing(worklist_df)
     name, plate_df = next(iter(plates.items()))
     wells = mod.process_plate(plate_df, name, wet_amounts)
     # We expect the raw wells from the sheet not to include all required QCs/Blanks as per spacings[0],
     # so the validator should raise.
     with pytest.raises(ValueError):
-        mod.compare_wells_and_counts(wells, mod.condition_dict(worklist_df), spacings, wet_amounts=None)
+        mod.compare_wells_and_counts(wells, mod.condition_dict(worklist_df), wet_amounts)
 
 # -----------------------------
 # Mid-pipeline tests (filenames & methods)
@@ -182,13 +179,11 @@ def test_create_filenames_happy_path():
     filenames = mod.create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     assert filenames[0].startswith("NB001_lib_blo1_run1_RA1_rep1")
 
-def test_create_csv_to_send_writes_file(tmp_path):
+def test_final_csv_format_as_pd_returns_dataframe():
     mod = load_module()
-    # Temporarily redirect output folder
-    mod.output_folder = str(tmp_path)
     conditions = {
-        1: ["Lib", "lib", "C:\\\\MSDATA", "C:\\\\MSMETHODS", "dry", "MSM1", "C:\\\\LCDATA", "C:\\\\LCMETHODS", "wet", "LCM1"],
-        2: ["QC", "qc", "C:\\\\MSDATA", "C:\\\\MSMETHODS", "dry", "MSM2", "C:\\\\LCDATA", "C:\\\\LCMETHODS", "wet", "LCM2"],
+        1: ["Lib", "lib", "C:\\MSDATA", "C:\\MSMETHODS", "dry", "MSM1", "C:\\LCDATA", "C:\\LCMETHODS", "wet", "LCM1"],
+        2: ["QC", "qc", "C:\\MSDATA", "C:\\MSMETHODS", "dry", "MSM2", "C:\\LCDATA", "C:\\LCMETHODS", "wet", "LCM2"],
     }
     nbcode = "NB001"
     lc_number = 1
@@ -198,15 +193,26 @@ def test_create_csv_to_send_writes_file(tmp_path):
     well_conditions = [2]
     positions = ["RA1"]
     inj_vol = 1
-    out = mod.create_csv_to_send("MS", conditions, nbcode, lc_number, blank_method, sample_type, filenames, well_conditions, positions, inj_vol)
-    assert os.path.exists(out)
-    # Inspect that header rows exist and a data row is written
-    with open(out, newline="") as fh:
-        rows = list(csv.reader(fh))
-    assert rows[0][0].startswith("Bracket Type=")
-    assert rows[1] == ["Sample Type", "File Name", "Path", "Instrument Method", "Position", "Inj Vol"]
-    assert rows[-1][0] == sample_type
-    assert filenames[0] in rows[-1][1]
+
+    # Call new method
+    df = mod.final_csv_format_as_pd(
+        "MS", conditions, nbcode, lc_number, blank_method,
+        sample_type, filenames, well_conditions, positions, inj_vol
+    )
+
+    # First row should be Bracket line
+    assert df.iloc[0, 0].startswith("Bracket Type=")
+
+    # Second row should be the header row
+    assert list(df.iloc[1]) == [
+        "Sample Type", "File Name", "Path", "Instrument Method", "Position", "Inj Vol"
+    ]
+
+    # Last row should contain actual data
+    last_row = df.iloc[-1].tolist()
+    assert last_row[0] == sample_type
+    assert filenames[0] in last_row[1]
+
 
 # -----------------------------
 # Small utilities
@@ -282,11 +288,38 @@ def test_flattener_with_empty_nested_lists():
 def test_compare_wells_and_counts_with_exact_match(worklist_df):
     mod = load_module()
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
-    spacings, *_ = mod.spacing(worklist_df)
+    QC_num = []
+    conditions = mod.condition_dict(worklist_df)
+    list_of_keys = list(conditions.keys())
+    for key in list_of_keys:
+        if conditions[key][0] == 'QC':
+            QC_num.append(int(key))
     name, plate_df = next(iter(plates.items()))
     wells = mod.process_plate(plate_df, name, wet_amounts)
     # Duplicate wells until match count exactly
-    required_qcs = sum(spacings[0])  # total QC count expected
+    for num in QC_num:
+        required_qcs = sum([mod.safe_int(conditions[num][10]), mod.safe_int(conditions[num][11]), mod.safe_int(conditions[num][12])])  # total QC count expected
     wells_matched = wells * math.ceil(required_qcs / len([w for w in wells if w[0] == 1]))
     # Should not raise if counts match exactly
-    mod.compare_wells_and_counts(wells_matched, mod.condition_dict(worklist_df), spacings, wet_amounts=None)
+    mod.compare_wells_and_counts(wells_matched, mod.condition_dict(worklist_df), wet_amounts)
+
+def test_process_with_real_sheet(worklist_df):
+    mod = load_module()
+    # This will run the same code your GUI calls
+    ms_df, lc_df, ms_filename, lc_filename = mod.process(os.getenv("WORKLIST_XLSX_PATH"))
+
+    # Check that MS and LC outputs are DataFrames
+    assert hasattr(ms_df, "to_csv")
+    assert hasattr(lc_df, "to_csv")
+
+    # Check filenames are correct strings ending in .csv
+    assert isinstance(ms_filename, str) and ms_filename.endswith("_MS.csv")
+    assert isinstance(lc_filename, str) and lc_filename.endswith("_LC.csv")
+
+    # Check the first row of MS output has the Bracket line
+    assert ms_df.iloc[0, 0].startswith("Bracket Type=")
+
+    # Check the header row is present and matches expected
+    expected_header = ["Sample Type", "File Name", "Path", "Instrument Method", "Position", "Inj Vol"]
+    assert list(ms_df.iloc[1]) == expected_header
+    assert list(lc_df.iloc[1]) == expected_header
