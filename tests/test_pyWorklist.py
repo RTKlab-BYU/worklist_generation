@@ -20,7 +20,7 @@ py_path = None
 xlsx_path = None
 for d in candidate_dirs:
     py_candidate = d / "pyWorklist.py"
-    xlsx_candidate = d / "worklist.xlsx"
+    xlsx_candidate = d / "worklist_template0821.xlsx"
     if py_candidate.exists():
         py_path = str(py_candidate)
     if xlsx_candidate.exists():
@@ -111,7 +111,7 @@ def test_separate_plates_structure(worklist_df):
     mod = load_module()
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
     # From the provided sheet we expect 3 plates
-    assert set(plates.keys()) == {"R_redplate", "B_blueplate", "G_greenplate"}
+    assert set(plates.keys()) == {"R_Gonda"}
     # And a 1-column system per this example
     assert lc_number in (1,2)
     assert isinstance(wet_amounts, dict) and len(wet_amounts) > 0
@@ -138,15 +138,40 @@ def test_process_plate_and_wells_format(worklist_df):
     assert all(isinstance(w, list) and len(w) == 2 and isinstance(w[0], (int, float)) and isinstance(w[1], str) for w in wells)
 
 def test_compare_wells_and_counts_detects_mismatch(worklist_df):
+    import pytest
     mod = load_module()
+
+    # Build basics from the sheet
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
     Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = mod.spacing(worklist_df)
+
+    # Build the conditions dict (for all conditions)
+    conditions = mod.condition_dict(worklist_df)  # cond_range=None -> your default (0–50)
+
+    # Take one plate’s wells
     name, plate_df = next(iter(plates.items()))
     wells = mod.process_plate(plate_df, name, wet_amounts)
-    # We expect the raw wells from the sheet not to include all required QCs/Blanks as per spacings[0],
-    # so the validator should raise.
+
+    # Find a QC condition ID
+    qc_candidates = [k for k, v in conditions.items() if v[0] == "QC"]
+    assert qc_candidates, "Expected at least one QC row in the test sheet"
+    qc_key = qc_candidates[0]
+    qc_num = int(qc_key)
+
+    # Sanity: your condition rows include 3 placement fields at indices 10,11,12
+    assert len(conditions[qc_key]) >= 13
+
+    # Count actual QC wells present
+    qc_well_count = sum(1 for w in wells if int(w[0]) == qc_num)
+
+    # Force a mismatch by demanding more QCs than present
+    conditions[qc_key][10] = qc_well_count + 1  # before
+    conditions[qc_key][11] = 0                  # after
+    conditions[qc_key][12] = 0                  # between
+
+    # Expect validator to complain
     with pytest.raises(ValueError):
-        mod.compare_wells_and_counts(wells, mod.condition_dict(worklist_df), wet_amounts)
+        mod.compare_wells_and_counts(wells, conditions, wet_amounts)
 
 # -----------------------------
 # Mid-pipeline tests (filenames & methods)
