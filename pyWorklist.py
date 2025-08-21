@@ -319,8 +319,9 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     TrueBlank_list = []
     Lib_list = []
     SysValid_list = []
-    wells_list = wells_list.copy()  # make a copy to avoid modifying the original list
-    for well in wells_list:
+    # wells_list = wells_list.copy()  # make a copy to avoid modifying the original list
+    # for well in wells_list:
+    for well in wells_list[:]:
         if QC_num:
             for num in QC_num:
                 if int(well[0]) == num:
@@ -456,7 +457,7 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     if QC_list:
         for num in QC_num:
             num_list = [well for well in QC_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 QC_list.remove(well)
         # nonsample_other.append(QC_list[:spacings[0][2]])
@@ -464,19 +465,19 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     if wet_QC_list:
         for num in wet_QC_num:
             num_list = [well for well in wet_QC_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 wet_QC_list.remove(well)
     if Blank_list:
         for num in Blank_num:
             num_list = [well for well in Blank_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 Blank_list.remove(well)
     if TrueBlank_list:
         for num in QC_num:
             num_list = [well for well in TrueBlank_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 QC_list.remove(well)
 
@@ -536,6 +537,12 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
         elif lc_number == 1:
             for sample in sample_list:
                 column1.append(sample)
+    print("one")
+    print(nonsample_after)
+    print("two")
+    print(nonsample_before)
+    print("three")
+    print(nonsample_other)
     
     if lc_number ==2:
         return (nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib)
