@@ -447,7 +447,7 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     if QC_list:
         for num in QC_num:
             num_list = [well for well in QC_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 QC_list.remove(well)
         # nonsample_other.append(QC_list[:spacings[0][2]])
@@ -455,21 +455,21 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     if wet_QC_list:
         for num in wet_QC_num:
             num_list = [well for well in wet_QC_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 wet_QC_list.remove(well)
     if Blank_list:
         for num in Blank_num:
             num_list = [well for well in Blank_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 Blank_list.remove(well)
     if TrueBlank_list:
-        for num in QC_num:
+        for num in TrueBlank_num:
             num_list = [well for well in TrueBlank_list if well[0] == num]
-            nonsample_after.append(num_list[:safe_int(conditions[num][12], default=0)])
+            nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
-                QC_list.remove(well)
+                TrueBlank_list.remove(well)
 
     # if library runs are not the same in a two experiment plate, they must be returned separately
     separate_Lib = []

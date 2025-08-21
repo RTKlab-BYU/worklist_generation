@@ -111,7 +111,7 @@ def test_separate_plates_structure(worklist_df):
     mod = load_module()
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
     # From the provided sheet we expect 3 plates
-    assert set(plates.keys()) == {"R_Gonda"}
+    assert set(plates.keys()) == {"R_redplate", "B_blueplate", "G_greenplate"}
     # And a 1-column system per this example
     assert lc_number in (1,2)
     assert isinstance(wet_amounts, dict) and len(wet_amounts) > 0
