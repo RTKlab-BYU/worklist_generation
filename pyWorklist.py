@@ -47,7 +47,7 @@ def condition_dict(dataframe, cond_range=None):
         if not values:
             return conditions   # skip if empty
     else:
-        values = ['0', '30']
+        values = ['0', '50']
     for i in range(int(values[0])-1, int(values[1])):
         key = dataframe.iloc[i, 29]
         if pd.notna(dataframe.iloc[i, 30]):
@@ -90,10 +90,10 @@ def separate_plates(dataframe):
             for c in range(4, max_col):
                 val = dataframe.iloc[r, c]
                 if pd.notna(val):
-                    if not isinstance(val, (int, float)) or not float(val).is_integer() or not (1 <= int(val) <= 30):
+                    if not isinstance(val, (int, float)) or not float(val).is_integer() or not (1 <= int(val) <= 50):
                         raise ValueError(
                             f"Invalid well value '{val}' in plate '{name}' at row {r+1}, column {c+1}: "
-                            "must be an integer between 1 and 30."
+                            "must be an integer between 1 and 50."
                         )
 
 
@@ -107,7 +107,7 @@ def separate_plates(dataframe):
         plates[name] = plate
 
     wet_amounts = {}
-    for i in range(0, 31):
+    for i in range(0, 51):
         if pd.notna(dataframe.iloc[i, 40]) & pd.notna(dataframe.iloc[i, 30]):
             try:
                 if dataframe.iloc[i, 40] is None or dataframe.iloc[i, 40] == '':
@@ -144,13 +144,13 @@ def spacing(dataframe):
     # true_blank_spacing = validate_and_convert_spacing(dataframe.iloc[40:43, 30].tolist(), "true_blank_spacing")
     # Each of the spacing lists should have 3 values: before, after, between
     # Retrieve Lib before or after value
-    Lib_placement = dataframe.iloc[31,34] # are lib runs before or after samples?
-    SysValid_interval = dataframe.iloc[32,34] # how often to run system validation
-    two_xp_TB = dataframe.iloc[33,34] # indicates condition number for TrueBlanks
-    even = dataframe.iloc[36,34] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
-    experiment1 = dataframe.iloc[31,37] # if not "All", which conditions belong to experiment 1
-    experiment2 = dataframe.iloc[32,37] # which conditions belong to experiment 2 if any
-    lib_same = dataframe.iloc[33,37] # "Yes" or "No", indicates if lib runs are the same for both experiments
+    Lib_placement = dataframe.iloc[51,34] # are lib runs before or after samples?
+    SysValid_interval = dataframe.iloc[52,34] # how often to run system validation
+    two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks
+    even = dataframe.iloc[56,34] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+    experiment1 = dataframe.iloc[51,37] # if not "All", which conditions belong to experiment 1
+    experiment2 = dataframe.iloc[52,37] # which conditions belong to experiment 2 if any
+    lib_same = dataframe.iloc[53,37] # "Yes" or "No", indicates if lib runs are the same for both experiments
     return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even
 
 def parse_range(cond_range):
@@ -214,77 +214,69 @@ def process_plate(plate, plate_name, wet_amounts, cond_range = None):
                     raise KeyError(f'ERROR: You may have a sample in your plate that is not labeled in the conditions legend.')
     return wells_list
 
-
 def compare_wells_and_counts(wells_list, conditions, wet_amounts):
     if wet_amounts is None:
         raise ValueError("Samples/well must be provided for validation")
-    # attaches 'QC', 'Blank', 'TrueBlank' and 'Lib' to their number in conditions dictionary
-    # QC_num, wet_QC_num, Blank_num, TrueBlank_num = None, None, None, None
-    # list_of_keys = list(conditions.keys())
-    # for key in list_of_keys:
-    #     if conditions[key][0] == 'QC':
-    #         QC_num = key
-    #     if conditions[key][0] == 'WetQC':
-    #         wet_QC_num = key
-    #     if conditions[key][0] == 'Blank':
-    #         Blank_num = key
-    #     if conditions[key][0] == 'TrueBlank':
-    #         TrueBlank_num = key
 
     QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
 
-    # find number associated with each nonsample well type
-    list_of_keys = list(conditions.keys())
-    for key in list_of_keys:
-        if conditions[key][0] == 'QC':
-            QC_num.append(int(key))
-        if conditions[key][0] == 'WetQC':
-            wet_QC_num.append(int(key))
-        if conditions[key][0] == 'Blank':
-            Blank_num.append(int(key))
-        if conditions[key][0] == 'TrueBlank':
-            TrueBlank_num.append(int(key))
-        if conditions[key][0] == 'Lib':
-            Lib_num.append(int(key))
-        if conditions[key][0] == "SystemValidation":
-            SysValid_num.append(int(key))
-    #check that QC, Blank, and TrueBlank numbers align with before/between/after inputs
-    total_QC = 0
-    total_wet_QC = 0
-    total_Blank = 0
-    total_TrueBlank = 0
-    for well in wells_list:
-        if QC_num is not None and well[0] in QC_num:
-            total_QC += 1
-        if wet_QC_num is not None and well[0] in wet_QC_num:
-            total_wet_QC += 1
-        if Blank_num is not None and well[0] in Blank_num:
-            total_Blank += 1
-        if TrueBlank_num is not None and well[0] in TrueBlank_num:
-            total_TrueBlank += 1
+    # Assign condition IDs to the right bucket
+    for key, row in conditions.items():
+        label = row[0]
+        try:
+            key_int = int(key)
+        except (ValueError, TypeError):
+            continue  # skip malformed keys
 
-    # print("What is wet amounts?")
-    # print(wet_amounts)
+        if label == 'QC':
+            QC_num.append(key_int)
+        elif label == 'WetQC':
+            wet_QC_num.append(key_int)
+        elif label == 'Blank':
+            Blank_num.append(key_int)
+        elif label == 'TrueBlank':
+            TrueBlank_num.append(key_int)
+        elif label == 'Lib':
+            Lib_num.append(key_int)
+        elif label == 'SystemValidation':
+            SysValid_num.append(key_int)
 
-    # for num in QC_num:
-    #     if total_QC * wet_amounts[num] < sum(spacings[0]):
-    #         raise ValueError ("Error: There are not enough QC wells in your plate diagrams corresponding to the conditions table.")
-    # for num in wet_QC_num:
-    #     if total_wet_QC * wet_amounts[num] < sum(spacings[1]):
-    #         raise ValueError ("Error: There are not enough wet QC wells in your plate diagrams corresponding to the conditions table.")
-    # for num in Blank_num:
-    #     if total_Blank * wet_amounts[num] < sum(spacings[2]):
-    #         raise ValueError ("Error: There are not enough Blank condition wells in your plate diagrams corresponding to the conditions table.")
+    # Count how many wells we actually have for each condition type
+    total_QC = sum(1 for w in wells_list if w[0] in QC_num)
+    total_wet_QC = sum(1 for w in wells_list if w[0] in wet_QC_num)
+    total_Blank = sum(1 for w in wells_list if w[0] in Blank_num)
+    total_TrueBlank = sum(1 for w in wells_list if w[0] in TrueBlank_num)
+    total_Lib = sum(1 for w in wells_list if w[0] in Lib_num)
+    total_SysValid = sum(1 for w in wells_list if w[0] in SysValid_num)
 
-    for num in QC_num:
-        if total_QC * wet_amounts[num] < sum([safe_int(conditions[num][10]), safe_int(conditions[num][11]), safe_int(conditions[num][12])]):
-            raise ValueError ("Error: There are not enough QC wells in your plate diagrams corresponding to the conditions table.")
-    for num in wet_QC_num:
-        if total_wet_QC * wet_amounts[num] < sum([safe_int(conditions[num][10]), safe_int(conditions[num][11]), safe_int(conditions[num][12])]):
-            raise ValueError ("Error: There are not enough wet QC wells in your plate diagrams corresponding to the conditions table.")
-    for num in Blank_num:
-        if total_Blank * wet_amounts[num] < sum([safe_int(conditions[num][10]), safe_int(conditions[num][11]), safe_int(conditions[num][12])]):
-            raise ValueError ("Error: There are not enough Blank condition wells in your plate diagrams corresponding to the conditions table.")
+    # Helper to safely extract spacing values (before/after/between)
+    def spacing_sum(cond_row):
+        vals = []
+        for idx in (10, 11, 12):
+            try:
+                vals.append(int(cond_row[idx]) if cond_row[idx] not in (None, "", "NaN") else 0)
+            except (IndexError, ValueError, TypeError):
+                vals.append(0)
+        return sum(vals)
+
+    # Validator: check actual wells * wet_amounts vs expected spacings
+    def validate(cond_ids, total_count, label):
+        for num in cond_ids:
+            expected = spacing_sum(conditions[num])
+            actual = total_count * wet_amounts.get(num, 1)
+            if actual < expected:
+                raise ValueError(
+                    f"Error: Not enough {label} wells. "
+                    f"Expected at least {expected}, but found {actual}."
+                )
+
+    # Run checks for each type
+    validate(QC_num, total_QC, "QC")
+    validate(wet_QC_num, total_wet_QC, "WetQC")
+    validate(Blank_num, total_Blank, "Blank")
+    validate(TrueBlank_num, total_TrueBlank, "TrueBlank")
+    validate(Lib_num, total_Lib, "Library")
+    validate(SysValid_num, total_SysValid, "SystemValidation")
 
 def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1): #split the wells list evenly between the two columns
     column1 = []
@@ -319,9 +311,7 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     TrueBlank_list = []
     Lib_list = []
     SysValid_list = []
-    # wells_list = wells_list.copy()  # make a copy to avoid modifying the original list
-    # for well in wells_list:
-    for well in wells_list[:]:
+    for well in wells_list[:]: # don't change this! iterates over copy of original list and edits original
         if QC_num:
             for num in QC_num:
                 if int(well[0]) == num:
@@ -475,11 +465,11 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
                 Blank_list.remove(well)
     if TrueBlank_list:
-        for num in QC_num:
+        for num in TrueBlank_num:
             num_list = [well for well in TrueBlank_list if well[0] == num]
             nonsample_other.append(num_list[:safe_int(conditions[num][12], default=0)])
             for well in num_list[:safe_int(conditions[num][12], default=0)]:
-                QC_list.remove(well)
+                TrueBlank_list.remove(well)
 
     # if library runs are not the same in a two experiment plate, they must be returned separately
     separate_Lib = []
@@ -491,9 +481,15 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     # remove the values from conditions dict that are in the between blocks + remove System Validation wells
     sample_keys = list(conditions.keys())
     new_keys = sample_keys.copy()
-    between_keys = [QC_num, Blank_num, TrueBlank_num, Lib_num, wet_QC_num, SysValid_num] 
+    between_keys = [QC_num, Blank_num, TrueBlank_num, Lib_num, wet_QC_num, SysValid_num]
     for sample in sample_keys:
-        if sample in between_keys:
+    # unwrap NumPy scalar to plain int if needed
+        sample_val = int(sample) if hasattr(sample, "item") else sample  
+
+        # flatten between_keys so it's just numbers
+        flat_between = [x for sub in between_keys for x in sub]
+
+        if sample_val in flat_between:
             new_keys.remove(sample)
 
     sample_dict = {}
@@ -604,7 +600,6 @@ def blocker(conditions, even, column1, column2 = None):
             random.shuffle(block)
             sample_blocks.append(block)
             blocks_created += 1
-        # print(f"Even = {even}")
         num_of_blocks = len(sample_blocks)
         if blocks_created == sample_block_num and even.upper() == "NO":
             # assigns leftover samples randomly to blocks if the user does not want even blocks
@@ -794,12 +789,11 @@ def block_zipper(nonsample_before, nonsample_after, sample_blocks, non_sample_bl
 
 def two_xp_zipper(flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_location):
     # find a TrueBlank well
-    
     #TB_well = ['30', conditions[two_xp_TB][0], "end"]
     TB_well = [two_xp_TB, two_xp_TB_location[0][1], "end"]
 
     if two_xp_TB is None or two_xp_TB == 'None':
-        raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AM37 of the excel sheet.")
+        raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AM37 of the excel sheet.") # fix this
     # removes empty blocks from the lists
     flat_list_1 = [block for block in flat_list_1 if block != [[]]]
     flat_list_2 = [block for block in flat_list_2 if block != [[]]]
@@ -810,13 +804,13 @@ def two_xp_zipper(flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_loc
         for part in block:
             for well in part:
                 if isinstance(well, list) and len(well) < 3:
-                    well.append(f"blo{index}")
+                    well.append(f"blo{index-1}") # fix this, see if it blocks after this to know if there really is only one block
     for index, block in enumerate(flat_list_2):
         index += 1
         for part in block:
             for well in part:
                 if isinstance(well, list) and len(well) < 3:
-                    well.append(f"blo{index}")
+                    well.append(f"blo{index-1}")
 
     # flattens the lists
     flat_list_1 = flattener(flat_list_1)
@@ -1011,7 +1005,7 @@ def extract_file_info(non_flat_list, conditions, SysValid_list, SysValid_interva
         for part in block:
             for well in part:
                 if isinstance(well, list) and len(well) < 3:
-                    well.append(f"blo{index}")
+                    well.append(f"blo{index-1}")
     flattened = flattener(non_flat_list)
     # inserts System QC wells into flattened list
     flattened = insert_sysQC(flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
@@ -1087,7 +1081,6 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
             raise ValueError(f"Condition {index} is malformed: expected at least 10 fields, but got {len(conditions[index])}. Check the corresponding row in your Excel sheet for missing values.")
         if csv_file == 'MS':
             data_paths.append(conditions[index][2])
-            #print(conditions[index][2])
             method_paths.append(conditions[index][3])
             method_names.append(conditions[index][5])
         elif csv_file == 'LC':
@@ -1151,7 +1144,6 @@ def process(filepath):
     two_xp_TB_location = []
 
     if cond_range1.upper() == "ALL" and lib_same.upper() == "YES": # one experiment, 1 or 2 column system
-        print("One experiment")
         conditions = condition_dict(df)
         for key in plates:
             all_wells_flat.extend(process_plate(plates[key], key, wet_amounts))
@@ -1172,7 +1164,6 @@ def process(filepath):
 
     elif cond_range1.upper() != "ALL": # two experiments, 2 column system
         lc_number = 1
-        # print("Two experiments, same library values")
         conditions1 = condition_dict(df, cond_range1) # work as expected
         conditions2 = condition_dict(df, cond_range2)
         all_wells_flat1 = []
@@ -1205,8 +1196,7 @@ def process(filepath):
         lc_number = 2
         well_conditions, block_runs, positions, reps, msmethods = two_xp_extract_file_info(two_xp_flat_list, conditions, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location)
     else:
-        print("If there is only one experiment the library values should be the same")
-        raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. Verify that all required experiment fields are correctly filled in the Excel sheet.")
+        raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. Verify that all required experiment fields are correctly filled in the Excel sheet. If there is only one experiment the library values should be the same.")
 
     filenames = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     # Create and export MS CSV
@@ -1216,7 +1206,6 @@ def process(filepath):
     lc_pd = final_csv_format_as_pd("LC", conditions, nbcode, lc_number, blank_method,
                        sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
-    print(f"Worksheet generation complete! Check the {output_folder} folder for your CSVs.")
 
     ms_filename = f"{nbcode}_MS.csv"
     lc_filename = f"{nbcode}_LC.csv"
