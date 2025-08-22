@@ -1069,7 +1069,7 @@ def create_instrument_methods(lc_number, methodpaths, methods, csv_file):
     return inst_methods
 
 def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method, sample_type,
-                       filenames, well_conditions, positions, inj_vol):
+                       filenames, well_conditions, positions, inj_vol, two_xp_TB_location):
     # Create instrument methods for MS and LC
     method_paths = []
     method_names = []
@@ -1100,8 +1100,12 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
         elif csv_file == 'LC':
             inst_methods.append(inst_methods[-1])
             inst_methods.append(inst_methods[-1])
-        positions.append(positions[-1])
-        positions.append(positions[-1])
+        print(f'positions before: {positions}')
+        # positions.append(positions[-1])
+        # positions.append(positions[-1])
+        positions.insert(0, two_xp_TB_location)
+        positions.insert(0, two_xp_TB_location)
+        print(f'positions after: {positions}')
 
     if not (len(filenames) == len(data_paths) == len(inst_methods) == len(positions)):
         raise IndexError("Mismatched lengths when creating CSV data.")
@@ -1201,10 +1205,10 @@ def process(filepath):
     filenames = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     # Create and export MS CSV
     ms_pd = final_csv_format_as_pd("MS", conditions, nbcode, lc_number, blank_method,
-                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
+                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location)
     # Create and export LC CSV
     lc_pd = final_csv_format_as_pd("LC", conditions, nbcode, lc_number, blank_method,
-                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
+                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
 
     ms_filename = f"{nbcode}_MS.csv"
