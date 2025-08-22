@@ -1,177 +1,89 @@
 ﻿0,1,2,3,4,5
 Bracket Type=4,,,,,
 Sample Type,File Name,Path,Instrument Method,Position,Inj Vol
-Unknown,JM1013_Preblank1,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RO2,1
-Unknown,JM1013_Preblank2,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo0_RC17_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC17,1
-Unknown,JM1013_TrueBlank_end_RO2_rep1_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo0_RD17_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD17,1
-Unknown,JM1013_TrueBlank_end_RO2_rep2_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo0_RC18_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC18,1
-Unknown,JM1013_TrueBlank_end_RO2_rep3_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo0_RD14_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD14,1
-Unknown,JM1013_TrueBlank_end_RO2_rep4_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo0_RC15_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC15,1
-Unknown,JM1013_TrueBlank_end_RO2_rep5_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo0_RG15_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG15,1
-Unknown,JM1013_TrueBlank_end_RO2_rep6_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA1_blo1_RF2_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF2,1
-Unknown,JM1013_TrueBlank_end_RO2_rep7_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA3_blo1_RC6_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC6,1
-Unknown,JM1013_TrueBlank_end_RO2_rep8_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA2_blo1_RD4_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD4,1
-Unknown,JM1013_TrueBlank_end_RO2_rep9_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS DG_blo1_RF9_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF9,1
-Unknown,JM1013_TrueBlank_end_RO2_rep10_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA2_blo1_RG5_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG5,1
-Unknown,JM1013_TrueBlank_end_RO2_rep11_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA3_blo1_RE7_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE7,1
-Unknown,JM1013_TrueBlank_end_RO2_rep12_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV Cortex_blo1_RG10_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG10,1
-Unknown,JM1013_TrueBlank_end_RO2_rep13_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV DG_blo1_RC8_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC8,1
-Unknown,JM1013_TrueBlank_end_RO2_rep14_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS Cortex_blo1_RE11_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE11,1
-Unknown,JM1013_TrueBlank_end_RO2_rep15_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA1_blo1_RG3_rep1_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG3,1
-Unknown,JM1013_TrueBlank_end_RO2_rep16_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo2_RE17_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE17,1
-Unknown,JM1013_TrueBlank_end_RO2_rep17_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo2_RE19_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE19,1
-Unknown,JM1013_TrueBlank_end_RO2_rep18_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo2_RF18_rep6_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF18,1
-Unknown,JM1013_TrueBlank_end_RO2_rep19_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo2_RH15_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RH15,1
-Unknown,JM1013_TrueBlank_end_RO2_rep20_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo2_RG13_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG13,1
-Unknown,JM1013_TrueBlank_end_RO2_rep21_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo2_RC13_rep6_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC13,1
-Unknown,JM1013_TrueBlank_end_RO2_rep22_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA1_blo3_RE3_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE3,1
-Unknown,JM1013_TrueBlank_end_RO2_rep23_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV Cortex_blo3_RD10_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD10,1
-Unknown,JM1013_TrueBlank_end_RO2_rep24_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS DG_blo3_RE9_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE9,1
-Unknown,JM1013_TrueBlank_end_RO2_rep25_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV DG_blo3_RG8_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG8,1
-Unknown,JM1013_TrueBlank_end_RO2_rep26_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA2_blo3_RF5_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF5,1
-Unknown,JM1013_TrueBlank_end_RO2_rep27_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA2_blo3_RC4_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC4,1
-Unknown,JM1013_TrueBlank_end_RO2_rep28_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA3_blo3_RF7_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF7,1
-Unknown,JM1013_TrueBlank_end_RO2_rep29_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS Cortex_blo3_RC11_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC11,1
-Unknown,JM1013_TrueBlank_end_RO2_rep30_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA1_blo3_RG2_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG2,1
-Unknown,JM1013_TrueBlank_end_RO2_rep31_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA3_blo3_RF6_rep2_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF6,1
-Unknown,JM1013_TrueBlank_end_RO2_rep32_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo4_RD18_rep7_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD18,1
-Unknown,JM1013_TrueBlank_end_RO2_rep33_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo4_RH18_rep8_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RH18,1
-Unknown,JM1013_TrueBlank_end_RO2_rep34_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo4_RG18_rep9_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG18,1
-Unknown,JM1013_TrueBlank_end_RO2_rep35_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo4_RD15_rep7_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD15,1
-Unknown,JM1013_TrueBlank_end_RO2_rep36_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo4_RF15_rep8_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF15,1
-Unknown,JM1013_TrueBlank_end_RO2_rep37_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo4_RH14_rep9_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RH14,1
-Unknown,JM1013_TrueBlank_end_RO2_rep38_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA2_blo5_RG4_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG4,1
-Unknown,JM1013_TrueBlank_end_RO2_rep39_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA1_blo5_RD3_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD3,1
-Unknown,JM1013_TrueBlank_end_RO2_rep40_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS DG_blo5_RG9_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG9,1
-Unknown,JM1013_TrueBlank_end_RO2_rep41_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV DG_blo5_RE8_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE8,1
-Unknown,JM1013_TrueBlank_end_RO2_rep42_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA2_blo5_RE5_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE5,1
-Unknown,JM1013_TrueBlank_end_RO2_rep43_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA3_blo5_RG6_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG6,1
-Unknown,JM1013_TrueBlank_end_RO2_rep44_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS Cortex_blo5_RG11_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG11,1
-Unknown,JM1013_TrueBlank_end_RO2_rep45_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA1_blo5_RD2_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD2,1
-Unknown,JM1013_TrueBlank_end_RO2_rep46_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV Cortex_blo5_RE10_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE10,1
-Unknown,JM1013_TrueBlank_end_RO2_rep47_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA3_blo5_RC7_rep3_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC7,1
-Unknown,JM1013_TrueBlank_end_RO2_rep48_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo6_RH19_rep10_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RH19,1
-Unknown,JM1013_TrueBlank_end_RO2_rep49_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo6_RG17_rep11_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG17,1
-Unknown,JM1013_TrueBlank_end_RO2_rep50_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo6_RF19_rep12_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF19,1
-Unknown,JM1013_TrueBlank_end_RO2_rep51_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo6_RE13_rep10_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE13,1
-Unknown,JM1013_TrueBlank_end_RO2_rep52_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo6_RF13_rep11_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF13,1
-Unknown,JM1013_TrueBlank_end_RO2_rep53_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo6_RE14_rep12_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE14,1
-Unknown,JM1013_TrueBlank_end_RO2_rep54_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV DG_blo7_RF8_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF8,1
-Unknown,JM1013_TrueBlank_end_RO2_rep55_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS Cortex_blo7_RD11_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD11,1
-Unknown,JM1013_TrueBlank_end_RO2_rep56_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA2_blo7_RE4_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE4,1
-Unknown,JM1013_TrueBlank_end_RO2_rep57_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA1_blo7_RF3_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF3,1
-Unknown,JM1013_TrueBlank_end_RO2_rep58_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA1_blo7_RC2_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC2,1
-Unknown,JM1013_TrueBlank_end_RO2_rep59_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA3_blo7_RG7_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG7,1
-Unknown,JM1013_TrueBlank_end_RO2_rep60_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA3_blo7_RD6_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD6,1
-Unknown,JM1013_TrueBlank_end_RO2_rep61_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV Cortex_blo7_RC10_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC10,1
-Unknown,JM1013_TrueBlank_end_RO2_rep62_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA2_blo7_RD5_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD5,1
-Unknown,JM1013_TrueBlank_end_RO2_rep63_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS DG_blo7_RD9_rep4_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD9,1
-Unknown,JM1013_TrueBlank_end_RO2_rep64_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo8_RH17_rep13_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RH17,1
-Unknown,JM1013_TrueBlank_end_RO2_rep65_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo8_RC19_rep14_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC19,1
-Unknown,JM1013_TrueBlank_end_RO2_rep66_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo8_RG19_rep15_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG19,1
-Unknown,JM1013_TrueBlank_end_RO2_rep67_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo8_RF14_rep13_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF14,1
-Unknown,JM1013_TrueBlank_end_RO2_rep68_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo8_RE15_rep14_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE15,1
-Unknown,JM1013_TrueBlank_end_RO2_rep69_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo8_RD13_rep15_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD13,1
-Unknown,JM1013_TrueBlank_end_RO2_rep70_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA2_blo9_RF4_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF4,1
-Unknown,JM1013_TrueBlank_end_RO2_rep71_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS Cortex_blo9_RF11_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF11,1
-Unknown,JM1013_TrueBlank_end_RO2_rep72_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS DG_blo9_RC9_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC9,1
-Unknown,JM1013_TrueBlank_end_RO2_rep73_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA3_blo9_RE6_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE6,1
-Unknown,JM1013_TrueBlank_end_RO2_rep74_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA1_blo9_RC3_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC3,1
-Unknown,JM1013_TrueBlank_end_RO2_rep75_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA2_blo9_RC5_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC5,1
-Unknown,JM1013_TrueBlank_end_RO2_rep76_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV Cortex_blo9_RF10_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF10,1
-Unknown,JM1013_TrueBlank_end_RO2_rep77_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV DG_blo9_RD8_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD8,1
-Unknown,JM1013_TrueBlank_end_RO2_rep78_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 67 PBS CA3_blo9_RD7_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD7,1
-Unknown,JM1013_TrueBlank_end_RO2_rep79_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Slide 39 TMEV CA1_blo9_RE2_rep5_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE2,1
-Unknown,JM1013_TrueBlank_end_RO2_rep80_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo10_RE18_rep16_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RE18,1
-Unknown,JM1013_TrueBlank_end_RO2_rep81_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo10_RD19_rep17_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RD19,1
-Unknown,JM1013_TrueBlank_end_RO2_rep82_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_2ng HeLa QC_blo10_RF17_rep18_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RF17,1
-Unknown,JM1013_TrueBlank_end_RO2_rep83_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo10_RC14_rep16_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RC14,1
-Unknown,JM1013_TrueBlank_end_RO2_rep84_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo10_RG14_rep17_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RG14,1
-Unknown,JM1013_TrueBlank_end_RO2_rep85_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
-Unknown,JM1013_Digest Mix_blo10_RH13_rep18_ch1_dry,lcdatapath,lcmethodpath\ChannelA_flush_1min_1ul,RH13,1
-Unknown,JM1013_TrueBlank_end_RO2_rep86_ch2_dry,lcdatapath,lcmethodpath\ChannelB_flush_1min_1ul,RO2,1
+Unknown,JM1013_2ng HeLa QC_blo0_GE17_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE17,1
+Unknown,JM1013_2ng HeLa QC_blo0_GC19_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC19,1
+Unknown,JM1013_2ng HeLa QC_blo0_GD18_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD18,1
+Unknown,JM1013_Digest Mix_blo0_GE14_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE14,1
+Unknown,JM1013_Digest Mix_blo0_GH14_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GH14,1
+Unknown,JM1013_Digest Mix_blo0_GC15_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC15,1
+Unknown,JM1013_Slide 67 PBS CA3_blo1_GD7_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD7,1
+Unknown,JM1013_Slide 39 TMEV Cortex_blo1_GE10_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE10,1
+Unknown,JM1013_Slide 39 TMEV DG_blo1_GC8_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC8,1
+Unknown,JM1013_Slide 67 PBS DG_blo1_GC9_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC9,1
+Unknown,JM1013_Slide 67 PBS CA1_blo1_GF3_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF3,1
+Unknown,JM1013_Slide 39 TMEV CA2_blo1_GD4_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD4,1
+Unknown,JM1013_Slide 39 TMEV CA3_blo1_GE6_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE6,1
+Unknown,JM1013_Slide 39 TMEV CA1_blo1_GF2_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF2,1
+Unknown,JM1013_Slide 67 PBS Cortex_blo1_GG11_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG11,1
+Unknown,JM1013_Slide 67 PBS CA2_blo1_GD5_rep1_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD5,1
+Unknown,JM1013_2ng HeLa QC_blo2_GD19_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD19,1
+Unknown,JM1013_2ng HeLa QC_blo2_GF17_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF17,1
+Unknown,JM1013_2ng HeLa QC_blo2_GF19_rep6_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF19,1
+Unknown,JM1013_Digest Mix_blo2_GF13_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF13,1
+Unknown,JM1013_Digest Mix_blo2_GF15_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF15,1
+Unknown,JM1013_Digest Mix_blo2_GH15_rep6_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GH15,1
+Unknown,JM1013_Slide 67 PBS CA3_blo3_GF7_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF7,1
+Unknown,JM1013_Slide 39 TMEV DG_blo3_GE8_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE8,1
+Unknown,JM1013_Slide 67 PBS DG_blo3_GG9_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG9,1
+Unknown,JM1013_Slide 39 TMEV CA2_blo3_GG4_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG4,1
+Unknown,JM1013_Slide 67 PBS CA1_blo3_GE3_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE3,1
+Unknown,JM1013_Slide 39 TMEV CA3_blo3_GG6_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG6,1
+Unknown,JM1013_Slide 39 TMEV Cortex_blo3_GG10_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG10,1
+Unknown,JM1013_Slide 67 PBS CA2_blo3_GE5_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE5,1
+Unknown,JM1013_Slide 39 TMEV CA1_blo3_GG2_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG2,1
+Unknown,JM1013_Slide 67 PBS Cortex_blo3_GD11_rep2_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD11,1
+Unknown,JM1013_2ng HeLa QC_blo4_GD17_rep7_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD17,1
+Unknown,JM1013_2ng HeLa QC_blo4_GH17_rep8_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GH17,1
+Unknown,JM1013_2ng HeLa QC_blo4_GC17_rep9_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC17,1
+Unknown,JM1013_Digest Mix_blo4_GC13_rep7_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC13,1
+Unknown,JM1013_Digest Mix_blo4_GD13_rep8_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD13,1
+Unknown,JM1013_Digest Mix_blo4_GE13_rep9_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE13,1
+Unknown,JM1013_Slide 39 TMEV CA1_blo5_GE2_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE2,1
+Unknown,JM1013_Slide 39 TMEV DG_blo5_GD8_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD8,1
+Unknown,JM1013_Slide 67 PBS CA1_blo5_GC3_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC3,1
+Unknown,JM1013_Slide 39 TMEV CA3_blo5_GF6_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF6,1
+Unknown,JM1013_Slide 39 TMEV CA2_blo5_GF4_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF4,1
+Unknown,JM1013_Slide 67 PBS CA3_blo5_GG7_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG7,1
+Unknown,JM1013_Slide 67 PBS Cortex_blo5_GE11_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE11,1
+Unknown,JM1013_Slide 67 PBS CA2_blo5_GG5_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG5,1
+Unknown,JM1013_Slide 39 TMEV Cortex_blo5_GD10_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD10,1
+Unknown,JM1013_Slide 67 PBS DG_blo5_GD9_rep3_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD9,1
+Unknown,JM1013_2ng HeLa QC_blo6_GE18_rep10_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE18,1
+Unknown,JM1013_2ng HeLa QC_blo6_GE19_rep11_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE19,1
+Unknown,JM1013_2ng HeLa QC_blo6_GG18_rep12_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG18,1
+Unknown,JM1013_Digest Mix_blo6_GG14_rep10_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG14,1
+Unknown,JM1013_Digest Mix_blo6_GF14_rep11_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF14,1
+Unknown,JM1013_Digest Mix_blo6_GD15_rep12_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD15,1
+Unknown,JM1013_Slide 67 PBS DG_blo7_GE9_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE9,1
+Unknown,JM1013_Slide 39 TMEV CA3_blo7_GC6_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC6,1
+Unknown,JM1013_Slide 67 PBS CA3_blo7_GC7_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC7,1
+Unknown,JM1013_Slide 39 TMEV CA1_blo7_GC2_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC2,1
+Unknown,JM1013_Slide 67 PBS CA1_blo7_GD3_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD3,1
+Unknown,JM1013_Slide 39 TMEV Cortex_blo7_GF10_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF10,1
+Unknown,JM1013_Slide 67 PBS Cortex_blo7_GF11_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF11,1
+Unknown,JM1013_Slide 39 TMEV CA2_blo7_GC4_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC4,1
+Unknown,JM1013_Slide 39 TMEV DG_blo7_GF8_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF8,1
+Unknown,JM1013_Slide 67 PBS CA2_blo7_GC5_rep4_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC5,1
+Unknown,JM1013_2ng HeLa QC_blo8_GG17_rep13_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG17,1
+Unknown,JM1013_2ng HeLa QC_blo8_GF18_rep14_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF18,1
+Unknown,JM1013_2ng HeLa QC_blo8_GH18_rep15_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GH18,1
+Unknown,JM1013_Digest Mix_blo8_GD14_rep13_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD14,1
+Unknown,JM1013_Digest Mix_blo8_GC14_rep14_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC14,1
+Unknown,JM1013_Digest Mix_blo8_GH13_rep15_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GH13,1
+Unknown,JM1013_Slide 67 PBS CA2_blo9_GF5_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF5,1
+Unknown,JM1013_Slide 39 TMEV CA2_blo9_GE4_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE4,1
+Unknown,JM1013_Slide 39 TMEV CA1_blo9_GD2_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD2,1
+Unknown,JM1013_Slide 39 TMEV DG_blo9_GG8_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG8,1
+Unknown,JM1013_Slide 67 PBS CA3_blo9_GE7_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE7,1
+Unknown,JM1013_Slide 67 PBS CA1_blo9_GG3_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG3,1
+Unknown,JM1013_Slide 67 PBS DG_blo9_GF9_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GF9,1
+Unknown,JM1013_Slide 39 TMEV Cortex_blo9_GC10_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC10,1
+Unknown,JM1013_Slide 67 PBS Cortex_blo9_GC11_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC11,1
+Unknown,JM1013_Slide 39 TMEV CA3_blo9_GD6_rep5_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GD6,1
+Unknown,JM1013_2ng HeLa QC_blo10_GH19_rep16_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GH19,1
+Unknown,JM1013_2ng HeLa QC_blo10_GC18_rep17_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GC18,1
+Unknown,JM1013_2ng HeLa QC_blo10_GG19_rep18_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG19,1
+Unknown,JM1013_Digest Mix_blo10_GG13_rep16_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG13,1
+Unknown,JM1013_Digest Mix_blo10_GE15_rep17_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GE15,1
+Unknown,JM1013_Digest Mix_blo10_GG15_rep18_dry,D:\Data\Tyler.H\JM1013,C:\Data\Tyler\Methods\ChannelA_flush_1min_1ul\flush_1min_1ul,GG15,1

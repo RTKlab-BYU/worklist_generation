@@ -1033,6 +1033,7 @@ def two_xp_extract_file_info(flattened, conditions, SysValid_list, SysValid_inte
 def create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods):
     # creates a list of filenames
     filenames = []
+    TB_method_found = False # in a 2 column system we need to store the msmethod for a TrueBlank for later
     if lc_number == 1:
         columns = ['nbcode', 'conditions', 'block and run', 'position', 'rep','msmethod']
     elif lc_number == 2:
@@ -1049,10 +1050,15 @@ def create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs,
         elif lc_number == 2:
             df.loc[len(df)] = [nbcode, condition, block_runs[index],
                       positions[index], f"rep{reps[index]}", f"ch{(index%2)+1}", msmethods[index]]
+            if condition == "TrueBlank":
+                TB_method = msmethods[index]
+                TB_method_found = True
     for _, row in df.iterrows():
         joined = "_".join(str(x).strip() for x in row if pd.notna(x))
         filenames.append(joined)
-    return filenames
+    if TB_method_found == True:
+        return filenames, TB_method
+    return filenames, None
 
 def create_instrument_methods(lc_number, methodpaths, methods, csv_file):
     inst_methods = []
@@ -1069,7 +1075,7 @@ def create_instrument_methods(lc_number, methodpaths, methods, csv_file):
     return inst_methods
 
 def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method, sample_type,
-                       filenames, well_conditions, positions, inj_vol, two_xp_TB_location):
+                       filenames, well_conditions, positions, inj_vol, two_xp_TB_location, TB_method):
     # Create instrument methods for MS and LC
     method_paths = []
     method_names = []
@@ -1098,8 +1104,10 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
             inst_methods.insert(0, blank_method)
             inst_methods.insert(0, blank_method)
         elif csv_file == 'LC':
-            inst_methods.append(inst_methods[-1])
-            inst_methods.append(inst_methods[-1])
+            # inst_methods.append(inst_methods[-1]) ## Frage Zeichen ##
+            # inst_methods.append(inst_methods[-1])
+            inst_methods.insert(0, TB_method)
+            inst_methods.insert(0, TB_method)
         print(f'positions before: {positions}')
         # positions.append(positions[-1])
         # positions.append(positions[-1])
@@ -1202,13 +1210,13 @@ def process(filepath):
     else:
         raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. Verify that all required experiment fields are correctly filled in the Excel sheet. If there is only one experiment the library values should be the same.")
 
-    filenames = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
+    filenames, TB_method = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     # Create and export MS CSV
     ms_pd = final_csv_format_as_pd("MS", conditions, nbcode, lc_number, blank_method,
-                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location)
+                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location, TB_method)
     # Create and export LC CSV
     lc_pd = final_csv_format_as_pd("LC", conditions, nbcode, lc_number, blank_method,
-                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location)
+                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location, TB_method)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
 
     ms_filename = f"{nbcode}_MS.csv"
