@@ -1103,8 +1103,8 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
         print(f'positions before: {positions}')
         # positions.append(positions[-1])
         # positions.append(positions[-1])
-        positions.insert(0, two_xp_TB_location)
-        positions.insert(0, two_xp_TB_location)
+        positions.insert(0, two_xp_TB_location[0][1])
+        positions.insert(0, two_xp_TB_location[0][1])
         print(f'positions after: {positions}')
 
     if not (len(filenames) == len(data_paths) == len(inst_methods) == len(positions)):
