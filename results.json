@@ -1,0 +1,158 @@
+{
+    "tests": [
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_generate_seed_deterministic_print",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_read_excel_to_df_success",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_read_excel_to_df_missing_raises",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_validate_and_convert_spacing_ok",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_validate_and_convert_spacing_rejects_non_ints",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_condition_dict_keys_and_labels",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_separate_plates_structure",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_spacing_tuple_contents",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_process_plate_and_wells_format",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_compare_wells_and_counts_detects_mismatch",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_create_instrument_methods_adds_channel_prefixes",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_create_filenames_happy_path",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_final_csv_format_as_pd_returns_dataframe",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_fully_flatten_and_rep_tracker",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_validate_and_convert_spacing_empty_list",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_validate_and_convert_spacing_negative_values",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_read_excel_to_df_with_non_excel_extension",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_create_instrument_methods_with_lc_number_one",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_create_filenames_with_special_characters",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_flattener_with_empty_nested_lists",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_compare_wells_and_counts_with_exact_match",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "test_pyWorklist.py::test_process_with_real_sheet",
+            "output": "\n",
+            "visibility": "visible"
+        }
+    ]
+}
