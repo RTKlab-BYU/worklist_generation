@@ -114,6 +114,8 @@ def separate_plates(dataframe):
                     wet_amounts[dataframe.iloc[i, 29]] = 1
                 else:
                     wet_amounts[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 40])
+                if dataframe.iloc[i, 30] == "TrueBlank":
+                    wet_amounts[dataframe.iloc[i, 29]] = 10000  # TrueBlanks should be infinite
             except ValueError:
                 raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
     num_to_run = {}
@@ -260,23 +262,31 @@ def compare_wells_and_counts(wells_list, conditions, wet_amounts):
         return sum(vals)
 
     # Validator: check actual wells * wet_amounts vs expected spacings
-    def validate(cond_ids, total_count, label):
+    def validate(cond_ids, total_count, label, infinite_source=False):
         for num in cond_ids:
             expected = spacing_sum(conditions[num])
             actual = total_count * wet_amounts.get(num, 1)
-            if actual < expected:
-                raise ValueError(
-                    f"Error: Not enough {label} wells. "
-                    f"Expected at least {expected}, but found {actual}."
-                )
+
+            if infinite_source:
+                # Only need at least 1, no matter how many times it's referenced
+                if total_count < 1:
+                    raise ValueError(f"Error: No {label} wells found, need at least 1.")
+            else:
+                if actual < expected:
+                    raise ValueError(
+                        f"Error: Not enough {label} wells. "
+                        f"Expected at least {expected}, but found {actual}."
+                    )
+
 
     # Run checks for each type
     validate(QC_num, total_QC, "QC")
     validate(wet_QC_num, total_wet_QC, "WetQC")
     validate(Blank_num, total_Blank, "Blank")
-    validate(TrueBlank_num, total_TrueBlank, "TrueBlank")
-    validate(Lib_num, total_Lib, "Library")
-    validate(SysValid_num, total_SysValid, "SystemValidation")
+    validate(TrueBlank_num, total_TrueBlank, "TrueBlank", infinite_source=True)
+    validate(Lib_num, total_Lib, "Library", infinite_source=True)
+    validate(SysValid_num, total_SysValid, "SystemValidation", infinite_source=True)
+
 
 def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1): #split the wells list evenly between the two columns
     column1 = []
