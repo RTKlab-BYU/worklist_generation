@@ -58,8 +58,8 @@ def run_worklist():
         output2_path = os.path.join(save_dir, lc_filename)
 
         # Save in Excel-friendly CSV format
-        ms_pd.to_csv(output1_path, index=False, encoding="utf-8-sig", lineterminator="\r\n")
-        lc_pd.to_csv(output2_path, index=False, encoding="utf-8-sig", lineterminator="\r\n")
+        ms_pd.to_csv(output1_path, index=False, header=False, encoding="utf-8-sig", lineterminator="\r\n")
+        lc_pd.to_csv(output2_path, index=False, header=False, encoding="utf-8-sig", lineterminator="\r\n")
 
         messagebox.showinfo("Worklist Generator", "Files saved successfully!")
 
