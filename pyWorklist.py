@@ -117,7 +117,7 @@ def separate_plates(dataframe):
             except ValueError:
                 raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
     num_to_run = {}
-    for i in range(0, 31):
+    for i in range(0, 51):
         if pd.notna(dataframe.iloc[i, 41]) & pd.notna(dataframe.iloc[i, 30]):
             if dataframe.iloc[i, 41] == 'all':
                 num_to_run[dataframe.iloc[i, 29]] = dataframe.iloc[i, 41]
@@ -659,7 +659,7 @@ def nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, eve
         block_num = nonsample_block_num
     elif nonsample_block_num == 0:
         block_num = num_of_blocks
-    elif nonsample_block_num < num_of_blocks:
+    elif nonsample_block_num < num_of_blocks: #and even.upper() == "YES": ## this might need to be changed
         block_num = nonsample_block_num
     elif nonsample_block_num >= num_of_blocks:
         block_num = num_of_blocks - 1
@@ -724,7 +724,45 @@ def zipper(both_blocks): # zips column1 and column2 together
             sample_blocks.append(block)
     return sample_blocks
 
+def combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, non_sample_blocks, QC_frequency):
+    # flatten sample blocks [[[well]]]
+    samples_flat = [well for block in sample_blocks for well in block]
+    # assume that at this point non_sample_blocks are reformatted correctly
+    counter = 0
+    samples_and_non = []
+
+    if nonsample_before:
+        for well in nonsample_before:
+            samples_and_non.append(well)
+
+    for well in samples_flat[:]:
+        samples_and_non.append(well)
+        counter += 1
+        if counter == QC_frequency:
+            try:
+                for well in non_sample_blocks[0]:
+                    samples_and_non.append(well)
+            except IndexError:
+                raise IndexError("Not enough QC groups were added to the plate.")
+            non_sample_blocks = non_sample_blocks[1:]
+            counter = 0
+
+    if nonsample_after:
+        for well in nonsample_after:
+            samples_and_non.append(nonsample_after)
+
+    return samples_and_non
+        
+
+
+
+
 def block_zipper(nonsample_before, nonsample_after, sample_blocks, non_sample_blocks, even):
+    print(sample_blocks)
+    print(non_sample_blocks)
+    print(even)
+    print(len(sample_blocks))
+    print(len(non_sample_blocks))
     final_flat_list = []
     # Add the pre-block if provided
     if nonsample_before:
@@ -1101,8 +1139,10 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
         data_paths.insert(0, data_paths[0])
         data_paths.insert(0, data_paths[0])
         if csv_file == 'MS':
-            inst_methods.insert(0, blank_method)
-            inst_methods.insert(0, blank_method)
+            # inst_methods.insert(0, blank_method)
+            # inst_methods.insert(0, blank_method)
+            inst_methods.insert(0, TB_method)
+            inst_methods.insert(0, TB_method)
         elif csv_file == 'LC':
             # inst_methods.append(inst_methods[-1]) ## Frage Zeichen ##
             # inst_methods.append(inst_methods[-1])
@@ -1147,7 +1187,7 @@ def process(filepath):
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = separate_plates(df)
 
     Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, two_xp_TB, even = spacing(df)
-                                                # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}"
+                                                # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
     sample_type = "Unknown"  # or "Sample", etc.
     blank_method = "Blank_Method"  # fill in with real method if needed
     inj_vol = 1  # injection volume in µL
