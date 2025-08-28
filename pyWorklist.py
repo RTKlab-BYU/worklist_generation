@@ -674,7 +674,7 @@ def nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, eve
         block_num = nonsample_block_num
     elif nonsample_block_num == 0:
         block_num = num_of_blocks
-    elif nonsample_block_num < num_of_blocks:
+    elif nonsample_block_num < num_of_blocks: #and even.upper() == "YES": ## this might need to be changed
         block_num = nonsample_block_num
     elif nonsample_block_num >= num_of_blocks:
         block_num = num_of_blocks - 1
@@ -740,7 +740,45 @@ def zipper(both_blocks): # zips column1 and column2 together
             sample_blocks.append(block)
     return sample_blocks
 
+def combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, non_sample_blocks, QC_frequency):
+    # flatten sample blocks [[[well]]]
+    samples_flat = [well for block in sample_blocks for well in block]
+    # assume that at this point non_sample_blocks are reformatted correctly
+    counter = 0
+    samples_and_non = []
+
+    if nonsample_before:
+        for well in nonsample_before:
+            samples_and_non.append(well)
+
+    for well in samples_flat[:]:
+        samples_and_non.append(well)
+        counter += 1
+        if counter == QC_frequency:
+            try:
+                for well in non_sample_blocks[0]:
+                    samples_and_non.append(well)
+            except IndexError:
+                raise IndexError("Not enough QC groups were added to the plate.")
+            non_sample_blocks = non_sample_blocks[1:]
+            counter = 0
+
+    if nonsample_after:
+        for well in nonsample_after:
+            samples_and_non.append(nonsample_after)
+
+    return samples_and_non
+        
+
+
+
+
 def block_zipper(nonsample_before, nonsample_after, sample_blocks, non_sample_blocks, even):
+    print(sample_blocks)
+    print(non_sample_blocks)
+    print(even)
+    print(len(sample_blocks))
+    print(len(non_sample_blocks))
     final_flat_list = []
     # Add the pre-block if provided
     if nonsample_before:
@@ -1117,8 +1155,10 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
         data_paths.insert(0, data_paths[0])
         data_paths.insert(0, data_paths[0])
         if csv_file == 'MS':
-            inst_methods.insert(0, blank_method)
-            inst_methods.insert(0, blank_method)
+            # inst_methods.insert(0, blank_method)
+            # inst_methods.insert(0, blank_method)
+            inst_methods.insert(0, TB_method)
+            inst_methods.insert(0, TB_method)
         elif csv_file == 'LC':
             inst_methods.append(inst_methods[-1])
             inst_methods.append(inst_methods[-1])
