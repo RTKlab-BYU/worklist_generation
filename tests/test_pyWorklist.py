@@ -49,12 +49,14 @@ def load_module():
     return mod
 
 @pytest.fixture(scope="session")
-def worklist_df():
+def worklist_dfs():
     """Load Excel if present, otherwise skip Excel-based tests."""
     xlsx_path = os.getenv("WORKLIST_XLSX_PATH")
     if not xlsx_path or not Path(xlsx_path).exists():
         pytest.skip("Excel file not found; skipping Excel-based tests.")
-    return pd.read_excel(xlsx_path)
+    user_df = pd.read_excel(xlsx_path, sheet_name="User")
+    manager_df = pd.read_excel(xlsx_path, sheet_name="Manager")
+    return [user_df, manager_df]
 
 @pytest.fixture(autouse=True)
 def _reseed():
@@ -72,17 +74,18 @@ def test_generate_seed_deterministic_print(capsys):
     captured = capsys.readouterr().out.strip()
     assert captured == "42"
 
-def test_read_excel_to_df_success(worklist_df):
+def test_read_excel_to_dfs_success(worklist_dfs):
     mod = load_module()
     # Should return a DataFrame with at least 1 column and row
-    df = mod.read_excel_to_df(os.getenv("WORKLIST_XLSX_PATH", "/mnt/data/worklist.xlsx"))
-    assert hasattr(df, "shape") and df.shape[0] > 0 and df.shape[1] > 0
+    user_df, manager_df = mod.read_excel_to_dfs(os.getenv("WORKLIST_XLSX_PATH", "/mnt/data/worklist.xlsx"))
+    assert hasattr(user_df, "shape") and user_df.shape[0] > 0 and user_df.shape[1] > 0
+    assert hasattr(manager_df, "shape") and manager_df.shape[0] > 0 and manager_df.shape[1] > 0
 
-def test_read_excel_to_df_missing_raises(tmp_path):
+def test_read_excel_to_dfs_missing_raises(tmp_path):
     mod = load_module()
     missing = tmp_path / "missing.xlsx"
     with pytest.raises(ValueError) as ei:
-        mod.read_excel_to_df(str(missing))
+        mod.read_excel_to_dfs(str(missing))
     assert "not found" in str(ei.value)
 
 def test_validate_and_convert_spacing_ok():
@@ -98,18 +101,18 @@ def test_validate_and_convert_spacing_rejects_non_ints():
 # Integration with provided sheet
 # -----------------------------
 
-def test_condition_dict_keys_and_labels(worklist_df):
+def test_condition_dict_keys_and_labels(worklist_dfs):
     mod = load_module()
-    conds = mod.condition_dict(worklist_df)
+    conds = mod.condition_dict(worklist_dfs[1])  # manager_df
     # Expect at least several conditions including 1..5 for this sheet
     assert 1 in conds and 2 in conds and 3 in conds
     # Sanity-check some labels
     assert isinstance(conds[1][0], str)
     assert isinstance(conds[2][0], str)
 
-def test_separate_plates_structure(worklist_df):
+def test_separate_plates_structure(worklist_dfs):
     mod = load_module()
-    nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
+    nbcode, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_dfs[0], worklist_dfs[1])
     # From the provided sheet we expect 3 plates
     assert set(plates.keys()) == {"R_redplate", "B_blueplate", "G_greenplate"}
     # And a 1-column system per this example
@@ -117,36 +120,36 @@ def test_separate_plates_structure(worklist_df):
     assert isinstance(wet_amounts, dict) and len(wet_amounts) > 0
     assert isinstance(num_to_run, dict)
 
-def test_spacing_tuple_contents(worklist_df):
+def test_additional_info_contents(worklist_dfs):
     mod = load_module()
-    spacing_tuple = mod.spacing(worklist_df)
+    add_info_tuple = mod.additional_info(worklist_dfs[0], worklist_dfs[1])  # user_df, manager_df
     # spacing() returns a 7-tuple
-    assert isinstance(spacing_tuple, tuple) and len(spacing_tuple) == 7
-    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = spacing_tuple
+    assert isinstance(add_info_tuple, tuple) and len(add_info_tuple) == 7
+    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = add_info_tuple
     assert Lib_placement in ("Before", "After")
     assert isinstance(SysValid_interval, (int, float))
     assert lib_same in ("Yes", "No")
     assert even in ("Yes", "No")
 
-def test_process_plate_and_wells_format(worklist_df):
+def test_process_plate_and_wells_format(worklist_dfs):
     mod = load_module()
-    nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
+    nbcode, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_dfs[0], worklist_dfs[1])
     # Pick one plate
     name, plate_df = next(iter(plates.items()))
     wells = mod.process_plate(plate_df, name, wet_amounts)
     # Each well entry should be [condition_number, position_string]
     assert all(isinstance(w, list) and len(w) == 2 and isinstance(w[0], (int, float)) and isinstance(w[1], str) for w in wells)
 
-def test_compare_wells_and_counts_detects_mismatch(worklist_df):
+def test_compare_wells_and_counts_detects_mismatch(worklist_dfs):
     import pytest
     mod = load_module()
 
     # Build basics from the sheet
-    nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
-    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = mod.spacing(worklist_df)
+    nbcode, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_dfs[0], worklist_dfs[1])
+    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = mod.additional_info(worklist_dfs[0], worklist_dfs[1])
 
     # Build the conditions dict (for all conditions)
-    conditions = mod.condition_dict(worklist_df)  # cond_range=None -> your default (0–50)
+    conditions = mod.condition_dict(worklist_dfs[1])  # cond_range=None -> your default (0–50)
 
     # Take one plate’s wells
     name, plate_df = next(iter(plates.items()))
@@ -204,6 +207,7 @@ def test_create_filenames_happy_path():
     reps = [1,1,2]
     msmethods = ["dry", "dry", "dry"]
     filenames = mod.create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
+    print(filenames)
     assert filenames[0].startswith("NB001_lib_blo1_run1_RA1_rep1")
 
 def test_final_csv_format_as_pd_returns_dataframe():
@@ -280,7 +284,7 @@ def test_read_excel_to_df_with_non_excel_extension(tmp_path):
     fakefile = tmp_path / "fake.txt"
     fakefile.write_text("Not an excel file")
     with pytest.raises(ValueError):
-        mod.read_excel_to_df(str(fakefile))
+        mod.read_excel_to_dfs(str(fakefile))
 
 def test_create_instrument_methods_with_lc_number_one():
     mod = load_module()
@@ -312,12 +316,12 @@ def test_flattener_with_empty_nested_lists():
     # Should return empty list or ignore empty items
     assert flat == []
 
-def test_compare_wells_and_counts_with_exact_match(worklist_df):
+def test_compare_wells_and_counts_with_exact_match(worklist_dfs):
     import math, pytest
     mod = load_module()
 
-    nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
-    conditions = mod.condition_dict(worklist_df)
+    nbcode, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_dfs[0], worklist_dfs[1])
+    conditions = mod.condition_dict(worklist_dfs[1])
 
     # Pick QC if present, otherwise the first condition
     if any(v[0] == "QC" for v in conditions.values()):
@@ -353,7 +357,7 @@ def test_compare_wells_and_counts_with_exact_match(worklist_df):
     except Exception as e:
         pytest.fail(f"compare_wells_and_counts raised an exception: {e}")
 
-def test_process_with_real_sheet(worklist_df):
+def test_process_with_real_sheet(worklist_dfs):
     mod = load_module()
     # This will run the same code your GUI calls
     ms_df, lc_df, ms_filename, lc_filename = mod.process(os.getenv("WORKLIST_XLSX_PATH"))

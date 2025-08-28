@@ -21,10 +21,11 @@ def generate_seed(run_seed = None):
     random.seed(run_seed)
     print(run_seed)
 
-def read_excel_to_df(filename):
+def read_excel_to_dfs(filename):
     try:
-        dataframe = pd.read_excel(filename)
-        return dataframe
+        user_df = pd.read_excel(filename, sheet_name="User")
+        manager_df = pd.read_excel(filename, sheet_name="Manager")
+        return user_df, manager_df
     except FileNotFoundError:
         raise ValueError(f"File '{filename}' not found. Please check that the file exists in the correct directory and has the expected extension.")
     except ValueError as e:
@@ -49,24 +50,24 @@ def condition_dict(dataframe, cond_range=None):
     else:
         values = ['0', '50']
     for i in range(int(values[0])-1, int(values[1])):
-        key = dataframe.iloc[i, 29]
-        if pd.notna(dataframe.iloc[i, 30]):
-            value = dataframe.iloc[i,30:40].tolist()
-            placings = dataframe.iloc[i,42:45].tolist()
+        key = dataframe.iloc[i,0]
+        if pd.notna(dataframe.iloc[i,1]):
+            value = dataframe.iloc[i,1:11].tolist()
+            placings = dataframe.iloc[i,13:16].tolist()
             value.extend(placings) # add before/after/between values to each condition in the list
             conditions[key] = value
     return conditions
 
-def separate_plates(dataframe):
-    nbcode = dataframe.columns[1]
-    pathway = dataframe.iloc[0,1] # Not used for anything currently, could be changed to a new variable
-    if dataframe.iloc[1,1] == '1 column':
+def separate_plates(user_df, manager_df):
+    user_name = user_df.columns[1]
+    nbcode = user_df.iloc[0,1]
+    if manager_df.iloc[0,17] == '1 column':
         lc_column_number = 1
-    elif dataframe.iloc[1,1] == '2 column':
+    elif manager_df.iloc[0,17] == '2 column':
         lc_column_number = 2
     else:
         raise ValueError(
-            f"System type must either be \"1 column\" or \"2 column\", but got {dataframe.iloc[2,0]}"
+            f"System type must either be \"1 column\" or \"2 column\", but got {manager_df.iloc[0,18]}"
         )
     plates = {}
     for i in range(1,4): # plates 1-3
@@ -79,16 +80,16 @@ def separate_plates(dataframe):
         elif i == 3:
             name_row = 40
             row_min = 39
-        name_values = dataframe.iloc[name_row, [0, 1]]
+        name_values = user_df.iloc[name_row, [0, 1]]
         name = "_".join(str(x).strip() for x in name_values if pd.notna(x))
-        plate = dataframe.iloc[row_min:row_min+18, 3:28]
+        plate = user_df.iloc[row_min:row_min+18, 3:28]
 
         # Validate plate values
-        max_row = min(row_min + 18, len(dataframe))
-        max_col = min(28, dataframe.shape[1])
+        max_row = min(row_min + 18, len(user_df))
+        max_col = min(28, user_df.shape[1])
         for r in range(row_min + 1, max_row):
             for c in range(4, max_col):
-                val = dataframe.iloc[r, c]
+                val = user_df.iloc[r, c]
                 if pd.notna(val):
                     if not isinstance(val, (int, float)) or not float(val).is_integer() or not (1 <= int(val) <= 50):
                         raise ValueError(
@@ -107,28 +108,32 @@ def separate_plates(dataframe):
         plates[name] = plate
 
     wet_amounts = {}
-    for i in range(0, 51):
-        if pd.notna(dataframe.iloc[i, 40]) & pd.notna(dataframe.iloc[i, 30]):
+    for i in range(0, 50):
+        if pd.notna(manager_df.iloc[i, 1]):
+            cond_num = manager_df.iloc[i, 0]
+            well_amount = manager_df.iloc[i, 11]
             try:
-                if dataframe.iloc[i, 40] is None or dataframe.iloc[i, 40] == '':
-                    wet_amounts[dataframe.iloc[i, 29]] = 1
+                if well_amount is None or np.isnan(well_amount) or well_amount == '':
+                    wet_amounts[int(cond_num)] = 1
                 else:
-                    wet_amounts[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 40])
-                if dataframe.iloc[i, 30] == "TrueBlank":
-                    wet_amounts[dataframe.iloc[i, 29]] = 10000  # TrueBlanks should be infinite
+                    wet_amounts[int(cond_num)] = int(well_amount)
+                if manager_df.iloc[i, 1] == "TrueBlank":
+                    wet_amounts[int(cond_num)] = 10000  # TrueBlanks should be infinite
             except ValueError:
                 raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
     num_to_run = {}
-    for i in range(0, 31):
-        if pd.notna(dataframe.iloc[i, 41]) & pd.notna(dataframe.iloc[i, 30]):
-            if dataframe.iloc[i, 41] == 'all':
-                num_to_run[dataframe.iloc[i, 29]] = dataframe.iloc[i, 41]
+    for i in range(0, 50):
+        if pd.notna(manager_df.iloc[i, 1]):
+            cond_num = manager_df.iloc[i, 0]
+            amt_to_run = manager_df.iloc[i, 12]
+            if amt_to_run == 'all' or np.isnan(amt_to_run) or amt_to_run == '':
+                num_to_run[int(cond_num)] = 'all'
             else:
                 try:
-                    num_to_run[dataframe.iloc[i, 29]] = int(dataframe.iloc[i, 41])
+                    num_to_run[int(cond_num)] = int(amt_to_run)
                 except ValueError:
                     raise ValueError("Number of samples to run must be either 'all' (no quotes) or a whole number.")
-    return nbcode, pathway, lc_column_number, wet_amounts, plates, num_to_run
+    return nbcode, lc_column_number, wet_amounts, plates, num_to_run
 
 def validate_and_convert_spacing(lst, name):
     converted = []
@@ -139,21 +144,20 @@ def validate_and_convert_spacing(lst, name):
             raise ValueError(f"Invalid value in {name}[{i}]: '{val}'. Expected a whole number.")
     return converted
 
-def spacing(dataframe):
+def additional_info(user_df, manager_df):
     # qc_spacing = validate_and_convert_spacing(dataframe.iloc[31:34, 30].tolist(), "qc_spacing")
     # wet_qc_spacing = validate_and_convert_spacing(dataframe.iloc[34:37, 30].tolist(), "wet_qc_spacing")
     # blank_spacing = validate_and_convert_spacing(dataframe.iloc[37:40, 30].tolist(), "blank_spacing")
     # true_blank_spacing = validate_and_convert_spacing(dataframe.iloc[40:43, 30].tolist(), "true_blank_spacing")
     # Each of the spacing lists should have 3 values: before, after, between
     # Retrieve Lib before or after value
-    Lib_placement = dataframe.iloc[51,34] # are lib runs before or after samples?
-    SysValid_interval = dataframe.iloc[52,34] # how often to run system validation
-    two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks
-    even = dataframe.iloc[56,34] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
-    experiment1 = dataframe.iloc[51,37] # if not "All", which conditions belong to experiment 1
-    experiment2 = dataframe.iloc[52,37] # which conditions belong to experiment 2 if any
-    lib_same = dataframe.iloc[53,37] # "Yes" or "No", indicates if lib runs are the same for both experiments
-    return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even
+    Lib_placement = manager_df.iloc[51,34] # are lib runs before or after samples?
+    SysValid_interval = manager_df.iloc[52,34] # how often to run system validation
+    even = manager_df.iloc[56,34] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+    experiment1 = manager_df.iloc[51,37] # if not "All", which conditions belong to experiment 1
+    experiment2 = manager_df.iloc[52,37] # which conditions belong to experiment 2 if any
+    lib_same = user_df.iloc[53,37] # "Yes" or "No", indicates if lib runs are the same for both experiments
+    return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, even
 
 def parse_range(cond_range):
     if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":
@@ -168,6 +172,13 @@ def parse_range(cond_range):
         return [start, end]
 
     raise ValueError(f"Invalid condition range: {cond_range!r}")
+
+def check_for_trueblank(conditions, well):
+    for i, cond in enumerate(conditions):
+        if cond[1] == "TrueBlank":
+            return conditions, i+1, True # condition IDs are 1-indexed
+    conditions[len(conditions)] = ["TrueBlank", "TrueBlank", "", "", "", "", "", "", "", "", 0, 0, 0, 0, 0, 0]
+    return conditions, len(conditions), False # return the new condition ID
 
 def process_plate(plate, plate_name, wet_amounts, cond_range = None):
     wells_list = []
@@ -543,12 +554,6 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
         elif lc_number == 1:
             for sample in sample_list:
                 column1.append(sample)
-    print("one")
-    print(nonsample_after)
-    print("two")
-    print(nonsample_before)
-    print("three")
-    print(nonsample_other)
     
     if lc_number ==2:
         return (nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib)
@@ -715,6 +720,7 @@ def nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, eve
             for item in sample_list:
                 placement = random.randint(0, num_of_blocks-1)
                 nonsample_blocks[placement].append(item)
+    print(len(nonsample_blocks))
     return(nonsample_blocks)
 
 def zipper(both_blocks): # zips column1 and column2 together
@@ -794,6 +800,8 @@ def block_zipper(nonsample_before, nonsample_after, sample_blocks, non_sample_bl
     # Add the post-block if provided
     if nonsample_after:
         final_flat_list.append(nonsample_after)
+    
+    print(final_flat_list)
 
     return final_flat_list
 
@@ -1066,9 +1074,7 @@ def create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs,
     for _, row in df.iterrows():
         joined = "_".join(str(x).strip() for x in row if pd.notna(x))
         filenames.append(joined)
-    if TB_method_found == True:
-        return filenames, TB_method
-    return filenames, None
+    return filenames
 
 def create_instrument_methods(lc_number, methodpaths, methods, csv_file):
     inst_methods = []
@@ -1085,7 +1091,7 @@ def create_instrument_methods(lc_number, methodpaths, methods, csv_file):
     return inst_methods
 
 def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method, sample_type,
-                       filenames, well_conditions, positions, inj_vol, two_xp_TB_location, TB_method):
+                       filenames, well_conditions, positions, inj_vol):
     # Create instrument methods for MS and LC
     method_paths = []
     method_names = []
@@ -1114,16 +1120,10 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
             inst_methods.insert(0, blank_method)
             inst_methods.insert(0, blank_method)
         elif csv_file == 'LC':
-            # inst_methods.append(inst_methods[-1]) ## Frage Zeichen ##
-            # inst_methods.append(inst_methods[-1])
-            inst_methods.insert(0, TB_method)
-            inst_methods.insert(0, TB_method)
-        print(f'positions before: {positions}')
-        # positions.append(positions[-1])
-        # positions.append(positions[-1])
-        positions.insert(0, two_xp_TB_location[0][1])
-        positions.insert(0, two_xp_TB_location[0][1])
-        print(f'positions after: {positions}')
+            inst_methods.append(inst_methods[-1])
+            inst_methods.append(inst_methods[-1])
+        positions.append(positions[-1])
+        positions.append(positions[-1])
 
     if not (len(filenames) == len(data_paths) == len(inst_methods) == len(positions)):
         raise IndexError("Mismatched lengths when creating CSV data.")
@@ -1149,15 +1149,14 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
     return pd.DataFrame(rows)
 
 def process(filepath):
-    df = read_excel_to_df(filepath)
+    user_df, manager_df = read_excel_to_dfs(filepath)
     generate_seed()
-    if df.shape[0] < 31 or df.shape[1] < 40:
-        raise ValueError("Input file must have at least 31 rows and 40 columns. Please check that all required rows/columns are present and not hidden.")
 
-    nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = separate_plates(df)
+    nbcode, lc_number, wet_amounts, plates, num_to_run = separate_plates(user_df, manager_df)
 
-    Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, two_xp_TB, even = spacing(df)
+    Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, even = additional_info(user_df, manager_df)
                                                 # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}"
+
     sample_type = "Unknown"  # or "Sample", etc.
     blank_method = "Blank_Method"  # fill in with real method if needed
     inj_vol = 1  # injection volume in µL
@@ -1166,10 +1165,13 @@ def process(filepath):
     two_xp_TB_location = []
 
     if cond_range1.upper() == "ALL" and lib_same.upper() == "YES": # one experiment, 1 or 2 column system
-        conditions = condition_dict(df)
+        conditions = condition_dict(manager_df)
         for key in plates:
             all_wells_flat.extend(process_plate(plates[key], key, wet_amounts))
             two_xp_TB_location.extend(process_plate(plates[key], key, wet_amounts)) #, f"{two_xp_TB}-{two_xp_TB}"))
+        conditions, two_xp_TB, found_TB = check_for_trueblank(conditions)
+        if not found_TB:
+            all_wells_flat.append([two_xp_TB, "R5"])
         compare_wells_and_counts(all_wells_flat, conditions, wet_amounts)
         if lc_number == 1:
             nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib1 = column_sorter(all_wells_flat, conditions, wet_amounts,
@@ -1186,8 +1188,9 @@ def process(filepath):
 
     elif cond_range1.upper() != "ALL": # two experiments, 2 column system
         lc_number = 1
-        conditions1 = condition_dict(df, cond_range1) # work as expected
-        conditions2 = condition_dict(df, cond_range2)
+        conditions1 = condition_dict(manager_df, cond_range1) # work as expected
+        conditions2 = condition_dict(manager_df, cond_range2)
+        conditions, two_xp_TB, found_TB = check_for_trueblank(conditions)
         all_wells_flat1 = []
         all_wells_flat2 = []
         two_xp_TB_location = []
@@ -1195,6 +1198,8 @@ def process(filepath):
             all_wells_flat1.extend(process_plate(plates[key], key, wet_amounts, cond_range1))
             all_wells_flat2.extend(process_plate(plates[key], key, wet_amounts, cond_range2))
             two_xp_TB_location.extend(process_plate(plates[key], key, wet_amounts, f"{two_xp_TB}-{two_xp_TB}"))
+        if not found_TB:
+            all_wells_flat.append([two_xp_TB, "R5"])
         # sort the wells in groups so they can be processed according to run type
         nonsample_before1, nonsample_after1, nonsample_other1, exp1col1, SysValid_list, separate_Lib1 = column_sorter(all_wells_flat1, conditions1,
                                                                                     wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
@@ -1210,7 +1215,7 @@ def process(filepath):
 
         non_flat_list1 = block_zipper(nonsample_before1, nonsample_after1, sample_blocks1, nonsample_blocks1, even)
         non_flat_list2 = block_zipper(nonsample_before2, nonsample_after2, sample_blocks2, nonsample_blocks2, even)
-        conditions = condition_dict(df)
+        conditions = condition_dict(manager_df)
         two_xp_flat_list = two_xp_zipper(non_flat_list1, non_flat_list2, two_xp_TB, conditions, two_xp_TB_location)
         two_xp_flat_list = attach_Lib(two_xp_flat_list, separate_Lib1, separate_Lib2, two_xp_TB, two_xp_TB_location, Lib_placement, lib_same)
 
@@ -1220,13 +1225,13 @@ def process(filepath):
     else:
         raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. Verify that all required experiment fields are correctly filled in the Excel sheet. If there is only one experiment the library values should be the same.")
 
-    filenames, TB_method = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
+    filenames = create_filenames(lc_number, conditions, nbcode, well_conditions, block_runs, positions, reps, msmethods)
     # Create and export MS CSV
     ms_pd = final_csv_format_as_pd("MS", conditions, nbcode, lc_number, blank_method,
-                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location, TB_method)
+                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     # Create and export LC CSV
     lc_pd = final_csv_format_as_pd("LC", conditions, nbcode, lc_number, blank_method,
-                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol, two_xp_TB_location, TB_method)
+                       sample_type, filenames.copy(), well_conditions.copy(), positions.copy(), inj_vol)
     #The files stored in files/output contain what needs to be sent to the mass spec and lc
 
     ms_filename = f"{nbcode}_MS.csv"
