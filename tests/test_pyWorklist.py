@@ -121,8 +121,8 @@ def test_spacing_tuple_contents(worklist_df):
     mod = load_module()
     spacing_tuple = mod.spacing(worklist_df)
     # spacing() returns a 7-tuple
-    assert isinstance(spacing_tuple, tuple) and len(spacing_tuple) == 7
-    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = spacing_tuple
+    assert isinstance(spacing_tuple, tuple) and len(spacing_tuple) == 9
+    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even, QC_Frequency, QC_per_block = spacing_tuple
     assert Lib_placement in ("Before", "After")
     assert isinstance(SysValid_interval, (int, float))
     assert lib_same in ("Yes", "No")
@@ -143,7 +143,7 @@ def test_compare_wells_and_counts_detects_mismatch(worklist_df):
 
     # Build basics from the sheet
     nbcode, pathway, lc_number, wet_amounts, plates, num_to_run = mod.separate_plates(worklist_df)
-    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even = mod.spacing(worklist_df)
+    Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even, QC_Frequency, QC_per_block = mod.spacing(worklist_df)
 
     # Build the conditions dict (for all conditions)
     conditions = mod.condition_dict(worklist_df)  # cond_range=None -> your default (0–50)
