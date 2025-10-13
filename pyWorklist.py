@@ -145,16 +145,16 @@ def validate_and_convert_spacing(lst, name):
     return converted
 
 def additional_info(user_df, manager_df):
-    Lib_placement = manager_df.iloc[51,34] # are lib runs before or after samples?
-    SysValid_interval = manager_df.iloc[52,34] # how often to run system validation
+    Lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
+    SysValid_interval = manager_df.iloc[4,17] # how often to run system validation
+    QC_Frequency = manager_df.iloc[5,17] # how often should QC blocks be added
     ### two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks ### FIX
-    even = manager_df.iloc[56,34] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
-    experiment1 = manager_df.iloc[51,37] # if not "All", which conditions belong to experiment 1
-    experiment2 = manager_df.iloc[52,37] # which conditions belong to experiment 2 if any
-    lib_same = user_df.iloc[53,37] # "Yes" or "No", indicates if lib runs are the same for both experiments
-    ### QC_Frequency = dataframe.iloc[55,37] # how often should QC blocks be added ### FIX
+    even = user_df.iloc[31,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+    experiment1 = user_df.iloc[34,35] # if not "All", which conditions belong to experiment 1
+    experiment2 = user_df.iloc[35,35] # which conditions belong to experiment 2 if any
+    lib_same = user_df.iloc[36,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
     ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
-    return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, two_xp_TB, even, QC_Frequency, QC_per_block
+    return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, even, QC_Frequency
 
 def parse_range(cond_range):
     if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":
@@ -170,12 +170,28 @@ def parse_range(cond_range):
 
     raise ValueError(f"Invalid condition range: {cond_range!r}")
 
-def check_for_trueblank(conditions, well):
-    for i, cond in enumerate(conditions):
-        if cond[1] == "TrueBlank":
-            return conditions, i+1, True # condition IDs are 1-indexed
-    conditions[len(conditions)] = ["TrueBlank", "TrueBlank", "", "", "", "", "", "", "", "", 0, 0, 0, 0, 0, 0]
-    return conditions, len(conditions), False # return the new condition ID
+def check_for_trueblank(conditions1, conditions2=None):
+    # raise ValueError(f"conditions1: {conditions1}")
+    found = False
+    for i, cond in enumerate(conditions1.items()):
+        if cond[0] == "TrueBlank":
+            found = True
+            break
+    if not found and conditions2:
+        for i, cond in enumerate(conditions2.items()):
+            if cond[0] == "TrueBlank":
+                found = True
+                break
+    if found:
+        if not conditions2:
+            return conditions1, i+1, True # condition IDs are 1-indexed
+        else:
+            return conditions1, conditions2, i+1, True # condition IDs are 1-indexed
+    conditions1[len(conditions1)] = ["TrueBlank", "TrueBlank", "", "", "", "", "", "", "", "", 0, 0, 0, 0, 0, 0]
+    if not conditions2:
+        return conditions1, len(conditions1), False # return the new condition ID
+    else:
+        return conditions1, conditions2, len(conditions1), False
 
 def process_plate(plate, plate_name, wet_amounts, cond_range = None):
     wells_list = []
@@ -726,7 +742,7 @@ def zipper(both_blocks): # zips column1 and column2 together
             sample_blocks.append(block)
     return sample_blocks
 
-def non_sample_lists(conditions, wells_list, blocks_to_make):
+def non_sample_lists(conditions, wells_list, blocks_to_make): # all inputs exist 10/13/2025
     QC_num, wet_QC_num, Blank_num, TrueBlank_num = [], [], [], []
     # find number associated with each nonsample well type
     list_of_keys = list(conditions.keys())
@@ -767,6 +783,7 @@ def non_sample_lists(conditions, wells_list, blocks_to_make):
                     wells_list.remove(well)
     list_nonsample_blocks = []
     nonsample_objects = [[QC_list, QC_num], [wet_QC_list, wet_QC_num], [Blank_list, Blank_num], [TrueBlank_list, TrueBlank_num]]
+    raise ValueError(f'Check nonsample_obects: {nonsample_objects}')
     for i in range(0, blocks_to_make):
         nonsample_block = []
         for set in nonsample_objects:
@@ -777,18 +794,19 @@ def non_sample_lists(conditions, wells_list, blocks_to_make):
                     for well in num_list[:safe_int(conditions[num][12], default=0)]:
                         set[0].remove(well)
         list_nonsample_blocks.append(nonsample_block)
-
+    # problem is nonsample blocks are empty
+    raise ValueError(f'Check list_nonsample_blocks: {list_nonsample_blocks}')
     return list_nonsample_blocks
 
 def combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, non_sample_other, QC_frequency, conditions):
-    # flatten sample blocks [[[well]]]
+    # flatten sample blocks
     samples_flat = [well for block in sample_blocks for well in block]
     ## create nonsample blocks
     # count # of samples divide by frequency to # of blocks
     num_samples = len(samples_flat)
     blocks_to_make = num_samples // QC_frequency
-    # create blocks and put into a list
 
+    # create blocks and put into a list
     list_nonsample_blocks = non_sample_lists(conditions, non_sample_other, blocks_to_make)
 
     # assume that at this point non_sample_blocks are reformatted correctly
@@ -1113,8 +1131,6 @@ def insert_sysQC(flattened_list, SysValid_list, SysValid_interval, lc_number, tw
 def extract_file_info(flattened, conditions, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location):
     flattened = insert_sysQC(flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
     well_conditions, block_runs, positions, reps, msmethods = [], [], [], [], []
-    
-    #raise ValueError(f"Is the error here?{flattened}")#[w[0] for w in flattened]}")
 
     well_conditions.extend([int(w[0]) for w in flattened])
     block_runs.extend([w[2] for w in flattened])
@@ -1243,7 +1259,7 @@ def process(filepath):
 
     nbcode, lc_number, wet_amounts, plates, num_to_run = separate_plates(user_df, manager_df)
 
-    Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, two_xp_TB, even, QC_Frequency, QC_per_block = additional_info(user_df, manager_df)
+    Lib_placement, SysValid_interval, cond_range1, cond_range2, lib_same, even, QC_Frequency = additional_info(user_df, manager_df)
                                                 # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
     sample_type = "Unknown"  # or "Sample", etc.
     blank_method = "Blank_Method"  # fill in with real method if needed
@@ -1270,7 +1286,7 @@ def process(filepath):
                                                                                                         num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
             both_blocks, num_of_blocks = blocker(conditions, even, column1, column2)
         # for later though # nonsample_blocks = nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, even)
-        # raise ValueError(nonsample_other)
+        #raise ValueError(f'what {nonsample_other}')
         sample_blocks = zipper(both_blocks)
         # non_flat_list = block_zipper(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, even)
         non_flat_list = combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, nonsample_other, QC_Frequency, conditions)
@@ -1282,7 +1298,7 @@ def process(filepath):
         lc_number = 1
         conditions1 = condition_dict(manager_df, cond_range1) # work as expected
         conditions2 = condition_dict(manager_df, cond_range2)
-        conditions, two_xp_TB, found_TB = check_for_trueblank(conditions)
+        conditions1, conditions2, two_xp_TB, found_TB = check_for_trueblank(conditions1, conditions2)
         all_wells_flat1 = []
         all_wells_flat2 = []
         two_xp_TB_location = []
@@ -1305,8 +1321,6 @@ def process(filepath):
         sample_blocks1 = [item for block in both_blocks1 for item in block] # remove one layer of list from each list of list
         sample_blocks2 = [item for block in both_blocks2 for item in block]
 
-        # non_flat_list1 = block_zipper(nonsample_before1, nonsample_after1, sample_blocks1, nonsample_blocks1, even)
-        # non_flat_list2 = block_zipper(nonsample_before2, nonsample_after2, sample_blocks2, nonsample_blocks2, even)
         non_flat_list1 = combine_samples_and_nonsamples(nonsample_before1, nonsample_after1, sample_blocks1, nonsample_blocks1, QC_Frequency, conditions1)
         non_flat_list2 = combine_samples_and_nonsamples(nonsample_before2, nonsample_after2, sample_blocks2, nonsample_blocks2, QC_Frequency, conditions2)
         conditions = condition_dict(manager_df)
