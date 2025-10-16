@@ -783,19 +783,20 @@ def non_sample_lists(conditions, wells_list, blocks_to_make): # all inputs exist
                     wells_list.remove(well)
     list_nonsample_blocks = []
     nonsample_objects = [[QC_list, QC_num], [wet_QC_list, wet_QC_num], [Blank_list, Blank_num], [TrueBlank_list, TrueBlank_num]]
-    raise ValueError(f'Check nonsample_obects: {nonsample_objects}')
+    #raise ValueError(f'Check nonsample_obects: {nonsample_objects}')
+    # check number of items to add
+    adding_check = []
     for i in range(0, blocks_to_make):
         nonsample_block = []
-        for set in nonsample_objects:
-            if set[0]:
-                for num in set[1]:
-                    num_list = [well for well in set[0] if well[0] == num]
+        for pair in nonsample_objects:
+            if pair[0]:
+                for num in pair[1]:
+                    num_list = [well for well in pair[0] if well[0] == num]
                     nonsample_block.extend(num_list[0:safe_int(conditions[num][12], default=0)])
+                    adding_check.append(safe_int(conditions[num][12], default=0))
                     for well in num_list[:safe_int(conditions[num][12], default=0)]:
-                        set[0].remove(well)
+                        pair[0].remove(well)
         list_nonsample_blocks.append(nonsample_block)
-    # problem is nonsample blocks are empty
-    raise ValueError(f'Check list_nonsample_blocks: {list_nonsample_blocks}')
     return list_nonsample_blocks
 
 def combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, non_sample_other, QC_frequency, conditions):

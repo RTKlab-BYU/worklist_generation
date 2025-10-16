@@ -1,3 +1,5 @@
-words = ["a", '1', "B", 'c']
-words = "!!!!".join(words)
-print(words)
+words = "12345"
+
+newlist = words[::-1]
+
+print(newlist)
