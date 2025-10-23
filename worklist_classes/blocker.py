@@ -4,6 +4,7 @@ import numpy as np
 import sys
 import math
 import re
+from collections import Counter
 
 class Blocker:
     def __init__(self, parser_output):
@@ -204,650 +205,314 @@ class Blocker:
         validate(SysValid_num, total_SysValid, "SystemValidation", infinite_source=True)
 
 
-    def column_sorter(self, wells_list, conditions, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1): #split the wells list evenly between the two columns
-        column1 = []
-        column2 = []
-        extras = [] # these are the odds ones out to attach at the end to run anyways if wanted
-        nonsample_before = []
-        nonsample_after = []
-        nonsample_other = []
-        QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
+    def column_sorter(self, wells_list, conditions, wet_amounts, num_to_run, lc_number, Lib_placement, lib_same, cond_range1):
+        import random
 
-        # find number associated with each nonsample well type
-        list_of_keys = list(conditions.keys())
-        for key in list_of_keys:
-            if conditions[key][0] == 'QC':
-                QC_num.append(int(key))
-            if conditions[key][0] == 'WetQC':
-                wet_QC_num.append(int(key))
-            if conditions[key][0] == 'Blank':
-                Blank_num.append(int(key))
-            if conditions[key][0] == 'TrueBlank':
-                TrueBlank_num.append(int(key))
-            if conditions[key][0] == 'Lib':
-                Lib_num.append(int(key))
-            if conditions[key][0] == "SystemValidation":
-                SysValid_num.append(int(key))
+        column1, column2, extras = [], [], []
+        nonsample_before, nonsample_after, nonsample_other = [], [], []
 
-        # remove non sample wells into new list
-        QC_list, wet_QC_list, Blank_list, TrueBlank_list, Lib_list, SysValid_list = [], [], [], [], [], []
-        
-        for well in wells_list[:]: # don't change this! iterates over copy of original list and edits original
-            if QC_num:
-                for num in QC_num:
-                    if int(well[0]) == num:
-                        QC_list.append(well)
-                        wells_list.remove(well)
-            if wet_QC_num:
-                for num in wet_QC_num:
-                    if well[0] == num:
-                        wet_QC_list.append(well)
-                        wells_list.remove(well)
-            if Blank_num:
-                for num in Blank_num:
-                    if well[0] == num:
-                        Blank_list.append(well)
-                        wells_list.remove(well)
-            if TrueBlank_num:
-                for num in TrueBlank_num:
-                    if well[0] == num:
-                        TrueBlank_list.append(well)
-                        wells_list.remove(well)
-                        continue
-            if Lib_num:
-                for num in Lib_num:
-                    if well[0] == num:
-                        Lib_list.append(well)
-                        wells_list.remove(well)
-            if SysValid_num:
-                for num in SysValid_num:
-                    if well[0] == num:
-                        SysValid_list.append(well)
-                        wells_list.remove(well)
+        # --- Define condition types ---
+        types = ['QC', 'WetQC', 'Blank', 'TrueBlank', 'Lib', 'SystemValidation']
 
-        # randomize the nonsamples
-        random.shuffle(QC_list)
-        random.shuffle(wet_QC_list)
-        random.shuffle(Blank_list)
-        random.shuffle(TrueBlank_list)
-        random.shuffle(Lib_list)
-        random.shuffle(SysValid_list)
+        # --- Collect numeric IDs for each type ---
+        nums = {t: [int(k) for k, v in conditions.items() if v[0] == t] for t in types}
 
-        # move a well to 'extras' if a list has an odd number of wells and it uses a 2 column system
+        # --- Separate non-sample wells ---
+        lists = {t: [] for t in types}
+        for well in wells_list[:]:  # iterate over copy to safely remove
+            for t, ids in nums.items():
+                if int(well[0]) in ids:
+                    lists[t].append(well)
+                    wells_list.remove(well)
+                    break
+
+        # --- Randomize each list ---
+        for lst in lists.values():
+            random.shuffle(lst)
+
+        # --- Handle odd counts (two-column only) ---
         if lc_number == 2:
-            if len(QC_list) %2 != 0:
-                extras.append(QC_list[-1:])
-                QC_list = QC_list[:-1]
-            if len(wet_QC_list) %2 != 0:
-                extras.append(wet_QC_list[-1:])
-                wet_QC_list = wet_QC_list[:-1]
-            if len(Blank_list) %2 != 0:
-                extras.append(Blank_list[-1:])
-                Blank_list = Blank_list[:-1]
-            if len(TrueBlank_list) %2 != 0:
-                extras.append(TrueBlank_list[-1:])
-                TrueBlank_list = TrueBlank_list[:-1]
-            if len(Lib_list) %2 != 0:
-                extras.append(Lib_list[-1:])
-                Lib_list = Lib_list[:-1]
+            for t in ['QC', 'WetQC', 'Blank', 'TrueBlank', 'Lib']:
+                if len(lists[t]) % 2 != 0:
+                    extras.append(lists[t][-1:])
+                    lists[t] = lists[t][:-1]
 
-        # divide them into their respective nonsample lists based on user inputs
-        # add nonsamples to 'nonsample_before' list
-        if QC_list:
-            for cond in QC_num: # QC_num is a list of the condition numbers of all QCs
-                one_QC = [] # temporary list to sort different QCs by their number
-                for well in QC_list:
-                    if well[0] == cond:
-                        one_QC.append(well)
-                nonsample_before.append(one_QC[:self.safe_int(conditions[cond][10], default=0)])
-                for well in one_QC[:self.safe_int(conditions[cond][10], default=0)]:
-                    QC_list.remove(well)
-            #QC_list = QC_list[int(conditions[cond][10]):]
-        if wet_QC_list:
-            for cond in wet_QC_num:
-                one_QC = []
-                for well in wet_QC_list:
-                    if well[0] == cond:
-                        one_QC.append(well)
-                nonsample_before.append(wet_QC_list[:self.safe_int(conditions[cond][10], default=0)])
-                for well in one_QC[:self.safe_int(conditions[cond][10], default=0)]:
-                    wet_QC_list.remove(well)
-            #wet_QC_list = wet_QC_list[int(conditions[cond][10]):]
-            #nonsample_before.append(wet_QC_list[:spacings[1][0]])
-            #wet_QC_list = wet_QC_list[spacings[1][0]:]
-        if Blank_list:
-            for cond in Blank_num:
-                one_QC = []
-                for well in Blank_list:
-                    if well[0] == cond:
-                        one_QC.append(well)
-                nonsample_before.append(Blank_list[:self.safe_int(conditions[cond][10], default=0)])
-                for well in one_QC[:self.safe_int(conditions[cond][10], default=0)]:
-                    Blank_list.remove(well)
-            #Blank_list = Blank_list[int(conditions[cond][10]):]
-            # nonsample_before.append(Blank_list[:spacings[2][0]])
-            # Blank_list = Blank_list[spacings[2][0]:]
-        if Lib_list and Lib_placement == "Before" and cond_range1.upper() == "ALL": #controls library placement
-            nonsample_before.append(Lib_list)
-        if TrueBlank_list:
-            for cond in TrueBlank_num: # TrueBlank_num is a list of the condition numbers of all TrueBlanks
-                one_QC = []
-                for well in TrueBlank_list:
-                    if well[0] == cond:
-                        one_QC.append(well)
-                for i in range(0, self.safe_int(conditions[cond][10], default=0)):
-                    nonsample_before.append(TrueBlank_list[:1])
-        # add nonsamples to 'nonsample_after' list
-        if QC_list:
-            for num in QC_num:
-                num_list = [well for well in QC_list if well[0] == num]
-                nonsample_after.append(num_list[:self.safe_int(conditions[num][11], default=0)])
-                for well in num_list[:self.safe_int(conditions[num][11], default=0)]:
-                    QC_list.remove(well)
-        if wet_QC_list:
-            for num in wet_QC_num:
-                num_list = [well for well in wet_QC_list if well[0] == num]
-                nonsample_after.append(num_list[:self.safe_int(conditions[num][11], default=0)])
-                for well in num_list[:self.safe_int(conditions[num][11], default=0)]:
-                    wet_QC_list.remove(well)
-        if Blank_list:
-            for num in Blank_num:
-                num_list = [well for well in Blank_list if well[0] == num]
-                nonsample_after.append(num_list[:self.safe_int(conditions[num][11], default=0)])
-                for well in num_list[:self.safe_int(conditions[num][11], default=0)]:
-                    Blank_list.remove(well)
-        if Lib_list and Lib_placement == "After" and cond_range1 == "ALL": #controls library placement
-            nonsample_after.append(Lib_list)
-        if TrueBlank_list:
-            for num in TrueBlank_num:
-                num_list = [well for well in TrueBlank_list if well[0] == num]
-                nonsample_after.append(num_list[:self.safe_int(conditions[num][11], default=0)])
-                for well in num_list[:self.safe_int(conditions[num][11], default=0)]:
-                    TrueBlank_list.remove(well)
+        # --- Assign nonsamples (before/after/other) ---
+        for t in ['QC', 'WetQC', 'Blank', 'TrueBlank']:
+            for cond in nums[t]:
+                before_n = self.safe_int(conditions[cond][10], default=0)
+                after_n = self.safe_int(conditions[cond][11], default=0)
 
-        # code for nonsample_other was removed
+                wells_of_type = [w for w in lists[t] if w[0] == cond]
 
-        if QC_list:
-            for well in QC_list:
-                nonsample_other.append(well)
-        if wet_QC_list:
-            for well in wet_QC_list:
-                nonsample_other.append(well)
-        if Blank_list:
-            for well in Blank_list:
-                nonsample_other.append(well)
-        if TrueBlank_list:
-            for well in TrueBlank_list:
-                nonsample_other.append(well)
+                # Before group
+                if before_n > 0:
+                    nonsample_before.append(wells_of_type[:before_n])
+                    for w in wells_of_type[:before_n]:
+                        if w in lists[t]:
+                            lists[t].remove(w)
 
+                # After group
+                if after_n > 0:
+                    nonsample_after.append(wells_of_type[:after_n])
+                    for w in wells_of_type[:after_n]:
+                        if w in lists[t]:
+                            lists[t].remove(w)
 
-        # if library runs are not the same in a two experiment plate, they must be returned separately
-        separate_Lib = []
-        if Lib_list and cond_range1.upper() != "ALL":
-            separate_Lib.append(Lib_list)
+        # --- Library placement control ---
+        if lists['Lib']:
+            if cond_range1.upper() == "ALL":
+                if Lib_placement == "Before":
+                    nonsample_before.append(lists['Lib'])
+                elif Lib_placement == "After":
+                    nonsample_after.append(lists['Lib'])
+            else:
+                separate_Lib = [lists['Lib']]
+            lists['Lib'] = []
+        else:
+            separate_Lib = []
 
-        ### handle divide sample lists into columns ###
+        # --- Handle System Validation wells ---
+        SysValid_list = lists['SystemValidation']
 
-        # remove the values from conditions dict that are in the between blocks + remove System Validation wells
-        sample_keys = list(conditions.keys())
-        new_keys = sample_keys.copy()
-        between_keys = [QC_num, Blank_num, TrueBlank_num, Lib_num, wet_QC_num, SysValid_num]
-        for sample in sample_keys:
-        # unwrap NumPy scalar to plain int if needed
-            sample_val = int(sample) if hasattr(sample, "item") else sample  
+        # --- Remaining nonsamples (other) ---
+        for t in ['QC', 'WetQC', 'Blank', 'TrueBlank']:
+            nonsample_other.extend(lists[t])
 
-            # flatten between_keys so it's just numbers
-            flat_between = [x for sub in between_keys for x in sub]
-
-            if sample_val in flat_between:
-                new_keys.remove(sample)
+        # --- Determine sample wells ---
+        all_between_ids = [i for sub in nums.values() for i in sub]
+        sample_keys = [int(k) for k in conditions.keys() if int(k) not in all_between_ids]
 
         sample_dict = {}
-        for sample in new_keys:
-            #Count number of sample wells in wells list
-            count = 0
-            for well in wells_list:
-                if well[0] == sample:
-                    count += 1
-            sample_dict[sample] = [conditions[sample], count] # key is number from well plate, value is list containg
-        # info from conditions then number of wells of that sample
+        for sample in sample_keys:
+            count = sum(1 for w in wells_list if w[0] == sample)
+            sample_dict[sample] = [conditions[sample], count]
 
-        # put samples into respective lists and randomize lists
-        for sample in sample_dict.keys(): # sample is an integer
-            sample_list = []
-            for well in wells_list:
-                if sample == well[0]:
-                    sample_list.append(well)
-            # randomize list of wells
+        # --- Distribute sample wells ---
+        for sample, (_, count) in sample_dict.items():
+            sample_list = [w for w in wells_list if w[0] == sample]
             random.shuffle(sample_list)
-            # reduce number of samples to that specified in num_to_run dictionary
-            if type(num_to_run[sample]) == int:
+
+            # Apply limit
+            if isinstance(num_to_run[sample], int):
                 sample_list = sample_list[:num_to_run[sample]]
 
             if lc_number == 2:
-                # remove extra samples
-                if len(sample_list) %2 != 0:
+                # Handle odd sample wells
+                if len(sample_list) % 2 != 0:
                     extras.append(sample_list[-1:])
                     sample_list = sample_list[:-1]
-                # divide the samples evenly between the two columns
-                even = True
-                for sample in sample_list:
-                    if even == True:
-                        column1.append(sample)
-                        even = False
-                    elif even == False:
-                        column2.append(sample)
-                        even = True
-            elif lc_number == 1:
-                for sample in sample_list:
-                    column1.append(sample)
-        
-        if lc_number ==2:
-            return (nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib)
 
-        elif lc_number == 1:
-            #column1 = wells_list
-            return (nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib)
+                # Alternate wells between columns
+                for i, well in enumerate(sample_list):
+                    (column1 if i % 2 == 0 else column2).append(well)
+            else:
+                column1.extend(sample_list)
 
-    def blocker(self, conditions, even, column1, column2 = None):
-        if column2:
-            columns = [column1, column2]
-        if not column2:
-            columns = [column1]
-        both_blocks = []
-        extras_dict = {} #stores uneven samples so that the second column can use same block assignments
+        # --- Return results ---
+        if lc_number == 2:
+            return (
+                nonsample_before, nonsample_after, nonsample_other,
+                column1, column2, extras, SysValid_list, separate_Lib
+            )
+        else:
+            return (
+                nonsample_before, nonsample_after, nonsample_other,
+                column1, extras, SysValid_list, separate_Lib
+            )
+
+    def blocker(self, conditions, even, column1, column2=None):
+        columns = [column1, column2] if column2 else [column1]
+        both_blocks, extras_dict = [], {}
+
         for column in columns:
-
-            #creates a dictionary that stores how much of each sample is in the column so it can be blocked
-            sample_dict = {}
-            for well in column:
-                if well[0] not in sample_dict.keys():
-                    sample_dict[well[0]] = 1
-                elif well[0] in sample_dict.keys():
-                    sample_dict[well[0]] += 1
-            sample_amounts = list(sample_dict.values())
-            try:
-                sample_block_num = min(sample_amounts)
-            except ValueError:
+            sample_dict = Counter(w[0] for w in column)
+            if not sample_dict:
                 print("No conditions were added to the plate.")
-                return([[[]]], 0)
+                return [[[]]], 0
 
-            sample_keys = list(sample_dict.keys())
-            for sample in sample_keys:
-                #Count number of sample wells in wells list
-                count = 0
-                for well in column:
-                    if well[0] == sample:
-                        count += 1
-                to_add = count // sample_block_num
-                sample_dict[sample] = [conditions[sample], to_add, count]
-            # create list of sample well blocks
+            sample_block_num = min(sample_dict.values())
+            for s, count in sample_dict.items():
+                sample_dict[s] = [conditions[s], count // sample_block_num, count]
+
             sample_blocks = []
-            blocks_created = 0
-            while blocks_created < sample_block_num:
-                block = [] # create each block for the samples
-                for sample in sample_dict.keys(): # go through each sample, create temporary list
-                    sample_list = []
-                    for well in column:
-                        if well[0] == sample:
-                            sample_list.append(well)
-                    # append these separately
-                    #block.append(sample_list[:sample_dict[sample][1]])
-                    wells_to_append = sample_list[:sample_dict[sample][1]]
-                    for well in wells_to_append:
-                        block.append(well)
-                for item in block:
-                    if item in column:
-                        column.remove(item)
+            for _ in range(sample_block_num):
+                block = [w for s in sample_dict for w in column if w[0] == s][:sample_dict[s][1]]
+                for w in block:
+                    if w in column: column.remove(w)
                 random.shuffle(block)
                 sample_blocks.append(block)
-                blocks_created += 1
-            num_of_blocks = len(sample_blocks)
-            if blocks_created == sample_block_num and even.upper() == "NO":
-                # assigns leftover samples randomly to blocks if the user does not want even blocks
-                num_of_blocks = len(sample_blocks)
-                for sample in sample_dict.keys(): # go through each sample, create temporary list
-                    sample_list = []
-                    for well in column:
-                        if well[0] == sample:
-                            sample_list.append(well)
-                    for item in sample_list:
+
+            if even.upper() == "NO":
+                num_blocks = len(sample_blocks)
+                for s in sample_dict:
+                    leftovers = [w for w in column if w[0] == s]
+                    for w in leftovers:
                         if column == column1:
-                            placement = random.randint(0, num_of_blocks-1)
-                            sample_blocks[placement].append(item)
-                            try:
-                                extras_dict[item[0]][0] += 1
-                                extras_dict[item[0]][1].append(placement)
-                            except KeyError:
-                                extras_dict[item[0]] = [1,[]]
-                                extras_dict[item[0]][1].append(placement)
+                            p = random.randrange(num_blocks)
+                            sample_blocks[p].append(w)
+                            extras_dict.setdefault(w[0], [0, []])
+                            extras_dict[w[0]][0] += 1
+                            extras_dict[w[0]][1].append(p)
                         else:
-                            placement = extras_dict[item[0]][1][-1]
-                            extras_dict[item[0]][1] = extras_dict[item[0]][1][:-1]
-                            sample_blocks[placement].append(item)
-                            extras_dict[item[0]][0] -= 1
+                            p = extras_dict[w[0]][1].pop()
+                            sample_blocks[p].append(w)
+                            extras_dict[w[0]][0] -= 1
+
             for block in sample_blocks:
                 random.shuffle(block)
             both_blocks.append(sample_blocks)
-        return(both_blocks, num_of_blocks)
 
-    def nonsample_blocker(self, lc_number, nonsample_other, num_of_blocks, conditions, even):
-        """ Will divide the QC, Blanks, Trueblanks etc, reserved to be between the runs, into blocks
-            Make sure that number of nonsample blocks does not exceed number of sample blocks
-            These blocks should not be randomized"""
-        nonsample_other = [item for block in nonsample_other for item in block] # flattens list
+        return both_blocks, len(sample_blocks)
 
-        sample_dict = {}
-        for well in nonsample_other:
-            if well[0] not in sample_dict.keys():
-                sample_dict[well[0]] = 1
-            elif well[0] in sample_dict.keys():
-                sample_dict[well[0]] += 1
-        sample_amounts = list(sample_dict.values())
-        if sample_amounts:
-            if lc_number == 2:
-                nonsample_block_num = min(sample_amounts) // 2
-            elif lc_number == 1:
-                nonsample_block_num = min(sample_amounts)
-        else:
-            nonsample_block_num = 0
-        # '//2' ensures that nonsamples can come in pairs of two by
-        # preventing blocks of only one of each nonsample condition
 
-        # # set 'sample_block_num' to correct number, max is one less than the sample_block number from 'blocker' function
-        # if num_of_blocks == 1:
-        #     block_num = 1
-        # elif num_of_blocks == 0:
-        #     block_num = nonsample_block_num
-        # elif nonsample_block_num == 0:
-        #     block_num = num_of_blocks
-        # elif nonsample_block_num < num_of_blocks: #and even.upper() == "YES": ## this might need to be changed
-        #     block_num = nonsample_block_num
-        # elif nonsample_block_num >= num_of_blocks:
-        #     block_num = num_of_blocks - 1
-        block_num = nonsample_block_num # temporary! write a new calculation using total number of 
-        # sample blocks and QC frequency
+    def nonsample_blocker(self, lc_number, nonsample_other, num_of_blocks, conditions):
+        nonsample_other = [w for b in nonsample_other for w in b]
+        sample_dict = Counter(w[0] for w in nonsample_other)
+        if not sample_dict:
+            print('Number of nonsample blocks: 0')
+            return []
 
-        sample_keys = list(sample_dict.keys())
-        for sample in sample_keys:
-            #Count number of sample wells in wells list
-            count = 0
-            for well in nonsample_other:
-                if well[0] == sample:
-                    count += 1
+        nonsample_block_num = min(sample_dict.values()) // (2 if lc_number == 2 else 1)
+        block_num = nonsample_block_num  # placeholder for future logic
+
+        for s, count in sample_dict.items():
             to_add = count // block_num
             if to_add == 1 and lc_number == 2:
-                raise ValueError("If you want to include nonsample wells between sample/condition wells in a two-column layout, you must include at least two of each nonsample well type.")
-            sample_dict[sample] = [conditions[sample], to_add, count]
+                raise ValueError("Two-column layout requires ≥2 of each nonsample type.")
+            sample_dict[s] = [conditions[s], to_add, count]
+
         nonsample_blocks = []
-        blocks_created = 0
-        while blocks_created < block_num:
-            block = [] # create each block for the samples
-            for sample in sample_dict.keys(): # go through each sample, create temporary list
-                sample_list = []
-                for well in nonsample_other:
-                    if well[0] == sample:
-                        sample_list.append(well)
-                #block.append(sample_list[:sample_dict[sample][1]]) # problem?
-                wells_to_append = sample_list[:sample_dict[sample][1]]
-                for well in wells_to_append:
-                    block.append(well)
-            for item in block:
-                if item in nonsample_other:
-                    nonsample_other.remove(item)
-            #random.shuffle(block)
+        for _ in range(block_num):
+            block = [w for s in sample_dict for w in nonsample_other if w[0] == s][:sample_dict[s][1]]
+            for w in block:
+                if w in nonsample_other: nonsample_other.remove(w)
             nonsample_blocks.append(block)
-            blocks_created += 1
-        if blocks_created == block_num and even.upper() == "NO":
-            # assigns leftover samples randomly to blocks
-            num_of_blocks = len(nonsample_blocks)
-            for sample in sample_dict.keys(): # go through each sample, create temporary list
-                sample_list = []
-                for well in nonsample_other:
-                    if well[0] == sample:
-                        sample_list.append(well)
-                for item in sample_list:
-                    placement = random.randint(0, num_of_blocks-1)
-                    nonsample_blocks[placement].append(item)
+
+        if self.even.upper() == "NO":
+            for s in sample_dict:
+                leftovers = [w for w in nonsample_other if w[0] == s]
+                for w in leftovers:
+                    nonsample_blocks[random.randrange(len(nonsample_blocks))].append(w)
+
         print(f'Number of nonsample blocks: {len(nonsample_blocks)}')
-        return(nonsample_blocks)
+        return nonsample_blocks
 
-    def zipper(self, both_blocks): # zips column1 and column2 together
+    def zipper(self, both_blocks):
         if len(both_blocks) == 1:
-            both_blocks = [item for block in both_blocks for item in block]
-            return both_blocks
-        else:
-            column1 = both_blocks[0]
-            column2 = both_blocks[1]
-            sample_blocks = []
-            max_length = max(len(column1), len(column2))
-            for i in range(0, max_length):
-                block = []
-                for x in range(0, len(column1[i])):
-                    block.append(column1[i][x])
-                    block.append(column2[i][x])
-                sample_blocks.append(block)
-        return sample_blocks
+            return [w for b in both_blocks for w in b]
+        col1, col2 = both_blocks
+        return [[a, b] for i in range(len(col1)) for a, b in zip(col1[i], col2[i])]
 
-    def non_sample_lists(self, conditions, wells_list, blocks_to_make): # all inputs exist 10/13/2025
-        QC_num, wet_QC_num, Blank_num, TrueBlank_num = [], [], [], []
-        # find number associated with each nonsample well type
-        list_of_keys = list(conditions.keys())
-        for key in list_of_keys:
-            if conditions[key][0] == 'QC':
-                QC_num.append(int(key))
-            if conditions[key][0] == 'WetQC':
-                wet_QC_num.append(int(key))
-            if conditions[key][0] == 'Blank':
-                Blank_num.append(int(key))
-            if conditions[key][0] == 'TrueBlank':
-                TrueBlank_num.append(int(key))
-        # remove non sample wells into new list
-        QC_list = []
-        wet_QC_list = []
-        Blank_list = []
-        TrueBlank_list = []
-        for well in wells_list[:]: # don't change this! iterates over copy of original list and edits original
-            if QC_num:
-                for num in QC_num:
-                    if int(well[0]) == num: # this is the current error
-                        QC_list.append(well)
-                        wells_list.remove(well)
-            if wet_QC_num:
-                for num in wet_QC_num:
-                    if well[0] == num:
-                        wet_QC_list.append(well)
-                        wells_list.remove(well)
-            if Blank_num:
-                for num in Blank_num:
-                    if well[0] == num:
-                        Blank_list.append(well)
-                        wells_list.remove(well)
-            if TrueBlank_num:
-                for num in TrueBlank_num:
-                    if well[0] == num:
-                        TrueBlank_list.append(well)
-                        wells_list.remove(well)
-        list_nonsample_blocks = []
-        nonsample_objects = [[QC_list, QC_num], [wet_QC_list, wet_QC_num], [Blank_list, Blank_num], [TrueBlank_list, TrueBlank_num]]
-        #raise ValueError(f'Check nonsample_obects: {nonsample_objects}')
-        # check number of items to add
-        adding_check = []
-        for i in range(0, blocks_to_make):
-            nonsample_block = []
-            for pair in nonsample_objects:
-                if pair[0]:
-                    for num in pair[1]:
-                        num_list = [well for well in pair[0] if well[0] == num]
-                        nonsample_block.extend(num_list[0:self.safe_int(conditions[num][12], default=0)])
-                        adding_check.append(self.safe_int(conditions[num][12], default=0))
-                        for well in num_list[:self.safe_int(conditions[num][12], default=0)]:
-                            pair[0].remove(well)
-            list_nonsample_blocks.append(nonsample_block)
-        return list_nonsample_blocks
+    def non_sample_lists(self, conditions, wells_list, blocks_to_make):
+        types = ['QC', 'WetQC', 'Blank', 'TrueBlank']
+        nonsample_objs = []
+        for t in types:
+            nums = [int(k) for k, v in conditions.items() if v[0] == t]
+            lst = [w for w in wells_list[:] if int(w[0]) in nums]
+            for w in lst: wells_list.remove(w)
+            nonsample_objs.append([lst, nums])
+
+        list_blocks = []
+        for _ in range(blocks_to_make):
+            block = []
+            for lst, nums in nonsample_objs:
+                for num in nums:
+                    wells = [w for w in lst if w[0] == num]
+                    take = self.safe_int(conditions[num][12], default=0)
+                    block.extend(wells[:take])
+                    for w in wells[:take]: lst.remove(w)
+            list_blocks.append(block)
+        return list_blocks
+
 
     def combine_samples_and_nonsamples(self, nonsample_before, nonsample_after, sample_blocks, non_sample_other, QC_frequency, conditions):
-        # flatten sample blocks
-        samples_flat = [well for block in sample_blocks for well in block]
-        ## create nonsample blocks
-        # count # of samples divide by frequency to # of blocks
-        num_samples = len(samples_flat)
-        blocks_to_make = num_samples // QC_frequency
-
-        # create blocks and put into a list
+        samples_flat = [w for b in sample_blocks for w in b]
+        blocks_to_make = len(samples_flat) // QC_frequency
         list_nonsample_blocks = self.non_sample_lists(conditions, non_sample_other, blocks_to_make)
 
-        # assume that at this point non_sample_blocks are reformatted correctly
         samples_and_non = []
-        nonsample_before = [well for block in nonsample_before for well in block]
         if nonsample_before:
-            samples_and_non.append(nonsample_before)
+            samples_and_non.append([w for b in nonsample_before for w in b])
 
-        temp_samples = []
-        counter = 0
-        for well in samples_flat[:]:
-            temp_samples.append(well)
-            counter += 1
+        temp, counter = [], 0
+        for w in samples_flat:
+            temp.append(w); counter += 1
             if counter == QC_frequency:
-                samples_and_non.append(temp_samples)
-                temp_samples = []
-                try:
-                    samples_and_non.append(list_nonsample_blocks[0])
-                except IndexError:
-                    raise IndexError("Not enough QC groups were added to the plate.")
-                list_nonsample_blocks = list_nonsample_blocks[1:]
-                counter = 0
-        if temp_samples:
-            samples_and_non.append(temp_samples)
-
-        nonsample_after = [well for block in nonsample_after for well in block]
+                samples_and_non += [temp, list_nonsample_blocks.pop(0)]
+                temp, counter = [], 0
+        if temp: samples_and_non.append(temp)
         if nonsample_after:
-            samples_and_non.append(nonsample_after)
-
+            samples_and_non.append([w for b in nonsample_after for w in b])
         return samples_and_non
             
     def blocknum_and_flatten(self, non_flat_list):
-        # non_flat_list is a list of lists
-        # add block numbers to each of the wells
-        for index, block in enumerate(non_flat_list):
-            index += 1
-            #for part in block:
-            for well in block:
-                if isinstance(well, list) and len(well) < 3:
-                    well.append(f"blo{index-1}") # fix this, see if it blocks after this to know if there really is only one block
-        # flatten
-        flat_list = [well for block in non_flat_list for well in block]
-        return(flat_list)
-
+        for i, block in enumerate(non_flat_list, 1):
+            for w in block:
+                if isinstance(w, list) and len(w) < 3:
+                    w.append(f"blo{i-1}")
+        return [w for b in non_flat_list for w in b]
 
 
     def block_zipper(self, nonsample_before, nonsample_after, sample_blocks, non_sample_blocks, even):
-        final_flat_list = []
-        # Add the pre-block if provided
-        if nonsample_before:
-            final_flat_list.append(nonsample_before)
-
-        total_blocks = len(sample_blocks) + len(non_sample_blocks)
-        sample_i = 0
-        nonsample_i = 0
+        final = []
+        if nonsample_before: final.append(nonsample_before)
+        sb, nb = len(sample_blocks), len(non_sample_blocks)
 
         if even.upper() == "NO":
-            print("NOT EVEN")
-            # Interleave using mostly even spacing
-            for i in range(total_blocks):
-                # Compute where the next non-sample block *should* go based on spacing
-                expected_nonsample_pos = (nonsample_i + 1) * total_blocks / (len(non_sample_blocks) + 1) if non_sample_blocks else float('inf')
-
-                if i + 1 >= expected_nonsample_pos and nonsample_i < len(non_sample_blocks):
-                    final_flat_list.append([non_sample_blocks[nonsample_i]])
-                    nonsample_i += 1
-                elif sample_i < len(sample_blocks):
-                    final_flat_list.append([sample_blocks[sample_i]])
-                    sample_i += 1
-
-        if even.upper() == "YES":
-            print("EVEN")
-            if not non_sample_blocks and not sample_blocks:
-                final_flat_list.append([[]])
-            elif not non_sample_blocks:
-                final_flat_list.append(sample_blocks)
-            elif not sample_blocks:
-                final_flat_list.append(non_sample_blocks)
-            # Interleave with perfectly even spacing
+            total = sb + nb; si = ni = 0
+            for i in range(total):
+                expect_n = (ni + 1) * total / (nb + 1) if nb else float('inf')
+                if i + 1 >= expect_n and ni < nb:
+                    final.append([non_sample_blocks[ni]]); ni += 1
+                elif si < sb:
+                    final.append([sample_blocks[si]]); si += 1
+        else:  # EVEN
+            if not sb and not nb: final.append([[]])
+            elif not nb: final.append(sample_blocks)
+            elif not sb: final.append(non_sample_blocks)
             else:
-                sample_interval = len(sample_blocks) // len(non_sample_blocks) 
-                if sample_interval >= 1:
-                    for i in range(0, len(non_sample_blocks) - sample_interval):
-                        for i in range(0, sample_interval):
-                            final_flat_list.append([sample_blocks[sample_i]])
-                            sample_i += 1
-                        final_flat_list.append([non_sample_blocks[nonsample_i]])
-                        nonsample_i += 1
-                    for i in range(0, sample_interval):
-                        final_flat_list.append([sample_blocks[sample_i]])
-                        sample_i += 1
-                else:
-                    sample_interval = len(non_sample_blocks) // len(sample_blocks)
-                    for i in range(0, len(sample_blocks) - sample_interval):
-                        for i in range(0, sample_interval):
-                            final_flat_list.append([sample_blocks[sample_i]])
-                            sample_i += 1
-                        final_flat_list.append([non_sample_blocks[nonsample_i]])
-                        nonsample_i += 1
-                    for i in range(0, sample_interval):
-                        final_flat_list.append([sample_blocks[sample_i]])
-                        sample_i += 1
+                si = ni = 0
+                step = max(1, sb // nb)
+                for _ in range(nb):
+                    for _ in range(step):
+                        if si < sb: final.append([sample_blocks[si]]); si += 1
+                    final.append([non_sample_blocks[ni]]); ni += 1
+                final += [[sample_blocks[i]] for i in range(si, sb)]
 
-        # Add the post-block if provided
-        if nonsample_after:
-            final_flat_list.append(nonsample_after)
-        
-        print(final_flat_list)
-
-        return final_flat_list
+        if nonsample_after: final.append(nonsample_after)
+        raise ValueError("Debugging: Checkpoint reached in block_zipper.")
+        return final
 
     def two_xp_zipper(self, flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_location):
-        # find a TrueBlank well
+        if not two_xp_TB or two_xp_TB == 'None':
+            raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AM37 of the excel sheet.")
         TB_well = [two_xp_TB, two_xp_TB_location[0][1], "end"]
 
-        if two_xp_TB is None or two_xp_TB == 'None':
-            raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AM37 of the excel sheet.") # fix this
-        # removes empty blocks from the lists
-        flat_list_1 = [block for block in flat_list_1 if block != [[]]]
-        flat_list_2 = [block for block in flat_list_2 if block != [[]]]
+        # remove empty sublists
+        flat_list_1 = [b for b in flat_list_1 if b != [[]]]
+        flat_list_2 = [b for b in flat_list_2 if b != [[]]]
 
-        # add block numbers to each of the wells
-        for index, block in enumerate(flat_list_1):
-            index += 1
-            for part in block:
-                for well in part:
-                    if isinstance(well, list) and len(well) < 3:
-                        well.append(f"blo{index-1}") # fix this, see if it blocks after this to know if there really is only one block
-        for index, block in enumerate(flat_list_2):
-            index += 1
-            for part in block:
-                for well in part:
-                    if isinstance(well, list) and len(well) < 3:
-                        well.append(f"blo{index-1}")
+        # tag block number
+        def tag_blocks(flat_list):
+            for i, block in enumerate(flat_list):
+                for part in block:
+                    for well in part:
+                        if isinstance(well, list) and len(well) < 3:
+                            well.append(f"blo{i}")
+            return self.flattener(flat_list)
 
-        # flattens the lists
-        flat_list_1 = self.flattener(flat_list_1)
-        flat_list_2 = self.flattener(flat_list_2)
+        flat_list_1, flat_list_2 = tag_blocks(flat_list_1), tag_blocks(flat_list_2)
 
-        # forces lists to be the same length by adding TrueBlank wells
-        if len(flat_list_1) > len(flat_list_2):
-            to_add = len(flat_list_1) - len(flat_list_2)
-            for i in range(0, to_add):
-                flat_list_2.append(TB_well)
-        elif len(flat_list_2) > len(flat_list_1):
-            to_add = len(flat_list_2) - len(flat_list_1)
-            for i in range(0, to_add):
-                flat_list_1.append(TB_well)
-        combined_list = []
-        for i in range(0, len(flat_list_1)):
-            combined_list.append(flat_list_1[i])
-            combined_list.append(flat_list_2[i])
-        return combined_list
+        # equalize lengths
+        diff = len(flat_list_1) - len(flat_list_2)
+        if diff > 0:
+            flat_list_2 += [TB_well] * diff
+        elif diff < 0:
+            flat_list_1 += [TB_well] * (-diff)
+
+        # interleave
+        return [v for pair in zip(flat_list_1, flat_list_2) for v in pair]
 
     def flattener(self, final_list):
         """Flatten a three-layer nested list into a list of lists, ignoring empty lists."""
@@ -867,33 +532,20 @@ class Blocker:
         return out
 
     def rep_tracker(self, flattened, conditions):
-        reps = []
-        rep_counters = {}
+        reps, counters = [], {}
         for well in flattened:
             if isinstance(well, list) and len(well) > 2:
                 try:
-                    condition = int(well[0])
-                    if condition in conditions:
-                        if condition not in rep_counters:
-                            rep_counters[condition] = 1
-
-                        elif condition in rep_counters:
-                            rep_counters[condition] += 1
-                        reps.append(rep_counters[condition])
-                    else:
-                        raise KeyError(f"Condition {condition} not found in conditions dictionary.")
+                    cond = int(well[0])
                 except ValueError:
-                    condition = well[0]
-                    if condition in conditions:
-                        if condition not in rep_counters:
-                            rep_counters[condition] = 1
-
-                        elif condition in rep_counters:
-                            rep_counters[condition] += 1
-                        reps.append(rep_counters[condition])
-                    #raise ValueError(f"Invalid condition value '{well[0]}' in well {well}.")
+                    cond = well[0]
+                if cond in conditions:
+                    counters[cond] = counters.get(cond, 0) + 1
+                    reps.append(counters[cond])
+                else:
+                    raise KeyError(f"Condition {cond} not found in conditions dictionary.")
             else:
-                reps.append(None)  # If well is not a valid list or doesn't have enough elements
+                reps.append(None)
         return reps
 
     def attach_Lib(self, two_xp_flat_list, separate_Lib1, separate_Lib2, two_xp_TB, two_xp_TB_location, Lib_placement, lib_same):
@@ -1086,8 +738,8 @@ class Blocker:
                                                                                         self.wet_amounts, self.num_to_run, lc_number, self.lib_placement, self.lib_same, self.cond_range1) #cond_range1 is correct, it checks of cond_range1.upper() == "ALL"
             both_blocks2, num_of_blocks2 = self.blocker(conditions2, self.even, exp2col1)
 
-            nonsample_blocks1 = self.nonsample_blocker(lc_number, nonsample_other1, num_of_blocks1, conditions1, self.even)
-            nonsample_blocks2 = self.nonsample_blocker(lc_number, nonsample_other2, num_of_blocks2, conditions2, self.even)
+            nonsample_blocks1 = self.nonsample_blocker(lc_number, nonsample_other1, num_of_blocks1, conditions1)
+            nonsample_blocks2 = self.nonsample_blocker(lc_number, nonsample_other2, num_of_blocks2, conditions2)
             sample_blocks1 = [item for block in both_blocks1 for item in block] # remove one layer of list from each list of list
             sample_blocks2 = [item for block in both_blocks2 for item in block]
 

@@ -10,7 +10,9 @@ def main(input_filename):
     blocked_for_output = blocker.block()
 
     output = Output(parsed_for_output, blocked_for_output)
-    return output.putout()
+    ms_pd, lc_pd, ms_filename, lc_filename = output.putout()
+    print(ms_pd)
+    print(lc_pd)
 
 if __name__ == "__main__":
-    main()
+    main("worklist_template0821.xlsx")
