@@ -4,13 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="Where is this pushing to?">
+      <change afterPath="$PROJECT_DIR$/cli_utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli_utils/ansi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli_utils/cli_prompts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/excel_file_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/excel_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/templates/TEST_EXCEL.xlsm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate7.xlsm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_classes/project_metadata.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_classes/project_outline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vars.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,10 +41,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="34iqAETPGeeg9RJU4celZZ8AeWn" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -38,12 +55,54 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.test_excel_utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/calebcoons/Projects/cli-metadata-generation/excel_utils/templates",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/excel_utils/templates" />
+      <recent name="$PROJECT_DIR$/cli_utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/excel_utils" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="test_excel_utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="cli-metadata-generation" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/excel_utils/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test_excel_utils" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -59,6 +118,27 @@
       <option name="presentableId" value="Default" />
       <updated>1761706595307</updated>
     </task>
+    <task id="LOCAL-00001" summary="Where is this pushing to?">
+      <option name="closed" value="true" />
+      <created>1761707411926</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761707411926</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Where is this pushing to?">
+      <option name="closed" value="true" />
+      <created>1761707420624</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761707420624</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Where is this pushing to?" />
+    <option name="LAST_COMMIT_MESSAGE" value="Where is this pushing to?" />
   </component>
 </project>
