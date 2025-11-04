@@ -4,27 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="Where is this pushing to?">
-      <change afterPath="$PROJECT_DIR$/cli_utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli_utils/ansi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli_utils/cli_prompts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/excel_file_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/excel_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/templates/TEST_EXCEL.xlsm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate7.xlsm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project_classes/project_metadata.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project_classes/project_outline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vars.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="Open Excel working and test written">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/excel_file_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/excel_utils/templates/basic_project_template_1.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_classes/project_type.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli_utils/cli_prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli_utils/cli_prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/excel_file_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/excel_file_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/excel_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate7.xlsm" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate8.xlsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate8.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vars.py" beforeDir="false" afterPath="$PROJECT_DIR$/vars.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/calebcoons/Projects/cli-metadata-generation/excel_utils/templates",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
@@ -134,11 +128,20 @@
       <option name="project" value="LOCAL" />
       <updated>1761707420624</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Open Excel working and test written">
+      <option name="closed" value="true" />
+      <created>1761838737675</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761838737675</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Where is this pushing to?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Where is this pushing to?" />
+    <MESSAGE value="Open Excel working and test written" />
+    <option name="LAST_COMMIT_MESSAGE" value="Open Excel working and test written" />
   </component>
 </project>
