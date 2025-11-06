@@ -13,6 +13,10 @@ def test_copy_excel():
     copy_template_with_datetime(filename="basic_project_template_1.xlsx", new_name="project_name")
 
 
+"""
+/Users/calebcoons/Projects/cli-metadata-generation/.venv/bin/pytest -v excel_utils/tests/test_excel_utils.py::test_advanced_excel
+"""
+
 
 def test_advanced_excel():
     project_outline: ProjectOutline = ProjectOutline(name="TEST_PROJECT_1",

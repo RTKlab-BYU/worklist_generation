@@ -1,3 +1,5 @@
+from openpyxl.styles import Border, Side, Font, Protection
+
 from excel_utils.excel_utils import copy_template_with_datetime
 from project_classes.project_outline import ProjectOutline
 from abc import ABC, abstractmethod
@@ -18,8 +20,9 @@ class ExcelFileGenerator(ABC):
         return copy_template_with_datetime(filename=self.source_file, new_name=self.project_outline.name)
 
     def generate_file(self) -> str:
-        self.ws["A1"] = self.project_outline.name
+        self.ws.cell(row=1, column=1).value = self.project_outline.name
         self._make_changes()
+        self.ws.protection.sheet = True
         self.wb.save(self.excel_path)
         return self.excel_path
 
@@ -57,7 +60,12 @@ class AdvancedFileGenerator(ExcelFileGenerator):
         style_attrs = [
             {
                 "font": copy(cell.font),
-                "border": copy(cell.border),
+                "border": Border(
+                                left=Side(style="thin", color="000000"),
+                                right=Side(style="thin", color="000000"),
+                                top=Side(style="thin", color="000000"),
+                                bottom=Side(style="thin", color="000000"),
+                                ),
                 "fill": copy(cell.fill),
                 "number_format": cell.number_format,
                 "protection": copy(cell.protection),
@@ -71,7 +79,7 @@ class AdvancedFileGenerator(ExcelFileGenerator):
         for group in self.project_outline.groups:
             # Set group name in header row
             self.ws.cell(row=8, column=cur_col).value = group
-
+            self.ws.cell(row=8, column=cur_col).font = Font(size=20, bold=True)
             # Apply pre-copied styles down the column
             for offset, style in enumerate(style_attrs):
                 row_idx = 9 + offset
@@ -83,6 +91,8 @@ class AdvancedFileGenerator(ExcelFileGenerator):
                 target.number_format = style["number_format"]
                 target.protection = style["protection"]
                 target.alignment = style["alignment"]
+                target.protection = Protection(locked=False)
+
 
             cur_col += 1
 
@@ -93,11 +103,12 @@ class AdvancedFileGenerator(ExcelFileGenerator):
         while True:
             cell = self.ws.cell(row=row, column=COL)
             val = cell.value
-            cell_format_pattern.append(cell)
             if val == "END_OF_FILE":
                 break
             if row > 200:
                 raise ValueError("INFINITE LOOP. No 'END_OF_FILE' value found in column 3")
+
+            cell_format_pattern.append(cell)
             row += 1
         return cell_format_pattern
 
