@@ -25,8 +25,6 @@ class Blocker:
         self.lib_same = parser_output[11]
         self.even = parser_output[12]
         self.qc_frequency = parser_output[13]
-        self.final_output = []
-        self.output_folder = None
 
     def generate_seed(self, run_seed=None):
         random.seed(run_seed := run_seed or random.randrange(sys.maxsize))
