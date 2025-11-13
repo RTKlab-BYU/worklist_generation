@@ -61,7 +61,7 @@ def run_worklist():
         ms_pd.to_csv(output1_path, index=False, header=False, encoding="utf-8-sig", lineterminator="\r\n")
         lc_pd.to_csv(output2_path, index=False, header=False, encoding="utf-8-sig", lineterminator="\r\n")
 
-        messagebox.showinfo("Worklist Generator", "Files saved successfully!")
+        messagebox.showinfo("Worklist Generator", f"{ms_filename}, {lc_filename} saved successfully!")
 
     except Exception as e:
         # Write full traceback to logfile

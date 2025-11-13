@@ -320,7 +320,7 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     nonsample_after = []
     nonsample_other = []
     QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
-
+    
     # find number associated with each nonsample well type
     list_of_keys = list(conditions.keys())
     for key in list_of_keys:
@@ -366,7 +366,6 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
                 if well[0] == num:
                     TrueBlank_list.append(well)
                     wells_list.remove(well)
-                    continue
         if Lib_num:
             for num in Lib_num:
                 if well[0] == num:
@@ -378,6 +377,9 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
                     SysValid_list.append(well)
                     wells_list.remove(well)
 
+    #raise ValueError(f'TrueBlank list check: {TrueBlank_list}')
+
+
     # randomize the nonsamples
     random.shuffle(QC_list)
     random.shuffle(wet_QC_list)
@@ -385,6 +387,9 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
     random.shuffle(TrueBlank_list)
     random.shuffle(Lib_list)
     random.shuffle(SysValid_list)
+
+    # raise ValueError(f'TrueBlank list check: {TrueBlank_list}')
+
 
     # move a well to 'extras' if a list has an odd number of wells and it uses a 2 column system
     if lc_number == 2:
@@ -397,9 +402,9 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
         if len(Blank_list) %2 != 0:
             extras.append(Blank_list[-1:])
             Blank_list = Blank_list[:-1]
-        if len(TrueBlank_list) %2 != 0:
-            extras.append(TrueBlank_list[-1:])
-            TrueBlank_list = TrueBlank_list[:-1]
+        # if len(TrueBlank_list) %2 != 0: # The number of TrueBlanks should not matter
+        #     extras.append(TrueBlank_list[-1:])
+        #     TrueBlank_list = TrueBlank_list[:-1]
         if len(Lib_list) %2 != 0:
             extras.append(Lib_list[-1:])
             Lib_list = Lib_list[:-1]
@@ -448,8 +453,16 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
             for well in TrueBlank_list:
                 if well[0] == cond:
                     one_QC.append(well)
-            for i in range(0, safe_int(conditions[cond][10], default=0)):
-                nonsample_before.append(TrueBlank_list[:1])
+            nonsample_before.append(one_QC[:safe_int(conditions[cond][10], default=0)])
+            for well in one_QC[:safe_int(conditions[cond][10], default=0)]:
+                TrueBlank_list.remove(well)
+    raise ValueError(f'Check conditions dict: {conditions}')
+    raise ValueError(f'num to add check: {conditions[cond]}')
+            
+            # for i in range(0, safe_int(conditions[cond][10], default=0)):
+            #     nonsample_before.append(TrueBlank_list[:1])
+
+    raise ValueError(f'Nonsample before check: {nonsample_before}, TrueBlank list check: {TrueBlank_list}')
     # add nonsamples to 'nonsample_after' list
     if QC_list:
         for num in QC_num:
