@@ -5,31 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="Commit">
-      <change afterPath="$PROJECT_DIR$/database_utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database_utils/upload_to_sqlite.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project_dataclasses/project_metadata.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli_utils/cli_prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli_utils/cli_prompts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/excel_file_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/excel_file_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/excel_file_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/excel_file_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_131911_NewProj.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_132039_NewProj.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_132912_Proj.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_133114_a.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_133326_a.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_141612_TEST_PROJECT_1.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_141709_TEST_PROJECT_1.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_142043_TEST_PROJECT_1.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_142406_TEST_PROJECT_1.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_142620_project_name.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_142637_TEST_PROJECT_1.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/outputs/20251104_143457_TEST_PROJECT_1.xlsm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate8.xlsm" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate8.xlsm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_classes/project_metadata.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_classes/project_outline.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_dataclasses/project_outline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_classes/project_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_dataclasses/project_type.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ctcoons"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ctcoons/cli-metadata-generation.git",
+    "accountId": "9957fdfd-30cb-43fb-b203-a01944a15bf5"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
