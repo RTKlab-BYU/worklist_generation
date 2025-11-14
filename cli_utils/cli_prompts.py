@@ -1,5 +1,5 @@
-from project_classes.project_outline import ProjectOutline
-from project_classes.project_type import ProjectType
+from project_dataclasses.project_outline import ProjectOutline
+from project_dataclasses.project_type import ProjectType
 
 
 def get_project_outline() -> ProjectOutline:
@@ -14,7 +14,7 @@ def get_project_outline() -> ProjectOutline:
         except ValueError:
             print("Please insert a positive integer for number of groups.")
 
-    groups = [input(f"Group {i} name: ") for i in range(number_of_groups)]
+    groups = [input(f"Group {i + 1} name: ") for i in range(number_of_groups)]
 
     return ProjectOutline(name=name, description=description, number_of_groups=number_of_groups, groups=groups)
 
