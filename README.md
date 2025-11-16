@@ -1,3 +1,8 @@
+# About This Project
+
+![Project Flow Diagram](images/project_diagram.png)
+
+
 # Project Setup
 
 Follow these steps to clone and run this project on macOS:
