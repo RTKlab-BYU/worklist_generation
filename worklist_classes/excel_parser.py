@@ -87,8 +87,6 @@ class ExcelParser:
             plate.columns = plate.iloc[0, :] # Set column names as index
             plate.index = plate.iloc[:, 0] # Set row names as index
             plate = plate.iloc[1:, 1:]
-            # with open (f"output/worklist/plate{i}.tsv", 'w') as outfile:
-            #     plate.to_csv(outfile, sep = '\t')
             if plate.isna().all().all():
                 continue
             plates[name] = plate
