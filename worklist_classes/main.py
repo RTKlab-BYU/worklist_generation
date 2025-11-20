@@ -11,7 +11,7 @@ def main(input_filename):
 
     output = Output(parsed_for_output, blocked_for_output)
     ms_pd, lc_pd, ms_filename, lc_filename = output.putout()
-    return ms_filename, lc_filename
+    return ms_pd, lc_pd,ms_filename, lc_filename
 
 if __name__ == "__main__":
     main("worklist_template0821.xlsx")

@@ -456,13 +456,11 @@ def column_sorter(wells_list, conditions, wet_amounts, num_to_run, lc_number, Li
             nonsample_before.append(one_QC[:safe_int(conditions[cond][10], default=0)])
             for well in one_QC[:safe_int(conditions[cond][10], default=0)]:
                 TrueBlank_list.remove(well)
-    raise ValueError(f'Check conditions dict: {conditions}')
-    raise ValueError(f'num to add check: {conditions[cond]}')
-            
+    
             # for i in range(0, safe_int(conditions[cond][10], default=0)):
             #     nonsample_before.append(TrueBlank_list[:1])
 
-    raise ValueError(f'Nonsample before check: {nonsample_before}, TrueBlank list check: {TrueBlank_list}')
+    #raise ValueError(f'Nonsample before check: {nonsample_before}, TrueBlank list check: {TrueBlank_list}')
     # add nonsamples to 'nonsample_after' list
     if QC_list:
         for num in QC_num:
