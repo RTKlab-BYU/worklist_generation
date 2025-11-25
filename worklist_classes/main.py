@@ -1,6 +1,6 @@
-from excel_parser import ExcelParser
-from blocker import Blocker
-from output import Output
+from worklist_classes.excel_parser import ExcelParser
+from worklist_classes.blocker import Blocker
+from worklist_classes.output import Output
 
 def main(input_filename):
     parser = ExcelParser(input_filename)
@@ -11,7 +11,7 @@ def main(input_filename):
 
     output = Output(parsed_for_output, blocked_for_output)
     ms_pd, lc_pd, ms_filename, lc_filename = output.putout()
-    return ms_filename, lc_filename
+    return ms_pd, lc_pd, ms_filename, lc_filename
 
 if __name__ == "__main__":
     main("worklist_template0821.xlsx")

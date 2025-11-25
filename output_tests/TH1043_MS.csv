@@ -1,0 +1,54 @@
+﻿Bracket Type=4,,,,,
+Sample Type,File Name,Path,Instrument Method,Position,Inj Vol
+Unknown,TH1043_Preblank1,,,plate 1D3,1
+Unknown,TH1043_Preblank2,,,plate 1F3,1
+Unknown,TH1043_End_blo1_plate 1D3_rep1_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E8,1
+Unknown,TH1043_End_blo1_plate 1F3_rep2_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C7,1
+Unknown,TH1043_Str_blo1_plate 1E8_rep1_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1F5,1
+Unknown,TH1043_Str_blo1_plate 1C7_rep2_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1F6,1
+Unknown,TH1043_Epi_blo1_plate 1F5_rep1_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D21,1
+Unknown,TH1043_Epi_blo3_plate 1F6_rep2_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E16,1
+Unknown,TH1043_NanoPOTS_blo3_plate 1D21_rep1_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C20,1
+Unknown,TH1043_NanoPOTS_blo3_plate 1E16_rep2_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C18,1
+Unknown,TH1043_NanoPOTS_blo3_plate 1C20_rep3_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C5,1
+Unknown,TH1043_NanoPOTS_blo3_plate 1C18_rep4_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D18,1
+Unknown,TH1043_Epi_blo5_plate 1C5_rep3_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D22,1
+Unknown,TH1043_NanoPOTS_blo5_plate 1D18_rep5_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1G4,1
+Unknown,TH1043_NanoPOTS_blo5_plate 1D22_rep6_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1F4,1
+Unknown,TH1043_End_blo5_plate 1G4_rep3_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D8,1
+Unknown,TH1043_End_blo5_plate 1F4_rep4_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D16,1
+Unknown,TH1043_Str_blo7_plate 1D8_rep3_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D6,1
+Unknown,TH1043_NanoPOTS_blo7_plate 1D16_rep7_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1G7,1
+Unknown,TH1043_Epi_blo7_plate 1D6_rep4_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E17,1
+Unknown,TH1043_Str_blo7_plate 1G7_rep4_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E6,1
+Unknown,TH1043_NanoPOTS_blo7_plate 1E17_rep8_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E18,1
+Unknown,TH1043_Epi_blo9_plate 1E6_rep5_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1G3,1
+Unknown,TH1043_NanoPOTS_blo9_plate 1E18_rep9_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C6,1
+Unknown,TH1043_End_blo9_plate 1G3_rep5_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D17,1
+Unknown,TH1043_Epi_blo9_plate 1C6_rep6_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E7,1
+Unknown,TH1043_NanoPOTS_blo9_plate 1D17_rep10_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C17,1
+Unknown,TH1043_Str_blo11_plate 1E7_rep5_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C19,1
+Unknown,TH1043_NanoPOTS_blo11_plate 1C17_rep11_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C8,1
+Unknown,TH1043_NanoPOTS_blo11_plate 1C19_rep12_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D4,1
+Unknown,TH1043_Str_blo11_plate 1C8_rep6_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E5,1
+Unknown,TH1043_End_blo11_plate 1D4_rep6_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C22,1
+Unknown,TH1043_Epi_blo13_plate 1E5_rep7_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E19,1
+Unknown,TH1043_NanoPOTS_blo13_plate 1C22_rep13_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C21,1
+Unknown,TH1043_NanoPOTS_blo13_plate 1E19_rep14_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C4,1
+Unknown,TH1043_NanoPOTS_blo13_plate 1C21_rep15_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E4,1
+Unknown,TH1043_End_blo13_plate 1C4_rep7_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1G8,1
+Unknown,TH1043_End_blo15_plate 1E4_rep8_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1G6,1
+Unknown,TH1043_Str_blo15_plate 1G8_rep7_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C16,1
+Unknown,TH1043_Epi_blo15_plate 1G6_rep8_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1F7,1
+Unknown,TH1043_NanoPOTS_blo15_plate 1C16_rep16_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1G5,1
+Unknown,TH1043_Str_blo15_plate 1F7_rep8_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D5,1
+Unknown,TH1043_Epi_blo17_plate 1G5_rep9_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D19,1
+Unknown,TH1043_Epi_blo17_plate 1D5_rep10_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1F8,1
+Unknown,TH1043_NanoPOTS_blo17_plate 1D19_rep17_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1D7,1
+Unknown,TH1043_Str_blo17_plate 1F8_rep9_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E22,1
+Unknown,TH1043_Str_blo17_plate 1D7_rep10_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E3,1
+Unknown,TH1043_NanoPOTS_blo19_plate 1E22_rep18_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E20,1
+Unknown,TH1043_End_blo19_plate 1E3_rep9_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1E21,1
+Unknown,TH1043_NanoPOTS_blo19_plate 1E20_rep19_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C3,1
+Unknown,TH1043_NanoPOTS_blo19_plate 1E21_rep20_ch1_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C3,1
+Unknown,TH1043_End_blo19_plate 1C3_rep10_ch2_DIA20ng,,D:/method/Chao/something\DIA20ng,plate 1C3,1

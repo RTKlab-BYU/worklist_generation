@@ -429,7 +429,7 @@ class Blocker:
                     column1.append(sample)
         
         if lc_number ==2:
-            return (nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib)
+            return (nonsample_before, nonsample_after, nonsample_other, column1, column2, SysValid_list, separate_Lib)
 
         elif lc_number == 1:
             return (nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib)
@@ -773,12 +773,27 @@ class Blocker:
 
         # print(f'Number of nonsample blocks: {len(nonsample_blocks)}')
         # return nonsample_blocks
-
-    def zipper(self, both_blocks):
+    def zipper(self, both_blocks): # zips column1 and column2 together
         if len(both_blocks) == 1:
-            return [w for b in both_blocks for w in b]
-        col1, col2 = both_blocks
-        return [[a, b] for i in range(len(col1)) for a, b in zip(col1[i], col2[i])]
+            both_blocks = [item for block in both_blocks for item in block]
+            return both_blocks
+        else:
+            column1 = both_blocks[0]
+            column2 = both_blocks[1]
+            sample_blocks = []
+            max_length = max(len(column1), len(column2))
+            for i in range(0, max_length):
+                block = []
+                for x in range(0, len(column1[i])):
+                    block.append(column1[i][x])
+                    block.append(column2[i][x])
+                sample_blocks.append(block)
+        return sample_blocks
+    # def zipper(self, both_blocks):
+    #     if len(both_blocks) == 1:
+    #         return [w for b in both_blocks for w in b]
+    #     col1, col2 = both_blocks
+    #     return [[a, b] for i in range(len(col1)) for a, b in zip(col1[i], col2[i])]
 
     def non_sample_lists(self, conditions, wells_list, blocks_to_make):
         QC_num, wet_QC_num, Blank_num, TrueBlank_num = [], [], [], []
@@ -1135,11 +1150,11 @@ class Blocker:
             if self.lc_number == 1:
                 nonsample_before, nonsample_after, nonsample_other, column1, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat, conditions,
                                                                                             self.num_to_run, self.lc_number, self.lib_same, self.cond_range1)
-                both_blocks = self.blocker(conditions, self.even, column1)
+                both_blocks, num_blocks = self.blocker(conditions, self.even, column1)
             elif self.lc_number == 2:
                 nonsample_before, nonsample_after, nonsample_other, column1, column2, sysvalid_list, separate_lib2 = self.column_sorter(all_wells_flat, conditions,
                                                                                                             self.num_to_run, self.lc_number, self.lib_same, self.cond_range1)
-                both_blocks = self.blocker(conditions, self.even, column1, column2)
+                both_blocks, num_blocks = self.blocker(conditions, self.even, column1, column2)
 
             sample_blocks = self.zipper(both_blocks)
 

@@ -6,7 +6,7 @@
 # for testing copy: python commandline.py -r "C:\Users\ivint\OneDrive\Desktop\Kelly_Lab\.venv\worklist_git\worklist_template0821.xlsx" "C:\Users\ivint\OneDrive\Desktop\Kelly_Lab\.venv\worklist_git\output_worklist"
 
 
-import pyWorklist
+import worklist_classes.main as main
 import os
 import sys
 
@@ -37,7 +37,7 @@ def create_template_copy(new_name=None):
 def generate_worklist(input_file, output_path=None):
     """Generates worklist and saves file to downloads folder or specified path"""
     try:
-        ms_pd, lc_pd, ms_filename, lc_filename = pyWorklist.process(input_file)
+        ms_pd, lc_pd, ms_filename, lc_filename = main.main(input_file)
         if output_path is None:
                 downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
                 output_path = os.path.join(downloads_folder, "worklist_output.xlsx")
