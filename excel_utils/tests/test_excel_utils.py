@@ -1,9 +1,8 @@
 from copy import deepcopy
 
-from excel_utils.excel_file_generator import AdvancedFileGenerator
+from excel_utils import AdvancedFileGenerator
 from excel_utils.excel_file_parser import AdvancedFileParser
 from excel_utils.excel_utils import open_excel_sheet, copy_template_with_datetime
-from project_dataclasses.project_metadata import ProjectMetadata
 from project_dataclasses.project_outline import ProjectOutline
 from vars import BASE_DIR, TEMPLATES
 

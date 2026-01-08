@@ -7,14 +7,14 @@ def get_project_outline() -> ProjectOutline:
     description = input("What is your project description: ")
     while True:
         try:
-            number_of_groups = int(input("How many groups does your project have: "))
+            number_of_groups = int(input("How many conditions does your project have: "))
             if not number_of_groups > 0:
                 raise ValueError
             break
         except ValueError:
-            print("Please insert a positive integer for number of groups.")
+            print("Please insert a positive integer for number of conditions.")
 
-    groups = [input(f"Group {i + 1} name: ") for i in range(number_of_groups)]
+    groups = [input(f"Condition {i + 1} name: ") for i in range(number_of_groups)]
 
     return ProjectOutline(name=name, description=description, number_of_groups=number_of_groups, groups=groups)
 
@@ -36,6 +36,6 @@ def get_project_type() -> ProjectType:
 
 
 def ask_if_done_editing() -> bool:
-    if input("Type Anything When You Have Finished Editing Your Excel AND saved the file (cmd/ctrl + 'S')") is not None:
+    if input("Press 'ENTER' When You Have Finished Editing Your Excel AND saved the file (cmd/ctrl + 'S')") not in ["quit", "q", "quit()"]:
         return True
     return False

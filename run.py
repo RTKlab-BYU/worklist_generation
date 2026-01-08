@@ -16,9 +16,10 @@ def main():
     project_outline: ProjectOutline = get_project_outline()
 
     # 2. Get the Project Type (Basic, Advanced, or Custom)
-    project_type: ProjectType = get_project_type()
-    gen: ExcelFileGenerator
-    output: str
+    # project_type: ProjectType = get_project_type()
+    # gen: ExcelFileGenerator
+    # output: str
+    project_type = ProjectType.ADVANCED
 
     # 3. Depending on Project Type, Use the correct generator and parser class
     if project_type == ProjectType.BASIC:
@@ -42,6 +43,7 @@ def main():
         output = gen.generate_file()
 
     # 4. Open the file
+    print("opening metadata template...")
     open_excel_sheet(output)
 
     # 5. Wait until they are done editing the Excel

@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="Added pictures for the project flow">
+    <list default="true" id="1976aef3-0d4e-4510-ad1a-75acc7b7798b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cli-metadata-generation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli_utils/cli_prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli_utils/cli_prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate8.xlsm" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/templates/metadataTemplate8.xlsm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_utils/tests/test_excel_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.db" beforeDir="false" afterPath="$PROJECT_DIR$/project.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +68,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/calebcoons/Projects/cli-metadata-generation/images&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/calebcoons/Projects/cli-metadata-generation/cli-metadata-generation&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable&quot;
   }
 }</component>
@@ -242,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763251858448</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added pictures for the project flow">
+      <option name="closed" value="true" />
+      <created>1763488815126</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763488815126</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
