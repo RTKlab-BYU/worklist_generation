@@ -8,7 +8,7 @@ The goal: **save time, reduce errors, and streamline lab workflows**.
 ---
 
 ## Features
-- Generate valid worklist files for MS and LC with one click  
+- Generate valid worklist files for MS and LC with large-scale experiments
 - Supports **one- and two-column instrument configurations**  
 - User-friendly interface (no coding required)  
 - Export files ready to be uploaded directly to the instrument software  
@@ -25,12 +25,7 @@ Detailed instructions on how to fill out and use the worklist template are avail
 
 ## Getting Started
 
-### Option 1: Run the prebuilt app
-1. Go to the [Releases](../../releases) page.  
-2. Download the latest installer for your operating system (`.exe` for Windows, `.app` for macOS).  
-3. Launch the app and start generating worklists!
-
-### Option 2: Run from source
+Paste the following commands into your commandline to install the tool.
 ```bash
 git clone https://github.com/yourusername/worklist-generator.git
 cd worklist-generator
