@@ -1,7 +1,7 @@
-### The purpose of this script is to run pyWorklist.py through the command line
+### The purpose of this script is to run worklist_classes/main.py through the command line
 
-# input format to run program ex: python3 commandline.py -r <input_file> <save_dir(optional)> 
 # input format to download template ex: python3 commandline.py -t <new_template_name(optional)>
+# input format to run program ex: python3 commandline.py -r <input_file> <save_dir(optional)> 
 
 # for testing copy: python commandline.py -r "C:\Users\ivint\OneDrive\Desktop\Kelly_Lab\.venv\worklist_git\worklist_template0821.xlsx" "C:\Users\ivint\OneDrive\Desktop\Kelly_Lab\.venv\worklist_git\output_worklist"
 

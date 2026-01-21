@@ -304,7 +304,6 @@ class Blocker:
                 nonsample_before.append(wet_QC_list[:self.safe_int(conditions[cond][10], default=0)])
                 for well in one_QC[:self.safe_int(conditions[cond][10], default=0)]:
                     wet_QC_list.remove(well)
-
         if Blank_list:
             for cond in Blank_num:
                 one_QC = []
@@ -315,7 +314,7 @@ class Blocker:
                 for well in one_QC[:self.safe_int(conditions[cond][10], default=0)]:
                     Blank_list.remove(well)
 
-        if Lib_list and lib_placement == "Before" and cond_range1.upper() == "ALL": #controls library placement
+        if Lib_list and lib_placement.upper() == "BEFORE" and cond_range1.upper() == "ALL": #controls library placement
             nonsample_before.append(Lib_list)
 
         if TrueBlank_list:
@@ -362,6 +361,7 @@ class Blocker:
         if wet_QC_list:
             for well in wet_QC_list:
                 nonsample_other.append(well)
+        print(Blank_list)
         if Blank_list:
             for well in Blank_list:
                 nonsample_other.append(well)
@@ -1153,7 +1153,7 @@ class Blocker:
                 both_blocks, num_blocks = self.blocker(conditions, self.even, column1)
             elif self.lc_number == 2:
                 nonsample_before, nonsample_after, nonsample_other, column1, column2, sysvalid_list, separate_lib2 = self.column_sorter(all_wells_flat, conditions,
-                                                                                                            self.num_to_run, self.lc_number, self.lib_same, self.cond_range1)
+                                                                                                            self.num_to_run, self.lc_number, self.lib_placement, self.cond_range1)
                 both_blocks, num_blocks = self.blocker(conditions, self.even, column1, column2)
 
             sample_blocks = self.zipper(both_blocks)
