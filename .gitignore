@@ -16,6 +16,9 @@ worklist_generator_log.txt
 venv/
 .env/
 
+# Ignore virtual environments
+.venv/
+
 # Build artifacts
 dist/
 build/
