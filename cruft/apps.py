@@ -8,7 +8,7 @@ sys.stdout = sys.stderr
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import pandas as pd
-import pyWorklist
+import cruft.pyWorklist as pyWorklist
 import shutil  # for copying template files
 
 def resource_path(relative_path):
