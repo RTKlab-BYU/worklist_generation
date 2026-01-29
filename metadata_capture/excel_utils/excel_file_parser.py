@@ -3,8 +3,8 @@ from collections import defaultdict
 
 import openpyxl
 
-from project_dataclasses.project_metadata import ProjectMetadata
-from project_dataclasses.project_outline import ProjectOutline
+from metadata_capture.project_dataclasses.project_metadata import ProjectMetadata
+from metadata_capture.project_dataclasses.project_outline import ProjectOutline
 
 
 class ExcelFileParser(ABC):
@@ -39,13 +39,12 @@ class AdvancedFileParser(ExcelFileParser):
 
     def __init__(self, source_file: str, project_outline: ProjectOutline):
         super().__init__(source_file, project_outline)
+        if project_outline is None:
+            self.project_outline = self._build_project_outline_from_excel()
+
 
     def _parse_file(self) -> ProjectMetadata:
-
-
         self._validate_title_and_group_names()
-
-
         return self._get_metadata()
 
 
@@ -155,6 +154,33 @@ class AdvancedFileParser(ExcelFileParser):
             val = self.ws.cell(8, col).value
             if val != group:
                 raise ValueError(f"Group Mismatch at (8, {col}); GOT: {val} != EXPECTED: {group}")
+            
+    def _build_project_outline_from_excel(self):
+        from metadata_capture.project_dataclasses.project_outline import ProjectOutline
+
+        # Project name and description
+        project_name = self.ws.cell(1, 1).value
+        project_description = self.ws.cell(2, 1).value or ""
+
+        # Read actual group names from row 8, columns 3+
+        groups = []
+        col = 3
+        while True:
+            val = self.ws.cell(8, col).value
+            if val is None:
+                break
+            groups.append(str(val).strip())
+            col += 1
+
+        number_of_groups = len(groups)
+
+        return ProjectOutline(
+            name=project_name,
+            description=project_description,
+            number_of_groups=number_of_groups,
+            groups=groups
+        )
+
 
 
 class CustomFileParser(ExcelFileParser):
@@ -165,4 +191,5 @@ class CustomFileParser(ExcelFileParser):
 
     def _parse_file(self) -> ProjectMetadata:
         pass
+    
 

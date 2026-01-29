@@ -1,7 +1,7 @@
 from openpyxl.styles import Border, Side, Font, Protection
 
-from excel_utils.excel_utils import copy_template_with_datetime
-from project_dataclasses.project_outline import ProjectOutline
+from metadata_capture.excel_utils.excel_utils import copy_template_with_datetime
+from metadata_capture.project_dataclasses.project_outline import ProjectOutline
 from abc import ABC, abstractmethod
 from openpyxl import load_workbook
 from copy import copy

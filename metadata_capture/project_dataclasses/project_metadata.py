@@ -2,7 +2,7 @@ import pprint
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
-from project_dataclasses.project_outline import ProjectOutline
+from metadata_capture.project_dataclasses.project_outline import ProjectOutline
 
 
 def _to_regular_dict(obj):

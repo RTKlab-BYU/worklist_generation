@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from project_dataclasses.project_metadata import ProjectMetadata
+from metadata_capture.project_dataclasses.project_metadata import ProjectMetadata
 
 
 def upload_to_sqlite(metadata: ProjectMetadata, db_path: str = "project.db"):
@@ -80,3 +80,4 @@ def upload_to_sqlite(metadata: ProjectMetadata, db_path: str = "project.db"):
 
     print(f"Successfully saved project '{metadata.project_outline.name}' to {db_path}")
 
+    return project_id

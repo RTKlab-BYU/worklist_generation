@@ -1,10 +1,10 @@
 from copy import deepcopy
 
-from excel_utils import AdvancedFileGenerator
-from excel_utils.excel_file_parser import AdvancedFileParser
-from excel_utils.excel_utils import open_excel_sheet, copy_template_with_datetime
-from project_dataclasses.project_outline import ProjectOutline
-from vars import BASE_DIR, TEMPLATES
+from metadata_capture.excel_utils import AdvancedFileGenerator
+from metadata_capture.excel_utils.excel_file_parser import AdvancedFileParser
+from metadata_capture.excel_utils.excel_utils import open_excel_sheet, copy_template_with_datetime
+from metadata_capture.project_dataclasses.project_outline import ProjectOutline
+from metadata_capture.vars import BASE_DIR, TEMPLATES
 
 
 def test_open_excel():

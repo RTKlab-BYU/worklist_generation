@@ -4,7 +4,7 @@ import subprocess
 from datetime import datetime
 import os
 from typing import Optional
-from vars import BASE_DIR
+from metadata_capture.vars import BASE_DIR
 
 
 def open_excel_sheet(filepath: str):

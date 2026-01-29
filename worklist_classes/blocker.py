@@ -361,7 +361,6 @@ class Blocker:
         if wet_QC_list:
             for well in wet_QC_list:
                 nonsample_other.append(well)
-        print(Blank_list)
         if Blank_list:
             for well in Blank_list:
                 nonsample_other.append(well)

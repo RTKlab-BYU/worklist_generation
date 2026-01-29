@@ -1,5 +1,5 @@
-from project_dataclasses.project_outline import ProjectOutline
-from project_dataclasses.project_type import ProjectType
+from metadata_capture.project_dataclasses.project_outline import ProjectOutline
+from metadata_capture.project_dataclasses.project_type import ProjectType
 
 
 def get_project_outline() -> ProjectOutline:
