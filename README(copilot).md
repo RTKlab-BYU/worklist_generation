@@ -164,7 +164,3 @@ This README summarizes the **Worklist Generator User Guide** and the program’s
 - GitHub: https://github.com/RTKlab-BYU/worklist_generation.git
 
 If you use this tool in a publication, please cite your laboratory and/or include a reference to the Worklist Generator repository.
-
----
-
-> **Need a different format?** I can also generate a shorter **Quick Start**, add screenshots/diagrams, or adapt the tone (concise, academic, beginner‑friendly). Just ask!
