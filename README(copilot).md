@@ -10,11 +10,11 @@
   - [Download the Excel Template](#1-download-the-excel-template)
   - [Generate a Worklist from a Completed Template](#2-generate-a-worklist-from-a-completed-template)
 - [Template Procedure](#template-procedure)
-  - [User Page](#user-page--define-well-types--conditions)
+  - [Experiment Page](#experiment-page--define-well-types--conditions)
   - [Fill Out Plates](#fill-out-plates)
   - [Multiple Experiments & Options](#multiple-experiments--additional-options)
   - [Metadata](#metadata)
-- [Manager Page](#manager-page)
+- [Machine Page](#machine-page)
   - [Running Wells](#running-wells)
   - [QC Before / After / Between](#qc-before--after--between)
   - [Columns & Library Placement](#columns--library-placement)
@@ -81,7 +81,7 @@ python3 commandline.py -r <path_to_template> <optional_output_folder>
 
 ## Template Procedure
 
-### User Page – Define Well Types & Conditions
+### Experiment Page – Define Well Types & Conditions
 Use **columns AD–AG** to define:
 - **Number** – Auto‑assigned identifier for wells; do not change this column.
 - **Well Type** – Choose from: `Condition`, `QC`, `Blank`, `TrueBlank`, `Lib`, `System Validation`, `WetQC`.
@@ -95,12 +95,12 @@ Use **columns AD–AG** to define:
 - **System Validation** wells, if present, are inserted at a **user‑defined interval**.
 
 ### Fill Out Plates
-- The template includes **three plates**.
+- The template includes **four plates**.
 - Use the **Number** values from column **AD** to place condition numbers into plate wells.
 - For convenience, set **Plate color** and **Plate name** (left of each plate) to help with slot identification on the LC system.
 
 ### Multiple Experiments & Additional Options
-(Located in **Columns AI–AJ, Rows 33–39**)
+(Located in **Columns AI–AJ, Rows 2-7**)
 
 **Force even blocks?**
 - **No** → Creates the **maximum** number of blocks by using the smallest condition count as the block size; extra samples are **randomly distributed** across blocks.
@@ -126,11 +126,11 @@ Use **columns AD–AG** to define:
 
 ---
 
-## Manager Page
+## Machine Page
 
 ### Running Wells
-- Column **L – Samples/Well**: specify how many samples of a condition are present in each labeled well (mirrors User page intent).
-- Column **M – Number of sample to run**: the **total** number of samples you want to run. Enter a number or `all`.
+- Column **M – Samples/Well**: specify how many samples of a condition are present in each labeled well (mirrors User page intent).
+- Column **N – Number of sample to run**: the **total** number of samples you want to run. Enter a number or `all`.
   - Example: 13 wells × 3 samples/well = **39** samples. Enter `39` to run all, or a smaller number to subsample; the program **randomly selects** that many from the full set.
 
 ### QC Before / After / Between
