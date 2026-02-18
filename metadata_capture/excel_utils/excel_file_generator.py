@@ -21,6 +21,7 @@ class ExcelFileGenerator(ABC):
 
     def generate_file(self) -> str:
         self.ws.cell(row=1, column=1).value = self.project_outline.name
+        self.ws.cell(row=1, column=2).value = self.project_outline.description
         self._make_changes()
         self.ws.protection.sheet = True
         self.wb.save(self.excel_path)

@@ -1,0 +1,41 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 15
+Name: Test
+Description: INSTRUCTIONS 
+Created: 2026-02-11 09:14:42
+Independent Variables: defaultdict(<function AdvancedFileParser._get_metadata.<locals>.<lambda> at 0x10661ef80>, {'SAMPLE IDENTIFICATION': defaultdict(<class 'list'>, {'Sex': ['M', 'F'], 'Age': [1, 2], 'Gene': ['b', 'c', 'a']})})
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### red
+
+  [SAMPLE IDENTIFICATION]
+    Species: grape
+    Sex: M
+    Age: 2
+    Gene: a
+
+
+### green
+
+  [SAMPLE IDENTIFICATION]
+    Species: grape
+    Sex: F
+    Age: 1
+    Gene: b
+
+
+### blue
+
+  [SAMPLE IDENTIFICATION]
+    Species: grape
+    Sex: F
+    Age: 2
+    Gene: c
+

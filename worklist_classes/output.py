@@ -8,12 +8,12 @@ class Output:
         self.blank_method = parser_output[2]
         self.sample_type = parser_output[3]
         self.inj_vol = parser_output[4]
-        self.conditions = parser_output[5][0]
         self.well_conditions = blocker_output[0]
         self.block_runs = blocker_output[1]
         self.positions = blocker_output[2]
         self.reps = blocker_output[3]
         self.msmethods = blocker_output[4]
+        self.conditions = blocker_output[5]
 
     def create_filenames(self):
         # creates a list of filenames
@@ -24,11 +24,11 @@ class Output:
         elif self.lc_number == 2:
             columns = ['nbcode', 'conditions', 'block and run', 'position', 'rep', 'channel', 'msmethod']
         df = pd.DataFrame(columns=columns)
-        for index, block_run in enumerate(self.block_runs):
+        for index, _ in enumerate(self.block_runs):
             try:
                 condition = self.conditions[self.well_conditions[index]][1]
             except KeyError:
-                raise KeyError(f"Condition {self.well_conditions[index]} not found in conditions dictionary.")
+                raise KeyError(f"Condition {self.well_conditions[index]} not found in conditions dictionary. Conditions: {list(self.conditions.keys())}")
             if self.lc_number == 1:
                 df.loc[len(df)] = [self.nbcode, condition, self.block_runs[index],
                         self.positions[index], f"rep{self.reps[index]}", self.msmethods[index]]
@@ -65,6 +65,11 @@ class Output:
         method_names = []
         data_paths = []
         for index in well_conditions:
+            if index==100:
+                data_paths.append(self.conditions[index][2])
+                method_paths.append(self.blank_method)
+                method_names.append(self.blank_method)
+                continue
             if index not in self.conditions:
                 raise KeyError(f"Condition {index} not found.")
             if len(self.conditions[index]) < 10:
@@ -87,8 +92,12 @@ class Output:
             if csv_file == 'MS':
                 # inst_methods.insert(0, blank_method)
                 # inst_methods.insert(0, blank_method)
-                inst_methods.insert(0, TB_method)
-                inst_methods.insert(0, TB_method)
+                if TB_method is None:
+                    inst_methods.insert(0, inst_methods[0])
+                    inst_methods.insert(0, inst_methods[0])
+                else:
+                    inst_methods.insert(0, TB_method)
+                    inst_methods.insert(0, TB_method)
             elif csv_file == 'LC':
                 inst_methods.append(inst_methods[-1])
                 inst_methods.append(inst_methods[-1])
@@ -124,7 +133,7 @@ class Output:
         ms_pd = self.final_csv_format_as_pd("MS", filenames.copy(), self.well_conditions.copy(), self.positions.copy(), TB_method)
         # Create and export LC CSV
         lc_pd = self.final_csv_format_as_pd("LC", filenames.copy(), self.well_conditions.copy(), self.positions.copy(), TB_method)
-        #The files stored in files/output contain what needs to be sent to the mass spec and lc
+        #The files stored in files\output contain what needs to be sent to the mass spec and lc
 
         ms_filename = f"{self.nbcode}_MS.csv"
         lc_filename = f"{self.nbcode}_LC.csv"

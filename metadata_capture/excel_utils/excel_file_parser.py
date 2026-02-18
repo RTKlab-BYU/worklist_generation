@@ -160,7 +160,7 @@ class AdvancedFileParser(ExcelFileParser):
 
         # Project name and description
         project_name = self.ws.cell(1, 1).value
-        project_description = self.ws.cell(2, 1).value or ""
+        project_description = self.ws.cell(1, 2).value or ""
 
         # Read actual group names from row 8, columns 3+
         groups = []

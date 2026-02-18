@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+import pathlib
+from pathlib import Path
 import random
 import sys
 import re
@@ -8,11 +10,11 @@ import numpy as np
 
 class ExcelParser:
     def __init__(self, input_filename=None):
-        self.input_filename = input_filename
+        self.input_filename = Path(input_filename)
         self.blocker_info = []
         self.output_info = []
-        self.output_folder = os.path.expanduser("~/Desktop/worklist_generation/output")
-        os.makedirs(self.output_folder, exist_ok=True)
+        self.output_folder = self.input_filename.parent / "output"
+        self.output_folder.mkdir(parents=True, exist_ok=True)
 
     def read_excel_to_dfs(self):
         try:
@@ -123,13 +125,13 @@ class ExcelParser:
         Lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
         SysValid_interval = manager_df.iloc[4,17] # how often to run system validation
         QC_Frequency = manager_df.iloc[5,17] # how often should QC blocks be added
-        ### two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks ### FIX
         even = user_df.iloc[31,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+        TB_location = user_df.iloc[32,35] # indicates condition number for TrueBlanks
         experiment1 = user_df.iloc[34,35] # if not "All", which conditions belong to experiment 1
         experiment2 = user_df.iloc[35,35] # which conditions belong to experiment 2 if any
         lib_same = user_df.iloc[36,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
         ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
-        return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, even, QC_Frequency
+        return Lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_Frequency
 
     def parse_range(self, cond_range):
         if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":
@@ -146,7 +148,7 @@ class ExcelParser:
         try:
             user_df, manager_df = self.read_excel_to_dfs()
             nbcode, lc_number, wet_amounts, plates, num_to_run = self.separate_plates(user_df, manager_df)
-            lib_placement, sysvalid_interval, cond_range1, cond_range2, lib_same, even, qc_frequency = self.additional_info(user_df, manager_df)
+            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency = self.additional_info(user_df, manager_df)
                                                     # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
             conditions = []
             conditions.append(self.condition_dict(manager_df)) # always include full condition dict
@@ -163,7 +165,7 @@ class ExcelParser:
         inj_vol = 1  # injection volume in µL
 
         self.blocker_info = [user_df, manager_df, lc_number, conditions, wet_amounts, plates, num_to_run,
-                             lib_placement, sysvalid_interval, cond_range1, cond_range2, lib_same, even, qc_frequency]
+                             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency]
         self.output_info = [nbcode, lc_number, blank_method, sample_type, inj_vol, conditions]
 
         return self.blocker_info, self.output_info

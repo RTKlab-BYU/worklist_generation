@@ -1,0 +1,42 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 18
+Name: test2
+Description: a test for description
+Created: 2026-02-11 09:50:56
+Independent Variables:
+  SAMPLE IDENTIFICATION
+    Species
+    Sex
+    Age
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### a
+
+  [SAMPLE IDENTIFICATION]
+    Species: rat
+    Sex: m
+    Age: 2
+
+
+### b
+
+  [SAMPLE IDENTIFICATION]
+    Species: mouse
+    Sex: f
+    Age: 3
+
+
+### c
+
+  [SAMPLE IDENTIFICATION]
+    Species: bird
+    Sex: f
+    Age: 4
+

@@ -78,6 +78,66 @@ def upload_to_sqlite(metadata: ProjectMetadata, db_path: str = "project.db"):
     conn.commit()
     conn.close()
 
-    print(f"Successfully saved project '{metadata.project_outline.name}' to {db_path}")
+    output_path = write_sqlite_to_output(metadata, project_id)
+
+    print(f"Saved project '{metadata.project_outline.name}' to {db_path}")
+    print(f"Summary written to: {output_path}")
 
     return project_id
+
+
+from pathlib import Path
+
+
+def write_sqlite_to_output(metadata: ProjectMetadata, project_id: int, output_dir="output"):
+    Path(output_dir).mkdir(exist_ok=True)
+
+    filename = f"{metadata.project_outline.name}_summary.txt"
+    output_path = Path(output_dir) / filename
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write("=" * 60 + "\n")
+        f.write("PROJECT SUMMARY\n")
+        f.write("=" * 60 + "\n\n")
+
+        f.write(f"Project ID: {project_id}\n")
+        f.write(f"Name: {metadata.project_outline.name}\n")
+        f.write(f"Description: {metadata.project_outline.description}\n")
+        f.write(f"Created: {metadata.created_at.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("Independent Variables:\n")
+        f.write(format_independent_variables(metadata.independent_variables))
+        f.write("\n\n")
+
+        f.write("-" * 60 + "\n")
+        f.write("GROUPS\n")
+        f.write("-" * 60 + "\n\n")
+
+        for group_name in metadata.project_outline.groups:
+            f.write(f"\n### {group_name}\n")
+
+            categories = metadata.metadata.get(group_name, {})
+            if not categories:
+                f.write("  (No metadata)\n")
+                continue
+
+            for category, pairs in categories.items():
+                f.write(f"\n  [{category}]\n")
+                for label, value in pairs.items():
+                    f.write(f"    {label}: {value}\n")
+
+            f.write("\n")
+
+    return output_path
+
+def format_independent_variables(ind_vars) -> str:
+    if not ind_vars:
+        return "  None"
+
+    lines = []
+
+    for category, labels in ind_vars.items():
+        lines.append(f"  {category}")
+        for label in labels.keys():
+            lines.append(f"    {label}")
+
+    return "\n".join(lines)
