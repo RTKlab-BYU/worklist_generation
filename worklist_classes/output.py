@@ -65,11 +65,6 @@ class Output:
         method_names = []
         data_paths = []
         for index in well_conditions:
-            if index==100:
-                data_paths.append(self.conditions[index][2])
-                method_paths.append(self.blank_method)
-                method_names.append(self.blank_method)
-                continue
             if index not in self.conditions:
                 raise KeyError(f"Condition {index} not found.")
             if len(self.conditions[index]) < 10:

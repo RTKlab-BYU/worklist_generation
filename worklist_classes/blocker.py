@@ -331,86 +331,66 @@ class Blocker:
             return (nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib)
 
     def blocker(self, conditions, even, column1, column2=None):
-        if column2:
-            columns = [column1, column2]
-        if not column2:
-            columns = [column1]
+        columns = [column1] if column2 is None else [column1, column2]
         both_blocks = []
-        extras_dict = {} #stores uneven samples so that the second column can use same block assignments
+        extras_dict = {}
+
         for column in columns:
-
-            #creates a dictionary that stores how much of each sample is in the column so it can be blocked
-            sample_dict = {}
-            for well in column:
-                if well[0] not in sample_dict.keys():
-                    sample_dict[well[0]] = 1
-                elif well[0] in sample_dict.keys():
-                    sample_dict[well[0]] += 1
-            sample_amounts = list(sample_dict.values())
-            try:
-                sample_block_num = min(sample_amounts)
-            except ValueError:
+            counts = Counter(well[0] for well in column)
+            if not counts:
                 print("No conditions were added to the plate.")
-                return([[[]]], 0)
+                return [[[]]], 0
 
-            sample_keys = list(sample_dict.keys())
-            for sample in sample_keys:
-                #Count number of sample wells in wells list
-                count = 0
-                for well in column:
-                    if well[0] == sample:
-                        count += 1
-                to_add = count // sample_block_num
-                sample_dict[sample] = [conditions[sample], to_add, count]
-            # create list of sample well blocks
+            sample_block_num = min(counts.values())
+            grouped = {}
+            for well in column:
+                grouped.setdefault(well[0], []).append(well)
+
+            sample_dict = {
+                sample: [conditions[sample], total // sample_block_num, total]
+                for sample, total in counts.items()
+            }
+
             sample_blocks = []
-            blocks_created = 0
-            while blocks_created < sample_block_num:
-                block = [] # create each block for the samples
-                for sample in sample_dict.keys(): # go through each sample, create temporary list
-                    sample_list = []
-                    for well in column:
-                        if well[0] == sample:
-                            sample_list.append(well)
-                    # append these separately
-                    #block.append(sample_list[:sample_dict[sample][1]])
-                    wells_to_append = sample_list[:sample_dict[sample][1]]
-                    for well in wells_to_append:
-                        block.append(well)
-                for item in block:
-                    if item in column:
-                        column.remove(item)
+            for _ in range(sample_block_num):
+                block = []
+                for sample, (_, per_block, _) in sample_dict.items():
+                    if per_block > 0:
+                        wells = grouped[sample][:per_block]
+                        block.extend(wells)
+                        grouped[sample] = grouped[sample][per_block:]
                 random.shuffle(block)
                 sample_blocks.append(block)
-                blocks_created += 1
-            num_of_blocks = len(sample_blocks)
-            if blocks_created == sample_block_num and even.upper() == "NO":
-                # assigns leftover samples randomly to blocks if the user does not want even blocks
-                num_of_blocks = len(sample_blocks)
-                for sample in sample_dict.keys(): # go through each sample, create temporary list
-                    sample_list = []
-                    for well in column:
-                        if well[0] == sample:
-                            sample_list.append(well)
-                    for item in sample_list:
-                        if column == column1:
-                            placement = random.randint(0, num_of_blocks-1)
-                            sample_blocks[placement].append(item)
-                            try:
-                                extras_dict[item[0]][0] += 1
-                                extras_dict[item[0]][1].append(placement)
-                            except KeyError:
-                                extras_dict[item[0]] = [1,[]]
-                                extras_dict[item[0]][1].append(placement)
-                        else:
-                            placement = extras_dict[item[0]][1][-1]
-                            extras_dict[item[0]][1] = extras_dict[item[0]][1][:-1]
-                            sample_blocks[placement].append(item)
-                            extras_dict[item[0]][0] -= 1
+
+            if even.upper() == "NO":
+                for sample in sample_dict:
+                    leftovers = grouped.get(sample, [])
+                    if not leftovers:
+                        continue
+                    if column is column1:
+                        for well in leftovers:
+                            pos = random.randint(0, len(sample_blocks) - 1)
+                            sample_blocks[pos].append(well)
+                            extras_dict.setdefault(well[0], [0, []])
+                            extras_dict[well[0]][0] += 1
+                            extras_dict[well[0]][1].append(pos)
+                    else:
+                        if sample not in extras_dict:
+                            continue
+                        placements = extras_dict[sample][1]
+                        for i, well in enumerate(leftovers):
+                            if i < len(placements):
+                                pos = placements[i]
+                                sample_blocks[pos].append(well)
+                                extras_dict[sample][0] -= 1
+
             for block in sample_blocks:
                 random.shuffle(block)
+
             both_blocks.append(sample_blocks)
-        return(both_blocks, num_of_blocks)
+
+        num_of_blocks = len(both_blocks[0]) if both_blocks else 0
+        return both_blocks, num_of_blocks
 
     def nonsample_blocker(self, lc_number, nonsample_other, num_of_blocks, conditions):
         """ Will divide the QC, Blanks, Trueblanks etc, reserved to be between the runs, into blocks
@@ -791,15 +771,8 @@ class Blocker:
             merged = {**merged, **sysvalid_condition}
         trueblanks, normal = [], []
         # separate TrueBlank rows
-        sysval_metadata = None
-        for i, row in sorted(merged.items()):
-             if row and row[0] == "SystemValidation":
-                sysval_metadata = row
-                break
         for i, row in sorted(merged.items()):
             if row and row[0] == "TrueBlank":
-                if i==100: # if TB was assigned 100 to be at the end, it won't have metadata, so we default to SysVal metadata if it exists
-                    row[2:10] = sysval_metadata[2:10] if sysval_metadata else row[2:10] # default to 
                 trueblanks.append(row)
             else:
                 normal.append(row)
@@ -816,6 +789,15 @@ class Blocker:
                 new[i] = row
                 i += 1
         return new
+    
+    def default_TB_metadata(self, conditions, found_TB, sysvalid_condition=None, sysvalid_num=None):
+        if not found_TB:
+            default_metadata = conditions[100]
+            if sysvalid_condition and sysvalid_num in sysvalid_condition:
+                sysval_metadata = sysvalid_condition[sysvalid_num]
+                default_metadata[2:10] = sysval_metadata[2:10]  # borrow metadata from System Validation if available
+            conditions[100] = default_metadata  # assign default metadata to the TrueBlank condition
+        return conditions
 
     def extract_file_info(self, flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions):
         flattened = self.insert_sysQC(flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
@@ -854,6 +836,8 @@ class Blocker:
             non_flat_list = self.combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, self.qc_frequency, conditions)
             # zipper to make flat list and add block labels
             flat_list = [w for b in non_flat_list for w in b]
+
+            conditions = self.default_TB_metadata(conditions, found_TB, sysvalid_condition, sysvalid_num)
             well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, self.lc_number, two_xp_TB, two_xp_TB_location, conditions)
 
         elif self.cond_range1.upper() != "ALL" and self.lc_number == 2: # two experiments, 2 column system
@@ -895,6 +879,7 @@ class Blocker:
 
             lc_number = 2
             conditions = self.merge_conditions(conditions1, conditions2, found_TB, sysvalid_condition, sysvalid_num)
+            conditions = self.default_TB_metadata(conditions, found_TB, sysvalid_condition, sysvalid_num)
             well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
 
         else:
