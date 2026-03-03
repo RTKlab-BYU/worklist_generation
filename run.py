@@ -4,6 +4,7 @@ import sys
 import os
 import platform
 import subprocess
+import argparse
 from pathlib import Path
 
 # Stage 1 imports
@@ -20,6 +21,55 @@ from metadata_capture.excel_utils.fill_conditions import fill_conditions_in_work
 
 # Stage 3 imports
 import worklist_classes.main as worklist_main
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        prog="run.py",
+        usage="""
+python run.py -s 1
+python run.py -s 2 -m <metadata_excel_path>
+python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
+""",
+        description="LC/MS Worklist Pipeline",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+
+    parser.add_argument(
+        "-s", "--stage",
+        required=True,
+        choices=["1", "2", "3"],
+        help="Pipeline stage"
+    )
+
+    parser.add_argument(
+        "-m", "--metadata",
+        type=Path,
+        help="Metadata Excel file (stage 2)"
+    )
+
+    parser.add_argument(
+        "-w", "--worklist",
+        type=Path,
+        help="Worklist Excel file (stage 3)"
+    )
+
+    parser.add_argument(
+        "-o", "--output",
+        type=Path,
+        help="Output directory (stage 3)"
+    )
+
+    return parser.parse_args()
+
+
+def validate_args(args):
+    if args.stage == "2" and not args.metadata:
+        raise SystemExit("Stage 2 requires -m / --metadata")
+
+    if args.stage == "3":
+        if not args.worklist or not args.output:
+            raise SystemExit("Stage 3 requires -w and -o")
 
 
 # Helper Functions
@@ -151,27 +201,23 @@ def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
 
 # Main
 def main():
-    if len(sys.argv) < 2:
-        usage()
+    args = parse_args()
+    validate_args(args)
 
-    stage = sys.argv[1]
-
-    if stage == "1":
+    if args.stage == "1":
         stage_1_generate_metadata()
 
-    elif stage == "2":
-        if len(sys.argv) < 3:
-            usage()
-        stage_2_generate_worklist(Path(sys.argv[2]))
+    elif args.stage == "2":
+        if not args.metadata:
+            print("Stage 2 requires --metadata")
+            return
+        stage_2_generate_worklist(args.metadata)
 
-    elif stage == "3":
-        if len(sys.argv) < 4:
-            usage()
-        stage_3_generate_lcms(
-            Path(sys.argv[2]),
-            Path(sys.argv[3])
-        )
-
+    elif args.stage == "3":
+        if not args.worklist or not args.output:
+            print("Stage 3 requires --worklist and --output")
+            return
+        stage_3_generate_lcms(args.worklist, args.output)
     else:
         usage()
 
