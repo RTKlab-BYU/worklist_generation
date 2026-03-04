@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from metadata_capture.excel_utils import AdvancedFileGenerator
+from metadata_capture.excel_utils.excel_file_generator import AdvancedFileGenerator
 from metadata_capture.excel_utils.excel_file_parser import AdvancedFileParser
 from metadata_capture.excel_utils.excel_utils import open_excel_sheet, copy_template_with_datetime
 from metadata_capture.project_dataclasses.project_outline import ProjectOutline

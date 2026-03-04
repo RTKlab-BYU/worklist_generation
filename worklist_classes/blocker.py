@@ -323,7 +323,6 @@ class Blocker:
             if isinstance(max_run, int):
                 wells = wells[:max_run]
             add_to_columns(wells)
-
         if lc_number==2:
             return (nonsample_before, nonsample_after, nonsample_other, column1, column2, SysValid_list, separate_Lib)
 
@@ -731,7 +730,7 @@ class Blocker:
             new_flat_list.extend(flattened_list[i:i + SysValid_interval])
             if i + SysValid_interval < len(flattened_list):
                 for i in range(0, lc_number):
-                    try: #why lib2? what does that mean?
+                    try:
                         if lc_number == 1:
                             if 'LIB' in new_flat_list[-1][2].upper() or 'LIB' in full_conditions[new_flat_list[-1][0]][0].upper():
                                 try:
@@ -763,40 +762,21 @@ class Blocker:
             print(f"Not enough System Validation QC was added, consider adding {missing_SV} more.")
         return new_flat_list
     
-    def merge_conditions(self, c1, c2, found_TB, sysvalid_condition=None, sysvalid_num=None):
+    def append_TB_condition(self, all_c, c1, c2, found_TB, sysvalid_condition=None, sysvalid_num=None):
         c1 = {int(k): v for k, v in c1.items()}
         c2 = {int(k): v for k, v in c2.items()}
         merged = {**c1, **c2}
-        if sysvalid_condition and sysvalid_num in sysvalid_condition:
-            merged = {**merged, **sysvalid_condition}
-        trueblanks, normal = [], []
-        # separate TrueBlank rows
-        for i, row in sorted(merged.items()):
+        for _, row in sorted(merged.items()):
             if row and row[0] == "TrueBlank":
-                trueblanks.append(row)
-            else:
-                normal.append(row)
-        # rebuild sequential numbering
-        new = {}
-        i = 1
-        for row in normal:
-            new[i] = row
-            i += 1
-        for row in trueblanks:
-            if not found_TB:
-                new[100] = row  # assign TrueBlank a high number to keep it at the end
-            else:
-                new[i] = row
-                i += 1
-        return new
+                all_c[100] = row
+        return all_c
     
-    def default_TB_metadata(self, conditions, found_TB, sysvalid_condition=None, sysvalid_num=None):
-        if not found_TB:
-            default_metadata = conditions[100]
-            if sysvalid_condition and sysvalid_num in sysvalid_condition:
-                sysval_metadata = sysvalid_condition[sysvalid_num]
-                default_metadata[2:10] = sysval_metadata[2:10]  # borrow metadata from System Validation if available
-            conditions[100] = default_metadata  # assign default metadata to the TrueBlank condition
+    def default_TB_metadata(self, conditions, sysvalid_condition=None, sysvalid_num=None):
+        default_metadata = conditions[100]
+        if sysvalid_condition and sysvalid_num in sysvalid_condition:
+            sysval_metadata = sysvalid_condition[sysvalid_num]
+            default_metadata[2:10] = sysval_metadata[2:10]  # borrow metadata from System Validation if available
+        conditions[100] = default_metadata  # assign default metadata to the TrueBlank condition
         return conditions
 
     def extract_file_info(self, flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions):
@@ -837,7 +817,7 @@ class Blocker:
             # zipper to make flat list and add block labels
             flat_list = [w for b in non_flat_list for w in b]
 
-            conditions = self.default_TB_metadata(conditions, found_TB, sysvalid_condition, sysvalid_num)
+            conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
             well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, self.lc_number, two_xp_TB, two_xp_TB_location, conditions)
 
         elif self.cond_range1.upper() != "ALL" and self.lc_number == 2: # two experiments, 2 column system
@@ -859,10 +839,10 @@ class Blocker:
 
             # sort the wells in groups so they can be processed according to run type
             nonsample_before1, nonsample_after1, nonsample_other1, exp1col1, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat1, conditions1,
-                                                                        self.num_to_run, lc_number, self.lib_same, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
+                                                                        self.num_to_run, lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
             both_blocks1, num_blocks1 = self.blocker(conditions1, self.even, exp1col1)
             nonsample_before2, nonsample_after2, nonsample_other2, exp2col1, sysvalid_list, separate_lib2 = self.column_sorter(all_wells_flat2, conditions2,
-                                                                        self.num_to_run, lc_number, self.lib_same, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
+                                                                        self.num_to_run, lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
             both_blocks2, num_blocks2 = self.blocker(conditions2, self.even, exp2col1)
 
             nonsample_blocks1 = self.nonsample_blocker(lc_number, nonsample_other1, num_blocks1, conditions1)
@@ -878,8 +858,9 @@ class Blocker:
             two_xp_flat_list = self.attach_lib_two_xp(two_xp_flat_list, separate_lib1, separate_lib2, two_xp_TB, two_xp_TB_location, self.lib_placement, self.lib_same)
 
             lc_number = 2
-            conditions = self.merge_conditions(conditions1, conditions2, found_TB, sysvalid_condition, sysvalid_num)
-            conditions = self.default_TB_metadata(conditions, found_TB, sysvalid_condition, sysvalid_num)
+            if not found_TB:
+                conditions = self.append_TB_condition(self.all_conditions, conditions1, conditions2, found_TB)
+                conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
             well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
 
         else:

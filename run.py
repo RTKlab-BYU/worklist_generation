@@ -89,13 +89,13 @@ def auto_open_file(path: Path):
 def usage():
     print("""
 USAGE:
-  python run.py 1
+  python run.py -s 1
       → Generate metadata Excel
 
-  python run.py 2 <metadata_excel_path>
+  python run.py -s 2 -m <metadata_excel_path>
       → Generate filled worklist Excel
 
-  python run.py 3 <worklist_excel_path> <output_dir>
+  python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
       → Generate LC + MS worklists
 """)
     sys.exit(1)
@@ -123,7 +123,7 @@ def stage_1_generate_metadata():
     auto_open_file(output_path)
 
     print("\nNext step:")
-    print(f"  python run.py 2 {output_path}\n")
+    print(f"  python run.py -s 2 -m {output_path}\n")
 
     sys.exit(0)
 
@@ -155,7 +155,7 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
         project_id=project_id,
         db_path="project.db",
         template_path=str(TEMPLATES / "worklist_template_blank.xlsx"),
-        output_dir="excel_utils/outputs",
+        output_dir="output",
         output_filename=f"worklist_conditions_project_{project_id}.xlsx"
     )
 
@@ -164,7 +164,7 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
     auto_open_file(output_path)
 
     print("\nNext step:")
-    print(f"  python run.py 3 {output_path} <output_dir>\n")
+    print(f"  python run.py -s 3 -w {output_path} -o <output_dir>\n")
 
     sys.exit(0)
 

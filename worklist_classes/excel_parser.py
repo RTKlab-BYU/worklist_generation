@@ -46,6 +46,17 @@ class ExcelParser:
                 conditions[key] = value
         return conditions
     
+    def parse_range(self, cond_range):
+        if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":
+            return [0,0]  # treat blank as no conditions
+        s = str(cond_range).strip()
+        # Try number-number
+        matches = re.findall(r'(\d+)-(\d+)', s)
+        if matches:
+            start, end = map(int, matches[0])
+            return [start, end]
+        raise ValueError(f"Invalid condition range: {cond_range!r}")
+    
     def separate_plates(self, user_df, manager_df):
         user_name = user_df.columns[1]
         nbcode = user_df.iloc[0,1]
@@ -92,6 +103,8 @@ class ExcelParser:
             if plate.isna().all().all():
                 continue
             plates[name] = plate
+        
+        self.check_plate_colors(plates)
 
         wet_amounts = {}
         for i in range(0, 50):
@@ -118,8 +131,16 @@ class ExcelParser:
                     try:
                         num_to_run[int(cond_num)] = int(amt_to_run)
                     except ValueError:
-                        raise ValueError("Number of samples to run must be either 'all' (no quotes) or a whole number.")
+                        raise ValueError("Number of samples to run must be either 'all' (no quotes), empyt, or a whole number.")
         return nbcode, lc_column_number, wet_amounts, plates, num_to_run
+    
+    def check_plate_colors(self, plates):
+        colors = []
+        for name in plates:
+            color = name.split("_")[0]
+            colors.append(color)
+        if not len(colors) == len(set(colors)):
+            raise ValueError("Plate colors must be different.")
     
     def additional_info(self, user_df, manager_df):
         Lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
@@ -132,17 +153,6 @@ class ExcelParser:
         lib_same = user_df.iloc[36,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
         ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
         return Lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_Frequency
-
-    def parse_range(self, cond_range):
-        if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":
-            return [0,0]  # treat blank as no conditions
-        s = str(cond_range).strip()
-        # Try number-number
-        matches = re.findall(r'(\d+)-(\d+)', s)
-        if matches:
-            start, end = map(int, matches[0])
-            return [start, end]
-        raise ValueError(f"Invalid condition range: {cond_range!r}")
     
     def parse(self):
         try:
