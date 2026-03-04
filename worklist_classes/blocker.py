@@ -204,7 +204,6 @@ class Blocker:
 
 
     def column_sorter(self, wells_list, conditions, num_to_run, lc_number, lib_placement, cond_range1):
-        
         column1, column2, extras = [], [], [] # these are the odds ones out to attach at the end to run anyways if wanted
         nonsample_before, nonsample_after, nonsample_other = [], [], []
         QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
@@ -368,7 +367,6 @@ class Blocker:
         if TrueBlank_list:
             for well in TrueBlank_list:
                 nonsample_other.append(well)
-
         # if library runs are not the same in a two experiment plate, they must be returned separately
         separate_Lib = []
         if Lib_list and cond_range1.upper() != "ALL":
@@ -380,7 +378,7 @@ class Blocker:
         between_keys = [QC_num, Blank_num, TrueBlank_num, Lib_num, wet_QC_num, SysValid_num]
         for sample in sample_keys:
         # unwrap NumPy scalar to plain int if needed
-            sample_val = int(sample) if hasattr(sample, "item") else sample  
+            sample_val = int(sample) if hasattr(sample, "item") else sample  ## this is problem
 
             # flatten between_keys so it's just numbers
             flat_between = [x for sub in between_keys for x in sub]
@@ -428,8 +426,8 @@ class Blocker:
                 for sample in sample_list:
                     column1.append(sample)
         
-        if lc_number ==2:
-            return (nonsample_before, nonsample_after, nonsample_other, column1, column2, extras, SysValid_list, separate_Lib)
+        if lc_number ==2: # removed extras from return
+            return (nonsample_before, nonsample_after, nonsample_other, column1, column2, SysValid_list, separate_Lib)
 
         elif lc_number == 1:
             return (nonsample_before, nonsample_after, nonsample_other, column1, SysValid_list, separate_Lib)
@@ -888,7 +886,7 @@ class Blocker:
 
     def two_xp_zipper(self, flat_list_1, flat_list_2, two_xp_TB, conditions, two_xp_TB_location):
         if not two_xp_TB or two_xp_TB == 'None':
-            raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AM37 of the excel sheet.")
+            raise ValueError("Error: When more than one experiment is run on one worklist, a TrueBlank well must be specified in cell AJ3 of the excel sheet.")
         TB_well = [two_xp_TB, two_xp_TB_location[0][1], "end"]
 
         # remove empty sublists
@@ -1135,14 +1133,16 @@ class Blocker:
             if self.lc_number == 1:
                 nonsample_before, nonsample_after, nonsample_other, column1, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat, conditions,
                                                                                             self.num_to_run, self.lc_number, self.lib_same, self.cond_range1)
-                both_blocks = self.blocker(conditions, self.even, column1)
+                both_blocks, num_of_blocks = self.blocker(conditions, self.even, column1)
             elif self.lc_number == 2:
+                #raise ValueError(f'lucky guess')
+                #(nonsample_before, nonsample_after, nonsample_other, column1, column2, SysValid_list, separate_Lib)
                 nonsample_before, nonsample_after, nonsample_other, column1, column2, sysvalid_list, separate_lib2 = self.column_sorter(all_wells_flat, conditions,
                                                                                                             self.num_to_run, self.lc_number, self.lib_same, self.cond_range1)
-                both_blocks = self.blocker(conditions, self.even, column1, column2)
+                
+                both_blocks, num_of_blocks = self.blocker(conditions, self.even, column1, column2)
 
             sample_blocks = self.zipper(both_blocks)
-
             non_flat_list = self.combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, nonsample_other, self.qc_frequency, conditions)
             # zipper to make flat list and add block labels
             flat_list = self.blocknum_and_flatten(non_flat_list)
@@ -1150,7 +1150,10 @@ class Blocker:
 
         elif self.cond_range1.upper() != "ALL": # two experiments, 2 column system
             lc_number = 1
+            raise ValueError('CHECK')
+
             conditions1, conditions2, two_xp_TB, found_TB = self.check_for_trueblank(self.conditions1, self.conditions2)
+            raise ValueError('CHECK')
             all_wells_flat1 = []
             all_wells_flat2 = []
             two_xp_TB_location = []
@@ -1174,7 +1177,7 @@ class Blocker:
             sample_blocks2 = [item for block in both_blocks2 for item in block]
 
             non_flat_list1 = self.combine_samples_and_nonsamples(nonsample_before1, nonsample_after1, sample_blocks1, nonsample_blocks1, self.qc_frequency, conditions1)
-            non_flat_list2 = self.combine_samplaes_and_nonsamples(nonsample_before2, nonsample_after2, sample_blocks2, nonsample_blocks2, self.qc_frequency, conditions2)
+            non_flat_list2 = self.combine_samples_and_nonsamples(nonsample_before2, nonsample_after2, sample_blocks2, nonsample_blocks2, self.qc_frequency, conditions2)
 
             two_xp_flat_list = self.two_xp_zipper(non_flat_list1, non_flat_list2, two_xp_TB, self.all_conditions, two_xp_TB_location)
             two_xp_flat_list = self.attach_lib(two_xp_flat_list, separate_lib1, separate_lib2, two_xp_TB, two_xp_TB_location, self.lib_placement, self.lib_same)

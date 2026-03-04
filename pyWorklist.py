@@ -154,7 +154,6 @@ def additional_info(user_df, manager_df):
     ### two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks ### FIX
     even = user_df.iloc[0,35] # -31 # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
     experiment1 = user_df.iloc[3,35] # if not "All", which conditions belong to experiment 1
-    raise ValueError(f"Experiment 1 value: {experiment1}")
     experiment2 = user_df.iloc[4,35] # which conditions belong to experiment 2 if any
     lib_same = user_df.iloc[5,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
     ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
@@ -1270,6 +1269,7 @@ def final_csv_format_as_pd(csv_file, conditions, nbcode, lc_number, blank_method
     return pd.DataFrame(rows)
 
 def process(filepath):
+    raise ValueError("is this running?")
     user_df, manager_df = read_excel_to_dfs(filepath)
     generate_seed()
 
@@ -1284,7 +1284,7 @@ def process(filepath):
     all_wells_flat = []
     two_xp_TB_location = []
 
-    raise ValueError (f'cond_range1: {cond_range1}, lib_same: {lib_same}')
+    #raise ValueError (f'cond_range1: {cond_range1}, lib_same: {lib_same}')
 
     if cond_range1.upper() == "ALL" and lib_same.upper() == "YES": # one experiment, 1 or 2 column system
         conditions = condition_dict(manager_df)
@@ -1304,7 +1304,6 @@ def process(filepath):
                                                                                                         num_to_run, lc_number, Lib_placement, lib_same, cond_range1)
             both_blocks, num_of_blocks = blocker(conditions, even, column1, column2)
         # for later though # nonsample_blocks = nonsample_blocker(lc_number, nonsample_other, num_of_blocks, conditions, even)
-        #raise ValueError(f'what {nonsample_other}')
         sample_blocks = zipper(both_blocks)
         # non_flat_list = block_zipper(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, even)
         non_flat_list = combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, nonsample_other, QC_Frequency, conditions)

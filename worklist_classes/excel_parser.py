@@ -17,8 +17,8 @@ class ExcelParser:
     def read_excel_to_dfs(self):
         try:
             filename = self.input_filename
-            user_df = pd.read_excel(filename, sheet_name="User")
-            manager_df = pd.read_excel(filename, sheet_name="Manager")
+            user_df = pd.read_excel(filename, sheet_name="Experiment")
+            manager_df = pd.read_excel(filename, sheet_name="Machine")
             return user_df, manager_df
         except FileNotFoundError:
             raise ValueError(f"File '{filename}' not found. Please check that the file exists in the correct directory and has the expected extension.")
@@ -27,7 +27,7 @@ class ExcelParser:
         except Exception as e:
             raise ValueError(f"Unexpected error reading Excel file: {e}. Please ensure the file is not corrupted and is saved in a compatible Excel format.")
 
-    def condition_dict(self, dataframe, cond_range=None):
+    def condition_dict(self, dataframe, cond_range=None): # move number 1 right 2/10/26
         conditions = {}
         if cond_range:
             values = self.parse_range(cond_range)
@@ -36,27 +36,28 @@ class ExcelParser:
         else:
             values = ['0', '50']
         for i in range(int(values[0]) - 1, int(values[1])):
-            key = dataframe.iloc[i, 0]
-            if pd.notna(dataframe.iloc[i, 1]):
-                value = dataframe.iloc[i, 1:11].tolist()
-                placings = dataframe.iloc[i, 13:16].tolist()
+            key = dataframe.iloc[i, 1]
+            if pd.notna(dataframe.iloc[i, 2]):
+                value = dataframe.iloc[i, 2:12].tolist()
+                placings = dataframe.iloc[i, 14:17].tolist()
                 value.extend(placings)
                 conditions[key] = value
         return conditions
     
     def separate_plates(self, user_df, manager_df):
+        #raise ValueError(f'Checks: {manager_df.iloc[0,17]}, {manager_df.iloc[0,18]}')
         user_name = user_df.columns[1]
         nbcode = user_df.iloc[0,1]
-        if manager_df.iloc[0,17] == '1 column':
+        if manager_df.iloc[0,18] == '1 column':
             lc_column_number = 1
-        elif manager_df.iloc[0,17] == '2 column':
+        elif manager_df.iloc[0,18] == '2 column':
             lc_column_number = 2
         else:
             raise ValueError(
                 f"System type must either be \"1 column\" or \"2 column\", but got {manager_df.iloc[0,18]}"
             )
         plates = {}
-        for i in range(1,4): # plates 1-3
+        for i in range(1,5): # plates 1-4
             if i == 1:
                 name_row = 4
                 row_min = 3
@@ -66,6 +67,9 @@ class ExcelParser:
             elif i == 3:
                 name_row = 40
                 row_min = 39
+            elif i == 4:
+                name_row = 58
+                row_min = 57
             name_values = user_df.iloc[name_row, [0, 1]]
             name = "_".join(str(x).strip() for x in name_values if pd.notna(x))
             plate = user_df.iloc[row_min:row_min+18, 3:28]
@@ -90,12 +94,13 @@ class ExcelParser:
             if plate.isna().all().all():
                 continue
             plates[name] = plate
-
+            
         wet_amounts = {}
         for i in range(0, 50):
-            if pd.notna(manager_df.iloc[i, 1]):
-                cond_num = manager_df.iloc[i, 0]
-                well_amount = manager_df.iloc[i, 11]
+            if pd.notna(manager_df.iloc[i, 2]):
+                cond_num = manager_df.iloc[i, 1]
+                well_amount = manager_df.iloc[i, 12]
+
                 try:
                     if well_amount is None or np.isnan(well_amount) or well_amount == '':
                         wet_amounts[int(cond_num)] = 1
@@ -104,30 +109,30 @@ class ExcelParser:
                     if manager_df.iloc[i, 1] == "TrueBlank":
                         wet_amounts[int(cond_num)] = 10000  # TrueBlanks should be infinite
                 except ValueError:
-                    raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
+                    raise ValueError(f"{e}: Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
         num_to_run = {}
         for i in range(0, 50):
-            if pd.notna(manager_df.iloc[i, 1]):
-                cond_num = manager_df.iloc[i, 0]
-                amt_to_run = manager_df.iloc[i, 12]
+            if pd.notna(manager_df.iloc[i, 2]):
+                cond_num = manager_df.iloc[i, 1]
+                amt_to_run = manager_df.iloc[i, 13]
                 if amt_to_run == 'all' or np.isnan(amt_to_run) or amt_to_run == '':
                     num_to_run[int(cond_num)] = 'all'
                 else:
                     try:
                         num_to_run[int(cond_num)] = int(amt_to_run)
                     except ValueError:
-                        raise ValueError("Number of samples to run must be either 'all' (no quotes) or a whole number.")
+                        raise ValueError(f" Number of samples to run must be either 'all' (no quotes) or a whole number.")
         return nbcode, lc_column_number, wet_amounts, plates, num_to_run
     
     def additional_info(self, user_df, manager_df):
-        Lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
-        SysValid_interval = manager_df.iloc[4,17] # how often to run system validation
-        QC_Frequency = manager_df.iloc[5,17] # how often should QC blocks be added
+        Lib_placement = manager_df.iloc[3,18] # are lib runs before or after samples?
+        SysValid_interval = manager_df.iloc[4,18] # how often to run system validation
+        QC_Frequency = manager_df.iloc[5,18] # how often should QC blocks be added
         ### two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks ### FIX
-        even = user_df.iloc[31,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
-        experiment1 = user_df.iloc[34,35] # if not "All", which conditions belong to experiment 1
-        experiment2 = user_df.iloc[35,35] # which conditions belong to experiment 2 if any
-        lib_same = user_df.iloc[36,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
+        even = user_df.iloc[0,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+        experiment1 = user_df.iloc[3,35] # if not "All", which conditions belong to experiment 1
+        experiment2 = user_df.iloc[4,35] # which conditions belong to experiment 2 if any
+        lib_same = user_df.iloc[5,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
         ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
         return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, even, QC_Frequency
 
@@ -154,13 +159,18 @@ class ExcelParser:
                 conditions.append(self.condition_dict(manager_df, cond_range1))
                 conditions.append(self.condition_dict(manager_df, cond_range2))
         except Exception as e:
-            raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \
+            user_df, manager_df = self.read_excel_to_dfs()
+            nbcode, lc_number, wet_amounts, plates, num_to_run = self.separate_plates(user_df, manager_df)
+            lib_placement, sysvalid_interval, cond_range1, cond_range2, lib_same, even, qc_frequency = self.additional_info(user_df, manager_df)
+
+            raise ValueError(f"{e}: Experiment conditions cannot be run due to missing or invalid configuration." \
             "Verify that all required experiment fields are correctly filled in the Excel sheet." \
             "If there is only one experiment the library values should be the same.")
 
         sample_type = "Unknown"  # or "Sample", etc.
         blank_method = "Blank_Method"  # fill in with real method if needed
         inj_vol = 1  # injection volume in µL
+
 
         self.blocker_info = [user_df, manager_df, lc_number, conditions, wet_amounts, plates, num_to_run,
                              lib_placement, sysvalid_interval, cond_range1, cond_range2, lib_same, even, qc_frequency]

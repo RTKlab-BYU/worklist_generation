@@ -42,8 +42,9 @@ def generate_worklist(input_file, output_path=None):
         ms_pd, lc_pd, ms_filename, lc_filename = main.main(input_file)
 
         if output_path is None:
-                downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
-                output_path = os.path.join(downloads_folder, "worklist_output.xlsx")
+                # downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
+                # output_path = os.path.join(downloads_folder, "worklist_output.xlsx")
+                output_path = os.path.join(os.path.expanduser("~"), "Downloads")
         # create file paths 
         output1_path = os.path.join(output_path, ms_filename)
         output2_path = os.path.join(output_path, lc_filename)
