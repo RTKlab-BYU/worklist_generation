@@ -1,6 +1,6 @@
-from excel_parser import ExcelParser
-from blocker import Blocker
-from output import Output
+from worklist_classes.excel_parser import ExcelParser
+from worklist_classes.blocker import Blocker
+from worklist_classes.output import Output
 
 def main(input_filename):
     parser = ExcelParser(input_filename)

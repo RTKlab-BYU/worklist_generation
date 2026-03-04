@@ -61,16 +61,16 @@ def condition_dict(dataframe, cond_range=None):
 def separate_plates(user_df, manager_df):
     user_name = user_df.columns[1]
     nbcode = user_df.iloc[0,1]
-    if manager_df.iloc[0,17] == '1 column':
+    if manager_df.iloc[0,18] == '1 column':
         lc_column_number = 1
-    elif manager_df.iloc[0,17] == '2 column':
+    elif manager_df.iloc[0,18] == '2 column':
         lc_column_number = 2
     else:
         raise ValueError(
             f"System type must either be \"1 column\" or \"2 column\", but got {manager_df.iloc[0,18]}"
         )
-    plates = {}
-    for i in range(1,4): # plates 1-3
+    plates = {} # add fourth plate 1/15/2026
+    for i in range(1,5): # plates 1-4
         if i == 1:
             name_row = 4
             row_min = 3
@@ -80,6 +80,9 @@ def separate_plates(user_df, manager_df):
         elif i == 3:
             name_row = 40
             row_min = 39
+        elif i == 4:    # to add fourth plate
+            name_row = 58
+            row_min = 57
         name_values = user_df.iloc[name_row, [0, 1]]
         name = "_".join(str(x).strip() for x in name_values if pd.notna(x))
         plate = user_df.iloc[row_min:row_min+18, 3:28]
@@ -109,9 +112,9 @@ def separate_plates(user_df, manager_df):
 
     wet_amounts = {}
     for i in range(0, 50):
-        if pd.notna(manager_df.iloc[i, 1]):
-            cond_num = manager_df.iloc[i, 0]
-            well_amount = manager_df.iloc[i, 11]
+        if pd.notna(manager_df.iloc[i, 2]):
+            cond_num = manager_df.iloc[i, 1]
+            well_amount = manager_df.iloc[i, 12]
             try:
                 if well_amount is None or np.isnan(well_amount) or well_amount == '':
                     wet_amounts[int(cond_num)] = 1
@@ -123,9 +126,9 @@ def separate_plates(user_df, manager_df):
                 raise ValueError(f"Wet sample amount must be a whole number or blank. Check column 'Samples/well' for invalid entries.")
     num_to_run = {}
     for i in range(0, 50):
-        if pd.notna(manager_df.iloc[i, 1]):
-            cond_num = manager_df.iloc[i, 0]
-            amt_to_run = manager_df.iloc[i, 12]
+        if pd.notna(manager_df.iloc[i, 2]):
+            cond_num = manager_df.iloc[i, 1]
+            amt_to_run = manager_df.iloc[i, 13]
             if amt_to_run == 'all' or np.isnan(amt_to_run) or amt_to_run == '':
                 num_to_run[int(cond_num)] = 'all'
             else:
@@ -145,14 +148,15 @@ def validate_and_convert_spacing(lst, name):
     return converted
 
 def additional_info(user_df, manager_df):
-    Lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
-    SysValid_interval = manager_df.iloc[4,17] # how often to run system validation
-    QC_Frequency = manager_df.iloc[5,17] # how often should QC blocks be added
+    Lib_placement = manager_df.iloc[3,18] # are lib runs before or after samples?
+    SysValid_interval = manager_df.iloc[4,18] # how often to run system validation
+    QC_Frequency = manager_df.iloc[5,18] # how often should QC blocks be added
     ### two_xp_TB = dataframe.iloc[53,34] # indicates condition number for TrueBlanks ### FIX
-    even = user_df.iloc[31,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
-    experiment1 = user_df.iloc[34,35] # if not "All", which conditions belong to experiment 1
-    experiment2 = user_df.iloc[35,35] # which conditions belong to experiment 2 if any
-    lib_same = user_df.iloc[36,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
+    even = user_df.iloc[0,35] # -31 # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+    experiment1 = user_df.iloc[3,35] # if not "All", which conditions belong to experiment 1
+    raise ValueError(f"Experiment 1 value: {experiment1}")
+    experiment2 = user_df.iloc[4,35] # which conditions belong to experiment 2 if any
+    lib_same = user_df.iloc[5,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
     ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
     return Lib_placement, SysValid_interval, experiment1, experiment2, lib_same, even, QC_Frequency
 
@@ -1279,6 +1283,8 @@ def process(filepath):
 
     all_wells_flat = []
     two_xp_TB_location = []
+
+    raise ValueError (f'cond_range1: {cond_range1}, lib_same: {lib_same}')
 
     if cond_range1.upper() == "ALL" and lib_same.upper() == "YES": # one experiment, 1 or 2 column system
         conditions = condition_dict(manager_df)
