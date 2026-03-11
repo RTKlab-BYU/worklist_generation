@@ -706,8 +706,9 @@ class Blocker:
         else:  # default After
             return two_xp_flat_list + to_add
 
-    def insert_sysQC(self, flattened_list, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, full_conditions):
-        # Counter to return how many more System Validation wells should be added        
+    def insert_sysQC(self, flattened_list, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, full_conditions):
+        # Counter to return how many more System Validation wells should be added    
+        lc_number = self.lc_number    
         missing_SV = 0
         SysVal_copy = SysValid_list.copy()
         # TB well is also needed here for SysVal QC in the midst of library runs
@@ -779,8 +780,8 @@ class Blocker:
         conditions[100] = default_metadata  # assign default metadata to the TrueBlank condition
         return conditions
 
-    def extract_file_info(self, flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions):
-        flattened = self.insert_sysQC(flattened, SysValid_list, SysValid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
+    def extract_file_info(self, flattened, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, conditions):
+        flattened = self.insert_sysQC(flattened, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, conditions)
         well_conditions, block_runs, positions, reps, msmethods = [], [], [], [], []
         well_conditions.extend([int(w[0]) for w in flattened])
         block_runs.extend([w[2] for w in flattened])
@@ -817,8 +818,9 @@ class Blocker:
             # zipper to make flat list and add block labels
             flat_list = [w for b in non_flat_list for w in b]
 
-            conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
-            well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, self.lc_number, two_xp_TB, two_xp_TB_location, conditions)
+            if not found_TB:
+                conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
+            well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
 
         elif self.cond_range1.upper() != "ALL" and self.lc_number == 2: # two experiments, 2 column system
             lc_number = 1
@@ -857,11 +859,10 @@ class Blocker:
             two_xp_flat_list = self.two_xp_zipper(non_flat_list1, non_flat_list2, two_xp_TB, self.all_conditions, two_xp_TB_location)
             two_xp_flat_list = self.attach_lib_two_xp(two_xp_flat_list, separate_lib1, separate_lib2, two_xp_TB, two_xp_TB_location, self.lib_placement, self.lib_same)
 
-            lc_number = 2
             if not found_TB:
                 conditions = self.append_TB_condition(self.all_conditions, conditions1, conditions2, found_TB)
                 conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
-            well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, lc_number, two_xp_TB, two_xp_TB_location, conditions)
+            well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
 
         else:
             raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \

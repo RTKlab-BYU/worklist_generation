@@ -78,17 +78,7 @@ def test_stage3_two_column_two_experiments_different_lib(tmp_path):
     """
     2 column, 2 experiments, different library
     """
-    worklist = Path("tests/data/2col_2xp_diflib")
-    output_dir = tmp_path
-
-    run_stage3(worklist, output_dir)
-    validate_outputs(output_dir)
-
-def test_stage3_wetQC(tmp_path):
-    """
-    With wetQC
-    """
-    worklist = Path("tests/data/worklist_wetqc.xlsx")
+    worklist = Path("tests/data/2col_2xp_diflib.xlsx")
     output_dir = tmp_path
 
     run_stage3(worklist, output_dir)

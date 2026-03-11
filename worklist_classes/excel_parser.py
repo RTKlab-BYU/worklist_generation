@@ -19,16 +19,21 @@ class ExcelParser:
     def read_excel_to_dfs(self):
         try:
             filename = self.input_filename
-            user_df = pd.read_excel(filename, sheet_name="User")
-            manager_df = pd.read_excel(filename, sheet_name="Manager")
+            xl = pd.ExcelFile(filename)
+            missing = [s for s in ("User", "Manager") if s not in xl.sheet_names]
+            if missing:
+                raise ValueError(f"Missing required sheet(s): {', '.join(missing)}. "
+                                "The workbook must contain both a 'User' and 'Manager' sheet.")
+            user_df = pd.read_excel(xl, sheet_name="User")
+            manager_df = pd.read_excel(xl, sheet_name="Manager")
             return user_df, manager_df
+        except ValueError:
+            raise
         except FileNotFoundError:
-            raise ValueError(f"File '{filename}' not found. Please check that the file exists in the correct directory and has the expected extension.")
-        except ValueError as e:
-            raise ValueError(f"Invalid file format: {e}. Supported formats are .xlsx or .xls.")
+            raise ValueError(f"File '{filename}' not found. ...")
         except Exception as e:
-            raise ValueError(f"Unexpected error reading Excel file: {e}. Please ensure the file is not corrupted and is saved in a compatible Excel format.")
-
+            raise ValueError(f"Unexpected error reading Excel file: {e}. ...")
+    
     def condition_dict(self, dataframe, cond_range=None):
         conditions = {}
         if cond_range:
@@ -131,7 +136,7 @@ class ExcelParser:
                     try:
                         num_to_run[int(cond_num)] = int(amt_to_run)
                     except ValueError:
-                        raise ValueError("Number of samples to run must be either 'all' (no quotes), empyt, or a whole number.")
+                        raise ValueError("Number of samples to run must be either 'all' (no quotes), empty, or a whole number.")
         return nbcode, lc_column_number, wet_amounts, plates, num_to_run
     
     def check_plate_colors(self, plates):

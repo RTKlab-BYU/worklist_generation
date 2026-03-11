@@ -201,6 +201,7 @@ def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
 
 # Main
 def main():
+    print("hi")
     args = parse_args()
     validate_args(args)
 
