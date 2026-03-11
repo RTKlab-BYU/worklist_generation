@@ -34,7 +34,7 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 
 ---
 
-## Installation
+## Installation -- github.com
 1. Download the latest version from GitHub:
    - https://github.com/RTKlab-BYU/worklist_generation.git
 2. Click the green **"<> Code"** button → **Download ZIP**.
@@ -45,14 +45,29 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 
 ---
 
+## Installation -- Commandline
+1. Access your commandline through your preferred program such as Terminal (MacOS), PowerShell (Windows), or VSCode.
+2. Enter the following code:
+```bash
+git clone https://github.com/yourusername/worklist-generator.git
+cd worklist-generator
+pip install -r requirements.txt
+python3 app.py
+```
+---
+
 ## Quick Start
-1. **Create a blank Excel template**:
+1. **Generate metadata sheet**:
+   ```bash
+   python3 run.py
+   ```
+2. **Create a blank Excel template**:
    ```bash
    python3 commandline.py -t <template_name_optional>
    ```
    A template `.xlsx` file is saved to your **Downloads** folder.
-2. **Fill the template** using the instructions in [Template Procedure](#template-procedure).
-3. **Generate a worklist** from your completed template:
+3. **Fill the template** using the instructions in [Template Procedure](#template-procedure).
+4. **Generate a worklist** from your completed template:
    ```bash
    python3 commandline.py -r <path_to_template> <optional_output_folder>
    ```
@@ -62,20 +77,40 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 
 ## Command‑Line Usage
 
-### 1. Download the Excel Template
+### 1. Generate metadata sheet
+   ```bash
+   python run.py -s 1
+   ```
+- Metadata sheet is found in your **Downloads** folder.
+
+### 2. Download the Excel Template
 ```bash
-python3 commandline.py -t <template_name_optional>
+python run.py -s 2 -m <metadata_excel_path>
 ```
 - Creates a blank template in your **Downloads** folder.
 - If `<template_name_optional>` is provided, it will be used as the file name.
 
-### 2. Generate a Worklist from a Completed Template
+### 3. Generate a Worklist from a Completed Template
 ```bash
-python3 commandline.py -r <path_to_template> <optional_output_folder>
+python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
 ```
-- `<path_to_template>` can be copied via your file explorer (e.g., **Right‑click → Copy as path**). Example:
+- `<worklist_excel_path>` and '<output_dir>' can be copied via your file explorer (e.g., **Right‑click → Copy as path**). Example:
   - `C:\\Users\\myaccount\\Downloads\\mytemplate.xlsx`
-- If `<optional_output_folder>` is omitted, the worklist is saved to **Downloads**.
+<!-- - If `<optional_output_folder>` is omitted, the worklist is saved to **Downloads**. -->
+
+---
+
+## Metadata Procedure
+
+### DataEntry Page
+Use row 8 to add Group Names
+**Rows 10-19** should be filled out for each group. First enter data that is repeated accross groups. Then hit the gray button in column 1 to copy information to all the groups.
+**Rows 20-24** provide space for extra variables.
+Boxes can be left blank.
+**Rows 26-38** will be filled in the same pattern as 10-19 except that data about sample prep will be entered.
+**Rows 39-43** will be filled like 20-24.
+**Save** changes made to the sheet.
+**{Use command to enter sheet into programm}**
 
 ---
 
