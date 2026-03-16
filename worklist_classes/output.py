@@ -39,7 +39,7 @@ class Output:
                     TB_method = self.msmethods[index]
                     TB_method_found = True
         for _, row in df.iterrows():
-            joined = "_".join(str(x).strip() for x in row if pd.notna(x))
+            joined = "_".join(str(x).strip().replace(" ", "_") for x in row if pd.notna(x))
             filenames.append(joined)
         if TB_method_found == True:
             return filenames, TB_method
@@ -55,7 +55,7 @@ class Output:
                         methods[index] = "ChannelA_" + methods[index]
                     elif counter%2 == 1:
                         methods[index] = "ChannelB_" + methods[index]
-            inst_methods.append("\\".join([path, methods[index]]))
+            inst_methods.append("\\".join([path.strip(), methods[index].strip()]))
             counter+=1
         return inst_methods
 
@@ -70,13 +70,13 @@ class Output:
             if len(self.conditions[index]) < 10:
                 raise ValueError(f"Condition {index} is malformed: expected at least 10 fields, but got {len(self.conditions[index])}. Check the corresponding row in your Excel sheet for missing values.")
             if csv_file == 'MS':
-                data_paths.append(self.conditions[index][2])
-                method_paths.append(self.conditions[index][3])
-                method_names.append(self.conditions[index][5])
+                data_paths.append(self.conditions[index][2].strip())
+                method_paths.append(self.conditions[index][3].strip())
+                method_names.append(self.conditions[index][5].strip())
             elif csv_file == 'LC':
-                data_paths.append(self.conditions[index][6])
-                method_paths.append(self.conditions[index][7])
-                method_names.append(self.conditions[index][9])
+                data_paths.append(self.conditions[index][6].strip())
+                method_paths.append(self.conditions[index][7].strip())
+                method_names.append(self.conditions[index][9].strip())
         inst_methods = self.create_instrument_methods(method_paths, method_names, csv_file)
         # Offset for 2 column system
         if self.lc_number == 2:
