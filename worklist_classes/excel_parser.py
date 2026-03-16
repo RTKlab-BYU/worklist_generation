@@ -74,16 +74,10 @@ class ExcelParser:
                 f"System type must either be \"1 column\" or \"2 column\", but got {manager_df.iloc[0,18]}"
             )
         plates = {}
-        for i in range(1,4): # plates 1-3
-            if i == 1:
-                name_row = 4
-                row_min = 3
-            elif i == 2:
-                name_row = 22
-                row_min = 21
-            elif i == 3:
-                name_row = 40
-                row_min = 39
+        for i in [3, 21, 39]: # plates 1-3
+            row_min = i
+            name_row = i + 1
+
             name_values = user_df.iloc[name_row, [0, 1]]
             name = "_".join(str(x).strip() for x in name_values if pd.notna(x))
             plate = user_df.iloc[row_min:row_min+18, 3:28]
