@@ -9,6 +9,7 @@
 - [Command‑Line Usage](#command-line-usage)
   - [Download the Excel Template](#1-download-the-excel-template)
   - [Generate a Worklist from a Completed Template](#2-generate-a-worklist-from-a-completed-template)
+- [Metadata Procedure](#metadata-procedure)
 - [Template Procedure](#template-procedure)
   - [Experiment Page](#experiment-page--define-well-types--conditions)
   - [Fill Out Plates](#fill-out-plates)
