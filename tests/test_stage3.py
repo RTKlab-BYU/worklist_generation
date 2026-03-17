@@ -78,17 +78,27 @@ def test_stage3_two_column_two_experiments_different_lib(tmp_path):
     """
     2 column, 2 experiments, different library
     """
-    worklist = Path("tests/data/2col_2xp_diflib")
+    worklist = Path("tests/data/2col_2xp_diflib.xlsx")
     output_dir = tmp_path
 
     run_stage3(worklist, output_dir)
     validate_outputs(output_dir)
 
-def test_stage3_wetQC(tmp_path):
+def test_stage3_mock_b_and_t_exp(tmp_path):
     """
-    With wetQC
+    1 column, 1 experiment, full mock B and T cell template from the paper
     """
-    worklist = Path("tests/data/worklist_wetqc.xlsx")
+    worklist = Path("tests/data/mock_b_and_t_cells_exp.xlsx")
+    output_dir = tmp_path
+
+    run_stage3(worklist, output_dir)
+    validate_outputs(output_dir)
+
+def test_stage3_drug_treatment_exp(tmp_path):
+    """
+    1 column, 1 experiment, full mock drug treament template
+    """
+    worklist = Path("tests/data/mock_drug_treatment_exp.xlsx")
     output_dir = tmp_path
 
     run_stage3(worklist, output_dir)

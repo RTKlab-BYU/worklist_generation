@@ -1,4 +1,5 @@
 from openpyxl.styles import Border, Side, Font, Protection
+import re
 
 from metadata_capture.excel_utils.excel_utils import copy_template_with_datetime
 from metadata_capture.project_dataclasses.project_outline import ProjectOutline
@@ -17,7 +18,8 @@ class ExcelFileGenerator(ABC):
         self.ws = self.wb["DataEntry"]
 
     def _make_copy(self) -> str:
-        return copy_template_with_datetime(filename=self.source_file, new_name=self.project_outline.name)
+        safe_name = re.sub(r'[^\w\-.]', '_', self.project_outline.name)
+        return copy_template_with_datetime(filename=self.source_file, new_name=safe_name)
 
     def generate_file(self) -> str:
         self.ws.cell(row=1, column=1).value = self.project_outline.name

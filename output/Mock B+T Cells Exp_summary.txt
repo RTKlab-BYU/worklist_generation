@@ -1,0 +1,125 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 21
+Name: Mock B+T Cells Exp
+Description: The mock experiment from the paper, with parameters as outlined in the paper
+Created: 2026-03-14 18:11:56
+Independent Variables:
+  SAMPLE IDENTIFICATION
+    Sex
+    Disease State
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### P1B
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Male
+    Age: 30
+    Disease State: Healthy
+
+
+### P1T
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Male
+    Age: 30
+    Disease State: Healthy
+
+
+### P2B
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Male
+    Age: 30
+    Disease State: Diseased
+
+
+### P2T
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Male
+    Age: 30
+    Disease State: Diseased
+
+
+### P3B
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Male
+    Age: 30
+    Disease State: Healthy
+
+
+### P3T
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Male
+    Age: 30
+    Disease State: Healthy
+
+
+### P4B
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Female
+    Age: 30
+    Disease State: Diseased
+
+
+### P4T
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Female
+    Age: 30
+    Disease State: Diseased
+
+
+### P5B
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Female
+    Age: 30
+    Disease State: Healthy
+
+
+### P5T
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Female
+    Age: 30
+    Disease State: Healthy
+
+
+### P6B
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Female
+    Age: 30
+    Disease State: Diseased
+
+
+### P6T
+
+  [SAMPLE IDENTIFICATION]
+    Species: Human
+    Sex: Female
+    Age: 30
+    Disease State: Diseased
+
