@@ -214,7 +214,7 @@ def test_column_sorter_splits_non_samples_and_applies_num_to_run():
     assert sample_ids.count(1) == 2
     assert sample_ids.count(2) == 2
     assert len(sysvalid_list) == 2
-    assert any(group == [[5, "R5"]] * 5 for group in nonsample_before)
+    assert any(group == [[5, "R5"]] * 3 for group in nonsample_before)
 
 
 def test_blocker_builds_blocks_for_one_column():
@@ -235,7 +235,7 @@ def test_nonsample_blocker_one_column_splits_evenly():
     blocker = make_blocker(all_conditions=conditions, even="YES")
     nonsample_other = [[3, "RA1"], [3, "RA2"], [4, "RB1"], [4, "RB2"]]
 
-    blocks = blocker.nonsample_blocker(1, nonsample_other, num_of_blocks=2, conditions=conditions)
+    blocks = blocker.nonsample_blocker(1, nonsample_other, num_of_blocks=2, conditions=conditions, total_wells=100)
 
     assert len(blocks) == 2
     assert all(len(b) == 2 for b in blocks)
@@ -247,7 +247,7 @@ def test_nonsample_blocker_two_column_singleton_can_trigger_divide_by_zero():
     nonsample_other = [[3, "RA1"]]
 
     with pytest.raises(ZeroDivisionError):
-        blocker.nonsample_blocker(2, nonsample_other, num_of_blocks=1, conditions=conditions)
+        blocker.nonsample_blocker(2, nonsample_other, num_of_blocks=1, conditions=conditions, total_wells=100)
 
 
 def test_zipper_interleaves_two_columns():

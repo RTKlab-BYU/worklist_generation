@@ -1,602 +1,602 @@
 ﻿Bracket Type=4,,,,,
 Sample Type,File Name,Path,Instrument Method,Position,Inj Vol
-Unknown,Test 1_Preblank1,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD22,1
-Unknown,Test 1_Preblank2,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE21,1
-Unknown,Test 1_sysval_SysQC_RD22_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN9,1
-Unknown,Test 1_sysval_SysQC_RE21_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN9_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO16,1
-Unknown,Test 1_TrueBlank_pre_R5_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO16_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO13,1
-Unknown,Test 1_TrueBlank_pre_R5_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO13_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO18,1
-Unknown,Test 1_TrueBlank_pre_R5_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO18_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO14,1
-Unknown,Test 1_TrueBlank_pre_R5_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO14_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN22,1
-Unknown,Test 1_TrueBlank_pre_R5_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN22_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO11,1
-Unknown,Test 1_TrueBlank_pre_R5_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO11_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO17,1
-Unknown,Test 1_TrueBlank_pre_R5_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO17_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN6,1
-Unknown,Test 1_TrueBlank_pre_R5_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN6_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN14,1
-Unknown,Test 1_TrueBlank_pre_R5_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN14_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_other_R5_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF5,1
-Unknown,Test 1_TrueBlank_other_R5_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB22,1
-Unknown,Test 1_sysval_SysQC_RF5_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN15,1
-Unknown,Test 1_sysval_SysQC_RB22_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN15_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO9,1
-Unknown,Test 1_TrueBlank_pre_R5_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO9_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO2,1
-Unknown,Test 1_TrueBlank_pre_R5_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO2_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN12,1
-Unknown,Test 1_TrueBlank_pre_R5_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN12_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN11,1
-Unknown,Test 1_TrueBlank_pre_R5_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN11_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO7,1
-Unknown,Test 1_TrueBlank_pre_R5_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO7_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN10,1
-Unknown,Test 1_TrueBlank_pre_R5_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN10_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN3,1
-Unknown,Test 1_TrueBlank_pre_R5_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN3_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN23,1
-Unknown,Test 1_TrueBlank_pre_R5_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN23_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO19,1
-Unknown,Test 1_TrueBlank_pre_R5_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO19_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_other_R5_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC18,1
-Unknown,Test 1_TrueBlank_other_R5_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF22,1
-Unknown,Test 1_sysval_SysQC_RC18_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO10,1
-Unknown,Test 1_sysval_SysQC_RF22_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO10_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN16,1
-Unknown,Test 1_TrueBlank_pre_R5_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN16_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN5_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN21,1
-Unknown,Test 1_TrueBlank_pre_R5_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN21_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN8,1
-Unknown,Test 1_TrueBlank_pre_R5_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN8_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO22,1
-Unknown,Test 1_TrueBlank_pre_R5_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO22_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO3,1
-Unknown,Test 1_TrueBlank_pre_R5_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO3_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO23,1
-Unknown,Test 1_TrueBlank_pre_R5_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO23_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO20,1
-Unknown,Test 1_TrueBlank_pre_R5_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO20_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN18,1
-Unknown,Test 1_TrueBlank_pre_R5_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN18_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_other_R5_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE7,1
-Unknown,Test 1_TrueBlank_other_R5_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG14,1
-Unknown,Test 1_sysval_SysQC_RE7_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO15,1
-Unknown,Test 1_sysval_SysQC_RG14_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO15_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO8,1
-Unknown,Test 1_TrueBlank_pre_R5_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO8_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO12,1
-Unknown,Test 1_TrueBlank_pre_R5_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO12_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN17,1
-Unknown,Test 1_TrueBlank_pre_R5_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN17_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO6,1
-Unknown,Test 1_TrueBlank_pre_R5_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO6_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN20,1
-Unknown,Test 1_TrueBlank_pre_R5_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN20_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO4,1
-Unknown,Test 1_TrueBlank_pre_R5_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO4_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN19,1
-Unknown,Test 1_TrueBlank_pre_R5_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN19_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO21,1
-Unknown,Test 1_TrueBlank_pre_R5_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO21_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN2,1
-Unknown,Test 1_TrueBlank_pre_R5_rep45_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN2_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep46_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_other_R5_rep47_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC7,1
-Unknown,Test 1_TrueBlank_other_R5_rep48_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF7,1
-Unknown,Test 1_sysval_SysQC_RC7_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN13,1
-Unknown,Test 1_sysval_SysQC_RF7_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN13_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN4,1
-Unknown,Test 1_TrueBlank_pre_R5_rep49_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN4_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep50_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GO5_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN7,1
-Unknown,Test 1_TrueBlank_pre_R5_rep51_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_lib_Lib2_GN7_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep52_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep53_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep54_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep55_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep56_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep57_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep58_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep59_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep60_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
-Unknown,Test 1_TrueBlank_pre_R5_rep61_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH9,1
-Unknown,Test 1_TrueBlank_pre_R5_rep62_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI6,1
-Unknown,Test 1_qc1_pre_BH9_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE15,1
-Unknown,Test 1_QC2_pre_GI6_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF17,1
-Unknown,Test 1_sysval_SysQC_RE15_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH19,1
-Unknown,Test 1_sysval_SysQC_RF17_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH5,1
-Unknown,Test 1_qc1_pre_BH19_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK19,1
-Unknown,Test 1_QC2_pre_GH5_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM21,1
-Unknown,Test 1_dm1_pre_BK19_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ9,1
-Unknown,Test 1_DM2_pre_GM21_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ13,1
-Unknown,Test 1_dm1_pre_BJ9_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG10,1
-Unknown,Test 1_DM2_pre_GJ13_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN13,1
-Unknown,Test 1_condC_blo1_BG10_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE7,1
-Unknown,Test 1_CONDE_blo1_BN13_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB20,1
-Unknown,Test 1_condB_blo1_BE7_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB9,1
-Unknown,Test 1_CONDF_blo1_GB20_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC7,1
-Unknown,Test 1_condA_blo1_BB9_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE8,1
-Unknown,Test 1_CONDF_blo1_GC7_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM17,1
-Unknown,Test 1_condB_blo2_BE8_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC20,1
-Unknown,Test 1_CONDD_blo1_BM17_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC14,1
-Unknown,Test 1_condA_blo2_BC20_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG23,1
-Unknown,Test 1_CONDF_blo2_GC14_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE23,1
-Unknown,Test 1_condC_blo2_BG23_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB10,1
-Unknown,Test 1_CONDF_blo2_GE23_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL23,1
-Unknown,Test 1_condA_blo3_BB10_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD20,1
-Unknown,Test 1_CONDD_blo2_BL23_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC22,1
-Unknown,Test 1_sysval_SysQC_RD20_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE5,1
-Unknown,Test 1_sysval_SysQC_RC22_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO13,1
-Unknown,Test 1_condB_blo3_BE5_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF18,1
-Unknown,Test 1_CONDE_blo2_BO13_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN10,1
-Unknown,Test 1_condC_blo3_BF18_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB2,1
-Unknown,Test 1_CONDE_blo3_BN10_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE13,1
-Unknown,Test 1_condA_blo4_BB2_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH3,1
-Unknown,Test 1_CONDF_blo3_GE13_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH11,1
-Unknown,Test 1_qc1_other_BH3_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK18,1
-Unknown,Test 1_QC2_other_GH11_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL17,1
-Unknown,Test 1_dm1_other_BK18_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF21,1
-Unknown,Test 1_DM2_other_GL17_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB19,1
-Unknown,Test 1_condC_blo4_BF21_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE3,1
-Unknown,Test 1_CONDF_blo3_GB19_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL14,1
-Unknown,Test 1_condB_blo4_BE3_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC12,1
-Unknown,Test 1_CONDD_blo3_BL14_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM8,1
-Unknown,Test 1_condA_blo5_BC12_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF14,1
-Unknown,Test 1_CONDD_blo4_BM8_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB3,1
-Unknown,Test 1_condC_blo5_BF14_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE15,1
-Unknown,Test 1_CONDF_blo4_GB3_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN8,1
-Unknown,Test 1_condB_blo5_BE15_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB6,1
-Unknown,Test 1_CONDE_blo4_BN8_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF23,1
-Unknown,Test 1_sysval_SysQC_RB6_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD19,1
-Unknown,Test 1_sysval_SysQC_RF23_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB23,1
-Unknown,Test 1_condB_blo6_BD19_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB11,1
-Unknown,Test 1_CONDF_blo4_GB23_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE15,1
-Unknown,Test 1_condA_blo6_BB11_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF9,1
-Unknown,Test 1_CONDF_blo5_GE15_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM16,1
-Unknown,Test 1_condC_blo6_BF9_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG7,1
-Unknown,Test 1_CONDD_blo5_BM16_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB7,1
-Unknown,Test 1_condC_blo7_BG7_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD20,1
-Unknown,Test 1_CONDF_blo5_GB7_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN11,1
-Unknown,Test 1_condB_blo7_BD20_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH16,1
-Unknown,Test 1_CONDE_blo5_BN11_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI11,1
-Unknown,Test 1_qc1_other_BH16_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ6,1
-Unknown,Test 1_QC2_other_GI11_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL22,1
-Unknown,Test 1_dm1_other_BJ6_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB17,1
-Unknown,Test 1_DM2_other_GL22_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD12,1
-Unknown,Test 1_condA_blo7_BB17_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG9,1
-Unknown,Test 1_CONDF_blo6_GD12_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC21,1
-Unknown,Test 1_condC_blo8_BG9_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD15,1
-Unknown,Test 1_CONDF_blo6_GC21_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO10,1
-Unknown,Test 1_condB_blo8_BD15_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF6,1
-Unknown,Test 1_CONDE_blo6_BO10_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD17,1
-Unknown,Test 1_sysval_SysQC_RF6_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC23,1
-Unknown,Test 1_sysval_SysQC_RD17_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL10,1
-Unknown,Test 1_condA_blo8_BC23_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE20,1
-Unknown,Test 1_CONDD_blo6_BL10_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE20,1
-Unknown,Test 1_condB_blo9_BE20_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF5,1
-Unknown,Test 1_CONDF_blo7_GE20_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL7,1
-Unknown,Test 1_condC_blo9_BF5_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB22,1
-Unknown,Test 1_CONDD_blo7_BL7_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN19,1
-Unknown,Test 1_condA_blo9_BB22_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD13,1
-Unknown,Test 1_CONDE_blo7_BN19_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD6,1
-Unknown,Test 1_condB_blo10_BD13_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF11,1
-Unknown,Test 1_CONDF_blo7_GD6_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM4,1
-Unknown,Test 1_condC_blo10_BF11_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB4,1
-Unknown,Test 1_CONDD_blo8_BM4_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN7,1
-Unknown,Test 1_condA_blo10_BB4_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH5,1
-Unknown,Test 1_CONDE_blo8_BN7_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF14,1
-Unknown,Test 1_qc1_other_BH5_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ10,1
-Unknown,Test 1_QC2_other_GF14_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ10,1
-Unknown,Test 1_dm1_other_BJ10_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE4,1
-Unknown,Test 1_DM2_other_GJ10_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE12,1
-Unknown,Test 1_condB_blo11_BE4_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE20,1
-Unknown,Test 1_CONDF_blo8_GE12_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD23,1
-Unknown,Test 1_sysval_SysQC_RE20_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG3,1
-Unknown,Test 1_sysval_SysQC_RD23_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE8,1
-Unknown,Test 1_condC_blo11_BG3_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB18,1
-Unknown,Test 1_CONDF_blo8_GE8_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM6,1
-Unknown,Test 1_condA_blo11_BB18_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC7,1
-Unknown,Test 1_CONDD_blo9_BM6_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE7,1
-Unknown,Test 1_condA_blo12_BC7_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD23,1
-Unknown,Test 1_CONDF_blo9_GE7_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN12,1
-Unknown,Test 1_condB_blo12_BD23_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF20,1
-Unknown,Test 1_CONDE_blo9_BN12_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB21,1
-Unknown,Test 1_condC_blo12_BF20_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB16,1
-Unknown,Test 1_CONDF_blo9_GB21_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO11,1
-Unknown,Test 1_condA_blo13_BB16_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE18,1
-Unknown,Test 1_CONDE_blo10_BO11_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD13,1
-Unknown,Test 1_condB_blo13_BE18_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF3,1
-Unknown,Test 1_CONDF_blo10_GD13_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM21,1
-Unknown,Test 1_condC_blo13_BF3_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC19,1
-Unknown,Test 1_CONDD_blo10_BM21_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB17,1
-Unknown,Test 1_condA_blo14_BC19_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI14,1
-Unknown,Test 1_CONDF_blo10_GB17_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH19,1
-Unknown,Test 1_qc1_other_BI14_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE16,1
-Unknown,Test 1_QC2_other_GH19_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD16,1
-Unknown,Test 1_sysval_SysQC_RE16_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK20,1
-Unknown,Test 1_sysval_SysQC_RD16_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM13,1
-Unknown,Test 1_dm1_other_BK20_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD4,1
-Unknown,Test 1_DM2_other_GM13_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC11,1
-Unknown,Test 1_condB_blo14_BD4_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF22,1
-Unknown,Test 1_CONDF_blo11_GC11_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD5,1
-Unknown,Test 1_condC_blo14_BF22_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD12,1
-Unknown,Test 1_CONDF_blo11_GD5_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO12,1
-Unknown,Test 1_condB_blo15_BD12_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB23,1
-Unknown,Test 1_CONDE_blo11_BO12_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM14,1
-Unknown,Test 1_condA_blo15_BB23_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG22,1
-Unknown,Test 1_CONDD_blo11_BM14_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD10,1
-Unknown,Test 1_condC_blo15_BG22_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB21,1
-Unknown,Test 1_CONDF_blo12_GD10_rep23_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM22,1
-Unknown,Test 1_condA_blo16_BB21_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD18,1
-Unknown,Test 1_CONDD_blo12_BM22_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO21,1
-Unknown,Test 1_condB_blo16_BD18_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG4,1
-Unknown,Test 1_CONDE_blo12_BO21_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB6,1
-Unknown,Test 1_condC_blo16_BG4_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF6,1
-Unknown,Test 1_CONDF_blo12_GB6_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN3,1
-Unknown,Test 1_condC_blo17_BF6_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE3,1
-Unknown,Test 1_CONDE_blo13_BN3_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG21,1
-Unknown,Test 1_sysval_SysQC_RE3_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB12,1
-Unknown,Test 1_sysval_SysQC_RG21_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL4,1
-Unknown,Test 1_condA_blo17_BB12_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI2,1
-Unknown,Test 1_CONDD_blo13_BL4_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF7,1
-Unknown,Test 1_qc1_other_BI2_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ20,1
-Unknown,Test 1_QC2_other_GF7_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK9,1
-Unknown,Test 1_dm1_other_BJ20_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE11,1
-Unknown,Test 1_DM2_other_GK9_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE17,1
-Unknown,Test 1_condB_blo17_BE11_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD5,1
-Unknown,Test 1_CONDF_blo13_GE17_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE9,1
-Unknown,Test 1_condB_blo18_BD5_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG17,1
-Unknown,Test 1_CONDF_blo13_GE9_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM5,1
-Unknown,Test 1_condC_blo18_BG17_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC5,1
-Unknown,Test 1_CONDD_blo14_BM5_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC2,1
-Unknown,Test 1_condA_blo18_BC5_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE17,1
-Unknown,Test 1_CONDF_blo14_GC2_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC5,1
-Unknown,Test 1_condB_blo19_BE17_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF19,1
-Unknown,Test 1_CONDF_blo14_GC5_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO4,1
-Unknown,Test 1_condC_blo19_BF19_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC14,1
-Unknown,Test 1_CONDE_blo14_BO4_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO14,1
-Unknown,Test 1_condA_blo19_BC14_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD15,1
-Unknown,Test 1_CONDE_blo15_BO14_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB20,1
-Unknown,Test 1_sysval_SysQC_RD15_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE2,1
-Unknown,Test 1_sysval_SysQC_RB20_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC3,1
-Unknown,Test 1_condB_blo20_BE2_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG18,1
-Unknown,Test 1_CONDF_blo15_GC3_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD14,1
-Unknown,Test 1_condC_blo20_BG18_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC21,1
-Unknown,Test 1_CONDF_blo15_GD14_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL12,1
-Unknown,Test 1_condA_blo20_BC21_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI9,1
-Unknown,Test 1_CONDD_blo15_BL12_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI8,1
-Unknown,Test 1_qc1_other_BI9_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK13,1
-Unknown,Test 1_QC2_other_GI8_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK14,1
-Unknown,Test 1_dm1_other_BK13_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE9,1
-Unknown,Test 1_DM2_other_GK14_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO16,1
-Unknown,Test 1_condB_blo21_BE9_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG19,1
-Unknown,Test 1_CONDE_blo16_BO16_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD16,1
-Unknown,Test 1_condC_blo21_BG19_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC22,1
-Unknown,Test 1_CONDF_blo16_GD16_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB10,1
-Unknown,Test 1_condA_blo21_BC22_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF13,1
-Unknown,Test 1_CONDF_blo16_GB10_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM11,1
-Unknown,Test 1_condC_blo22_BF13_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB6,1
-Unknown,Test 1_CONDD_blo16_BM11_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO2,1
-Unknown,Test 1_condA_blo22_BB6_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RG2,1
-Unknown,Test 1_CONDE_blo17_BO2_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC20,1
-Unknown,Test 1_sysval_SysQC_RG2_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE12,1
-Unknown,Test 1_sysval_SysQC_RC20_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD23,1
-Unknown,Test 1_condB_blo22_BE12_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE10,1
-Unknown,Test 1_CONDF_blo17_GD23_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE6,1
-Unknown,Test 1_condB_blo23_BE10_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB7,1
-Unknown,Test 1_CONDF_blo17_GE6_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL13,1
-Unknown,Test 1_condA_blo23_BB7_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF10,1
-Unknown,Test 1_CONDD_blo17_BL13_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD4,1
-Unknown,Test 1_condC_blo23_BF10_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD2,1
-Unknown,Test 1_CONDF_blo18_GD4_rep35_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD19,1
-Unknown,Test 1_condB_blo24_BD2_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH4,1
-Unknown,Test 1_CONDF_blo18_GD19_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI15,1
-Unknown,Test 1_qc1_other_BH4_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ5,1
-Unknown,Test 1_QC2_other_GI15_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ16,1
-Unknown,Test 1_dm1_other_BJ5_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB13,1
-Unknown,Test 1_DM2_other_GJ16_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN5,1
-Unknown,Test 1_condA_blo24_BB13_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG15,1
-Unknown,Test 1_CONDE_blo18_BN5_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL19,1
-Unknown,Test 1_condC_blo24_BG15_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB8,1
-Unknown,Test 1_CONDD_blo18_BL19_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE18,1
-Unknown,Test 1_condA_blo25_BB8_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE9,1
-Unknown,Test 1_CONDF_blo19_GE18_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB7,1
-Unknown,Test 1_sysval_SysQC_RE9_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE16,1
-Unknown,Test 1_sysval_SysQC_RB7_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL6,1
-Unknown,Test 1_condB_blo25_BE16_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG16,1
-Unknown,Test 1_CONDD_blo19_BL6_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE21,1
-Unknown,Test 1_condC_blo25_BG16_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE22,1
-Unknown,Test 1_CONDF_blo19_GE21_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO5,1
-Unknown,Test 1_condB_blo26_BE22_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC6,1
-Unknown,Test 1_CONDE_blo19_BO5_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN23,1
-Unknown,Test 1_condA_blo26_BC6_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG2,1
-Unknown,Test 1_CONDE_blo20_BN23_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE2,1
-Unknown,Test 1_condC_blo26_BG2_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB20,1
-Unknown,Test 1_CONDF_blo20_GE2_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC15,1
-Unknown,Test 1_condA_blo27_BB20_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE23,1
-Unknown,Test 1_CONDF_blo20_GC15_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM7,1
-Unknown,Test 1_condB_blo27_BE23_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI16,1
-Unknown,Test 1_CONDD_blo20_BM7_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI7,1
-Unknown,Test 1_qc1_other_BI16_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK5,1
-Unknown,Test 1_QC2_other_GI7_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK7,1
-Unknown,Test 1_dm1_other_BK5_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG6,1
-Unknown,Test 1_DM2_other_GK7_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE10,1
-Unknown,Test 1_condC_blo27_BG6_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD21,1
-Unknown,Test 1_CONDF_blo21_GE10_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF10,1
-Unknown,Test 1_sysval_SysQC_RD21_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC18,1
-Unknown,Test 1_sysval_SysQC_RF10_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO9,1
-Unknown,Test 1_condA_blo28_BC18_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF17,1
-Unknown,Test 1_CONDE_blo21_BO9_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL17,1
-Unknown,Test 1_condC_blo28_BF17_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE21,1
-Unknown,Test 1_CONDD_blo21_BL17_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD8,1
-Unknown,Test 1_condB_blo28_BE21_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC3,1
-Unknown,Test 1_CONDF_blo21_GD8_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC16,1
-Unknown,Test 1_condA_blo29_BC3_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD17,1
-Unknown,Test 1_CONDF_blo22_GC16_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC19,1
-Unknown,Test 1_condB_blo29_BD17_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF12,1
-Unknown,Test 1_CONDF_blo22_GC19_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM2,1
-Unknown,Test 1_condC_blo29_BF12_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF8,1
-Unknown,Test 1_CONDD_blo22_BM2_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN20,1
-Unknown,Test 1_condC_blo30_BF8_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC10,1
-Unknown,Test 1_CONDE_blo22_BN20_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE5,1
-Unknown,Test 1_condA_blo30_BC10_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE6,1
-Unknown,Test 1_CONDF_blo23_GE5_rep45_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC13,1
-Unknown,Test 1_condB_blo30_BE6_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI15,1
-Unknown,Test 1_CONDF_blo23_GC13_rep46_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH8,1
-Unknown,Test 1_qc1_other_BI15_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RG15,1
-Unknown,Test 1_QC2_other_GH8_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD18,1
-Unknown,Test 1_sysval_SysQC_RG15_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ7,1
-Unknown,Test 1_sysval_SysQC_RD18_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM4,1
-Unknown,Test 1_dm1_other_BJ7_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD7,1
-Unknown,Test 1_DM2_other_GM4_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO17,1
-Unknown,Test 1_condB_blo31_BD7_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG14,1
-Unknown,Test 1_CONDE_blo23_BO17_rep23_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL18,1
-Unknown,Test 1_condC_blo31_BG14_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC15,1
-Unknown,Test 1_CONDD_blo23_BL18_rep23_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD7,1
-Unknown,Test 1_condA_blo31_BC15_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC11,1
-Unknown,Test 1_CONDF_blo24_GD7_rep47_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN16,1
-Unknown,Test 1_condA_blo32_BC11_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF4,1
-Unknown,Test 1_CONDE_blo24_BN16_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM23,1
-Unknown,Test 1_condC_blo32_BF4_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD8,1
-Unknown,Test 1_CONDD_blo24_BM23_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE11,1
-Unknown,Test 1_condB_blo32_BD8_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB15,1
-Unknown,Test 1_CONDF_blo24_GE11_rep48_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD22,1
-Unknown,Test 1_condA_blo33_BB15_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE19,1
-Unknown,Test 1_CONDF_blo25_GD22_rep49_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN2,1
-Unknown,Test 1_condB_blo33_BE19_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG5,1
-Unknown,Test 1_CONDE_blo25_BN2_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL8,1
-Unknown,Test 1_condC_blo33_BG5_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD5,1
-Unknown,Test 1_CONDD_blo25_BL8_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG16,1
-Unknown,Test 1_sysval_SysQC_RD5_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD3,1
-Unknown,Test 1_sysval_SysQC_RG16_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE19,1
-Unknown,Test 1_condB_blo34_BD3_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH10,1
-Unknown,Test 1_CONDF_blo25_GE19_rep50_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI16,1
-Unknown,Test 1_qc1_other_BH10_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ15,1
-Unknown,Test 1_QC2_other_GI16_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM22,1
-Unknown,Test 1_dm1_other_BJ15_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC17,1
-Unknown,Test 1_DM2_other_GM22_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN17,1
-Unknown,Test 1_condA_blo34_BC17_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF2,1
-Unknown,Test 1_CONDE_blo26_BN17_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB11,1
-Unknown,Test 1_condC_blo34_BF2_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG11,1
-Unknown,Test 1_CONDF_blo26_GB11_rep51_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM15,1
-Unknown,Test 1_condC_blo35_BG11_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD6,1
-Unknown,Test 1_CONDD_blo26_BM15_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB2,1
-Unknown,Test 1_condB_blo35_BD6_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC8,1
-Unknown,Test 1_CONDF_blo26_GB2_rep52_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL5,1
-Unknown,Test 1_condA_blo35_BC8_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG12,1
-Unknown,Test 1_CONDD_blo27_BL5_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD15,1
-Unknown,Test 1_condC_blo36_BG12_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC9,1
-Unknown,Test 1_CONDF_blo27_GD15_rep53_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB22,1
-Unknown,Test 1_condA_blo36_BC9_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF9,1
-Unknown,Test 1_CONDF_blo27_GB22_rep54_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG13,1
-Unknown,Test 1_sysval_SysQC_RF9_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD9,1
-Unknown,Test 1_sysval_SysQC_RG13_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN18,1
-Unknown,Test 1_condB_blo36_BD9_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD11,1
-Unknown,Test 1_CONDE_blo27_BN18_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO15,1
-Unknown,Test 1_condB_blo37_BD11_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB5,1
-Unknown,Test 1_CONDE_blo28_BO15_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE22,1
-Unknown,Test 1_condA_blo37_BB5_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH6,1
-Unknown,Test 1_CONDF_blo28_GE22_rep55_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF21,1
-Unknown,Test 1_qc1_other_BH6_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK2,1
-Unknown,Test 1_QC2_other_GF21_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK10,1
-Unknown,Test 1_dm1_other_BK2_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG21,1
-Unknown,Test 1_DM2_other_GK10_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM9,1
-Unknown,Test 1_condC_blo37_BG21_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF16,1
-Unknown,Test 1_CONDD_blo28_BM9_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD9,1
-Unknown,Test 1_condC_blo38_BF16_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC16,1
-Unknown,Test 1_CONDF_blo28_GD9_rep56_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE3,1
-Unknown,Test 1_condA_blo38_BC16_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD14,1
-Unknown,Test 1_CONDF_blo29_GE3_rep57_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL20,1
-Unknown,Test 1_condB_blo38_BD14_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE13,1
-Unknown,Test 1_CONDD_blo29_BL20_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB15,1
-Unknown,Test 1_condB_blo39_BE13_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE22,1
-Unknown,Test 1_CONDF_blo29_GB15_rep58_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF8,1
-Unknown,Test 1_sysval_SysQC_RE22_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB3,1
-Unknown,Test 1_sysval_SysQC_RF8_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO22,1
-Unknown,Test 1_condA_blo39_BB3_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF7,1
-Unknown,Test 1_CONDE_blo29_BO22_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM18,1
-Unknown,Test 1_condC_blo39_BF7_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG13,1
-Unknown,Test 1_CONDD_blo30_BM18_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB14,1
-Unknown,Test 1_condC_blo40_BG13_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD10,1
-Unknown,Test 1_CONDF_blo30_GB14_rep59_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN14,1
-Unknown,Test 1_condB_blo40_BD10_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC13,1
-Unknown,Test 1_CONDE_blo30_BN14_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD2,1
-Unknown,Test 1_condA_blo40_BC13_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH11,1
-Unknown,Test 1_CONDF_blo30_GD2_rep60_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF19,1
-Unknown,Test 1_qc1_other_BH11_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK16,1
-Unknown,Test 1_QC2_other_GF19_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ21,1
-Unknown,Test 1_dm1_other_BK16_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB14,1
-Unknown,Test 1_DM2_other_GJ21_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB12,1
-Unknown,Test 1_condA_blo41_BB14_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF15,1
-Unknown,Test 1_CONDF_blo31_GB12_rep61_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO23,1
-Unknown,Test 1_condC_blo41_BF15_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD21,1
-Unknown,Test 1_CONDE_blo31_BO23_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC6,1
-Unknown,Test 1_condB_blo41_BD21_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB16,1
-Unknown,Test 1_CONDF_blo31_GC6_rep62_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC15,1
-Unknown,Test 1_sysval_SysQC_RB16_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB19,1
-Unknown,Test 1_sysval_SysQC_RC15_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL16,1
-Unknown,Test 1_condA_blo42_BB19_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD22,1
-Unknown,Test 1_CONDD_blo31_BL16_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD18,1
-Unknown,Test 1_condB_blo42_BD22_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG8,1
-Unknown,Test 1_CONDF_blo32_GD18_rep63_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO3,1
-Unknown,Test 1_condC_blo42_BG8_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC2,1
-Unknown,Test 1_CONDE_blo32_BO3_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM3,1
-Unknown,Test 1_condA_blo43_BC2_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF23,1
-Unknown,Test 1_CONDD_blo32_BM3_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC4,1
-Unknown,Test 1_condC_blo43_BF23_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE14,1
-Unknown,Test 1_CONDF_blo32_GC4_rep64_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD3,1
-Unknown,Test 1_condB_blo43_BE14_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD16,1
-Unknown,Test 1_CONDF_blo33_GD3_rep65_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB13,1
-Unknown,Test 1_condB_blo44_BD16_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI11,1
-Unknown,Test 1_CONDF_blo33_GB13_rep66_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI10,1
-Unknown,Test 1_qc1_other_BI11_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK10,1
-Unknown,Test 1_QC2_other_GI10_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL20,1
-Unknown,Test 1_dm1_other_BK10_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG20,1
-Unknown,Test 1_DM2_other_GL20_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL3,1
-Unknown,Test 1_condC_blo44_BG20_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE23,1
-Unknown,Test 1_CONDD_blo33_BL3_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC16,1
-Unknown,Test 1_sysval_SysQC_RE23_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC4,1
-Unknown,Test 1_sysval_SysQC_RC16_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO18,1
-Unknown,Test 1_condA_blo44_BC4_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH12,1
-Unknown,Test 1_CONDE_blo33_BO18_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO19,1
-Unknown,Test 1_qc1_post_BH12_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI23,1
-Unknown,Test 1_CONDE_blo34_BO19_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL22,1
-Unknown,Test 1_qc1_post_BI23_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK22,1
-Unknown,Test 1_CONDD_blo34_BL22_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE16,1
-Unknown,Test 1_dm1_post_BK22_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ18,1
-Unknown,Test 1_CONDF_blo34_GE16_rep67_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE14,1
-Unknown,Test 1_dm1_post_BJ18_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo34_GE14_rep68_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL9,1
-Unknown,Test 1_TrueBlank_end_R5_rep63_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo35_BL9_rep35_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN9,1
-Unknown,Test 1_TrueBlank_end_R5_rep64_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo35_BN9_rep35_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD21,1
-Unknown,Test 1_TrueBlank_end_R5_rep65_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo35_GD21_rep69_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB4,1
-Unknown,Test 1_TrueBlank_end_R5_rep66_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo35_GB4_rep70_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG23,1
-Unknown,Test 1_TrueBlank_end_R5_rep67_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RG19,1
-Unknown,Test 1_QC2_other_GG23_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE2,1
-Unknown,Test 1_sysval_SysQC_RG19_rep45_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_sysval_SysQC_RE2_rep46_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK11,1
-Unknown,Test 1_TrueBlank_end_R5_rep68_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_DM2_other_GK11_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN15,1
-Unknown,Test 1_TrueBlank_end_R5_rep69_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo36_BN15_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL15,1
-Unknown,Test 1_TrueBlank_end_R5_rep70_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo36_BL15_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB16,1
-Unknown,Test 1_TrueBlank_end_R5_rep71_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo36_GB16_rep71_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC23,1
-Unknown,Test 1_TrueBlank_end_R5_rep72_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo36_GC23_rep72_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB18,1
-Unknown,Test 1_TrueBlank_end_R5_rep73_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo37_GB18_rep73_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM12,1
-Unknown,Test 1_TrueBlank_end_R5_rep74_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo37_BM12_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC9,1
-Unknown,Test 1_TrueBlank_end_R5_rep75_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo37_GC9_rep74_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO20,1
-Unknown,Test 1_TrueBlank_end_R5_rep76_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo37_BO20_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN21,1
-Unknown,Test 1_TrueBlank_end_R5_rep77_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD4,1
-Unknown,Test 1_CONDE_blo38_BN21_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB10,1
-Unknown,Test 1_sysval_SysQC_RD4_rep47_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_sysval_SysQC_RB10_rep48_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM20,1
-Unknown,Test 1_TrueBlank_end_R5_rep78_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo38_BM20_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG16,1
-Unknown,Test 1_TrueBlank_end_R5_rep79_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_QC2_other_GG16_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL4,1
-Unknown,Test 1_TrueBlank_end_R5_rep80_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_DM2_other_GL4_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE4,1
-Unknown,Test 1_TrueBlank_end_R5_rep81_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo38_GE4_rep75_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB8,1
-Unknown,Test 1_TrueBlank_end_R5_rep82_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo38_GB8_rep76_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM19,1
-Unknown,Test 1_TrueBlank_end_R5_rep83_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo39_BM19_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB9,1
-Unknown,Test 1_TrueBlank_end_R5_rep84_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo39_GB9_rep77_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO7,1
-Unknown,Test 1_TrueBlank_end_R5_rep85_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo39_BO7_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC12,1
-Unknown,Test 1_TrueBlank_end_R5_rep86_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo39_GC12_rep78_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL11,1
-Unknown,Test 1_TrueBlank_end_R5_rep87_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE19,1
-Unknown,Test 1_CONDD_blo40_BL11_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF19,1
-Unknown,Test 1_sysval_SysQC_RE19_rep49_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_sysval_SysQC_RF19_rep50_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB5,1
-Unknown,Test 1_TrueBlank_end_R5_rep88_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo40_GB5_rep79_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC18,1
-Unknown,Test 1_TrueBlank_end_R5_rep89_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo40_GC18_rep80_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN4,1
-Unknown,Test 1_TrueBlank_end_R5_rep90_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo40_BN4_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF17,1
-Unknown,Test 1_TrueBlank_end_R5_rep91_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_QC2_other_GF17_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK20,1
-Unknown,Test 1_TrueBlank_end_R5_rep92_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_DM2_other_GK20_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM10,1
-Unknown,Test 1_TrueBlank_end_R5_rep93_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo41_BM10_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN6,1
-Unknown,Test 1_TrueBlank_end_R5_rep94_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo41_BN6_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC10,1
-Unknown,Test 1_TrueBlank_end_R5_rep95_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo41_GC10_rep81_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD11,1
-Unknown,Test 1_TrueBlank_end_R5_rep96_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo41_GD11_rep82_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL21,1
-Unknown,Test 1_TrueBlank_end_R5_rep97_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD19,1
-Unknown,Test 1_CONDD_blo42_BL21_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC17,1
-Unknown,Test 1_sysval_SysQC_RD19_rep51_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_sysval_SysQC_RC17_rep52_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN22,1
-Unknown,Test 1_TrueBlank_end_R5_rep98_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo42_BN22_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD20,1
-Unknown,Test 1_TrueBlank_end_R5_rep99_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo42_GD20_rep83_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC8,1
-Unknown,Test 1_TrueBlank_end_R5_rep100_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo42_GC8_rep84_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM13,1
-Unknown,Test 1_TrueBlank_end_R5_rep101_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDD_blo43_BM13_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD17,1
-Unknown,Test 1_TrueBlank_end_R5_rep102_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo43_GD17_rep85_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF13,1
-Unknown,Test 1_TrueBlank_end_R5_rep103_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_QC2_other_GF13_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL16,1
-Unknown,Test 1_TrueBlank_end_R5_rep104_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_DM2_other_GL16_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC22,1
-Unknown,Test 1_TrueBlank_end_R5_rep105_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo43_GC22_rep86_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO8,1
-Unknown,Test 1_TrueBlank_end_R5_rep106_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo43_BO8_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL2,1
-Unknown,Test 1_TrueBlank_end_R5_rep107_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE13,1
-Unknown,Test 1_CONDD_blo44_BL2_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG8,1
-Unknown,Test 1_sysval_SysQC_RE13_rep53_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_sysval_SysQC_RG8_rep54_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC20,1
-Unknown,Test 1_TrueBlank_end_R5_rep108_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo44_GC20_rep87_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO6,1
-Unknown,Test 1_TrueBlank_end_R5_rep109_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDE_blo44_BO6_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC17,1
-Unknown,Test 1_TrueBlank_end_R5_rep110_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_CONDF_blo44_GC17_rep88_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH6,1
-Unknown,Test 1_TrueBlank_end_R5_rep111_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_QC2_post_GH6_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF8,1
-Unknown,Test 1_TrueBlank_end_R5_rep112_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_QC2_post_GF8_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK13,1
-Unknown,Test 1_TrueBlank_end_R5_rep113_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
-Unknown,Test 1_DM2_post_GK13_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ12,1
-Unknown,Test 1_TrueBlank_end_R5_rep114_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB15,1
-Unknown,Test 1_DM2_post_GJ12_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC21,1
-Unknown,Test 1_sysval_SysQC_RB15_rep55_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC21,1
-Unknown,Test 1_sysval_SysQC_RC21_rep56_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC21,1
+Unknown,Test 1_Preblank1,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC19,1
+Unknown,Test 1_Preblank2,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB21,1
+Unknown,Test_1_sysval_SysQC_RC19_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO8,1
+Unknown,Test_1_sysval_SysQC_RB21_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO8_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN9,1
+Unknown,Test_1_TrueBlank_pre_R5_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN9_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN13,1
+Unknown,Test_1_TrueBlank_pre_R5_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN13_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN21,1
+Unknown,Test_1_TrueBlank_pre_R5_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN21_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN14,1
+Unknown,Test_1_TrueBlank_pre_R5_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN14_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN15,1
+Unknown,Test_1_TrueBlank_pre_R5_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN15_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO10,1
+Unknown,Test_1_TrueBlank_pre_R5_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO10_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO20,1
+Unknown,Test_1_TrueBlank_pre_R5_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO20_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN20,1
+Unknown,Test_1_TrueBlank_pre_R5_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN20_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN22,1
+Unknown,Test_1_TrueBlank_pre_R5_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN22_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_other_R5_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD22,1
+Unknown,Test_1_TrueBlank_other_R5_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE6,1
+Unknown,Test_1_sysval_SysQC_RD22_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO4,1
+Unknown,Test_1_sysval_SysQC_RE6_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO4_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN11,1
+Unknown,Test_1_TrueBlank_pre_R5_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN11_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN2,1
+Unknown,Test_1_TrueBlank_pre_R5_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN2_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO18,1
+Unknown,Test_1_TrueBlank_pre_R5_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO18_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN5_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN18,1
+Unknown,Test_1_TrueBlank_pre_R5_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN18_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN16,1
+Unknown,Test_1_TrueBlank_pre_R5_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN16_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO3,1
+Unknown,Test_1_TrueBlank_pre_R5_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO3_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO5_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN10,1
+Unknown,Test_1_TrueBlank_pre_R5_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN10_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_other_R5_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF23,1
+Unknown,Test_1_TrueBlank_other_R5_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD9,1
+Unknown,Test_1_sysval_SysQC_RF23_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO17,1
+Unknown,Test_1_sysval_SysQC_RD9_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO17_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO12,1
+Unknown,Test_1_TrueBlank_pre_R5_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO12_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN17,1
+Unknown,Test_1_TrueBlank_pre_R5_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN17_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO7,1
+Unknown,Test_1_TrueBlank_pre_R5_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO7_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO21,1
+Unknown,Test_1_TrueBlank_pre_R5_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO21_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO22,1
+Unknown,Test_1_TrueBlank_pre_R5_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO22_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN3,1
+Unknown,Test_1_TrueBlank_pre_R5_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN3_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN8,1
+Unknown,Test_1_TrueBlank_pre_R5_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN8_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN4,1
+Unknown,Test_1_TrueBlank_pre_R5_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN4_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO16,1
+Unknown,Test_1_TrueBlank_pre_R5_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO16_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_other_R5_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB17,1
+Unknown,Test_1_TrueBlank_other_R5_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD18,1
+Unknown,Test_1_sysval_SysQC_RB17_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO11,1
+Unknown,Test_1_sysval_SysQC_RD18_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO11_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN12,1
+Unknown,Test_1_TrueBlank_pre_R5_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN12_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO15,1
+Unknown,Test_1_TrueBlank_pre_R5_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO15_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO14,1
+Unknown,Test_1_TrueBlank_pre_R5_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO14_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN6,1
+Unknown,Test_1_TrueBlank_pre_R5_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN6_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO23,1
+Unknown,Test_1_TrueBlank_pre_R5_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO23_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO6,1
+Unknown,Test_1_TrueBlank_pre_R5_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO6_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO13,1
+Unknown,Test_1_TrueBlank_pre_R5_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO13_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO2,1
+Unknown,Test_1_TrueBlank_pre_R5_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO2_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN19,1
+Unknown,Test_1_TrueBlank_pre_R5_rep45_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN19_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep46_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_other_R5_rep47_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB23,1
+Unknown,Test_1_TrueBlank_other_R5_rep48_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG17,1
+Unknown,Test_1_sysval_SysQC_RB23_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO9,1
+Unknown,Test_1_sysval_SysQC_RG17_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO9_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN7,1
+Unknown,Test_1_TrueBlank_pre_R5_rep49_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN7_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GN23,1
+Unknown,Test_1_TrueBlank_pre_R5_rep50_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GN23_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_lib,GO19,1
+Unknown,Test_1_TrueBlank_pre_R5_rep51_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_lib_lib2_GO19_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep52_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep53_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep54_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep55_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep56_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep57_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep58_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep59_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep60_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,R5,1
+Unknown,Test_1_TrueBlank_pre_R5_rep61_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH23,1
+Unknown,Test_1_TrueBlank_pre_R5_rep62_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH10,1
+Unknown,Test_1_qc1_pre_BH23_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF6,1
+Unknown,Test_1_QC2_pre_GH10_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD17,1
+Unknown,Test_1_sysval_SysQC_RF6_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH10,1
+Unknown,Test_1_sysval_SysQC_RD17_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH13,1
+Unknown,Test_1_qc1_pre_BH10_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK12,1
+Unknown,Test_1_QC2_pre_GH13_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL15,1
+Unknown,Test_1_dm1_pre_BK12_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ2,1
+Unknown,Test_1_DM2_pre_GL15_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK23,1
+Unknown,Test_1_dm1_pre_BJ2_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF17,1
+Unknown,Test_1_DM2_pre_GK23_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO18,1
+Unknown,Test_1_condC_blo1_BF17_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE8,1
+Unknown,Test_1_CONDE_blo1_BO18_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD14,1
+Unknown,Test_1_condB_blo1_BE8_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC5,1
+Unknown,Test_1_CONDF_blo1_GD14_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL5,1
+Unknown,Test_1_condA_blo1_BC5_rep1_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB9,1
+Unknown,Test_1_CONDD_blo1_BL5_rep1_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE7,1
+Unknown,Test_1_condA_blo2_BB9_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF22,1
+Unknown,Test_1_CONDF_blo1_GE7_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM11,1
+Unknown,Test_1_condC_blo2_BF22_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE11,1
+Unknown,Test_1_CONDD_blo2_BM11_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB13,1
+Unknown,Test_1_condB_blo2_BE11_rep2_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE18,1
+Unknown,Test_1_CONDF_blo2_GB13_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE9,1
+Unknown,Test_1_condB_blo3_BE18_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF20,1
+Unknown,Test_1_CONDF_blo2_GE9_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB4,1
+Unknown,Test_1_sysval_SysQC_RF20_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF23,1
+Unknown,Test_1_sysval_SysQC_RB4_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO8,1
+Unknown,Test_1_condC_blo3_BF23_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC7,1
+Unknown,Test_1_CONDE_blo2_BO8_rep2_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM7,1
+Unknown,Test_1_condA_blo3_BC7_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB8,1
+Unknown,Test_1_CONDD_blo3_BM7_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN9,1
+Unknown,Test_1_condA_blo4_BB8_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI10,1
+Unknown,Test_1_CONDE_blo3_BN9_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI7,1
+Unknown,Test_1_qc1_other_BI10_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK2,1
+Unknown,Test_1_QC2_other_GI7_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL9,1
+Unknown,Test_1_dm1_other_BK2_rep3_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD22,1
+Unknown,Test_1_DM2_other_GL9_rep3_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE23,1
+Unknown,Test_1_condB_blo4_BD22_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG21,1
+Unknown,Test_1_CONDF_blo3_GE23_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB9,1
+Unknown,Test_1_condC_blo4_BG21_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG13,1
+Unknown,Test_1_CONDF_blo3_GB9_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM10,1
+Unknown,Test_1_condC_blo5_BG13_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD14,1
+Unknown,Test_1_CONDD_blo4_BM10_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC14,1
+Unknown,Test_1_condB_blo5_BD14_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB12,1
+Unknown,Test_1_CONDF_blo4_GC14_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE18,1
+Unknown,Test_1_condA_blo5_BB12_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB9,1
+Unknown,Test_1_CONDF_blo4_GE18_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG15,1
+Unknown,Test_1_sysval_SysQC_RB9_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC17,1
+Unknown,Test_1_sysval_SysQC_RG15_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN18,1
+Unknown,Test_1_condA_blo6_BC17_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE14,1
+Unknown,Test_1_CONDE_blo4_BN18_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO11,1
+Unknown,Test_1_condB_blo6_BE14_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF2,1
+Unknown,Test_1_CONDE_blo5_BO11_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE12,1
+Unknown,Test_1_condC_blo6_BF2_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD23,1
+Unknown,Test_1_CONDF_blo5_GE12_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM2,1
+Unknown,Test_1_condB_blo7_BD23_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC20,1
+Unknown,Test_1_CONDD_blo5_BM2_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC12,1
+Unknown,Test_1_condA_blo7_BC20_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI20,1
+Unknown,Test_1_CONDF_blo5_GC12_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG15,1
+Unknown,Test_1_qc1_other_BI20_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ23,1
+Unknown,Test_1_QC2_other_GG15_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK11,1
+Unknown,Test_1_dm1_other_BJ23_rep4_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG9,1
+Unknown,Test_1_DM2_other_GK11_rep4_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM23,1
+Unknown,Test_1_condC_blo7_BG9_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG14,1
+Unknown,Test_1_CONDD_blo6_BM23_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD12,1
+Unknown,Test_1_condC_blo8_BG14_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE3,1
+Unknown,Test_1_CONDF_blo6_GD12_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC8,1
+Unknown,Test_1_condB_blo8_BE3_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB10,1
+Unknown,Test_1_CONDF_blo6_GC8_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE13,1
+Unknown,Test_1_sysval_SysQC_RB10_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB22,1
+Unknown,Test_1_sysval_SysQC_RE13_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN10,1
+Unknown,Test_1_condA_blo8_BB22_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD7,1
+Unknown,Test_1_CONDE_blo6_BN10_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM9,1
+Unknown,Test_1_condB_blo9_BD7_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC8,1
+Unknown,Test_1_CONDD_blo7_BM9_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC10,1
+Unknown,Test_1_condA_blo9_BC8_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG20,1
+Unknown,Test_1_CONDF_blo7_GC10_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE11,1
+Unknown,Test_1_condC_blo9_BG20_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD16,1
+Unknown,Test_1_CONDF_blo7_GE11_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN23,1
+Unknown,Test_1_condB_blo10_BD16_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB14,1
+Unknown,Test_1_CONDE_blo7_BN23_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL13,1
+Unknown,Test_1_condA_blo10_BB14_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF11,1
+Unknown,Test_1_CONDD_blo8_BL13_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE16,1
+Unknown,Test_1_condC_blo10_BF11_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI11,1
+Unknown,Test_1_CONDF_blo8_GE16_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF21,1
+Unknown,Test_1_qc1_other_BI11_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ22,1
+Unknown,Test_1_QC2_other_GF21_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK9,1
+Unknown,Test_1_dm1_other_BJ22_rep5_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG7,1
+Unknown,Test_1_DM2_other_GK9_rep5_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO3,1
+Unknown,Test_1_condC_blo11_BG7_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC5,1
+Unknown,Test_1_CONDE_blo8_BO3_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE4,1
+Unknown,Test_1_sysval_SysQC_RC5_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC16,1
+Unknown,Test_1_sysval_SysQC_RE4_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC18,1
+Unknown,Test_1_condA_blo11_BC16_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE9,1
+Unknown,Test_1_CONDF_blo8_GC18_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM4,1
+Unknown,Test_1_condB_blo11_BE9_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF20,1
+Unknown,Test_1_CONDD_blo9_BM4_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB18,1
+Unknown,Test_1_condC_blo12_BF20_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD6,1
+Unknown,Test_1_CONDF_blo9_GB18_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB4,1
+Unknown,Test_1_condB_blo12_BD6_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC14,1
+Unknown,Test_1_CONDF_blo9_GB4_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO2,1
+Unknown,Test_1_condA_blo12_BC14_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE17,1
+Unknown,Test_1_CONDE_blo9_BO2_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM13,1
+Unknown,Test_1_condB_blo13_BE17_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG17,1
+Unknown,Test_1_CONDD_blo10_BM13_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN16,1
+Unknown,Test_1_condC_blo13_BG17_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB2,1
+Unknown,Test_1_CONDE_blo10_BN16_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB11,1
+Unknown,Test_1_condA_blo13_BB2_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC23,1
+Unknown,Test_1_CONDF_blo10_GB11_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC19,1
+Unknown,Test_1_condA_blo14_BC23_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH9,1
+Unknown,Test_1_CONDF_blo10_GC19_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG8,1
+Unknown,Test_1_qc1_other_BH9_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RG14,1
+Unknown,Test_1_QC2_other_GG8_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC11,1
+Unknown,Test_1_sysval_SysQC_RG14_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK5,1
+Unknown,Test_1_sysval_SysQC_RC11_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL5,1
+Unknown,Test_1_dm1_other_BK5_rep6_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD21,1
+Unknown,Test_1_DM2_other_GL5_rep6_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN15,1
+Unknown,Test_1_condB_blo14_BD21_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG10,1
+Unknown,Test_1_CONDE_blo11_BN15_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM12,1
+Unknown,Test_1_condC_blo14_BG10_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE19,1
+Unknown,Test_1_CONDD_blo11_BM12_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE3,1
+Unknown,Test_1_condB_blo15_BE19_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB13,1
+Unknown,Test_1_CONDF_blo11_GE3_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC23,1
+Unknown,Test_1_condA_blo15_BB13_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG22,1
+Unknown,Test_1_CONDF_blo11_GC23_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL11,1
+Unknown,Test_1_condC_blo15_BG22_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC6,1
+Unknown,Test_1_CONDD_blo12_BL11_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO10,1
+Unknown,Test_1_condA_blo16_BC6_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG2,1
+Unknown,Test_1_CONDE_blo12_BO10_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE14,1
+Unknown,Test_1_condC_blo16_BG2_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE2,1
+Unknown,Test_1_CONDF_blo12_GE14_rep23_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC7,1
+Unknown,Test_1_condB_blo16_BE2_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE7,1
+Unknown,Test_1_CONDF_blo12_GC7_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC21,1
+Unknown,Test_1_condB_blo17_BE7_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC10,1
+Unknown,Test_1_CONDF_blo13_GC21_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC2,1
+Unknown,Test_1_sysval_SysQC_RC10_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB16,1
+Unknown,Test_1_sysval_SysQC_RC2_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE10,1
+Unknown,Test_1_condA_blo17_BB16_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH14,1
+Unknown,Test_1_CONDF_blo13_GE10_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF13,1
+Unknown,Test_1_qc1_other_BH14_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK4,1
+Unknown,Test_1_QC2_other_GF13_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL2,1
+Unknown,Test_1_dm1_other_BK4_rep7_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF8,1
+Unknown,Test_1_DM2_other_GL2_rep7_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM6,1
+Unknown,Test_1_condC_blo17_BF8_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG19,1
+Unknown,Test_1_CONDD_blo13_BM6_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO5,1
+Unknown,Test_1_condC_blo18_BG19_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD15,1
+Unknown,Test_1_CONDE_blo13_BO5_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB7,1
+Unknown,Test_1_condB_blo18_BD15_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC21,1
+Unknown,Test_1_CONDF_blo14_GB7_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB3,1
+Unknown,Test_1_condA_blo18_BC21_rep18_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC13,1
+Unknown,Test_1_CONDF_blo14_GB3_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN21,1
+Unknown,Test_1_condA_blo19_BC13_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD8,1
+Unknown,Test_1_CONDE_blo14_BN21_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM5,1
+Unknown,Test_1_condB_blo19_BD8_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF10,1
+Unknown,Test_1_CONDD_blo14_BM5_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB19,1
+Unknown,Test_1_condC_blo19_BF10_rep19_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF7,1
+Unknown,Test_1_CONDF_blo15_GB19_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC17,1
+Unknown,Test_1_sysval_SysQC_RF7_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC11,1
+Unknown,Test_1_sysval_SysQC_RC17_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD9,1
+Unknown,Test_1_condA_blo20_BC11_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG3,1
+Unknown,Test_1_CONDF_blo15_GD9_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO9,1
+Unknown,Test_1_condC_blo20_BG3_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE10,1
+Unknown,Test_1_CONDE_blo15_BO9_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL23,1
+Unknown,Test_1_condB_blo20_BE10_rep20_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI6,1
+Unknown,Test_1_CONDD_blo15_BL23_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG13,1
+Unknown,Test_1_qc1_other_BI6_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ20,1
+Unknown,Test_1_QC2_other_GG13_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ16,1
+Unknown,Test_1_dm1_other_BJ20_rep8_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC3,1
+Unknown,Test_1_DM2_other_GJ16_rep8_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL17,1
+Unknown,Test_1_condA_blo21_BC3_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF4,1
+Unknown,Test_1_CONDD_blo16_BL17_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO15,1
+Unknown,Test_1_condC_blo21_BF4_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE5,1
+Unknown,Test_1_CONDE_blo16_BO15_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD22,1
+Unknown,Test_1_condB_blo21_BE5_rep21_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB17,1
+Unknown,Test_1_CONDF_blo16_GD22_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC11,1
+Unknown,Test_1_condA_blo22_BB17_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG4,1
+Unknown,Test_1_CONDF_blo16_GC11_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL4,1
+Unknown,Test_1_condC_blo22_BG4_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC3,1
+Unknown,Test_1_CONDD_blo17_BL4_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB22,1
+Unknown,Test_1_sysval_SysQC_RC3_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD5,1
+Unknown,Test_1_sysval_SysQC_RB22_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC5,1
+Unknown,Test_1_condB_blo22_BD5_rep22_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC10,1
+Unknown,Test_1_CONDF_blo17_GC5_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO12,1
+Unknown,Test_1_condA_blo23_BC10_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD4,1
+Unknown,Test_1_CONDE_blo17_BO12_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD3,1
+Unknown,Test_1_condB_blo23_BD4_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF18,1
+Unknown,Test_1_CONDF_blo17_GD3_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL10,1
+Unknown,Test_1_condC_blo23_BF18_rep23_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE13,1
+Unknown,Test_1_CONDD_blo18_BL10_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO13,1
+Unknown,Test_1_condB_blo24_BE13_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH19,1
+Unknown,Test_1_CONDE_blo18_BO13_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH7,1
+Unknown,Test_1_qc1_other_BH19_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK11,1
+Unknown,Test_1_QC2_other_GH7_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK6,1
+Unknown,Test_1_dm1_other_BK11_rep9_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC22,1
+Unknown,Test_1_DM2_other_GK6_rep9_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC22,1
+Unknown,Test_1_condA_blo24_BC22_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF12,1
+Unknown,Test_1_CONDF_blo18_GC22_rep35_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE2,1
+Unknown,Test_1_condC_blo24_BF12_rep24_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG15,1
+Unknown,Test_1_CONDF_blo18_GE2_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD19,1
+Unknown,Test_1_condC_blo25_BG15_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RG21,1
+Unknown,Test_1_CONDF_blo19_GD19_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE21,1
+Unknown,Test_1_sysval_SysQC_RG21_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE6,1
+Unknown,Test_1_sysval_SysQC_RE21_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL16,1
+Unknown,Test_1_condB_blo25_BE6_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB10,1
+Unknown,Test_1_CONDD_blo19_BL16_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD7,1
+Unknown,Test_1_condA_blo25_BB10_rep25_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF15,1
+Unknown,Test_1_CONDF_blo19_GD7_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO16,1
+Unknown,Test_1_condC_blo26_BF15_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB11,1
+Unknown,Test_1_CONDE_blo19_BO16_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM16,1
+Unknown,Test_1_condA_blo26_BB11_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD13,1
+Unknown,Test_1_CONDD_blo20_BM16_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB2,1
+Unknown,Test_1_condB_blo26_BD13_rep26_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG6,1
+Unknown,Test_1_CONDF_blo20_GB2_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD17,1
+Unknown,Test_1_condC_blo27_BG6_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD10,1
+Unknown,Test_1_CONDF_blo20_GD17_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO20,1
+Unknown,Test_1_condB_blo27_BD10_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI9,1
+Unknown,Test_1_CONDE_blo20_BO20_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG12,1
+Unknown,Test_1_qc1_other_BI9_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ7,1
+Unknown,Test_1_QC2_other_GG12_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ17,1
+Unknown,Test_1_dm1_other_BJ7_rep10_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB3,1
+Unknown,Test_1_DM2_other_GJ17_rep10_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE22,1
+Unknown,Test_1_condA_blo27_BB3_rep27_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF15,1
+Unknown,Test_1_CONDF_blo21_GE22_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD19,1
+Unknown,Test_1_sysval_SysQC_RF15_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF13,1
+Unknown,Test_1_sysval_SysQC_RD19_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM3,1
+Unknown,Test_1_condC_blo28_BF13_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB5,1
+Unknown,Test_1_CONDD_blo21_BM3_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD13,1
+Unknown,Test_1_condA_blo28_BB5_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE20,1
+Unknown,Test_1_CONDF_blo21_GD13_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN2,1
+Unknown,Test_1_condB_blo28_BE20_rep28_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB4,1
+Unknown,Test_1_CONDE_blo21_BN2_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM19,1
+Unknown,Test_1_condA_blo29_BB4_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD17,1
+Unknown,Test_1_CONDD_blo22_BM19_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO22,1
+Unknown,Test_1_condB_blo29_BD17_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF19,1
+Unknown,Test_1_CONDE_blo22_BO22_rep22_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD5,1
+Unknown,Test_1_condC_blo29_BF19_rep29_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG23,1
+Unknown,Test_1_CONDF_blo22_GD5_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC13,1
+Unknown,Test_1_condC_blo30_BG23_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE4,1
+Unknown,Test_1_CONDF_blo22_GC13_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL3,1
+Unknown,Test_1_condB_blo30_BE4_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC9,1
+Unknown,Test_1_CONDD_blo23_BL3_rep23_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD6,1
+Unknown,Test_1_condA_blo30_BC9_rep30_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI18,1
+Unknown,Test_1_CONDF_blo23_GD6_rep45_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH11,1
+Unknown,Test_1_qc1_other_BI18_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC14,1
+Unknown,Test_1_QC2_other_GH11_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD13,1
+Unknown,Test_1_sysval_SysQC_RC14_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK7,1
+Unknown,Test_1_sysval_SysQC_RD13_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM16,1
+Unknown,Test_1_dm1_other_BK7_rep11_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF6,1
+Unknown,Test_1_DM2_other_GM16_rep11_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO6,1
+Unknown,Test_1_condC_blo31_BF6_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE22,1
+Unknown,Test_1_CONDE_blo23_BO6_rep23_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC4,1
+Unknown,Test_1_condB_blo31_BE22_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB23,1
+Unknown,Test_1_CONDF_blo23_GC4_rep46_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD16,1
+Unknown,Test_1_condA_blo31_BB23_rep31_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD19,1
+Unknown,Test_1_CONDF_blo24_GD16_rep47_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC17,1
+Unknown,Test_1_condB_blo32_BD19_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF21,1
+Unknown,Test_1_CONDF_blo24_GC17_rep48_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN12,1
+Unknown,Test_1_condC_blo32_BF21_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC2,1
+Unknown,Test_1_CONDE_blo24_BN12_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM22,1
+Unknown,Test_1_condA_blo32_BC2_rep32_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD20,1
+Unknown,Test_1_CONDD_blo24_BM22_rep24_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM21,1
+Unknown,Test_1_condB_blo33_BD20_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB18,1
+Unknown,Test_1_CONDD_blo25_BM21_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN8,1
+Unknown,Test_1_condA_blo33_BB18_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG18,1
+Unknown,Test_1_CONDE_blo25_BN8_rep25_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE6,1
+Unknown,Test_1_condC_blo33_BG18_rep33_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC13,1
+Unknown,Test_1_CONDF_blo25_GE6_rep49_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE17,1
+Unknown,Test_1_sysval_SysQC_RC13_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC12,1
+Unknown,Test_1_sysval_SysQC_RE17_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD18,1
+Unknown,Test_1_condA_blo34_BC12_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH20,1
+Unknown,Test_1_CONDF_blo25_GD18_rep50_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI21,1
+Unknown,Test_1_qc1_other_BH20_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ18,1
+Unknown,Test_1_QC2_other_GI21_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM14,1
+Unknown,Test_1_dm1_other_BJ18_rep12_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD9,1
+Unknown,Test_1_DM2_other_GM14_rep12_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB12,1
+Unknown,Test_1_condB_blo34_BD9_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG12,1
+Unknown,Test_1_CONDF_blo26_GB12_rep51_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL14,1
+Unknown,Test_1_condC_blo34_BG12_rep34_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE12,1
+Unknown,Test_1_CONDD_blo26_BL14_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN14,1
+Unknown,Test_1_condB_blo35_BE12_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC15,1
+Unknown,Test_1_CONDE_blo26_BN14_rep26_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE19,1
+Unknown,Test_1_condA_blo35_BC15_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF16,1
+Unknown,Test_1_CONDF_blo26_GE19_rep52_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL15,1
+Unknown,Test_1_condC_blo35_BF16_rep35_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD11,1
+Unknown,Test_1_CONDD_blo27_BL15_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO23,1
+Unknown,Test_1_condB_blo36_BD11_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB7,1
+Unknown,Test_1_CONDE_blo27_BO23_rep27_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD15,1
+Unknown,Test_1_condA_blo36_BB7_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC9,1
+Unknown,Test_1_CONDF_blo27_GD15_rep53_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RC16,1
+Unknown,Test_1_sysval_SysQC_RC9_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG5,1
+Unknown,Test_1_sysval_SysQC_RC16_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB6,1
+Unknown,Test_1_condC_blo36_BG5_rep36_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC19,1
+Unknown,Test_1_CONDF_blo27_GB6_rep54_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE13,1
+Unknown,Test_1_condA_blo37_BC19_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE23,1
+Unknown,Test_1_CONDF_blo28_GE13_rep55_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB5,1
+Unknown,Test_1_condB_blo37_BE23_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI2,1
+Unknown,Test_1_CONDF_blo28_GB5_rep56_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH17,1
+Unknown,Test_1_qc1_other_BI2_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK9,1
+Unknown,Test_1_QC2_other_GH17_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ8,1
+Unknown,Test_1_dm1_other_BK9_rep13_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG16,1
+Unknown,Test_1_DM2_other_GJ8_rep13_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL22,1
+Unknown,Test_1_condC_blo37_BG16_rep37_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD18,1
+Unknown,Test_1_CONDD_blo28_BL22_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN5,1
+Unknown,Test_1_condB_blo38_BD18_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF14,1
+Unknown,Test_1_CONDE_blo28_BN5_rep28_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD21,1
+Unknown,Test_1_condC_blo38_BF14_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC18,1
+Unknown,Test_1_CONDF_blo29_GD21_rep57_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM8,1
+Unknown,Test_1_condA_blo38_BC18_rep38_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE21,1
+Unknown,Test_1_CONDD_blo29_BM8_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN13,1
+Unknown,Test_1_condB_blo39_BE21_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RD3,1
+Unknown,Test_1_CONDE_blo29_BN13_rep29_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG13,1
+Unknown,Test_1_sysval_SysQC_RD3_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB15,1
+Unknown,Test_1_sysval_SysQC_RG13_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB16,1
+Unknown,Test_1_condA_blo39_BB15_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG11,1
+Unknown,Test_1_CONDF_blo29_GB16_rep58_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC20,1
+Unknown,Test_1_condC_blo39_BG11_rep39_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD2,1
+Unknown,Test_1_CONDF_blo30_GC20_rep59_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE20,1
+Unknown,Test_1_condB_blo40_BD2_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF5,1
+Unknown,Test_1_CONDF_blo30_GE20_rep60_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO7,1
+Unknown,Test_1_condC_blo40_BF5_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB21,1
+Unknown,Test_1_CONDE_blo30_BO7_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM20,1
+Unknown,Test_1_condA_blo40_BB21_rep40_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI17,1
+Unknown,Test_1_CONDD_blo30_BM20_rep30_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG23,1
+Unknown,Test_1_qc1_other_BI17_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ10,1
+Unknown,Test_1_QC2_other_GG23_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM7,1
+Unknown,Test_1_dm1_other_BJ10_rep14_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB20,1
+Unknown,Test_1_DM2_other_GM7_rep14_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE17,1
+Unknown,Test_1_condA_blo41_BB20_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BG8,1
+Unknown,Test_1_CONDF_blo31_GE17_rep61_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL21,1
+Unknown,Test_1_condC_blo41_BG8_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE16,1
+Unknown,Test_1_CONDD_blo31_BL21_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO17,1
+Unknown,Test_1_condB_blo41_BE16_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RC8,1
+Unknown,Test_1_CONDE_blo31_BO17_rep31_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD6,1
+Unknown,Test_1_sysval_SysQC_RC8_rep41_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BE15,1
+Unknown,Test_1_sysval_SysQC_RD6_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD11,1
+Unknown,Test_1_condB_blo42_BE15_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF9,1
+Unknown,Test_1_CONDF_blo31_GD11_rep62_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC15,1
+Unknown,Test_1_condC_blo42_BF9_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BC4,1
+Unknown,Test_1_CONDF_blo32_GC15_rep63_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN22,1
+Unknown,Test_1_condA_blo42_BC4_rep42_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF3,1
+Unknown,Test_1_CONDE_blo32_BN22_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM17,1
+Unknown,Test_1_condC_blo43_BF3_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD3,1
+Unknown,Test_1_CONDD_blo32_BM17_rep32_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD4,1
+Unknown,Test_1_condB_blo43_BD3_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB19,1
+Unknown,Test_1_CONDF_blo32_GD4_rep64_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM18,1
+Unknown,Test_1_condA_blo43_BB19_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BD12,1
+Unknown,Test_1_CONDD_blo33_BM18_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB20,1
+Unknown,Test_1_condB_blo44_BD12_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BH11,1
+Unknown,Test_1_CONDF_blo33_GB20_rep65_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH9,1
+Unknown,Test_1_qc1_other_BH11_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ17,1
+Unknown,Test_1_QC2_other_GH9_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GL23,1
+Unknown,Test_1_dm1_other_BJ17_rep15_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BB6,1
+Unknown,Test_1_DM2_other_GL23_rep15_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC3,1
+Unknown,Test_1_condA_blo44_BB6_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB5,1
+Unknown,Test_1_CONDF_blo33_GC3_rep66_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB19,1
+Unknown,Test_1_sysval_SysQC_RB5_rep43_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_2ng,BF7,1
+Unknown,Test_1_sysval_SysQC_RB19_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN4,1
+Unknown,Test_1_condC_blo44_BF7_rep44_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI15,1
+Unknown,Test_1_CONDE_blo33_BN4_rep33_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE4,1
+Unknown,Test_1_qc1_post_BI15_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_qc,BI14,1
+Unknown,Test_1_CONDF_blo34_GE4_rep67_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN17,1
+Unknown,Test_1_qc1_post_BI14_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BJ4,1
+Unknown,Test_1_CONDE_blo34_BN17_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB23,1
+Unknown,Test_1_dm1_post_BJ4_rep16_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_blank,BK3,1
+Unknown,Test_1_CONDF_blo34_GB23_rep68_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL7,1
+Unknown,Test_1_dm1_post_BK3_rep17_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo34_BL7_rep34_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL6,1
+Unknown,Test_1_TrueBlank_end_R5_rep63_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo35_BL6_rep35_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN3,1
+Unknown,Test_1_TrueBlank_end_R5_rep64_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo35_BN3_rep35_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE8,1
+Unknown,Test_1_TrueBlank_end_R5_rep65_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo35_GE8_rep69_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD8,1
+Unknown,Test_1_TrueBlank_end_R5_rep66_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo35_GD8_rep70_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI18,1
+Unknown,Test_1_TrueBlank_end_R5_rep67_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB13,1
+Unknown,Test_1_QC2_other_GI18_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RD16,1
+Unknown,Test_1_sysval_SysQC_RB13_rep45_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_sysval_SysQC_RD16_rep46_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK3,1
+Unknown,Test_1_TrueBlank_end_R5_rep68_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_DM2_other_GK3_rep16_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC16,1
+Unknown,Test_1_TrueBlank_end_R5_rep69_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo36_GC16_rep71_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC9,1
+Unknown,Test_1_TrueBlank_end_R5_rep70_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo36_GC9_rep72_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL12,1
+Unknown,Test_1_TrueBlank_end_R5_rep71_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo36_BL12_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN19,1
+Unknown,Test_1_TrueBlank_end_R5_rep72_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo36_BN19_rep36_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB22,1
+Unknown,Test_1_TrueBlank_end_R5_rep73_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo37_GB22_rep73_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN11,1
+Unknown,Test_1_TrueBlank_end_R5_rep74_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo37_BN11_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL18,1
+Unknown,Test_1_TrueBlank_end_R5_rep75_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo37_BL18_rep37_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD23,1
+Unknown,Test_1_TrueBlank_end_R5_rep76_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo37_GD23_rep74_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL2,1
+Unknown,Test_1_TrueBlank_end_R5_rep77_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB12,1
+Unknown,Test_1_CONDD_blo38_BL2_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RF4,1
+Unknown,Test_1_sysval_SysQC_RB12_rep47_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_sysval_SysQC_RF4_rep48_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN7,1
+Unknown,Test_1_TrueBlank_end_R5_rep78_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo38_BN7_rep38_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH8,1
+Unknown,Test_1_TrueBlank_end_R5_rep79_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_QC2_other_GH8_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK22,1
+Unknown,Test_1_TrueBlank_end_R5_rep80_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_DM2_other_GK22_rep17_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD10,1
+Unknown,Test_1_TrueBlank_end_R5_rep81_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo38_GD10_rep75_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD20,1
+Unknown,Test_1_TrueBlank_end_R5_rep82_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo38_GD20_rep76_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE21,1
+Unknown,Test_1_TrueBlank_end_R5_rep83_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo39_GE21_rep77_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC2,1
+Unknown,Test_1_TrueBlank_end_R5_rep84_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo39_GC2_rep78_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL19,1
+Unknown,Test_1_TrueBlank_end_R5_rep85_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo39_BL19_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO14,1
+Unknown,Test_1_TrueBlank_end_R5_rep86_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo39_BO14_rep39_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB17,1
+Unknown,Test_1_TrueBlank_end_R5_rep87_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RB20,1
+Unknown,Test_1_CONDF_blo40_GB17_rep79_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RB2,1
+Unknown,Test_1_sysval_SysQC_RB20_rep49_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_sysval_SysQC_RB2_rep50_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB21,1
+Unknown,Test_1_TrueBlank_end_R5_rep88_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo40_GB21_rep80_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN20,1
+Unknown,Test_1_TrueBlank_end_R5_rep89_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo40_BN20_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL9,1
+Unknown,Test_1_TrueBlank_end_R5_rep90_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo40_BL9_rep40_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GH6,1
+Unknown,Test_1_TrueBlank_end_R5_rep91_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_QC2_other_GH6_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GM8,1
+Unknown,Test_1_TrueBlank_end_R5_rep92_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_DM2_other_GM8_rep18_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL20,1
+Unknown,Test_1_TrueBlank_end_R5_rep93_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo41_BL20_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GC6,1
+Unknown,Test_1_TrueBlank_end_R5_rep94_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo41_GC6_rep81_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BN6,1
+Unknown,Test_1_TrueBlank_end_R5_rep95_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo41_BN6_rep41_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB14,1
+Unknown,Test_1_TrueBlank_end_R5_rep96_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo41_GB14_rep82_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO21,1
+Unknown,Test_1_TrueBlank_end_R5_rep97_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RG12,1
+Unknown,Test_1_CONDE_blo42_BO21_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG6,1
+Unknown,Test_1_sysval_SysQC_RG12_rep51_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_sysval_SysQC_RG6_rep52_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB15,1
+Unknown,Test_1_TrueBlank_end_R5_rep98_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo42_GB15_rep83_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BL8,1
+Unknown,Test_1_TrueBlank_end_R5_rep99_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo42_BL8_rep42_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB10,1
+Unknown,Test_1_TrueBlank_end_R5_rep100_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo42_GB10_rep84_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO4,1
+Unknown,Test_1_TrueBlank_end_R5_rep101_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDE_blo43_BO4_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE15,1
+Unknown,Test_1_TrueBlank_end_R5_rep102_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo43_GE15_rep85_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GI14,1
+Unknown,Test_1_TrueBlank_end_R5_rep103_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_QC2_other_GI14_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK7,1
+Unknown,Test_1_TrueBlank_end_R5_rep104_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_DM2_other_GK7_rep19_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GE5,1
+Unknown,Test_1_TrueBlank_end_R5_rep105_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo43_GE5_rep86_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM15,1
+Unknown,Test_1_TrueBlank_end_R5_rep106_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo43_BM15_rep43_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BO19,1
+Unknown,Test_1_TrueBlank_end_R5_rep107_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RE9,1
+Unknown,Test_1_CONDE_blo44_BO19_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RG4,1
+Unknown,Test_1_sysval_SysQC_RE9_rep53_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_sysval_SysQC_RG4_rep54_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,BM14,1
+Unknown,Test_1_TrueBlank_end_R5_rep108_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDD_blo44_BM14_rep44_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GB8,1
+Unknown,Test_1_TrueBlank_end_R5_rep109_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo44_GB8_rep87_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_2ng,GD2,1
+Unknown,Test_1_TrueBlank_end_R5_rep110_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_CONDF_blo44_GD2_rep88_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GG21,1
+Unknown,Test_1_TrueBlank_end_R5_rep111_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_QC2_post_GG21_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_QC,GF16,1
+Unknown,Test_1_TrueBlank_end_R5_rep112_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_QC2_post_GF16_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GK5,1
+Unknown,Test_1_TrueBlank_end_R5_rep113_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,R5,1
+Unknown,Test_1_DM2_post_GK5_rep20_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_BLANK,GJ23,1
+Unknown,Test_1_TrueBlank_end_R5_rep114_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelA_sysval,RF22,1
+Unknown,Test_1_DM2_post_GJ23_rep21_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE15,1
+Unknown,Test_1_sysval_SysQC_RF22_rep55_ch1_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE15,1
+Unknown,Test_1_sysval_SysQC_RE15_rep56_ch2_msmethod,lcpath/datapath,lcpath/methodpath\ChannelB_sysval,RE15,1

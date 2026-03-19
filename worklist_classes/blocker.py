@@ -235,24 +235,12 @@ class Blocker:
         random.shuffle(wet_QC_list)
         random.shuffle(Blank_list)
         random.shuffle(TrueBlank_list)
-        random.shuffle(Lib_list)
-        random.shuffle(SysValid_list)
+        random.shuffle(Lib_list) # future: add option for nonrandomization
+
+        if len(Lib_list) > self.sysvalid_interval:
+            print(f"Warning: library will not be clear. {len(Lib_list)} library values and {self.sysvalid_interval} wells between system QC.")
 
         # move a well to 'extras' if a list has an odd number of wells and it uses a 2 column system
-        if lc_number == 2:
-            if len(QC_list) %2 != 0:
-                extras.append(QC_list[-1:])
-                QC_list = QC_list[:-1]
-            if len(wet_QC_list) %2 != 0:
-                extras.append(wet_QC_list[-1:])
-                wet_QC_list = wet_QC_list[:-1]
-            if len(Blank_list) %2 != 0:
-                extras.append(Blank_list[-1:])
-                Blank_list = Blank_list[:-1]
-            if len(Lib_list) %2 != 0:
-                extras.append(Lib_list[-1:])
-                Lib_list = Lib_list[:-1]
-        
         if lc_number == 2:
             for lst in [QC_list, wet_QC_list, Blank_list, Lib_list]:
                 if len(lst) % 2:
@@ -284,16 +272,17 @@ class Blocker:
         split_nonsample_list(wet_QC_list,   wet_QC_num,    conditions, nonsample_before, nonsample_after, nonsample_other)
         split_nonsample_list(Blank_list,    Blank_num,     conditions, nonsample_before, nonsample_after, nonsample_other)
         split_nonsample_list(TrueBlank_list,TrueBlank_num, conditions, nonsample_before, nonsample_after, nonsample_other)
+        nonsample_other = nonsample_other[:10000] if len(nonsample_other) > 10000 else nonsample_other
 
         if Lib_list and lib_placement.upper() == "BEFORE" and cond_range1.upper() == "ALL": #controls library placement
             nonsample_before.append(Lib_list)
             if not found_TB:
-                nonsample_before.append([[two_xp_TB, "R5"]]*5)
+                nonsample_before.append([[two_xp_TB, "R5"]]*3)
 
         if Lib_list and lib_placement.upper() == "AFTER" and cond_range1.upper() == "ALL": #controls library placement
             nonsample_after.append(Lib_list)
             if not found_TB:
-                nonsample_after.append([[two_xp_TB, "R5"]]*5)
+                nonsample_after.append([[two_xp_TB, "R5"]]*3)
 
         # if library runs are not the same in a two experiment plate, they must be returned separately
         library = []
@@ -393,7 +382,7 @@ class Blocker:
         num_of_blocks = len(both_blocks[0]) if both_blocks else 0
         return both_blocks, num_of_blocks
 
-    def nonsample_blocker(self, lc_number, nonsample_other, num_of_blocks, conditions):
+    def nonsample_blocker(self, lc_number, nonsample_other, num_of_blocks, conditions, total_wells):
         """ Will divide the QC, Blanks, Trueblanks etc, reserved to be between the runs, into blocks
         Make sure that number of nonsample blocks does not exceed number of sample blocks
         These blocks should not be randomized"""
@@ -405,6 +394,7 @@ class Blocker:
                 sample_dict[well[0]] = 1
             elif well[0] in sample_dict.keys():
                 sample_dict[well[0]] += 1
+                
         sample_amounts = list(sample_dict.values())
         if sample_amounts:
             if lc_number == 2:
@@ -414,11 +404,10 @@ class Blocker:
         else:
             nonsample_block_num = 0
 
-        block_num = nonsample_block_num # temporary! write a new calculation using total number of 
-        # sample blocks and QC frequency
 
-        sample_keys = list(sample_dict.keys())
-        for sample in sample_keys:
+        block_num = min([nonsample_block_num, (total_wells//self.qc_frequency)])
+
+        for sample in list(sample_dict.keys()):
             #Count number of sample wells in wells list
             count = 0
             for well in nonsample_other:
@@ -641,21 +630,21 @@ class Blocker:
                 reps.append(None)  # If well is not a valid list or doesn't have enough elements
         return reps
 
-    def attach_lib_two_xp(self, two_xp_flat_list, separate_Lib1, separate_Lib2, two_xp_TB, two_xp_TB_location, Lib_placement, lib_same):
+    def attach_lib_two_xp(self, two_xp_flat_list, separate_lib1, separate_lib2, two_xp_TB, two_xp_TB_location, lib_placement, lib_same):
         """Attach library experiments for two-experiment runs.
         Inserts TB wells every other position during library runs.
         """
         # Flatten nested lists
-        separate_Lib1 = [item for sublist in separate_Lib1 for item in sublist] if separate_Lib1 else []
-        separate_Lib2 = [item for sublist in separate_Lib2 for item in sublist] if separate_Lib2 else []
+        separate_lib1 = [item for sublist in separate_lib1 for item in sublist] if separate_lib1 else []
+        separate_lib2 = [item for sublist in separate_lib2 for item in sublist] if separate_lib2 else []
 
         # Tag wells with their library identity
-        if separate_Lib1:
-            for well in separate_Lib1:
-                well.append("Lib1")
-        if separate_Lib2:
-            for well in separate_Lib2:
-                well.append("Lib2")
+        if separate_lib1:
+            for well in separate_lib1:
+                well.append("lib1")
+        if separate_lib2:
+            for well in separate_lib2:
+                well.append("lib2")
 
         TB_well = [two_xp_TB, two_xp_TB_location[0][1], "pre"]
         to_add = []
@@ -670,99 +659,107 @@ class Blocker:
 
         if lib_same.upper() == "NO":
             # Run libraries separately, TB every other
-            if separate_Lib1:
-                to_add.extend(interweave_with_tb(separate_Lib1))
-            if separate_Lib2:
-                to_add.extend(interweave_with_tb(separate_Lib2))
+            if separate_lib1:
+                to_add.extend(interweave_with_tb(separate_lib1))
+            if separate_lib2:
+                to_add.extend(interweave_with_tb(separate_lib2))
 
         elif lib_same.upper() == "YES":
-            if separate_Lib1 and separate_Lib2:
+            if separate_lib1 and separate_lib2:
                 # Balance lengths
-                if len(separate_Lib1) > len(separate_Lib2):
-                    separate_Lib2.extend([TB_well] * (len(separate_Lib1) - len(separate_Lib2)))
-                elif len(separate_Lib2) > len(separate_Lib1):
-                    separate_Lib1.extend([TB_well] * (len(separate_Lib2) - len(separate_Lib1)))
+                if len(separate_lib1) > len(separate_lib2):
+                    separate_lib2.extend([TB_well] * (len(separate_lib1) - len(separate_lib2)))
+                elif len(separate_lib2) > len(separate_lib1):
+                    separate_lib1.extend([TB_well] * (len(separate_lib2) - len(separate_lib1)))
                 # Interleave across libraries with TBs
-                for i in range(len(separate_Lib1)):
-                    to_add.append(separate_Lib1[i])
+                for i in range(len(separate_lib1)):
+                    to_add.append(separate_lib1[i])
                     to_add.append(TB_well)
-                    to_add.append(separate_Lib2[i])
+                    to_add.append(separate_lib2[i])
                     to_add.append(TB_well)
-            elif separate_Lib1:
-                to_add.extend(interweave_with_tb(separate_Lib1))
-            elif separate_Lib2:
-                to_add.extend(interweave_with_tb(separate_Lib2))
+            elif separate_lib1:
+                to_add.extend(interweave_with_tb(separate_lib1))
+            elif separate_lib2:
+                to_add.extend(interweave_with_tb(separate_lib2))
 
         else:  # Fallback
-            if separate_Lib1:
-                to_add.extend(interweave_with_tb(separate_Lib1))
-            if separate_Lib2:
-                to_add.extend(interweave_with_tb(separate_Lib2))
+            if separate_lib1:
+                to_add.extend(interweave_with_tb(separate_lib1))
+            if separate_lib2:
+                to_add.extend(interweave_with_tb(separate_lib2))
             # safety flush
             to_add.extend([TB_well, TB_well])
         # Place libraries before or after main experiment
         to_add.extend([TB_well, TB_well]*5)  # buffer TBs between library and main experiment
 
-        if Lib_placement == "Before":
+        if lib_placement == "Before":
             return to_add + two_xp_flat_list
         else:  # default After
             return two_xp_flat_list + to_add
 
-    def insert_sysQC(self, flattened_list, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, full_conditions):
-        # Counter to return how many more System Validation wells should be added    
-        lc_number = self.lc_number    
-        missing_SV = 0
-        SysVal_copy = SysValid_list.copy()
-        # TB well is also needed here for SysVal QC in the midst of library runs
-        TB_well = [two_xp_TB, two_xp_TB_location[0][1], "other"]
-        # System QC wells will need a block indicator, for now they will be labeled as SysQC in place of 'blo{#}' format
-        if len(SysValid_list) == 0:
-            print("No System Validation QC were labeled on and/or inserted in the plate.")
-            return(flattened_list)
-        SysValid_interval = int(SysValid_interval)
+    def split_sysvalid_by_type(self, SysValid_list):
+        groups = defaultdict(list)
         for well in SysValid_list:
-            # for i in range(0, lc_number):
-            well.append('SysQC')
-        new_flat_list = []
+            groups[well[0]].append(well)
+        return list(groups.values())
 
-        for i in range(0, lc_number):
-            new_flat_list.append(SysValid_list[-1])
-            SysValid_list = SysValid_list[:-1]
-
-        for i in range(0, len(flattened_list), SysValid_interval):
-            new_flat_list.extend(flattened_list[i:i + SysValid_interval])
-            if i + SysValid_interval < len(flattened_list):
-                for i in range(0, lc_number):
-                    try:
-                        if lc_number == 1:
-                            if 'LIB' in new_flat_list[-1][2].upper() or 'LIB' in full_conditions[new_flat_list[-1][0]][0].upper():
-                                try:
-                                    new_flat_list.append(TB_well)
-                                except NameError:
-                                    raise ("TrueBlank well was not labeled in the excel sheet! It is needed because System Validation QC is," \
-                                                "trying to run in the midst of the library runs.")
-                        elif lc_number == 2:
-                            if 'LIB' in new_flat_list[-1][2].upper() or 'LIB' in new_flat_list[-2][2].upper() or 'LIB' in full_conditions[new_flat_list[-1][0]][0].upper() or 'LIB' in full_conditions[new_flat_list[-2][0]][0].upper():
-                                try:
-                                    new_flat_list.append(TB_well)
-                                    new_flat_list.append(TB_well)
-                                except NameError:
-                                    raise ("TrueBlank well was not labeled in the excel sheet! It is needed because System Validation QC is," \
-                                                    "trying to run in the midst of the library runs.")
-                        new_flat_list.append(SysValid_list[-1])
-                        SysValid_list = SysValid_list[:-1]
-                    except IndexError:
-                        missing_SV += 1
-                        continue
-        for i in range(0, lc_number):
+    def pop_one_per_group(self, sysvalid_groups, new_flat_list, missing_SV):
+        for group in sysvalid_groups:
             try:
-                new_flat_list.append(SysValid_list[-1])
-                SysValid_list = SysValid_list[:-1]
+                new_flat_list.append(group[-1])
+                group.pop()
             except IndexError:
                 missing_SV += 1
-                continue
+        return missing_SV
+
+    def insert_sysQC(self, flattened_list, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, full_conditions):
+        lc_number = self.lc_number
+        missing_SV = 0
+        SysVal_copy = SysValid_list.copy()
+
+        if len(SysValid_list) == 0:
+            print("No System Validation QC were labeled on and/or inserted in the plate.")
+            return flattened_list
+
+        SysValid_interval = int(SysValid_interval)
+        TB_well = [two_xp_TB, two_xp_TB_location[0][1], "other"]
+
+        # Tag all wells with 'SysQC'
+        for well in SysValid_list:
+            well.append('SysQC')
+
+        # Split into per-type groups (one group per unique first element)
+        sysvalid_groups = self.split_sysvalid_by_type(SysValid_list)
+
+        new_flat_list = []
+
+        # Prepend one well from each group at the start
+        for _ in range(lc_number):
+            missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
+
+        # Walk through flattened_list in chunks, inserting SysQC between each
+        for i in range(0, len(flattened_list), SysValid_interval):
+            new_flat_list.extend(flattened_list[i:i + SysValid_interval])
+
+            if i + SysValid_interval < len(flattened_list):
+                # Check if TB wells are needed before inserting SysQC
+                if any(
+                    'LIB' in new_flat_list[-j][2].upper() or 
+                    'LIB' in full_conditions[new_flat_list[-j][0]][0].upper()
+                    for j in range(1, lc_number + 1)
+                ):
+                    new_flat_list.extend([TB_well] * lc_number)
+                # Insert one well per group at this interval point
+                for _ in range(lc_number):
+                    missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
+
+        # Append one well from each group at the end
+        for _ in range(lc_number):
+            missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
+
         if missing_SV > 0 and SysVal_copy:
             print(f"Not enough System Validation QC was added, consider adding {missing_SV} more.")
+
         return new_flat_list
     
     def append_TB_condition(self, all_c, c1, c2, found_TB, sysvalid_condition=None, sysvalid_num=None):
@@ -813,8 +810,7 @@ class Blocker:
                 nonsample_before, nonsample_after, nonsample_other, column1, column2, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat, conditions,
                                                                                         self.num_to_run, self.lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition)
                 both_blocks, num_blocks = self.blocker(conditions, self.even, column1, column2)
-
-            nonsample_blocks = self.nonsample_blocker(self.lc_number, nonsample_other, num_blocks, conditions)
+            nonsample_blocks = self.nonsample_blocker(self.lc_number, nonsample_other, num_blocks, conditions, len(all_wells_flat))
             sample_blocks = self.zipper(both_blocks)
             non_flat_list = self.combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, self.qc_frequency, conditions)
             # zipper to make flat list and add block labels
@@ -849,8 +845,8 @@ class Blocker:
                                                                         self.num_to_run, lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
             both_blocks2, num_blocks2 = self.blocker(conditions2, self.even, exp2col1)
 
-            nonsample_blocks1 = self.nonsample_blocker(lc_number, nonsample_other1, num_blocks1, conditions1)
-            nonsample_blocks2 = self.nonsample_blocker(lc_number, nonsample_other2, num_blocks2, conditions2)
+            nonsample_blocks1 = self.nonsample_blocker(lc_number, nonsample_other1, num_blocks1, conditions1, len(all_wells_flat1))
+            nonsample_blocks2 = self.nonsample_blocker(lc_number, nonsample_other2, num_blocks2, conditions2, len(all_wells_flat2))
 
             sample_blocks1 = [item for block in both_blocks1 for item in block] # remove one layer of list from each list of lists
             sample_blocks2 = [item for block in both_blocks2 for item in block]
