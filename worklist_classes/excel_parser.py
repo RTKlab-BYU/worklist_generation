@@ -142,28 +142,32 @@ class ExcelParser:
             raise ValueError("Plate colors must be different.")
     
     def additional_info(self, user_df, manager_df):
-        Lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
-        SysValid_interval = manager_df.iloc[4,17] # how often to run system validation
-        QC_Frequency = manager_df.iloc[5,17] # how often should QC blocks be added
-        even = user_df.iloc[31,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
-        TB_location = user_df.iloc[32,35] # indicates condition number for TrueBlanks
-        experiment1 = user_df.iloc[34,35] # if not "All", which conditions belong to experiment 1
-        experiment2 = user_df.iloc[35,35] # which conditions belong to experiment 2 if any
-        lib_same = user_df.iloc[36,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
-        ### QC_per_block = dataframe.iloc[56,37] # how many QC in a block ### FIX
-        return Lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_Frequency
+        even = user_df.iloc[2,35] # "Yes" or "No", indicates if blocks should be forced to be even, sacrificing runs to do so
+        TB_location = user_df.iloc[3,35] # indicates condition number for TrueBlanks
+        experiment1 = user_df.iloc[6,35] # if not "All", which conditions belong to experiment 1
+        experiment2 = user_df.iloc[7,35] # which conditions belong to experiment 2 if any
+        lib_same = user_df.iloc[8,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
+        lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
+        SysValid_interval = manager_df.iloc[6,17] # how often to run system validation
+        QC_frequency = manager_df.iloc[7,17] # how often should QC blocks be added
+        lc_system = manager_df.iloc[10,17] # determines how the well
+        return lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_frequency, lc_system
     
     def parse(self):
         try:
             user_df, manager_df = self.read_excel_to_dfs()
             nbcode, lc_number, wet_amounts, plates, num_to_run = self.separate_plates(user_df, manager_df)
-            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency = self.additional_info(user_df, manager_df)
+            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system = self.additional_info(user_df, manager_df)
                                                     # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
+            even = 'Yes' if even not in ['Yes', 'No'] else even
             conditions = []
             conditions.append(self.condition_dict(manager_df)) # always include full condition dict
             if cond_range1.upper() != "ALL": # only include partial condition dicts if specified
                 conditions.append(self.condition_dict(manager_df, cond_range1))
                 conditions.append(self.condition_dict(manager_df, cond_range2))
+            if lc_system == "Vanquish Neo":
+                lc_symbol = ':'
+            else: lc_symbol = ''
         except Exception as e:
             raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \
             "Verify that all required experiment fields are correctly filled in the Excel sheet." \
@@ -175,6 +179,6 @@ class ExcelParser:
 
         self.blocker_info = [user_df, manager_df, lc_number, conditions, wet_amounts, plates, num_to_run,
                              lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency]
-        self.output_info = [nbcode, lc_number, blank_method, sample_type, inj_vol, conditions]
+        self.output_info = [nbcode, lc_number, blank_method, sample_type, inj_vol, lc_symbol]
 
         return self.blocker_info, self.output_info

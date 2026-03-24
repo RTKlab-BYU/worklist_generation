@@ -78,17 +78,17 @@ def _validate_file_names(df, label, twocol_2xp):
     #    If this is a 2-column system with two experiments, split file names
     #    into two interleaved groups (every other) and check each separately.
     def check_block_completeness(fns, label_suffix=""):
-        block_pattern = re.compile(r"^(.+?)_(blo\d+)_", re.IGNORECASE)
+        block_pattern = re.compile(r"_([^_]+)_(blo\d+)_", re.IGNORECASE)
         blocks: dict[str, list[str]] = {}
         for fn in fns:
             m = block_pattern.search(fn)
             if m:
-                full_prefix = m.group(1)
+                condition = m.group(1)
                 block_id = m.group(2).lower()
-                condition = full_prefix.split("_", 1)[-1]
                 blocks.setdefault(block_id, []).append(condition)
 
         assert len(blocks) > 0, f"{label}{label_suffix}: No block file names found"
+        print(len(blocks))
 
         all_conditions = set(c for conditions in blocks.values() for c in conditions)
         for block_id, conditions in blocks.items():
@@ -97,11 +97,15 @@ def _validate_file_names(df, label, twocol_2xp):
                 f"{label}{label_suffix}: Block '{block_id}' is missing conditions: {missing}"
             )
 
+    # NEW: Filter for block files BEFORE slicing to preserve experiment parity
+    block_pattern = re.compile(r"_([^_]+)_(blo\d+)_", re.IGNORECASE)
+    block_files = [fn for fn in file_names if block_pattern.search(fn)]
+
     if twocol_2xp:
-        check_block_completeness(file_names[0::2], label_suffix=" (experiment 1)")
-        check_block_completeness(file_names[1::2], label_suffix=" (experiment 2)")
+        check_block_completeness(block_files[0::2], label_suffix=" (experiment 1)")
+        check_block_completeness(block_files[1::2], label_suffix=" (experiment 2)")
     else:
-        check_block_completeness(file_names)
+        check_block_completeness(block_files)
 
     # 4. At least one file name contains "tb" or "trueblank" (case-insensitive)
     assert any("tb" in fn.lower() or "trueblank" in fn.lower() or "true_blank" in fn.lower()

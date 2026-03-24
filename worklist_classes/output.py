@@ -8,6 +8,7 @@ class Output:
         self.blank_method = parser_output[2]
         self.sample_type = parser_output[3]
         self.inj_vol = parser_output[4]
+        self.lc_symbol = parser_output[5]
         self.well_conditions = blocker_output[0]
         self.block_runs = blocker_output[1]
         self.positions = blocker_output[2]
@@ -64,6 +65,11 @@ class Output:
         method_paths = []
         method_names = []
         data_paths = []
+
+        # add position symbol
+        if self.lc_symbol != '':
+            positions = [p[0] + self.lc_symbol + p[1:] for p in positions]
+
         for index in well_conditions:
             if index not in self.conditions:
                 raise KeyError(f"Condition {index} not found.")

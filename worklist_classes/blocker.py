@@ -137,7 +137,7 @@ class Blocker:
                 Blank_num.append(key_int)
             elif label == 'TrueBlank':
                 TrueBlank_num.append(key_int)
-            elif label == 'Lib':
+            elif label == 'Library':
                 Lib_num.append(key_int)
             elif label == 'SystemValidation':
                 SysValid_num.append(key_int)
@@ -203,7 +203,7 @@ class Blocker:
                 Blank_num.append(int(key))
             if conditions[key][0] == 'TrueBlank' and key != 100: # if TrueBlank wasn't originally in conditions, it was assigned 100 so it can be sorted but not treated as a real TrueBlank in the blocking
                 TrueBlank_num.append(int(key))
-            if conditions[key][0] == 'Lib':
+            if conditions[key][0] == 'Library':
                 Lib_num.append(int(key))
         
         for key in list(self.all_conditions.keys()):
@@ -282,7 +282,7 @@ class Blocker:
         if Lib_list and lib_placement.upper() == "AFTER" and cond_range1.upper() == "ALL": #controls library placement
             nonsample_after.append(Lib_list)
             if not found_TB:
-                nonsample_after.append([[two_xp_TB, "R5"]]*3)
+                nonsample_after.append([[two_xp_TB, "R5"]])
 
         # if library runs are not the same in a two experiment plate, they must be returned separately
         library = []
@@ -337,7 +337,7 @@ class Blocker:
                 grouped.setdefault(well[0], []).append(well)
 
             sample_dict = {
-                sample: [conditions[sample], total // sample_block_num, total]
+                sample: [conditions[sample], 1 if even.upper() == "YES" else total // sample_block_num, total]
                 for sample, total in counts.items()
             }
 
@@ -373,7 +373,7 @@ class Blocker:
                                 pos = placements[i]
                                 sample_blocks[pos].append(well)
                                 extras_dict[sample][0] -= 1
-
+                                
             for block in sample_blocks:
                 random.shuffle(block)
 
@@ -645,8 +645,10 @@ class Blocker:
         if separate_lib2:
             for well in separate_lib2:
                 well.append("lib2")
+        
+        tag = 'pre' if lib_placement.upper() == "AFTER" else 'post'
 
-        TB_well = [two_xp_TB, two_xp_TB_location[0][1], "pre"]
+        TB_well = [two_xp_TB, two_xp_TB_location[0][1], tag]
         to_add = []
 
         def interweave_with_tb(lib):
@@ -692,7 +694,7 @@ class Blocker:
         # Place libraries before or after main experiment
         to_add.extend([TB_well, TB_well]*5)  # buffer TBs between library and main experiment
 
-        if lib_placement == "Before":
+        if lib_placement.upper() == "BEFORE":
             return to_add + two_xp_flat_list
         else:  # default After
             return two_xp_flat_list + to_add
@@ -706,8 +708,8 @@ class Blocker:
     def pop_one_per_group(self, sysvalid_groups, new_flat_list, missing_SV):
         for group in sysvalid_groups:
             try:
-                new_flat_list.append(group[-1])
-                group.pop()
+                new_flat_list.append(group[0])
+                group.pop(0)
             except IndexError:
                 missing_SV += 1
         return missing_SV
@@ -736,10 +738,12 @@ class Blocker:
         # Prepend one well from each group at the start
         for _ in range(lc_number):
             missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
+            new_flat_list.extend([TB_well])
 
         # Walk through flattened_list in chunks, inserting SysQC between each
         for i in range(0, len(flattened_list), SysValid_interval):
             new_flat_list.extend(flattened_list[i:i + SysValid_interval])
+            new_flat_list.extend([TB_well])
 
             if i + SysValid_interval < len(flattened_list):
                 # Check if TB wells are needed before inserting SysQC
@@ -752,10 +756,12 @@ class Blocker:
                 # Insert one well per group at this interval point
                 for _ in range(lc_number):
                     missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
+                    new_flat_list.extend([TB_well])
 
         # Append one well from each group at the end
         for _ in range(lc_number):
             missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
+            new_flat_list.extend([TB_well])
 
         if missing_SV > 0 and SysVal_copy:
             print(f"Not enough System Validation QC was added, consider adding {missing_SV} more.")

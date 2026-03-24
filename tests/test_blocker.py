@@ -160,7 +160,7 @@ def test_compare_wells_and_counts_requires_trueblank_presence_if_defined():
 
 
 def test_compare_wells_and_counts_requires_library_presence_if_defined():
-    conditions = {1: cond_row("Lib")}
+    conditions = {1: cond_row("Library")}
     blocker = make_blocker(all_conditions=conditions, wet_amounts={1: 1})
 
     with pytest.raises(ValueError, match="No Library wells found"):
@@ -181,7 +181,7 @@ def test_column_sorter_splits_non_samples_and_applies_num_to_run():
         1: cond_row("Sample"),
         2: cond_row("Sample"),
         3: cond_row("QC", before=1),
-        4: cond_row("Lib"),
+        4: cond_row("Library"),
         5: cond_row("TrueBlank"),
         6: cond_row("SystemValidation"),
     }
@@ -287,7 +287,7 @@ def test_block_end_to_end_single_experiment_without_excel_parser():
         1: cond_row("Sample", method="METHOD_A"),
         2: cond_row("SystemValidation", method="METHOD_SV"),
     }
-    plate = pd.DataFrame([[1], [1], [1], [2]], index=["A", "B", "C", "D"], columns=[1])
+    plate = pd.DataFrame([[1], [1], [1], [2], [2]], index=["A", "B", "C", "D", "E"], columns=[1])
 
     blocker = make_blocker(
         all_conditions=all_conditions,
@@ -306,7 +306,7 @@ def test_block_end_to_end_single_experiment_without_excel_parser():
     well_conditions, block_runs, positions, reps, msmethods, conditions = blocked
 
     assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods)
-    assert set(well_conditions).issubset({1, 2})
+    assert set(well_conditions).issubset({1, 2, 100})
     assert "METHOD_A" in set(msmethods)
     assert 100 in conditions
 
@@ -316,7 +316,7 @@ def test_block_end_to_end_places_qc_pre_between_post_and_includes_lib_and_sysval
     all_conditions = {
         1: cond_row("Sample", method="METHOD_SAMPLE"),
         2: cond_row("QC", before=2, after=1, between=1, method="METHOD_QC"),
-        3: cond_row("Lib", method="METHOD_LIB"),
+        3: cond_row("Library", method="METHOD_LIB"),
         4: cond_row("SystemValidation", method="METHOD_SV"),
         5: cond_row("TrueBlank", method="METHOD_TB"),
     }
@@ -359,7 +359,7 @@ def test_block_end_to_end_lib_after_tags_library_as_post():
     all_conditions = {
         1: cond_row("Sample"),
         2: cond_row("QC", before=1, after=1, between=0),
-        3: cond_row("Lib"),
+        3: cond_row("Library"),
         4: cond_row("SystemValidation"),
     }
     values = [[1, 1], [1, 1], [2, 2], [3, 3], [4, 4]]
