@@ -42,7 +42,7 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 3. Extract the ZIP using File Explorer (Windows) or Finder (macOS).
 4. Open the folder with your preferred IDE or a terminal.
 
-> **Note:** Commands below assume **Python 3** is available on your system (use `python3` on macOS/Linux and `python` or `py -3` on Windows, as appropriate).
+> **Note:** Commands below assume **Python 3** is available on your system. Visit https://www.python.org/downloads/ to install python on your computer.
 
 ---
 
@@ -50,30 +50,10 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 1. Access your commandline through your preferred program such as Terminal (MacOS), PowerShell (Windows), or VSCode.
 2. Enter the following code:
 ```bash
-git clone https://github.com/yourusername/worklist-generator.git
+git clone https://github.com/(yourusername)/worklist-generator.git ## enter your github username in place of '(yourusername)'.
 cd worklist-generator
 pip install -r requirements.txt
-python3 app.py
 ```
----
-
-## Quick Start
-1. **Generate metadata sheet**:
-   ```bash
-   python3 run.py
-   ```
-2. **Create a blank Excel template**:
-   ```bash
-   python3 commandline.py -t <template_name_optional>
-   ```
-   A template `.xlsx` file is saved to your **Downloads** folder.
-3. **Fill the template** using the instructions in [Template Procedure](#template-procedure).
-4. **Generate a worklist** from your completed template:
-   ```bash
-   python3 commandline.py -r <path_to_template> <optional_output_folder>
-   ```
-   If you omit the output folder, results are written to **Downloads**.
-
 ---
 
 ## Command‑Line Usage
@@ -162,30 +142,30 @@ Use **columns AD–AG** to define:
 
 ---
 
-## Machine Page
+### Machine Page
 
-### Running Wells
+**Running Wells**
 - Column **M – Samples/Well**: specify how many samples of a condition are present in each labeled well (mirrors User page intent).
 - Column **N – Number of sample to run**: the **total** number of samples you want to run. Enter a number or `all`.
   - Example: 13 wells × 3 samples/well = **39** samples. Enter `39` to run all, or a smaller number to subsample; the program **randomly selects** that many from the full set.
 
-### QC Before / After / Between
+**QC Before / After / Between**
 (For **QC‑type** wells only: `QC`, `WetQC`, `Blank`, `TrueBlank`; **not** used for `Condition`, `Lib`, or `System Validation`.)
 - **QC before (Column N)** – Number of specified non‑condition samples to run **before** any condition samples.
 - **QC after (Column O)** – Number to run **after** all condition samples.
 - **QC between (Column P)** – Number to distribute **between** condition blocks.
 
-### Columns & Library Placement
+**Columns & Library Placement**
 - **Column R, Row 2** – Set **LC column count** (`1` or `2`). Use `2` when running **two experiments** simultaneously or when your LC system has two columns.
 - **Column R, Row 5** – Place all **Library** samples **before** or **after** the condition blocks. Two **TrueBlank** runs are added automatically after libraries to clear residue.
 
-### Frequency Settings
+**Frequency Settings**
 - **Column R, Row 6 – System Validation frequency**: runs system‑validation wells every *N* injections (condition or non‑condition).
 - **Column R, Row 7 – QC block frequency**: inserts a QC block every *N* condition runs.
 
 ---
 
-## Glossary
+**Glossary**
 - **System Validation** – Wells used by the instrument manager to monitor equipment performance across experiments; scheduled at a defined frequency.
 - **QC (Quality Control)** – Control units for the current experiment, run at an interval chosen by the experimentalist.
 - **TrueBlank** – Completely empty wells, used to clear LC columns after Library runs.
