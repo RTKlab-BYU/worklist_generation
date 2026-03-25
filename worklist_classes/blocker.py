@@ -284,6 +284,7 @@ class Blocker:
             if not found_TB:
                 nonsample_after.append([[two_xp_TB, "R5"]])
 
+
         # if library runs are not the same in a two experiment plate, they must be returned separately
         library = []
         if Lib_list and cond_range1.upper() != "ALL":
@@ -705,13 +706,14 @@ class Blocker:
             groups[well[0]].append(well)
         return list(groups.values())
 
-    def pop_one_per_group(self, sysvalid_groups, new_flat_list, missing_SV):
+    def pop_all_columns_per_group(self, sysvalid_groups, new_flat_list, missing_SV):
+        """For each group, insert lc_number copies before moving to the next group."""
         for group in sysvalid_groups:
-            try:
-                new_flat_list.append(group[0])
-                group.pop(0)
-            except IndexError:
-                missing_SV += 1
+            if group:
+                well = group.pop(0)
+                new_flat_list.extend([well] * self.lc_number)
+            else:
+                missing_SV += self.lc_number
         return missing_SV
 
     def insert_sysQC(self, flattened_list, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, full_conditions):
@@ -736,32 +738,24 @@ class Blocker:
         new_flat_list = []
 
         # Prepend one well from each group at the start
-        for _ in range(lc_number):
-            missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
-            new_flat_list.extend([TB_well])
+        missing_SV = self.pop_all_columns_per_group(sysvalid_groups, new_flat_list, missing_SV)
 
         # Walk through flattened_list in chunks, inserting SysQC between each
         for i in range(0, len(flattened_list), SysValid_interval):
             new_flat_list.extend(flattened_list[i:i + SysValid_interval])
-            new_flat_list.extend([TB_well])
 
             if i + SysValid_interval < len(flattened_list):
-                # Check if TB wells are needed before inserting SysQC
                 if any(
                     'LIB' in new_flat_list[-j][2].upper() or 
                     'LIB' in full_conditions[new_flat_list[-j][0]][0].upper()
                     for j in range(1, lc_number + 1)
                 ):
                     new_flat_list.extend([TB_well] * lc_number)
-                # Insert one well per group at this interval point
-                for _ in range(lc_number):
-                    missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
-                    new_flat_list.extend([TB_well])
+                # Insert all columns for each group in order
+                missing_SV = self.pop_all_columns_per_group(sysvalid_groups, new_flat_list, missing_SV)
 
         # Append one well from each group at the end
-        for _ in range(lc_number):
-            missing_SV = self.pop_one_per_group(sysvalid_groups, new_flat_list, missing_SV)
-            new_flat_list.extend([TB_well])
+        missing_SV = self.pop_all_columns_per_group(sysvalid_groups, new_flat_list, missing_SV)
 
         if missing_SV > 0 and SysVal_copy:
             print(f"Not enough System Validation QC was added, consider adding {missing_SV} more.")
@@ -787,13 +781,14 @@ class Blocker:
 
     def extract_file_info(self, flattened, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, conditions):
         flattened = self.insert_sysQC(flattened, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, conditions)
-        well_conditions, block_runs, positions, reps, msmethods = [], [], [], [], []
+        well_conditions, block_runs, positions, reps, msmethods, lcmethods = [], [], [], [], [], []
         well_conditions.extend([int(w[0]) for w in flattened])
         block_runs.extend([w[2] for w in flattened])
         positions.extend([w[1] for w in flattened])
         reps = self.rep_tracker(flattened, conditions)
         msmethods.extend([conditions[int(w[0])][4] for w in flattened])
-        return well_conditions, block_runs, positions, reps, msmethods
+        lcmethods.extend([conditions[int(w[0])][8] for w in flattened])
+        return well_conditions, block_runs, positions, reps, msmethods, lcmethods
         
     def block(self):
         all_wells_flat, two_xp_TB_location = [], []
@@ -824,7 +819,7 @@ class Blocker:
 
             if not found_TB:
                 conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
-            well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
+            well_conditions, block_runs, positions, reps, msmethods, lcmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
 
         elif self.cond_range1.upper() != "ALL" and self.lc_number == 2: # two experiments, 2 column system
             lc_number = 1
@@ -866,11 +861,11 @@ class Blocker:
             if not found_TB:
                 conditions = self.append_TB_condition(self.all_conditions, conditions1, conditions2, found_TB)
                 conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
-            well_conditions, block_runs, positions, reps, msmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
+            well_conditions, block_runs, positions, reps, msmethods, lcmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
 
         else:
             raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \
             "Verify that all required experiment fields are correctly filled in the Excel sheet." \
             "If there is only one experiment the library values should be the same. If there are two experiments you must use a 2 column system.")
-        blocked = [well_conditions, block_runs, positions, reps, msmethods, conditions]
+        blocked = [well_conditions, block_runs, positions, reps, msmethods, lcmethods, conditions]
         return blocked

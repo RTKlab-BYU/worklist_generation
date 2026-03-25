@@ -303,9 +303,9 @@ def test_block_end_to_end_single_experiment_without_excel_parser():
 
     blocked = blocker.block()
 
-    well_conditions, block_runs, positions, reps, msmethods, conditions = blocked
+    well_conditions, block_runs, positions, reps, msmethods, lcmethods, conditions = blocked
 
-    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods)
+    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods) == len(lcmethods)
     assert set(well_conditions).issubset({1, 2, 100})
     assert "METHOD_A" in set(msmethods)
     assert 100 in conditions
@@ -342,9 +342,9 @@ def test_block_end_to_end_places_qc_pre_between_post_and_includes_lib_and_sysval
         qc_frequency=2,
     )
 
-    well_conditions, block_runs, positions, reps, msmethods, _ = blocker.block()
+    well_conditions, block_runs, positions, reps, msmethods, lcmethods, _ = blocker.block()
 
-    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods)
+    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods) == len(lcmethods)
     assert any(c == 3 for c in well_conditions)  # Lib is present
     assert any(c == 4 and r == "SysQC" for c, r in zip(well_conditions, block_runs))  # SysValid inserted
 
