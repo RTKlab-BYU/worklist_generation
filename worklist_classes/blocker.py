@@ -20,7 +20,7 @@ class Blocker:
         self.num_to_run = parser_output[6]
         self.lib_placement = parser_output[7]
         self.sysvalid_interval = parser_output[8]
-        self.TB_location = parser_output[9] # incorporate later
+        self.TB_location = parser_output[9]
         self.cond_range1 = parser_output[10]
         self.cond_range2 = parser_output[11]
         self.lib_same = parser_output[12]
@@ -237,7 +237,7 @@ class Blocker:
         random.shuffle(TrueBlank_list)
         random.shuffle(Lib_list) # future: add option for nonrandomization
 
-        if len(Lib_list) > self.sysvalid_interval:
+        if len(Lib_list) > self.sysvalid_interval - 1:
             print(f"Warning: library will not be clear. {len(Lib_list)} library values and {self.sysvalid_interval} wells between system QC.")
 
         # move a well to 'extras' if a list has an odd number of wells and it uses a 2 column system
@@ -276,14 +276,11 @@ class Blocker:
 
         if Lib_list and lib_placement.upper() == "BEFORE" and cond_range1.upper() == "ALL": #controls library placement
             nonsample_before.append(Lib_list)
-            if not found_TB:
-                nonsample_before.append([[two_xp_TB, "R5"]]*3)
+            nonsample_before.append([[two_xp_TB, self.TB_location]]*2)
 
         if Lib_list and lib_placement.upper() == "AFTER" and cond_range1.upper() == "ALL": #controls library placement
             nonsample_after.append(Lib_list)
-            if not found_TB:
-                nonsample_after.append([[two_xp_TB, "R5"]])
-
+            nonsample_after.append([[two_xp_TB, self.TB_location]]*2)
 
         # if library runs are not the same in a two experiment plate, they must be returned separately
         library = []
@@ -315,6 +312,7 @@ class Blocker:
             if isinstance(max_run, int):
                 wells = wells[:max_run]
             add_to_columns(wells)
+            
         if lc_number==2:
             return (nonsample_before, nonsample_after, nonsample_other, column1, column2, SysValid_list, library)
 

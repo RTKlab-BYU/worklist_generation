@@ -25,7 +25,7 @@ def make_blocker(
     lc_number=1,
     lib_placement="Before",
     sysvalid_interval=5,
-    tb_location=None,
+    tb_location="R5",
     cond_range1="ALL",
     cond_range2="",
     lib_same="YES",
@@ -214,7 +214,8 @@ def test_column_sorter_splits_non_samples_and_applies_num_to_run():
     assert sample_ids.count(1) == 2
     assert sample_ids.count(2) == 2
     assert len(sysvalid_list) == 2
-    assert any(group == [[5, "R5"]] * 3 for group in nonsample_before)
+    print(nonsample_before)  # For debugging
+    assert any(group == [[5, "R5"]] * 2 for group in nonsample_before)
 
 
 def test_blocker_builds_blocks_for_one_column():
