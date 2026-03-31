@@ -791,7 +791,7 @@ class Blocker:
     def block(self):
         all_wells_flat, two_xp_TB_location = [], []
 
-        if self.cond_range1.upper() == "ALL" and self.lib_same.upper() == "YES": # one experiment, 1 or 2 column system
+        if self.cond_range1.upper() == "ALL": # one experiment, 1 or 2 column system
             conditions, two_xp_TB, found_TB = self.check_for_trueblank(self.all_conditions)
             sysvalid_condition, sysvalid_num, found_sysvalid = self.check_for_sysvalid(self.all_conditions)
             for key in self.plates:
