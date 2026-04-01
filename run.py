@@ -122,7 +122,7 @@ def stage_1_generate_metadata():
     print(f"\nMetadata Excel generated:\n  {output_path}")
     auto_open_file(output_path)
 
-    print("\nNext step:")
+    print("\nNext step (you may copy and paste the command below):")
     print(f"  python run.py -s 2 -m {output_path}\n")
 
     sys.exit(0)
@@ -160,10 +160,10 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
     )
 
     output_path = Path(output_path)
-    print(f"\nFilled worklist created:\n  {output_path}")
+    print(f"\nMetadata captured!\nWorklist template created:\n  {output_path}")
     auto_open_file(output_path)
 
-    print("\nNext step:")
+    print("\nNext step (you may copy and paste the command below):")
     print(f"  python run.py -s 3 -w {output_path} -o <output_dir>\n")
 
     sys.exit(0)

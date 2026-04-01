@@ -56,7 +56,7 @@ class Blocker:
             if v[0] == "SystemValidation":
                 sys_valid_cond[i+1] = v
                 return sys_valid_cond, i+1, True
-        return 0, False
+        return None, 0, False
 
     def parse_range(self, cond_range):
         if cond_range is None or (isinstance(cond_range, float) and np.isnan(cond_range)) or str(cond_range).strip() == "":

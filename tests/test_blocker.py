@@ -433,7 +433,7 @@ def test_block_raises_for_invalid_configuration():
         blocker.block()
 
 
-def test_block_without_systemvalidation_condition_hits_unpacking_error():
+def test_block_without_systemvalidation_condition_hits_unpacking_error(capsys):
     # Represents a plausible parser output where no SystemValidation row was defined.
     blocker = make_blocker(
         all_conditions={1: cond_row("Sample")},
@@ -447,5 +447,7 @@ def test_block_without_systemvalidation_condition_hits_unpacking_error():
         qc_frequency=2,
     )
 
-    with pytest.raises(ValueError, match="not enough values to unpack"):
-        blocker.block()
+    blocker.block()
+    
+    captured = capsys.readouterr()
+    assert "No System Validation QC" in captured.out
