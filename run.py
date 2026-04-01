@@ -116,8 +116,12 @@ def stage_1_generate_metadata():
         source_file=source_file,
         project_outline=project_outline
     )
+    temp_path = Path(generator.generate_file())
 
-    output_path = Path(generator.generate_file())
+    output_dir = Path(__file__).parent / "output"
+    output_dir.mkdir(exist_ok=True)
+
+    output_path = temp_path.rename(output_dir / temp_path.name)
 
     print(f"\nMetadata Excel generated:\n  {output_path}")
     auto_open_file(output_path)
@@ -159,11 +163,17 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
         output_filename=f"worklist_conditions_project_{project_id}.xlsx"
     )
 
-    output_path = Path(output_path)
+    temp_path = Path(output_path)
+
+    output_dir = Path(__file__).parent / "output"
+    output_dir.mkdir(exist_ok=True)
+
+    output_path = temp_path.rename(output_dir / temp_path.name)
+
     print(f"\nMetadata captured!\nWorklist template created:\n  {output_path}")
     auto_open_file(output_path)
 
-    print("\nNext step (you may copy and paste the command below):")
+    print("\nNext step (you may copy and paste the command below, but remember to add your own output directory):")
     print(f"  python run.py -s 3 -w {output_path} -o <output_dir>\n")
 
     sys.exit(0)

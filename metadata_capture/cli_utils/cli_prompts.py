@@ -13,7 +13,7 @@ def get_project_outline() -> ProjectOutline:
             break
         except ValueError:
             print("Please insert a positive integer for number of conditions.")
-
+    print("\nYou may change the condition names later, but please provide initial names here.")
     groups = [input(f"Condition {i + 1} name: ") for i in range(number_of_groups)]
 
     return ProjectOutline(name=name, description=description, number_of_groups=number_of_groups, groups=groups)

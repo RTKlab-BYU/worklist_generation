@@ -92,7 +92,7 @@ from pathlib import Path
 def write_sqlite_to_output(metadata: ProjectMetadata, project_id: int, output_dir="output"):
     Path(output_dir).mkdir(exist_ok=True)
 
-    filename = f"{metadata.project_outline.name}_summary.txt"
+    filename = f"{metadata.project_outline.name.replace(' ', '_')}_summary.txt"
     output_path = Path(output_dir) / filename
 
     with open(output_path, "w", encoding="utf-8") as f:
