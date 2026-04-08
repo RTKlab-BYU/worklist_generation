@@ -1,32 +1,17 @@
-
 # Worklist Generator
 *A tool for creating randomized, blocked, high‑power LC–MS worklists*
 
 ## Table of Contents
 - [Overview](#overview)
 - [Installation](#installation)
-- [Quick Start](#quick-start)
 - [Command‑Line Usage](#command-line-usage)
-  - [Download the Excel Template](#1-download-the-excel-template)
-  - [Generate a Worklist from a Completed Template](#2-generate-a-worklist-from-a-completed-template)
-- [Metadata Procedure](#metadata-procedure)
-- [Template Procedure](#template-procedure)
-  - [Experiment Page](#experiment-page--define-well-types--conditions)
-  - [Fill Out Plates](#fill-out-plates)
-  - [Multiple Experiments & Options](#multiple-experiments--additional-options)
-  - [Metadata](#metadata)
-- [Machine Page](#machine-page)
-  - [Running Wells](#running-wells)
-  - [QC Before / After / Between](#qc-before--after--between)
-  - [Columns & Library Placement](#columns--library-placement)
-  - [Frequency Settings](#frequency-settings)
 - [Glossary](#glossary)
 - [Cite & Acknowledge](#cite--acknowledge)
 
 ---
 
 ## Overview
-The **Worklist Generator** helps researchers quickly create statistically robust worklists for LC–MS experiments. It supports up to **four 16×24 well plates** and allows each well to be labeled as an **experimental condition** or one of several **non‑condition types** (QC, WetQC, Library, Blank, TrueBlank, or System Validation). The program:
+The **Worklist Generator** helps researchers quickly create statistically robust worklists for LC–MS experiments. It supports up to **three 16×24 well plates** and allows each well to be labeled as an **experimental condition** or one of several **non‑condition types** (QC, WetQC, Library, Blank, TrueBlank, or System Validation). The program:
 
 - Randomizes and blocks experimental conditions
 - Builds block structures for non‑condition wells (QC/Blank/TrueBlank/WetQC)
@@ -55,7 +40,6 @@ cd worklist-generator
 pip install -r requirements.txt
 ```
 ---
-
 ## Command‑Line Usage
 
 ### 1. Generate metadata sheet
@@ -80,101 +64,6 @@ python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
 <!-- - If `<optional_output_folder>` is omitted, the worklist is saved to **Downloads**. -->
 
 ---
-
-## Metadata Procedure
-
-### DataEntry Page
-Use row 8 to add Group Names
-**Rows 10-19** should be filled out for each group. First enter data that is repeated accross groups. Then hit the gray button in column 1 to copy information to all the groups.
-**Rows 20-24** provide space for extra variables.
-Boxes can be left blank.
-**Rows 26-38** will be filled in the same pattern as 10-19 except that data about sample prep will be entered.
-**Rows 39-43** will be filled like 20-24.
-**Save** changes made to the sheet.
-**{Use command to enter sheet into programm}**
-
----
-
-## Template Procedure
-
-### Experiment Page – Define Well Types & Conditions
-Use **columns AD–AG** to define:
-- **Number** – Auto‑assigned identifier for wells; do not change this column.
-- **Well Type** – Choose from: `Condition`, `QC`, `Blank`, `TrueBlank`, `Lib`, `System Validation`, `WetQC`.
-- **Condition** – Descriptive name for the condition.
-- **Samples/Well** – How many samples can be drawn from each well.
-
-**Well‑type behavior:**
-- **Condition** wells are randomized and **blocked** together.
-- **Lib (Library)** wells are grouped **together** at either the **beginning or end** (set later) and are **followed by two `TrueBlank` runs**.
-- **QC / Blank / TrueBlank / WetQC** are randomized and blocked together into **QC Blocks**.
-- **System Validation** wells, if present, are inserted at a **user‑defined interval**.
-
-### Fill Out Plates
-- The template includes **four plates**.
-- Use the **Number** values from column **AD** to place condition numbers into plate wells.
-- For convenience, set **Plate color** and **Plate name** (left of each plate) to help with slot identification on the LC system.
-
-### Multiple Experiments & Additional Options
-(Located in **Columns AI–AJ, Rows 2-7**)
-
-**Force even blocks?**
-- **No** → Creates the **maximum** number of blocks by using the smallest condition count as the block size; extra samples are **randomly distributed** across blocks.
-- **Yes** → All blocks contain the **same number** of each condition; **extra** samples are **ignored**.
-
-**One vs. Two Experiments**
-- For a **single** experiment, enter `All` for **Experiment 1** and leave **Experiment 2** blank.
-- For **two** experiments, provide **ranges** (using the **Number** values from column AD), e.g., `1-3` and `4-7`. Ranges must be contiguous for each experiment.
-
-**Two‑experiment mode (two‑column systems):**
-- Each experiment is **blocked independently**, producing two logical worklists.
-- Blocks are **interwoven** so Experiment 1 runs on **Column A** while Experiment 2 runs on **Column B** (or equivalent).
-- If experiment sizes differ, **TrueBlank (air)** runs are added to the shorter experiment so both columns finish together.
-- If you are using **one column** only, consider creating **two separate worklists** and run them sequentially for simplicity.
-
-**Library type consistency across experiments**
-- If **library types are the same**, they can run back‑to‑back.
-- If **different**, the worklist runs Experiment 1 libraries (with blanks on the other column), then Experiment 2 libraries (with blanks on the first column), to minimize residue carryover.
-
-### Metadata
-- In the upper‑left of the template, provide **Name**, **Experiment Name**, and a **Notebook Code**.
-- The **Notebook Code** is appended to output filenames for traceability.
-
----
-
-### Machine Page
-
-**Running Wells**
-- Column **M – Samples/Well**: specify how many samples of a condition are present in each labeled well (mirrors User page intent).
-- Column **N – Number of sample to run**: the **total** number of samples you want to run. Enter a number or `all`.
-  - Example: 13 wells × 3 samples/well = **39** samples. Enter `39` to run all, or a smaller number to subsample; the program **randomly selects** that many from the full set.
-
-**QC Before / After / Between**
-(For **QC‑type** wells only: `QC`, `WetQC`, `Blank`, `TrueBlank`; **not** used for `Condition`, `Lib`, or `System Validation`.)
-- **QC before (Column N)** – Number of specified non‑condition samples to run **before** any condition samples.
-- **QC after (Column O)** – Number to run **after** all condition samples.
-- **QC between (Column P)** – Number to distribute **between** condition blocks.
-
-**Columns & Library Placement**
-- **Column R, Row 2** – Set **LC column count** (`1` or `2`). Use `2` when running **two experiments** simultaneously or when your LC system has two columns.
-- **Column R, Row 5** – Place all **Library** samples **before** or **after** the condition blocks. Two **TrueBlank** runs are added automatically after libraries to clear residue.
-
-**Frequency Settings**
-- **Column R, Row 6 – System Validation frequency**: runs system‑validation wells every *N* injections (condition or non‑condition).
-- **Column R, Row 7 – QC block frequency**: inserts a QC block every *N* condition runs.
-
----
-
-**Glossary**
-- **System Validation** – Wells used by the instrument manager to monitor equipment performance across experiments; scheduled at a defined frequency.
-- **QC (Quality Control)** – Control units for the current experiment, run at an interval chosen by the experimentalist.
-- **TrueBlank** – Completely empty wells, used to clear LC columns after Library runs.
-- **WetQC** – QC wells prepared in additional liquid.
-- **Library (Lib)** – Wells used to train/validate downstream analysis methods.
-- **Block** – A group of experimental units arranged to increase balance and improve randomization.
-
----
-
 ## Cite & Acknowledge
 This README summarizes the **Worklist Generator User Guide** and the program’s public repository.
 - GitHub: https://github.com/RTKlab-BYU/worklist_generation.git
