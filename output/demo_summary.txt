@@ -1,0 +1,39 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 25
+Name: demo
+Description: a demo
+Created: 2026-04-09 10:39:32
+Independent Variables:
+  None
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### a
+
+  [SAMPLE IDENTIFICATION]
+    Species: sapiens
+
+
+### b
+
+  [SAMPLE IDENTIFICATION]
+    Species: sapiens
+
+
+### c
+
+  [SAMPLE IDENTIFICATION]
+    Species: sapiens
+
+
+### d
+
+  [SAMPLE IDENTIFICATION]
+    Species: sapiens
+

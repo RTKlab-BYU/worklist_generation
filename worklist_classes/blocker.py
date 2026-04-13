@@ -530,8 +530,8 @@ class Blocker:
         # Add block numbers
         sample_blocks = self.tag_blocks(sample_blocks)
         samples_flat = [w for b in sample_blocks for w in b]
-
         blocks_to_make = len(samples_flat) // QC_frequency
+        blocks_to_make = 0 if np.isnan(blocks_to_make) else blocks_to_make
         list_nonsample_blocks = self.non_sample_lists(conditions, non_sample_blocks, blocks_to_make)
 
         samples_and_non, temp, counter = [], [], 0
