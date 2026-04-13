@@ -97,7 +97,6 @@ def _validate_file_names(df, label, twocol_2xp):
                 f"{label}{label_suffix}: Block '{block_id}' is missing conditions: {missing}"
             )
 
-    # NEW: Filter for block files BEFORE slicing to preserve experiment parity
     block_pattern = re.compile(r"_([^_]+)_(blo\d+)_", re.IGNORECASE)
     block_files = [fn for fn in file_names if block_pattern.search(fn)]
 

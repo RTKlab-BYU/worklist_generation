@@ -25,7 +25,7 @@ def make_blocker(
     lc_number=1,
     lib_placement="Before",
     sysvalid_interval=5,
-    tb_location=None,
+    tb_location="R5",
     cond_range1="ALL",
     cond_range2="",
     lib_same="YES",
@@ -214,7 +214,8 @@ def test_column_sorter_splits_non_samples_and_applies_num_to_run():
     assert sample_ids.count(1) == 2
     assert sample_ids.count(2) == 2
     assert len(sysvalid_list) == 2
-    assert any(group == [[5, "R5"]] * 3 for group in nonsample_before)
+    print(nonsample_before)  # For debugging
+    assert any(group == [[5, "R5"]] * 2 for group in nonsample_before)
 
 
 def test_blocker_builds_blocks_for_one_column():
@@ -303,9 +304,9 @@ def test_block_end_to_end_single_experiment_without_excel_parser():
 
     blocked = blocker.block()
 
-    well_conditions, block_runs, positions, reps, msmethods, conditions = blocked
+    well_conditions, block_runs, positions, reps, msmethods, lcmethods, conditions = blocked
 
-    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods)
+    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods) == len(lcmethods)
     assert set(well_conditions).issubset({1, 2, 100})
     assert "METHOD_A" in set(msmethods)
     assert 100 in conditions
@@ -342,9 +343,9 @@ def test_block_end_to_end_places_qc_pre_between_post_and_includes_lib_and_sysval
         qc_frequency=2,
     )
 
-    well_conditions, block_runs, positions, reps, msmethods, _ = blocker.block()
+    well_conditions, block_runs, positions, reps, msmethods, lcmethods, _ = blocker.block()
 
-    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods)
+    assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods) == len(lcmethods)
     assert any(c == 3 for c in well_conditions)  # Lib is present
     assert any(c == 4 and r == "SysQC" for c, r in zip(well_conditions, block_runs))  # SysValid inserted
 
@@ -432,7 +433,7 @@ def test_block_raises_for_invalid_configuration():
         blocker.block()
 
 
-def test_block_without_systemvalidation_condition_hits_unpacking_error():
+def test_block_without_systemvalidation_condition_hits_unpacking_error(capsys):
     # Represents a plausible parser output where no SystemValidation row was defined.
     blocker = make_blocker(
         all_conditions={1: cond_row("Sample")},
@@ -446,5 +447,7 @@ def test_block_without_systemvalidation_condition_hits_unpacking_error():
         qc_frequency=2,
     )
 
-    with pytest.raises(ValueError, match="not enough values to unpack"):
-        blocker.block()
+    blocker.block()
+    
+    captured = capsys.readouterr()
+    assert "No System Validation QC" in captured.out

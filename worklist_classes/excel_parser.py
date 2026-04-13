@@ -159,6 +159,7 @@ class ExcelParser:
             nbcode, lc_number, wet_amounts, plates, num_to_run = self.separate_plates(user_df, manager_df)
             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system = self.additional_info(user_df, manager_df)
                                                     # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
+            TB_location = 'R5' if (TB_location == '' or TB_location != TB_location) else TB_location # check for blank or NaN and set to default if so
             even = 'Yes' if even not in ['Yes', 'No'] else even
             conditions = []
             conditions.append(self.condition_dict(manager_df)) # always include full condition dict

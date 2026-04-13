@@ -14,16 +14,17 @@ class Output:
         self.positions = blocker_output[2]
         self.reps = blocker_output[3]
         self.msmethods = blocker_output[4]
-        self.conditions = blocker_output[5]
+        self.lcmethods = blocker_output[5]
+        self.conditions = blocker_output[6]
 
     def create_filenames(self):
         # creates a list of filenames
         filenames = []
         TB_method_found = False # in a 2 column system we need to store the msmethod for a TrueBlank for later
         if self.lc_number == 1:
-            columns = ['nbcode', 'conditions', 'block and run', 'position', 'rep','msmethod']
+            columns = ['nbcode', 'conditions', 'block and run', 'position', 'rep', 'msmethod', 'lcmethod']
         elif self.lc_number == 2:
-            columns = ['nbcode', 'conditions', 'block and run', 'position', 'rep', 'channel', 'msmethod']
+            columns = ['nbcode', 'conditions', 'block and run', 'position', 'rep', 'channel', 'msmethod', 'lcmethod']
         df = pd.DataFrame(columns=columns)
         for index, _ in enumerate(self.block_runs):
             try:
@@ -31,11 +32,11 @@ class Output:
             except KeyError:
                 raise KeyError(f"Condition {self.well_conditions[index]} not found in conditions dictionary. Conditions: {list(self.conditions.keys())}")
             if self.lc_number == 1:
-                df.loc[len(df)] = [self.nbcode, condition, self.block_runs[index],
-                        self.positions[index], f"rep{self.reps[index]}", self.msmethods[index]]
+                df.loc[len(df)] = [self.nbcode, condition, self.block_runs[index], self.positions[index],
+                                   f"rep{self.reps[index]}", self.msmethods[index], self.lcmethods[index]]
             elif self.lc_number == 2:
-                df.loc[len(df)] = [self.nbcode, condition, self.block_runs[index],
-                        self.positions[index], f"rep{self.reps[index]}", f"ch{(index%2)+1}", self.msmethods[index]]
+                df.loc[len(df)] = [self.nbcode, condition, self.block_runs[index], self.positions[index],
+                                   f"rep{self.reps[index]}", f"ch{(index%2)+1}", self.msmethods[index], self.lcmethods[index]]
                 if condition == "TrueBlank":
                     TB_method = self.msmethods[index]
                     TB_method_found = True
@@ -93,18 +94,12 @@ class Output:
             filenames.insert(0, f"{self.nbcode}_Preblank1")
             data_paths.insert(0, data_paths[0])
             data_paths.insert(0, data_paths[0])
-            if csv_file == 'MS':
-                # inst_methods.insert(0, blank_method)
-                # inst_methods.insert(0, blank_method)
-                if TB_method is None:
-                    inst_methods.insert(0, inst_methods[0])
-                    inst_methods.insert(0, inst_methods[0])
-                else:
-                    inst_methods.insert(0, TB_method)
-                    inst_methods.insert(0, TB_method)
-            elif csv_file == 'LC':
+            if TB_method is None:
                 inst_methods.append(inst_methods[-1])
                 inst_methods.append(inst_methods[-1])
+            else:
+                inst_methods.append(TB_method)
+                inst_methods.append(TB_method)
             positions.append(positions[-1])
             positions.append(positions[-1])
 
