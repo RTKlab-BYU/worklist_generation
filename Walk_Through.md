@@ -5,12 +5,14 @@ This walkthrough guides you through an example experiment to show how the templa
 ## Project Description
 
 This mock experiment follows the pattern of an experiment looking for the difference between healthy and diseased, B and T cells across 6 individuals. Half of the individuals are male, and half are female.
-
+![experiment_design](./images/figure-WLG_6sub.png)
 
 
 ---
 
-## Terminal: Create Metadata Excel Sheet
+## Step 1: Create Metadata Excel Sheet
+
+In the first step, enter metadata about the different conditions.
 
 In the terminal enter:
 
@@ -49,7 +51,7 @@ We recommend copying the text under **“Next step:”**.
 
 ---
 
-## Fill Metadata Sheet
+### Fill Metadata Sheet
 
 See the filled in example sheet:
 
@@ -61,19 +63,21 @@ Remember that not all cells need to be filled out. For this experiment, only inf
 
 ---
 
-## Create Experiment Excel Sheet
+## Step 2: 
 
-Going back to the terminal we can see that our last step gave us the input for this next step. In this case:
+In this step we return the filled-in metadata excel file and receive a new template. This new template is where we enter the plate information.
 
 ```bash
-python run.py -s 2 -m C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\excel_utils\outputs\20260331_085854_testtest.xlsm
+python run.py -s 2 -m path/to/excel
 ```
 
-Running this command will automatically open the Experiment Excel Sheet.
+Running this command will create the worklist template and open that file in excel for you.
 
 ---
 
-## Fill User Page
+### Fill User Page
+
+The user page shows the plate layout. You will need to enter exactly where each sample is on the plate(s).
 
 **Although conditions have already been specificed in the metadata sheet, they may be freely added of removed in the experiment excel sheet.**
 
@@ -83,28 +87,28 @@ For the excel sheet used in this example open:
 \worklist_git\metadata_capture\excel_utils\outputs\20260314_175710_Mock_B_T_Cells_Exp.xlsm
 ```
 
-### Columns AD–AG
+#### Columns AD–AG
 
 - Assign the conditions, SystemValidation, TrueBlank and Library wells a number.
 - The order is not important, only that each has a unique number.
 
-### Column AF
+#### Column AF
 
 - The condition names are given.
 - These names will be passed into the final worklist.
 - Highlighting has no effect on the program.
 
-### Column AG
+#### Column AG
 
 - Notes how many samples are given per well.
 - If increased, the well location is multiplied in the program and drawn multiple times.
 
-### Plate Setup
+#### Plate Setup
 
 - When 3 plates are entered, they can all be drawn from randomly.
 - Fill plates in a way convenient for pipetting.
 
-### Columns AI and AJ
+#### Columns AI and AJ
 
 - **Row 4:** Force even blocks
   - Each sample block contains one replicate of each sample
@@ -126,11 +130,13 @@ For the excel sheet used in this example open:
 
 ---
 
-## Fill Manager Page
+### Fill Manager Page
+
+The manager page is to help you enter information relevant to file locations and other data for the LC and MS methods.
 
 - Columns **B, C, and L** autopopulate from the user page.
 
-### Required Inputs
+#### Required Inputs
 
 - MS Data Path
 - MS Method Path
@@ -144,15 +150,15 @@ For the excel sheet used in this example open:
 These depend on your MS and LC machines.
 The columns "MS Method" and "LC Method" are not technically required for the worklist to run but are good for record keepign.
 
-### Samples per well and number of samples to run
+#### Samples per well and number of samples to run
 
 Column L lets you input the number of samples in a well. The worklist will treat the multiple samples in the well as seperate. This means the well will not be drawn from consecutively. Be aware that significant evaporation may occur in the well. 
 
-### QC Before / After / Between
+#### QC Before / After / Between
 
 Non condition wells are seperated into groups that run before all conditions, in blocks between the condition blocks and after the conditions. The number of wells wanted to run in each group should be entered in columns N, O, and P for before, after and between respectively.
 
-### Column Q Settings
+#### Column Q Settings
 
 - **Row 2:** Select one- or two-column system
 - **Row 5:** Library placement (beginning or end)
@@ -167,13 +173,23 @@ Non condition wells are seperated into groups that run before all conditions, in
   - Adjusts output format.
 
 ---
-## Clean Up
+## Step 3:
 
-Always double check the worklist the program generates. If changes need to be made, the worklist can be easily changed in manually in Microsoft Excel, Google Sheets or Apple Numbers. Make sure the file type is still ".xlsx" after changes are made.
+In this step we return the filled-in worklist excel file and receive our newly generated LC and MS worklist files.
+
+```bash
+python run.py -s 3 -w path/to/excel -o output_directory/
+```
+
+These files may be give directly to the MS controller (e.g. Xcalibur for Thermo instrumentation).
+___
+### Clean Up
+
+Always double check the worklist that the program generates. If changes need to be made, the worklist can be easily changed in manually in Microsoft Excel, Google Sheets or Apple Numbers. Make sure the file type is still ".xlsx" after changes are made.
 
 ---
 
-## Example Output
+### Example Output
 
 You will receive three files as output:
 
