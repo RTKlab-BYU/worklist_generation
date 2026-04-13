@@ -53,13 +53,7 @@ We recommend copying the text under **“Next step:”**.
 
 ### Fill Metadata Sheet
 
-See the filled in example sheet:
-
-```
-\worklist_git\metadata_capture\excel_utils\outputs\20260314_175710_Mock_B_T_Cells_Exp.xlsm
-```
-
-Remember that not all cells need to be filled out. For this experiment, only information about **Species, Sex, Age, and Disease State** has been given.
+Remember that not all cells need to be filled out.
 
 ---
 
@@ -71,9 +65,9 @@ In this step we return the filled-in metadata excel file and receive a new templ
 python run.py -s 2 -m path/to/excel
 ```
 
-Running this command will create the worklist template and open that file in excel for you.
-
----
+Running this command will create the worklist template and open that file in excel for you. You can see the example template here:
+[Mock Experiment](./tests/data/mock_b_and_t_cells_exp.xlsx)
+___
 
 ### Fill User Page
 
