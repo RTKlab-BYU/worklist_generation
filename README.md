@@ -26,6 +26,11 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 2. Click the green **"<> Code"** button → **Download ZIP**.
 3. Extract the ZIP using File Explorer (Windows) or Finder (macOS).
 4. Open the folder with your preferred IDE or a terminal.
+5. Run the following after navigating to your folder to download the package requirements of the program:
+```bash
+pip install -r requirements.txt
+```
+
 
 > **Note:** Commands below assume **Python 3** is available on your system. Visit https://www.python.org/downloads/ to install python on your computer.
 
