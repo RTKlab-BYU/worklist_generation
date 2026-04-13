@@ -3,7 +3,9 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Installation](#installation)
+- [Installation Options](#installation-options)
+- [Virtual Environment](#create-and-activate-virtual-environment-optional)
+- [Requirements](#install-requirements)
 - [Command‑Line Usage](#command-line-usage)
 - [Glossary](#glossary)
 - [Cite & Acknowledge](#cite--acknowledge)
@@ -19,29 +21,37 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 - Produces a final, instrument‑ready worklist
 
 ---
+## Installation Options
 
-## Installation -- github.com
+### Installation -- github.com
 1. Download the latest version from GitHub:
    - https://github.com/RTKlab-BYU/worklist_generation.git
 2. Click the green **"<> Code"** button → **Download ZIP**.
 3. Extract the ZIP using File Explorer (Windows) or Finder (macOS).
 4. Open the folder with your preferred IDE or a terminal.
-5. Run the following after navigating to your folder to download the package requirements of the program:
-```bash
-pip install -r requirements.txt
-```
-
 
 > **Note:** Commands below assume **Python 3** is available on your system. Visit https://www.python.org/downloads/ to install python on your computer.
 
----
-
-## Installation -- Commandline
+### Installation -- Commandline
 1. Access your commandline through your preferred program such as Terminal (MacOS), PowerShell (Windows), or VSCode.
 2. Enter the following code:
 ```bash
 git clone https://github.com/(yourusername)/worklist-generator.git ## enter your github username in place of '(yourusername)'.
 cd worklist-generator
+pip install -r requirements.txt
+```
+---
+## Create and Activate Virtual Environment (optional)
+Creating a virtual environment helps to protect your computer.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+---
+## Install Requirements
+Run the following after navigating to worklist_git to download the package requirements of the program:
+```bash
 pip install -r requirements.txt
 ```
 ---
