@@ -4,9 +4,8 @@ This walkthrough guides you through an example experiment to show how the templa
 
 ## Project Description
 
+![experiment_design](./images/figure-WLG_6sub.png)
 This mock experiment follows the pattern of an experiment looking for the difference between healthy and diseased, B and T cells across 6 individuals. Half of the individuals are male, and half are female.
-
-
 
 ---
 

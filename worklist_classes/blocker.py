@@ -40,11 +40,13 @@ class Blocker:
             return default
    
     def check_for_trueblank(self, conditions1, conditions2=None):
-        for i, (_, v) in enumerate(conditions1.items()):
+        for i, (key_num, v) in enumerate(conditions1.items()):
             if v[0] == "TrueBlank":
-                return (conditions1, i+1, True) if not conditions2 else (conditions1, conditions2, i+1, True)
+                #raise ValueError(f"check key value: {key_num}\n check v: {v}")
+                # changed second return from "i+1" to key_num. This fixes a problem with the TrueBlank condition if there are gaps between conditions in the excel sheet.
+                return (conditions1, key_num, True) if not conditions2 else (conditions1, conditions2, key_num+1, True)
         if conditions2:
-            for i, (_, v) in enumerate(conditions2.items()):
+            for i, (key_num, v) in enumerate(conditions2.items()):
                 if v[0] == "TrueBlank":
                     return conditions1, conditions2, i+1, True
         conditions1[100] = ["TrueBlank", "TrueBlank", "", "", "", "", "", "", "", "", 0, 0, 0, 0, 0, 0] # assign TrueBlank a high number to keep it at the end if it's not already in conditions
@@ -724,6 +726,7 @@ class Blocker:
             return flattened_list
 
         SysValid_interval = int(SysValid_interval)
+        #raise ValueError(f"Check SYSVAL format:\n {two_xp_TB}\n {two_xp_TB_location}\n {full_conditions}")
         TB_well = [two_xp_TB, two_xp_TB_location[0][1], "other"]
 
         # Tag all wells with 'SysQC'
