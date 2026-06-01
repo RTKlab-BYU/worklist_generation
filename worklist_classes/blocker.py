@@ -8,7 +8,6 @@ from collections import Counter, defaultdict
 
 class Blocker:
     def __init__(self, parser_output):
-
         self.user_df = parser_output[0]
         self.manager_df = parser_output[1]
         self.lc_number = parser_output[2]
@@ -17,15 +16,17 @@ class Blocker:
         self.conditions2 = parser_output[3][2] if len(parser_output[3]) > 2 else None
         self.wet_amounts = parser_output[4]
         self.plates = parser_output[5]
-        self.num_to_run = parser_output[6]
-        self.lib_placement = parser_output[7]
-        self.sysvalid_interval = parser_output[8]
-        self.TB_location = parser_output[9]
-        self.cond_range1 = parser_output[10]
-        self.cond_range2 = parser_output[11]
-        self.lib_same = parser_output[12]
-        self.even = parser_output[13]
-        self.qc_frequency = parser_output[14]
+        self.solvent_vials = parser_output[6]
+        self.num_to_run = parser_output[7]
+        self.lib_placement = parser_output[8]
+        self.sysvalid_interval = parser_output[9]
+        self.TB_location = parser_output[10]
+        self.cond_range1 = parser_output[11]
+        self.cond_range2 = parser_output[12]
+        self.lib_same = parser_output[13]
+        self.even = parser_output[14]
+        self.qc_frequency = parser_output[15]
+        self.inj_vol = parser_output[16]
 
     def generate_seed(self, run_seed=None):
         random.seed(run_seed := run_seed or random.randrange(sys.maxsize))
@@ -73,7 +74,7 @@ class Blocker:
 
     def process_plate(self, plate, plate_name, wet_amounts, cond_range = None):
         wells_list = []
-        RGB = plate_name.split("_")[0]
+        RGBY = plate_name.split("_")[0]
         if cond_range:
             try:
                 ranges = self.parse_range(cond_range)
@@ -86,11 +87,11 @@ class Blocker:
                     col_num = int(col_name)
                 except ValueError:
                     raise ValueError(f"Column name '{col_name}' in plate '{plate_name}' must be a unique integer (e.g., 1, 2, 3). Please rename the column accordingly.")
-                value = row_series[col_name]
-                if pd.isna(row_series[col_name]):
+                value = row_series.loc[col_name]
+                if pd.isna(value):
                     continue
                 plate_location = f"{r_idx}{col_num}" # well location (e.g. A1)
-                abs_location = RGB + plate_location
+                abs_location = RGBY + plate_location
                 try:
                     try:
                         # Try to coerce to float first, whether it's a number or a numeric string
@@ -115,6 +116,42 @@ class Blocker:
                         continue # only adds wells to wells_list associated with the conditions specified in cond_range
                     else:
                         raise KeyError(f'ERROR: You may have a sample in your plate that is not labeled in the conditions legend.')
+        return wells_list
+    
+    def process_solvent_vials(self, solvent_data, plate_name, wet_amounts, cond_range=None):
+        wells_list = []
+        RGBY = plate_name.split("_")[0]
+        if cond_range:
+            try:
+                ranges = self.parse_range(cond_range)
+            except TypeError:
+                ranges = ['0', '0']
+        for vial_num, vial_val in solvent_data.items():
+            plate_location = f"{vial_num}"
+            abs_location = RGBY + plate_location
+            try:
+                as_float = float(vial_val)
+                if math.isfinite(as_float) and as_float.is_integer():
+                    normalized_value = int(as_float)
+                else:
+                    raise ValueError
+            except (ValueError, TypeError):
+                raise ValueError(
+                    f"Invalid condition ID '{vial_val}' for solvent vial {vial_num} in plate '{plate_name}'. "
+                    "Condition IDs must be whole numbers without extra symbols."
+                )
+            try:
+                for _ in range(int(wet_amounts[normalized_value])):
+                    if cond_range:
+                        if normalized_value in range(int(ranges[0]), int(ranges[1]) + 1):
+                            wells_list.append([normalized_value, abs_location])
+                    else:
+                        wells_list.append([normalized_value, abs_location])
+            except KeyError:
+                if cond_range:
+                    continue
+                else:
+                    raise KeyError(f'ERROR: Solvent vial {vial_num} in plate {plate_name} has a condition ID not found in the conditions legend.')
         return wells_list
 
     def compare_wells_and_counts(self, wells_list, conditions, wet_amounts):
@@ -782,14 +819,15 @@ class Blocker:
 
     def extract_file_info(self, flattened, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, conditions):
         flattened = self.insert_sysQC(flattened, SysValid_list, SysValid_interval, two_xp_TB, two_xp_TB_location, conditions)
-        well_conditions, block_runs, positions, reps, msmethods, lcmethods = [], [], [], [], [], []
+        well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods = [], [], [], [], [], [], []
         well_conditions.extend([int(w[0]) for w in flattened])
         block_runs.extend([w[2] for w in flattened])
         positions.extend([w[1] for w in flattened])
+        inj_vols.extend([self.inj_vol[int(w[0])] for w in flattened])
         reps = self.rep_tracker(flattened, conditions)
         msmethods.extend([conditions[int(w[0])][4] for w in flattened])
         lcmethods.extend([conditions[int(w[0])][8] for w in flattened])
-        return well_conditions, block_runs, positions, reps, msmethods, lcmethods
+        return well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods
         
     def block(self):
         all_wells_flat, two_xp_TB_location = [], []
@@ -800,6 +838,8 @@ class Blocker:
             for key in self.plates:
                 all_wells_flat.extend(self.process_plate(self.plates[key], key, self.wet_amounts))
                 two_xp_TB_location.extend(self.process_plate(self.plates[key], key, self.wet_amounts, f"{two_xp_TB}-{two_xp_TB}"))
+            for key in self.solvent_vials:
+                all_wells_flat.extend(self.process_solvent_vials(self.solvent_vials[key], key, self.wet_amounts))
             if not found_TB:
                 all_wells_flat.append([two_xp_TB, "R5"])
                 two_xp_TB_location.append([two_xp_TB, "R5"])
@@ -820,7 +860,7 @@ class Blocker:
 
             if not found_TB:
                 conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
-            well_conditions, block_runs, positions, reps, msmethods, lcmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
+            well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods = self.extract_file_info(flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
 
         elif self.cond_range1.upper() != "ALL" and self.lc_number == 2: # two experiments, 2 column system
             lc_number = 1
@@ -834,6 +874,9 @@ class Blocker:
                 all_wells_flat2.extend(self.process_plate(self.plates[key], key, self.wet_amounts, f"{sysvalid_num}-{sysvalid_num}"))
                 if found_TB:
                     two_xp_TB_location.extend(self.process_plate(self.plates[key], key, self.wet_amounts, f"{two_xp_TB}-{two_xp_TB}"))
+            for key in self.solvent_vials:
+                all_wells_flat1.extend(self.process_solvent_vials(self.solvent_vials[key], key, self.wet_amounts, self.cond_range1))
+                all_wells_flat2.extend(self.process_solvent_vials(self.solvent_vials[key], key, self.wet_amounts, self.cond_range2))
             if not found_TB:
                 two_xp_TB_location.append([two_xp_TB, "R5"])
                 all_wells_flat1.append([two_xp_TB, "R5"])
@@ -862,11 +905,11 @@ class Blocker:
             if not found_TB:
                 conditions = self.append_TB_condition(self.all_conditions, conditions1, conditions2, found_TB)
                 conditions = self.default_TB_metadata(conditions, sysvalid_condition, sysvalid_num)
-            well_conditions, block_runs, positions, reps, msmethods, lcmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
+            well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods = self.extract_file_info(two_xp_flat_list, sysvalid_list, self.sysvalid_interval, two_xp_TB, two_xp_TB_location, conditions)
 
         else:
             raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \
             "Verify that all required experiment fields are correctly filled in the Excel sheet." \
             "If there is only one experiment the library values should be the same. If there are two experiments you must use a 2 column system.")
-        blocked = [well_conditions, block_runs, positions, reps, msmethods, lcmethods, conditions]
+        blocked = [well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods, conditions]
         return blocked

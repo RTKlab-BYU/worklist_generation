@@ -46,7 +46,7 @@ class ExcelParser:
             key = dataframe.iloc[i, 0]
             if pd.notna(dataframe.iloc[i, 1]):
                 value = dataframe.iloc[i, 1:11].tolist()
-                placings = dataframe.iloc[i, 13:16].tolist()
+                placings = dataframe.iloc[i, 14:17].tolist()
                 value.extend(placings)
                 conditions[key] = value
         return conditions
@@ -65,44 +65,62 @@ class ExcelParser:
     def separate_plates(self, user_df, manager_df):
         user_name = user_df.columns[1]
         nbcode = user_df.iloc[0,1]
-        if manager_df.iloc[0,17] == '1 column':
+        if manager_df.iloc[0,18] == '1 column':
             lc_column_number = 1
-        elif manager_df.iloc[0,17] == '2 column':
+        elif manager_df.iloc[0,18] == '2 column':
             lc_column_number = 2
         else:
             raise ValueError(
                 f"System type must either be \"1 column\" or \"2 column\", but got {manager_df.iloc[0,18]}"
             )
         plates = {}
-        for i in [3, 21, 39]: # plates 1-3
+        solvent_vials = {}
+
+        for i in [3, 21, 39, 57]: # plates 1-4
             row_min = i
             name_row = i + 1
 
             name_values = user_df.iloc[name_row, [0, 1]]
             name = "_".join(str(x).strip() for x in name_values if pd.notna(x))
-            plate = user_df.iloc[row_min:row_min+18, 3:28]
+
+            plate = user_df.iloc[row_min:row_min+17, 3:28] # 18 rows, 24 columns (A-P, 1-24)
+            plate.iloc[1:, 1:] = plate.iloc[1:, 1:].apply(pd.to_numeric, errors='coerce')  # coerce non-numeric to NaN
 
             # Validate plate values
-            max_row = min(row_min + 18, len(user_df))
+            max_row = min(row_min + 17, len(user_df))
             max_col = min(28, user_df.shape[1])
             for r in range(row_min + 1, max_row):
                 for c in range(4, max_col):
-                    val = user_df.iloc[r, c]
+                    val = pd.to_numeric(user_df.iloc[r, c], errors='coerce')
                     if pd.notna(val):
-                        if not isinstance(val, (int, float)) or not float(val).is_integer() or not (1 <= int(val) <= 50):
+                        if not (1 <= int(val) <= 50):
                             raise ValueError(
                                 f"Invalid well value '{val}' in plate '{name}' at row {r+1}, column {c+1}: "
                                 "must be an integer between 1 and 50."
                             )
 
-
             plate.columns = plate.iloc[0, :] # Set column names as index
             plate.index = plate.iloc[:, 0] # Set row names as index
             plate = plate.iloc[1:, 1:]
-            if plate.isna().all().all():
-                continue
-            plates[name] = plate
-        
+
+            solvent_label_row = i + 4
+            solvent_data = {}
+            for r in range(solvent_label_row + 1, solvent_label_row + 6):  # 5 vials
+                vial_num = user_df.iloc[r, 0]
+                vial_val = pd.to_numeric(user_df.iloc[r, 1], errors='coerce')
+                if pd.notna(vial_val):
+                    if not (1 <= int(vial_val) <= 50): # or not isinstance(vial_val, (int, float)) or not float(vial_val).is_integer() # check that vial is an integer
+                        raise ValueError(
+                            f"Invalid solvent vial value '{vial_val}' in plate '{name}' at vial {int(vial_num)}: "
+                            "must be an integer between 1 and 50."
+                        )
+                    solvent_data[int(vial_num)] = int(vial_val)
+
+            if not plate.isna().all().all():
+                plates[name] = plate
+            if solvent_data:
+                solvent_vials[name] = solvent_data
+
         self.check_plate_colors(plates)
 
         wet_amounts = {}
@@ -131,7 +149,7 @@ class ExcelParser:
                         num_to_run[int(cond_num)] = int(amt_to_run)
                     except ValueError:
                         raise ValueError("Number of samples to run must be either 'all' (no quotes), empty, or a whole number.")
-        return nbcode, lc_column_number, wet_amounts, plates, num_to_run
+        return nbcode, lc_column_number, wet_amounts, plates, solvent_vials, num_to_run
     
     def check_plate_colors(self, plates):
         colors = []
@@ -147,17 +165,33 @@ class ExcelParser:
         experiment1 = user_df.iloc[6,35] # if not "All", which conditions belong to experiment 1
         experiment2 = user_df.iloc[7,35] # which conditions belong to experiment 2 if any
         lib_same = user_df.iloc[8,35] # "Yes" or "No", indicates if lib runs are the same for both experiments
-        lib_placement = manager_df.iloc[3,17] # are lib runs before or after samples?
-        SysValid_interval = manager_df.iloc[6,17] # how often to run system validation
-        QC_frequency = manager_df.iloc[7,17] # how often should QC blocks be added
-        lc_system = manager_df.iloc[10,17] # determines how the well
-        return lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_frequency, lc_system
+        lib_placement = manager_df.iloc[3,18] # are lib runs before or after samples?
+        SysValid_interval = manager_df.iloc[6,18] # how often to run system validation
+        QC_frequency = manager_df.iloc[7,18] # how often should QC blocks be added
+        lc_system = manager_df.iloc[10,18] # determines how the well
+        ms_system = manager_df.iloc[12,18] # determines how the well conditions are parsed for MS methods and data paths
+        return lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_frequency, lc_system, ms_system
+    
+    def get_injection_volume(self, manager_df, conditions):
+        inj_vol = {}
+        counter = 0
+        for i in conditions[0].keys():
+            if pd.notna(manager_df.iloc[i, 13]):
+                inj_vol[i] = int(manager_df.iloc[i, 13])
+                if not (isinstance(inj_vol[i], (int, float)) and float(inj_vol[i]) > 0):
+                    raise ValueError(f"Injection volume must be a positive number. Check column 'Injection volume' for invalid entries.")
+                counter += 1
+            else: inj_vol[i] = 1  # default injection volume is 1 µL if not specified
+        inj_vol[100] = 1  # add default injection volume for TrueBlank condition (100) if not already specified
+        if counter == 0:
+            print("Warning: No injection volume specified. Defaulting to 1 µL.")
+        return inj_vol
     
     def parse(self):
         try:
             user_df, manager_df = self.read_excel_to_dfs()
-            nbcode, lc_number, wet_amounts, plates, num_to_run = self.separate_plates(user_df, manager_df)
-            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system = self.additional_info(user_df, manager_df)
+            nbcode, lc_number, wet_amounts, plates, solvent_vials, num_to_run = self.separate_plates(user_df, manager_df)
+            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system, ms_system = self.additional_info(user_df, manager_df)
                                                     # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
             TB_location = 'R5' if (TB_location == '' or TB_location != TB_location) else TB_location # check for blank or NaN and set to default if so
             even = 'Yes' if even not in ['Yes', 'No'] else even
@@ -169,6 +203,9 @@ class ExcelParser:
             if lc_system == "Vanquish Neo":
                 lc_symbol = ':'
             else: lc_symbol = ''
+            if ms_system == "Thermo":
+                ms_type = True
+            else: ms_type = False
         except Exception as e:
             raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \
             "Verify that all required experiment fields are correctly filled in the Excel sheet." \
@@ -176,10 +213,10 @@ class ExcelParser:
 
         sample_type = "Unknown"  # or "Sample", etc.
         blank_method = "Blank_Method"  # fill in with real method if needed
-        inj_vol = 1  # injection volume in µL
+        inj_vol = self.get_injection_volume(manager_df, conditions)  # injection volume in µL
 
-        self.blocker_info = [user_df, manager_df, lc_number, conditions, wet_amounts, plates, num_to_run,
-                             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency]
-        self.output_info = [nbcode, lc_number, blank_method, sample_type, inj_vol, lc_symbol]
+        self.blocker_info = [user_df, manager_df, lc_number, conditions, wet_amounts, plates, solvent_vials, num_to_run,
+                             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, inj_vol]
+        self.output_info = [nbcode, lc_number, blank_method, sample_type, lc_symbol, ms_type]
 
         return self.blocker_info, self.output_info
