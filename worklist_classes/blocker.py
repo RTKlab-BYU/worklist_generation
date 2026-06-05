@@ -6,6 +6,8 @@ import math
 import re
 from collections import Counter, defaultdict
 
+SOLVENT_VIAL_LIMIT = 999
+
 class Blocker:
     def __init__(self, parser_output):
         self.user_df = parser_output[0]
@@ -141,7 +143,7 @@ class Blocker:
                     "Condition IDs must be whole numbers without extra symbols."
                 )
             try:
-                for _ in range(int(wet_amounts[normalized_value])):
+                for _ in range(SOLVENT_VIAL_LIMIT):
                     if cond_range:
                         if normalized_value in range(int(ranges[0]), int(ranges[1]) + 1):
                             wells_list.append([normalized_value, abs_location])
