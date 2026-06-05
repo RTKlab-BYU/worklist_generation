@@ -48,6 +48,11 @@ class ExcelParser:
                 value = dataframe.iloc[i, 1:11].tolist()
                 placings = dataframe.iloc[i, 14:17].tolist()
                 value.extend(placings)
+
+                value[6] = value[2] if pd.isna(value[6]) else value[6]
+                value[7] = value[3] if pd.isna(value[7]) else value[7]
+                value[9] = value[5] if pd.isna(value[9]) else value[9]
+                    
                 conditions[key] = value
         return conditions
     
