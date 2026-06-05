@@ -21,6 +21,7 @@ def make_blocker(
     conditions2=None,
     wet_amounts=None,
     plates=None,
+    solvent_vials=None,
     num_to_run=None,
     lc_number=1,
     lib_placement="Before",
@@ -31,6 +32,7 @@ def make_blocker(
     lib_same="YES",
     even="YES",
     qc_frequency=2,
+    inj_vol=[1]*50,
 ):
     all_conditions = all_conditions or {1: cond_row("Sample")}
     conditions = [all_conditions]
@@ -46,6 +48,7 @@ def make_blocker(
         conditions,
         wet_amounts or {1: 1},
         plates or {},
+        solvent_vials or {},
         num_to_run or {1: "all"},
         lib_placement,
         sysvalid_interval,
@@ -55,6 +58,7 @@ def make_blocker(
         lib_same,
         even,
         qc_frequency,
+        inj_vol,
     ]
     return Blocker(parser_output)
 
@@ -294,17 +298,19 @@ def test_block_end_to_end_single_experiment_without_excel_parser():
         all_conditions=all_conditions,
         wet_amounts={1: 1, 2: 1},
         plates={"R_plate1": plate},
+        solvent_vials=None,
         num_to_run={1: "all", 2: "all"},
         lc_number=1,
         cond_range1="ALL",
         lib_same="YES",
         even="YES",
         qc_frequency=2,
+        inj_vol=[1]*50,
     )
 
     blocked = blocker.block()
 
-    well_conditions, block_runs, positions, reps, msmethods, lcmethods, conditions = blocked
+    well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods, conditions = blocked
 
     assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods) == len(lcmethods)
     assert set(well_conditions).issubset({1, 2, 100})
@@ -333,6 +339,7 @@ def test_block_end_to_end_places_qc_pre_between_post_and_includes_lib_and_sysval
         all_conditions=all_conditions,
         wet_amounts={1: 1, 2: 1, 3: 1, 4: 1, 5: 1},
         plates={"R_plate1": plate},
+        solvent_vials={"R": {1: 5}},
         num_to_run={1: "all", 2: "all", 3: "all", 4: "all", 5: "all"},
         lc_number=1,
         lib_placement="Before",
@@ -343,7 +350,7 @@ def test_block_end_to_end_places_qc_pre_between_post_and_includes_lib_and_sysval
         qc_frequency=2,
     )
 
-    well_conditions, block_runs, positions, reps, msmethods, lcmethods, _ = blocker.block()
+    well_conditions, block_runs, positions, inj_vols, reps, msmethods, lcmethods, _ = blocker.block()
 
     assert len(well_conditions) == len(block_runs) == len(positions) == len(reps) == len(msmethods) == len(lcmethods)
     assert any(c == 3 for c in well_conditions)  # Lib is present
@@ -378,6 +385,7 @@ def test_block_end_to_end_lib_after_tags_library_as_post():
         lib_same="YES",
         even="YES",
         qc_frequency=2,
+        inj_vol=[1]*1000,
     )
 
     well_conditions, block_runs, *_ = blocker.block()
@@ -399,6 +407,7 @@ def test_block_end_to_end_two_column_inserts_systemvalidation_in_pairs():
         all_conditions=all_conditions,
         wet_amounts={1: 1, 4: 1},
         plates={"R_plate1": plate},
+        solvent_vials={"R": {1: 1}},
         num_to_run={1: "all", 4: "all"},
         lc_number=2,
         lib_placement="Before",
@@ -407,6 +416,7 @@ def test_block_end_to_end_two_column_inserts_systemvalidation_in_pairs():
         lib_same="YES",
         even="YES",
         qc_frequency=2,
+        inj_vol=[1]*50,
     )
 
     well_conditions, block_runs, *_ = blocker.block()
@@ -422,6 +432,7 @@ def test_block_raises_for_invalid_configuration():
         all_conditions={1: cond_row("Sample")},
         wet_amounts={1: 1},
         plates={"R_plate1": pd.DataFrame([[1]], index=["A"], columns=[1])},
+        solvent_vials={"R": {1: 1}},
         num_to_run={1: "all"},
         lc_number=1,
         cond_range1="1-1",
@@ -439,12 +450,14 @@ def test_block_without_systemvalidation_condition_hits_unpacking_error(capsys):
         all_conditions={1: cond_row("Sample")},
         wet_amounts={1: 1},
         plates={"R_plate1": pd.DataFrame([[1], [1]], index=["A", "B"], columns=[1])},
+        solvent_vials={"R": {1: 1}},
         num_to_run={1: "all"},
         lc_number=1,
         cond_range1="ALL",
         lib_same="YES",
         even="YES",
         qc_frequency=2,
+        inj_vol=[1]*50,
     )
 
     blocker.block()

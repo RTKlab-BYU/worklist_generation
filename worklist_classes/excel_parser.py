@@ -125,6 +125,7 @@ class ExcelParser:
                 plates[name] = plate
             if solvent_data:
                 solvent_vials[name] = solvent_data
+        print(solvent_vials)
 
         self.check_plate_colors(plates)
 
