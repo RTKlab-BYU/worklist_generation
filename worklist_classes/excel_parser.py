@@ -175,7 +175,8 @@ class ExcelParser:
         QC_frequency = manager_df.iloc[7,18] # how often should QC blocks be added
         lc_system = manager_df.iloc[10,18] # determines how the well
         ms_system = manager_df.iloc[12,18] # determines how the well conditions are parsed for MS methods and data paths
-        return lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_frequency, lc_system, ms_system
+        run_seed = manager_df.iloc[14,18] if not np.isnan(manager_df.iloc[14,18]) else None  # get the run seed if it exists
+        return lib_placement, SysValid_interval, TB_location, experiment1, experiment2, lib_same, even, QC_frequency, lc_system, ms_system, run_seed
     
     def get_injection_volume(self, manager_df, conditions):
         inj_vol = {}
@@ -196,7 +197,7 @@ class ExcelParser:
         try:
             user_df, manager_df = self.read_excel_to_dfs()
             nbcode, lc_number, wet_amounts, plates, solvent_vials, num_to_run = self.separate_plates(user_df, manager_df)
-            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system, ms_system = self.additional_info(user_df, manager_df)
+            lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system, ms_system, run_seed = self.additional_info(user_df, manager_df)
                                                     # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
             TB_location = 'R5' if (TB_location == '' or TB_location != TB_location) else TB_location # check for blank or NaN and set to default if so
             even = 'Yes' if even not in ['Yes', 'No'] else even
@@ -221,7 +222,7 @@ class ExcelParser:
         inj_vol = self.get_injection_volume(manager_df, conditions)  # injection volume in µL
 
         self.blocker_info = [user_df, manager_df, lc_number, conditions, wet_amounts, plates, solvent_vials, num_to_run,
-                             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, inj_vol]
+                             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, inj_vol, run_seed]
         self.output_info = [nbcode, lc_number, blank_method, sample_type, lc_symbol, ms_type]
 
         return self.blocker_info, self.output_info

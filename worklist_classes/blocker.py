@@ -29,10 +29,17 @@ class Blocker:
         self.even = parser_output[14]
         self.qc_frequency = parser_output[15]
         self.inj_vol = parser_output[16]
+        self.run_seed = parser_output[17] if len(parser_output) > 17 else None
+
+        self.generate_seed()
 
     def generate_seed(self, run_seed=None):
-        random.seed(run_seed := run_seed or random.randrange(sys.maxsize))
-        print(run_seed)
+        # Prioritize an explicitly passed argument, then the instance seed, then a random integer
+        chosen_seed = run_seed if run_seed is not None else self.run_seed
+        
+        # If both are None (or empty/falsy), generate a random one
+        random.seed(chosen_seed := chosen_seed or random.randrange(sys.maxsize))
+        print(f"Random seed set to: {chosen_seed}")
 
     def safe_int(self, val, default=0):
         try:

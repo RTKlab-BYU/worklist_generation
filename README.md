@@ -37,7 +37,7 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 2. Enter the following code:
 ```bash
 git clone https://github.com/(yourusername)/worklist-generator.git ## enter your github username in place of '(yourusername)'.
-cd worklist-generator
+cd worklist_generator
 pip install -r requirements.txt
 ```
 ---
