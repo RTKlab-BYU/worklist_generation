@@ -13,7 +13,7 @@
 ---
 
 ## Overview
-The **Worklist Generator** helps researchers quickly create statistically robust worklists for LC–MS experiments. It supports up to **three 16×24 well plates** and allows each well to be labeled as an **experimental condition** or one of several **non‑condition types** (QC, WetQC, Library, Blank, TrueBlank, or System Validation). The program:
+The **Worklist Generator** helps researchers quickly create statistically robust worklists for LC–MS experiments. It supports up to **four 16×24 well plates** and allows each well to be labeled as an **experimental condition** or one of several **non‑condition types** (QC, WetQC, Library, Blank, TrueBlank, or System Validation). The program:
 
 - Randomizes and blocks experimental conditions
 - Builds block structures for non‑condition wells (QC/Blank/TrueBlank/WetQC)
@@ -79,8 +79,7 @@ pip install -r requirements.txt
 ```bash
 python run.py -s 2 -m <metadata_excel_path>
 ```
-- Creates a blank template in your **Downloads** folder.
-- If `<template_name_optional>` is provided, it will be used as the file name.
+- Creates a blank template in the **Output** folder.
 
 ### 3. Generate a Worklist from a Completed Template
 ```bash
@@ -88,7 +87,6 @@ python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
 ```
 - `<worklist_excel_path>` and '<output_dir>' can be copied via your file explorer (e.g., **Right‑click → Copy as path**). Example:
   - `C:\\Users\\myaccount\\Downloads\\mytemplate.xlsx`
-<!-- - If `<optional_output_folder>` is omitted, the worklist is saved to **Downloads**. -->
 
 ---
 ## Cite & Acknowledge
