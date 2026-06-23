@@ -23,34 +23,46 @@ The **Worklist Generator** helps researchers quickly create statistically robust
 ---
 ## Installation Options
 
-### Installation -- github.com
-1. Download the latest version from GitHub:
-   - https://github.com/RTKlab-BYU/worklist_generation.git
+### Option 1 — Download ZIP (GitHub)
+1. Go to https://github.com/RTKlab-BYU/worklist_generation
 2. Click the green **"<> Code"** button → **Download ZIP**.
 3. Extract the ZIP using File Explorer (Windows) or Finder (macOS).
-4. Open the folder with your preferred IDE or a terminal.
-
-> **Note:** Commands below assume **Python 3** is available on your system. Visit https://www.python.org/downloads/ to install python on your computer.
-
-### Installation -- Commandline
-1. Access your commandline through your preferred program such as Terminal (MacOS), PowerShell (Windows), or VSCode.
-2. Enter the following code:
+4. Open a terminal and navigate into the extracted folder:
 ```bash
-git clone https://github.com/(yourusername)/worklist-generator.git ## enter your github username in place of '(yourusername)'.
-cd worklist_generator
-pip install -r requirements.txt
+   cd worklist_generation
 ```
+
+### Option 2 — Command Line
+1. Open your terminal (Terminal on macOS, PowerShell on Windows, or VSCode).
+2. Clone the repository:
+```bash
+   git clone https://github.com/RTKlab-BYU/worklist_generation.git
+   cd worklist_generation
+```
+
 ---
-## Create and Activate Virtual Environment (optional)
-Creating a virtual environment helps to protect your computer.
+
+## Set Up Your Environment
+
+> **Note:** Commands below assume **Python 3** is available on your system. Visit https://www.python.org/downloads/ to install it.
+
+### Create and Activate a Virtual Environment (recommended)
+Creating a virtual environment keeps dependencies isolated from the rest of your system.
+
+**macOS/Linux:**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
----
-## Install Requirements
-Run the following after navigating to worklist_git to download the package requirements of the program:
+**Windows:**
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### Install Requirements
+Run the following to install the required packages:
 ```bash
 pip install -r requirements.txt
 ```
