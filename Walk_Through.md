@@ -131,7 +131,7 @@ The manager page is to help you enter information relevant to file locations and
 
 - Columns **B, C, and L** autopopulate from the user page.
 
-#### Required Inputs
+#### MS and LC Inputs
 
 - MS Data Path
 - MS Method Path
@@ -168,6 +168,33 @@ Non condition wells are seperated into groups that run before all conditions, in
   - Adjusts output format.
 
 ---
+
+## Required Fields
+ 
+The worklist template will not run unless certain fields are completed with the correct type of input. Before moving on to Step 3, double check the following fields on the worklist excel file.
+ 
+### User Sheet
+ 
+| Field | Requirement |
+|---|---|
+| A6, A24, A42, A60 | Mandatory. Must be one of `R`, `G`, `B`, or `Y`. |
+| AE | Mandatory. Must be selected from the provided drop-down options. |
+| AF | Mandatory. Must be alphanumeric. |
+| AJ8 | Mandatory. Must be either `All` or a range of positive integers (e.g. `1-5`). |
+ 
+### Manager Sheet
+ 
+| Field | Requirement |
+|---|---|
+| Columns B–G | Mandatory for every row. |
+| Columns H-K | Optional. Defaults to match input from columns D-G if left blank. |
+| S2 | Optional. Defaults to `1 column` if left blank. |
+| S8 | Optional. Defaults to `10` if left blank. |
+ 
+If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
+ 
+---
+
 ## Step 3:
 
 In this step we return the filled-in worklist excel file and receive our newly generated LC and MS worklist files.
