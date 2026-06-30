@@ -75,9 +75,7 @@ class ExcelParser:
         elif manager_df.iloc[0,18] == '2 column':
             lc_column_number = 2
         else:
-            raise ValueError(
-                f"System type must either be \"1 column\" or \"2 column\", but got {manager_df.iloc[0,18]}"
-            )
+            lc_column_number = 1 # default to 1 if not specified
         plates = {}
         solvent_vials = {}
 
@@ -86,6 +84,8 @@ class ExcelParser:
             name_row = i + 1
 
             name_values = user_df.iloc[name_row, [0, 1]]
+            if name_values.iloc[0] not in ['R', 'G', 'B', 'Y']:
+                raise ValueError(f"Invalid plate color '{name_values[0]}' in row {name_row+1}: must be one of 'R', 'G', 'B', or 'Y'.")
             name = "_".join(str(x).strip() for x in name_values if pd.notna(x))
 
             plate = user_df.iloc[row_min:row_min+17, 3:28] # 18 rows, 24 columns (A-P, 1-24)
@@ -199,8 +199,10 @@ class ExcelParser:
             nbcode, lc_number, wet_amounts, plates, solvent_vials, num_to_run = self.separate_plates(user_df, manager_df)
             lib_placement, sysvalid_interval, TB_location, cond_range1, cond_range2, lib_same, even, qc_frequency, lc_system, ms_system, run_seed = self.additional_info(user_df, manager_df)
                                                     # cond_range1 = "All" or "{#}-{#}", cond_range2 = "" or "{#}-{#}", even = "Yes" or "No"
+            if np.isnan(sysvalid_interval) or sysvalid_interval == '':
+                sysvalid_interval = 10 # default to 10 if not specified
             TB_location = 'R5' if (TB_location == '' or TB_location != TB_location) else TB_location # check for blank or NaN and set to default if so
-            even = 'Yes' if even not in ['Yes', 'No'] else even
+            even = 'No' if even not in ['Yes', 'No'] else even
             conditions = []
             conditions.append(self.condition_dict(manager_df)) # always include full condition dict
             if cond_range1.upper() != "ALL": # only include partial condition dicts if specified
@@ -213,8 +215,8 @@ class ExcelParser:
                 ms_type = True
             else: ms_type = False
         except Exception as e:
-            raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration." \
-            "Verify that all required experiment fields are correctly filled in the Excel sheet." \
+            raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. " \
+            "Verify that all required experiment fields are correctly filled in the Excel sheet. " \
             "If there is only one experiment the library values should be the same.")
 
         sample_type = "Unknown"  # or "Sample", etc.

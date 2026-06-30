@@ -18,6 +18,7 @@ from metadata_capture.vars import TEMPLATES
 from metadata_capture.excel_utils.excel_file_parser import AdvancedFileParser
 from metadata_capture.database_utils.upload_to_sqlite import upload_to_sqlite
 from metadata_capture.excel_utils.fill_conditions import fill_conditions_in_worklist
+from metadata_capture.sdrf_generator import generate_sdrf
 
 # Stage 3 imports
 import worklist_classes.main as worklist_main
@@ -30,6 +31,7 @@ def parse_args():
 python run.py -s 1
 python run.py -s 2 -m <metadata_excel_path>
 python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
+python run.py -s 4 -p <project_id>
 """,
         description="LC/MS Worklist Pipeline",
         formatter_class=argparse.RawTextHelpFormatter
@@ -38,7 +40,7 @@ python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
     parser.add_argument(
         "-s", "--stage",
         required=True,
-        choices=["1", "2", "3"],
+        choices=["1", "2", "3", "4"],
         help="Pipeline stage"
     )
 
@@ -60,6 +62,12 @@ python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
         help="Output directory (stage 3)"
     )
 
+    parser.add_argument(
+        "-p", "--project_id",
+        type=int,
+        help="Project ID (stage 4)"
+    )
+
     return parser.parse_args()
 
 
@@ -70,6 +78,9 @@ def validate_args(args):
     if args.stage == "3":
         if not args.worklist or not args.output:
             raise SystemExit("Stage 3 requires -w and -o")
+
+    if args.stage == "4" and not args.project_id:
+        raise SystemExit("Stage 4 requires -p / --project_id")
 
 
 # Helper Functions
@@ -93,10 +104,13 @@ USAGE:
       → Generate metadata Excel
 
   python run.py -s 2 -m <metadata_excel_path>
-      → Generate filled worklist Excel
+      → Generate filled worklist Excel and SDRF file
 
   python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
       → Generate LC + MS worklists
+          
+  python run.py -s 4 -p <project_id>
+      → Print SDRF for a project
 """)
     sys.exit(1)
 
@@ -135,7 +149,7 @@ def stage_1_generate_metadata():
 # Stage 2
 def stage_2_generate_worklist(metadata_excel_path: Path):
     """
-    Parse metadata Excel, upload to DB, generate filled worklist Excel.
+    Parse metadata Excel, upload to DB, generate filled worklist Excel, and generate SDRF file.
     """
     print("\n=== STAGE 2: Generate Filled Worklist ===\n")
 
@@ -173,6 +187,15 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
     print(f"\nMetadata captured!\nWorklist template created:\n  {output_path}")
     auto_open_file(output_path)
 
+    # --- SDRF export ---
+    sdrf_path = generate_sdrf(
+        project_id=project_id,
+        db_path="project.db",
+        output_dir=str(output_dir),
+    )
+    print(f"\nSDRF file created:\n  {sdrf_path}")
+    print(f"\nProject ID: {project_id} (you will need this for stage 4)\n")
+
     print("\nNext step (you may copy and paste the command below, but remember to add your own output directory):")
     print(f"  python run.py -s 3 -w {output_path} -o <output_dir>\n")
 
@@ -208,6 +231,23 @@ def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
 
     sys.exit(0)
 
+# Stage 4
+def stage_4_print_sdrf(project_id: int):
+    """
+    Print the SDRF for a previously uploaded project to stdout.
+    """
+    print(f"\n=== STAGE 4: Print SDRF (Project ID: {project_id}) ===\n")
+ 
+    from metadata_capture.sdrf_generator import generate_sdrf_rows
+ 
+    headers, rows = generate_sdrf_rows(project_id=project_id, db_path="project.db")
+ 
+    print("\t".join(headers))
+    for row in rows:
+        print("\t".join(row))
+ 
+    sys.exit(0)
+
 
 # Main
 def main():
@@ -228,6 +268,12 @@ def main():
             print("Stage 3 requires --worklist and --output")
             return
         stage_3_generate_lcms(args.worklist, args.output)
+
+    elif args.stage == "4":
+        if not args.project_id:
+            print("Stage 4 requires --project_id")
+            return
+        stage_4_print_sdrf(args.project_id)
     else:
         usage()
 

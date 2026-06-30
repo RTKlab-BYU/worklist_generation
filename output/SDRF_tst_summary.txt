@@ -1,0 +1,82 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 30
+Name: SDRF tst
+Description: test
+Created: 2026-06-29 18:31:44
+Independent Variables:
+  SAMPLE IDENTIFICATION
+    Species
+    Sex
+    Age
+    Cell Line
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### a
+
+  [SAMPLE IDENTIFICATION]
+    Species: Homo sapiens
+    Sex: M
+    Age: 23
+    Gene: Denim
+    Tissue: Kleenex
+    Cell Type: Big
+    Cell Line: Straight
+
+  [SAMPLE PREP]
+    Type: A
+    Cell Sorter: C
+    LCM: E
+    Sample Injection Ammount: 3
+    Reagent Dispenser: G
+    Enzyme: I
+    Digestion Temperature: 5
+
+
+### b
+
+  [SAMPLE IDENTIFICATION]
+    Species: Homo sapiens
+    Sex: F
+    Age: 25
+    Gene: Denim
+    Tissue: Kleenex
+    Cell Type: Big
+    Cell Line: Curvy
+
+  [SAMPLE PREP]
+    Type: A
+    Cell Sorter: C
+    LCM: E
+    Sample Injection Ammount: 3
+    Reagent Dispenser: G
+    Enzyme: I
+    Digestion Temperature: 5
+
+
+### c
+
+  [SAMPLE IDENTIFICATION]
+    Species: Homosapiens
+    Sex: F
+    Age: 27
+    Gene: Denim
+    Tissue: Kleenex
+    Cell Type: Big
+    Cell Line: Wavy
+
+  [SAMPLE PREP]
+    Type: A
+    Cell Sorter: C
+    LCM: E
+    Sample Injection Ammount: 3
+    Reagent Dispenser: G
+    Enzyme: I
+    Digestion Temperature: 5
+
