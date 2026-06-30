@@ -67,7 +67,7 @@ python run.py -s 2 -m path/to/excel
 ```
 
 Running this command will create the worklist template and open that file in excel for you. You can see the example template here:
-[Mock Experiment](./tests/data/mock_b_and_t_cells_exp.xlsx)
+[Mock Experiment](./examples/mock_b_and_t_cells_exp.xlsx)
 ___
 
 ### Fill User Page
