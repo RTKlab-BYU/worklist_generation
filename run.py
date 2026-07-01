@@ -265,11 +265,11 @@ def main():
             return
         stage_3_generate_lcms(args.worklist, args.output)
 
-    elif args.stage == "4":
-        if not args.project_id:
-            print("Stage 4 requires --project_id")
-            return
-        stage_4_print_sdrf(args.project_id)
+    # elif args.stage == "4":
+    #     if not args.project_id:
+    #         print("Stage 4 requires --project_id")
+    #         return
+    #     stage_4_print_sdrf(args.project_id)
     else:
         usage()
 
