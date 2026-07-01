@@ -31,7 +31,6 @@ def parse_args():
 python run.py -s 1
 python run.py -s 2 -m <metadata_excel_path>
 python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
-python run.py -s 4 -p <project_id>
 """,
         description="LC/MS Worklist Pipeline",
         formatter_class=argparse.RawTextHelpFormatter
@@ -40,7 +39,7 @@ python run.py -s 4 -p <project_id>
     parser.add_argument(
         "-s", "--stage",
         required=True,
-        choices=["1", "2", "3", "4"],
+        choices=["1", "2", "3"],
         help="Pipeline stage"
     )
 
@@ -62,11 +61,11 @@ python run.py -s 4 -p <project_id>
         help="Output directory (stage 3)"
     )
 
-    parser.add_argument(
-        "-p", "--project_id",
-        type=int,
-        help="Project ID (stage 4)"
-    )
+    # parser.add_argument(
+    #     "-p", "--project_id",
+    #     type=int,
+    #     help="Project ID (stage 4)"
+    # )
 
     return parser.parse_args()
 
@@ -79,8 +78,8 @@ def validate_args(args):
         if not args.worklist or not args.output:
             raise SystemExit("Stage 3 requires -w and -o")
 
-    if args.stage == "4" and not args.project_id:
-        raise SystemExit("Stage 4 requires -p / --project_id")
+    # if args.stage == "4" and not args.project_id:
+    #     raise SystemExit("Stage 4 requires -p / --project_id")
 
 
 # Helper Functions
@@ -108,9 +107,6 @@ USAGE:
 
   python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
       → Generate LC + MS worklists
-          
-  python run.py -s 4 -p <project_id>
-      → Print SDRF for a project
 """)
     sys.exit(1)
 
@@ -193,8 +189,8 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
         db_path="project.db",
         output_dir=str(output_dir),
     )
-    print(f"\nSDRF file created:\n  {sdrf_path}")
-    print(f"\nProject ID: {project_id} (you will need this for stage 4)\n")
+    print(f"\nPartial SDRF-style file created based on uploaded metadata:\n  {sdrf_path}\n")
+    # print(f"\nProject ID: {project_id} (you will need this for stage 4)\n")
 
     print("\nNext step (you may copy and paste the command below, but remember to add your own output directory):")
     print(f"  python run.py -s 3 -w {output_path} -o <output_dir>\n")
@@ -231,22 +227,22 @@ def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
 
     sys.exit(0)
 
-# Stage 4
-def stage_4_print_sdrf(project_id: int):
-    """
-    Print the SDRF for a previously uploaded project to stdout.
-    """
-    print(f"\n=== STAGE 4: Print SDRF (Project ID: {project_id}) ===\n")
+# # Stage 4
+# def stage_4_print_sdrf(project_id: int):
+#     """
+#     Print the SDRF for a previously uploaded project to stdout.
+#     """
+#     print(f"\n=== STAGE 4: Print SDRF (Project ID: {project_id}) ===\n")
  
-    from metadata_capture.sdrf_generator import generate_sdrf_rows
+#     from metadata_capture.sdrf_generator import generate_sdrf_rows
  
-    headers, rows = generate_sdrf_rows(project_id=project_id, db_path="project.db")
+#     headers, rows = generate_sdrf_rows(project_id=project_id, db_path="project.db")
  
-    print("\t".join(headers))
-    for row in rows:
-        print("\t".join(row))
+#     print("\t".join(headers))
+#     for row in rows:
+#         print("\t".join(row))
  
-    sys.exit(0)
+#     sys.exit(0)
 
 
 # Main
