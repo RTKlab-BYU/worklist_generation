@@ -3,10 +3,10 @@
 This walkthrough guides you through an example experiment to demonstate how to use the WorklistGenerator. The program gathers data primarily through a series of Excell template files, which the program generates and the user fills out. This walk through uses a mock experiment for single cell proteomics
 
 ## Project Description
-The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. We assume that cells have been put on 384 well-plates and now the users wants to generate a randomized run ordering. 
+The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
 
 ![experiment_design](./images/figure-WLG_6sub.png)
-This mock experiment follows the pattern of an experiment looking for the difference between healthy and diseased, B and T cells across 6 individuals. Half of the individuals are male, and half are female.
+
 
 
 ---
