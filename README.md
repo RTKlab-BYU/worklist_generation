@@ -100,9 +100,9 @@ A: Yes. A step‑by‑step walkthrough is available in the [Walk‑Through guide
  
 A: A complete list of required fields is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
  
-**Q: How should batching be handled for experiments with more than three plates?**
+**Q: How should batching be handled for experiments with more than four plates?**
  
-A: Guidance on batching strategy for experiments spanning more than three plates is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
+A: Guidance on batching strategy for experiments spanning more than four plates is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
 
 **Q: How should high‑input samples be handled?**
  
