@@ -6,7 +6,9 @@ This walkthrough guides you through an example experiment to demonstate how to u
 - [Step 1: Generate metadata excel sheet](#step-1)
 - [Step 2: Download excel tempate](#step-2)
 - [Step 3: Geenrate worklist from completed template](#step-3)
-
+- [Glossary](#glossary)
+- [Guidance for BIG experiments](#guidance-for-big-experiments)
+- [Guidance for required input](#guidance-for-required-input)
 
 ## Project Description
 The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
