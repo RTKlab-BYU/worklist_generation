@@ -2,8 +2,11 @@
 
 This walkthrough guides you through an example experiment to demonstate how to use the WorklistGenerator. The program gathers data primarily through a series of Excell template files, which the program generates and the user fills out. This walk through uses a mock experiment for single cell proteomics.
 
-[Project Description](#project-description)
-[Step 1](#step-1:-create-metadata-excel-sheet)
+- [Project Description](#project-description)
+- [Step 1: Generate metadata excel sheet](#step-1)
+- [Step 2: Download excel tempate](#step-2)
+- [Step 3: Geenrate worklist from completed template](#step-3)
+
 
 ## Project Description
 The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
@@ -14,7 +17,8 @@ The mock experiment is a simple example of an A/B study design where there are t
 
 ---
 
-## Step 1: Create Metadata Excel Sheet
+## Step 1
+Create Metadata Excel Sheet
 
 In the first step, enter metadata about the different conditions.
 
