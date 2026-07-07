@@ -68,7 +68,8 @@ Run the following to install the required packages:
 pip install -r requirements.txt
 ```
 ---
-## Command‑Line Usage
+## Run the program
+The WorklistGenerator is a command line program and therefore runs through a terminal. Below is a brief display of the three main steps. Extensive detail is given in a [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md)
 
 ### 1. Generate metadata sheet
    ```bash
