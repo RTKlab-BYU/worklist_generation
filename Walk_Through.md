@@ -11,7 +11,7 @@ This walkthrough guides you through an example experiment to demonstate how to u
 - [Guidance for required input](#guidance-for-required-input)
 
 ## Project Description
-The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
+The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected, sorted with FACS and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
 
 ![experiment_design](./images/figure-WLG_6sub.png)
 
@@ -20,9 +20,7 @@ The mock experiment is a simple example of an A/B study design where there are t
 ---
 
 ## Step 1
-Create Metadata Excel Sheet
-
-In the first step, enter metadata about the different conditions.
+In this step, we will generate the metadata excell sheet by entering some basic inforamtion about the different experimental/biological conditions.
 
 In the terminal enter:
 
@@ -30,12 +28,12 @@ In the terminal enter:
 python run.py -s 1
 ```
 
-The terminal will then ask a series of questions. The inputs for this experiment will be shown.
-
+The terminal will then ask a series of questions. We have the terminal prompt below in bold, and example answers following. 
 - **What is your project name:** Mock B+T Cells Exp
 - **What is your project description:** The mock experiment from the paper, with parameters as outlined in the paper
 - **How many conditions does your project have:** 12
 
+After you have specified the number of condition, you will be prompted to enter a name/label for each. Below we use 'H' or 'D' to indicate healthy and diseased; a numeral represents the index of the subject with their condition group; then a 'B' or 'T' to specify the cell type.
 ### Conditions
 
 1. H1B  
