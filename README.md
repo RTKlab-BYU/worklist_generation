@@ -6,8 +6,7 @@
 - [Installation Options](#installation-options)
 - [Virtual Environment](#create-and-activate-virtual-environment-optional)
 - [Requirements](#install-requirements)
-- [Command‑Line Usage](#command-line-usage)
-- [Glossary](#glossary)
+- [Run the Program](#run-the-program)
 - [FAQ](#faq)
 - [Cite & Acknowledge](#cite--acknowledge)
 
