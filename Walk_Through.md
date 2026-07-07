@@ -1,6 +1,6 @@
 # Walkthrough: Mock Experiment B and T Cells
 
-This walkthrough guides you through an example experiment to show how the templates may be filled out and the output that they give after the program has been installed. To install the program, see the README file.
+This walkthrough guides you through an example experiment to demonstate how to use the WorklistGenerator. The program gathers data primarily through a series of Excell template files, which the program generates and the user fills out. This walk through uses a mock experiment for single cell proteomics where B and T cells are collected from several subjects in both the healthy and disease state. The cells have been put on 384 well-plates and now the users wants to generate a randomized run ordering.
 
 ## Project Description
 
