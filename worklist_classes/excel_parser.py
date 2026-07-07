@@ -208,12 +208,10 @@ class ExcelParser:
             if cond_range1.upper() != "ALL": # only include partial condition dicts if specified
                 conditions.append(self.condition_dict(manager_df, cond_range1))
                 conditions.append(self.condition_dict(manager_df, cond_range2))
-            if lc_system == "Vanquish Neo":
-                lc_symbol = ':'
-            else: lc_symbol = ''
-            if ms_system == "Thermo":
-                ms_type = True
-            else: ms_type = False
+
+            lc_symbol = ":" if lc_system == "Vanquish Neo" else ""
+            ms_type = True if ms_system == "Thermo" else False
+            
         except Exception as e:
             raise ValueError("Experiment conditions cannot be run due to missing or invalid configuration. " \
             "Verify that all required experiment fields are correctly filled in the Excel sheet. " \

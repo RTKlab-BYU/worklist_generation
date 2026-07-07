@@ -8,6 +8,7 @@
 - [Requirements](#install-requirements)
 - [Command‑Line Usage](#command-line-usage)
 - [Glossary](#glossary)
+- [FAQ](#faq)
 - [Cite & Acknowledge](#cite--acknowledge)
 
 ---
@@ -89,6 +90,28 @@ python run.py -s 3 -w <worklist_excel_path> -o <output_dir>
   - `C:\\Users\\myaccount\\Downloads\\mytemplate.xlsx`
 
 ---
+## FAQ
+
+**Q: Is a walkthrough available for completing the template?**
+ 
+A: Yes. A step‑by‑step walkthrough is available in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
+ 
+**Q: Which fields in the template are required?**
+ 
+A: A complete list of required fields is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
+ 
+**Q: How should batching be handled for experiments with more than three plates?**
+ 
+A: Guidance on batching strategy for experiments spanning more than three plates is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
+
+**Q: How should high‑input samples be handled?**
+ 
+A: Samples with a high potential for carry‑over can be accommodated in one of two ways. First, they may be designated as `Library` values, which are grouped into a single contiguous block at either the beginning or the end of the worklist and, by default, are always followed by a `TrueBlank`. Second, they may be designated as `QC` values; in this case, the user specifies the desired number of `QC` replicates and adds a `Blank` and/or `TrueBlank` condition, which will always be scheduled to run immediately after the specified number of `QC` replicates.
+ 
+**Q: Can a worklist be reproduced on a different computer?**
+ 
+A: Yes. Entering the same value in the `Random seed` field of the template will regenerate an identical worklist, regardless of the machine used.
+
 ## Cite & Acknowledge
 This README summarizes the **Worklist Generator User Guide** and the program’s public repository.
 - GitHub: https://github.com/RTKlab-BYU/worklist_generation.git

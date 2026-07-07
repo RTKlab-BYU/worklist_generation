@@ -31,7 +31,7 @@ class Blocker:
         self.inj_vol = parser_output[16]
         self.run_seed = parser_output[17] if len(parser_output) > 17 else None
 
-        self.generate_seed()
+        self.generate_seed(self.run_seed)  # Set the random seed for reproducibility
 
     def generate_seed(self, run_seed=None):
         # Prioritize an explicitly passed argument, then the instance seed, then a random integer
