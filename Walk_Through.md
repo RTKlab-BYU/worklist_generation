@@ -71,15 +71,14 @@ In this step, we will capture the information about sample placement in well pla
 2. Receive a plate layout template. 
 3. Fill in the plate layout template.
 
-We start in the terminal, by entering the following command:
+We start in the terminal, returning the filled out metadata file. Do this by entering the following command:
 ```bash
-python run.py -s 2 -m /path/to/excel_file
+python run.py -s 2 -m /path/to/metadata_excel_file
 ```
 
-Running this command will create the worklist template and open that file in excel for you. You can see the example template here:
+The WorklistGenerator will read the metadata file and create a customized template for your experiment. It will save the plate layout template and open that file in excel for you. You can see the example template here:
 [Mock Experiment](./examples/mock_b_and_t_cells_exp.xlsx)
-___
-
+The plate layout template has two tabs that each need to be filled in. One is about the samples on a plate, we call this the 'User Page', and one is about the LC-MS method files that you want to use in analyzing the samples. We call this the 'Manager Page'.
 ### Fill User Page
 
 The user page shows the plate layout. You will need to enter exactly where each sample is on the plate(s).
