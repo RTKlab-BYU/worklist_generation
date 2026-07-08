@@ -3,9 +3,9 @@
 This walkthrough guides you through an example experiment to demonstate how to use the WorklistGenerator. The program gathers data primarily through a series of Excell template files, which the program generates and the user fills out. This walk through uses a mock experiment for single cell proteomics.
 
 - [Project Description](#project-description)
-- [Step 1: Generate metadata excel sheet](#step-1)
-- [Step 2: Download excel tempate](#step-2)
-- [Step 3: Geenrate worklist from completed template](#step-3)
+- [Step 1: Capturing basic meta-data](#step-1)
+- [Step 2: Specifying plate layout](#step-2)
+- [Step 3: Genenrating the worklist](#step-3)
 - [Glossary](#glossary)
 - [Guidance for BIG experiments](#guidance-for-big-experiments)
 - [Guidance for required input](#guidance-for-required-input)
@@ -21,9 +21,12 @@ The mock experiment is a simple example of an A/B study design where there are t
 ---
 
 ## Step 1
-In this step, we will generate the metadata excell sheet by entering some basic inforamtion about the different experimental/biological conditions.
+In this step, we will capture some basic metadata. There are three substeps
+1. Use a commandline interface to enter some meta-data
+2. Receive a metadata Excel template
+3. Enter information in the template about the different experimental/biological conditions.
 
-In the terminal enter:
+We start in the terminal, by entering the following command:
 
 ```bash
 python run.py -s 1
@@ -34,8 +37,7 @@ The terminal will then ask a series of questions. We have the terminal prompt be
 - **What is your project description:** The mock experiment from the paper, with parameters as outlined in the paper
 - **How many conditions does your project have:** 12
 
-After you have specified the number of condition, you will be prompted to enter a name/label for each. Below we use 'H' or 'D' to indicate healthy and diseased; a numeral represents the index of the subject with their condition group; then a 'B' or 'T' to specify the cell type.
-### Conditions
+After you have specified the number of condition, you will be prompted to enter a name/label for each. Below we use 'H' or 'D' to indicate healthy and diseased; a numeral represents the index of the subject with their condition group; then a 'B' or 'T' to specify the cell type. For the mock experiment, we entered:
 
 1. H1B  
 2. H1T  
@@ -50,7 +52,7 @@ After you have specified the number of condition, you will be prompted to enter 
 11. D6B  
 12. D6T
 
-The metadata excel filepath will be shown in the terminal and can be found in the folder in which you downloaded the worklist generator with a path similar to this one:
+When you finish entering this information, the program will give you a metadata Excell template file, where you enter the rest of the metadata. The Excel filepath will be shown in the terminal and can be found in the folder in which you downloaded the worklist generator with a path similar to this one:
 
 ```
 C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\excel_utils\outputs\20260314_175710_Mock_B_T_Cells_Exp.xlsm
@@ -58,20 +60,20 @@ C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\ex
 
 We recommend copying the text under **“Next step:”**.
 
----
-
-### Fill Metadata Sheet
-
-Remember that not all cells need to be filled out.
+The last part of step 1 is to fill out the metadata into the template. Remember that not all cells need to be filled out. Please see the [Guidance for required input](#guidance-for-required-input) for more details.
 
 ---
 
 ## Step 2: 
 
-In this step we return the filled-in metadata excel file and receive a new template. This new template is where we enter the plate information.
+In this step, we will capture the information about sample placement in well plates. It has three substeps
+1. Return the filled-in metadata excel file 
+2. Receive a plate layout template. 
+3. Fill in the plate layout template.
 
+We start in the terminal, by entering the following command:
 ```bash
-python run.py -s 2 -m path/to/excel
+python run.py -s 2 -m /path/to/excel_file
 ```
 
 Running this command will create the worklist template and open that file in excel for you. You can see the example template here:
