@@ -16,8 +16,6 @@ The mock experiment is a simple example of an A/B study design where there are t
 
 ![experiment_design](./images/figure-WLG_6sub.png)
 
-
-
 ---
 
 ## Step 1
@@ -60,7 +58,7 @@ C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\ex
 
 We recommend copying the text under **“Next step:”**.
 
-The last part of step 1 is to fill out the metadata into the template. Remember that not all cells need to be filled out. Please see the [Guidance for required input](#guidance-for-required-input) for more details.
+The last part of step 1 is to fill out the metadata into the template. 
 
 ---
 
@@ -78,7 +76,8 @@ python run.py -s 2 -m /path/to/metadata_excel_file
 
 The WorklistGenerator will read the metadata file and create a customized template for your experiment. It will save the plate layout template and open that file in excel for you. You can see the example template here:
 [Mock Experiment](./examples/mock_b_and_t_cells_exp.xlsx)
-The plate layout template has two tabs that each need to be filled in. One is about the samples on a plate, we call this the 'User Page', and one is about the LC-MS method files that you want to use in analyzing the samples. We call this the 'Manager Page'.
+The plate layout template has two tabs that each need to be filled in. One is about the samples on a plate, we call this the 'User Page', and one is about the LC-MS method files that you want to use in analyzing the samples. We call this the 'Manager Page'. If you have questions about specific fields, please refer to [Guidance for required input](#guidance-for-required-input) for more details.
+
 ### Fill User Page
 
 The user page shows the plate layout. You will need to enter exactly where each sample is on the plate(s).
@@ -178,41 +177,20 @@ Non condition wells are seperated into groups that run before all conditions, in
 
 ---
 
-## Required Fields
- 
-The worklist template will not run unless certain fields are completed with the correct type of input. Before moving on to Step 3, double check the following fields on the worklist excel file.
- 
-### User Sheet
- 
-| Field | Requirement |
-|---|---|
-| A6, A24, A42, A60 | Mandatory. Must be one of `R`, `G`, `B`, or `Y`. |
-| AE | Mandatory. Must be selected from the provided drop-down options. |
-| AF | Mandatory. Must be alphanumeric. |
-| AJ8 | Mandatory. Must be either `All` or a range of positive integers (e.g. `1-5`). |
- 
-### Manager Sheet
- 
-| Field | Requirement |
-|---|---|
-| Columns B–G | Mandatory for every row. |
-| Columns H-K | Optional. Defaults to match input from columns D-G if left blank. |
-| S2 | Optional. Defaults to `1 column` if left blank. |
-| S8 | Optional. Defaults to `10` if left blank. |
- 
-If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
- 
----
-
 ## Step 3:
 
-In this step we return the filled-in worklist excel file and receive our newly generated LC and MS worklist files.
+In this final step, we return our information and recieve our newly generated LC and MS worklist files. In the command line, please enter
 
 ```bash
-python run.py -s 3 -w path/to/excel -o output_directory/
+python run.py -s 3 -w /path/to/plate_layout_excel_file -o output_directory/
 ```
 
-These files may be give directly to the MS controller (e.g. Xcalibur for Thermo instrumentation).
+In the specified output directory, you will find the files below. These files may be give directly to the MS controller (e.g. Xcalibur for Thermo instrumentation).
+1. **Experiment Summary** (from metadata sheet)
+2. **LC Worklist**
+3. **MS Worklist**
+
+
 ___
 ### Clean Up
 
@@ -244,3 +222,26 @@ Both worklists will be saved to the folder specified by the user in step 3.
 - **Library (Lib)** – Wells used to train/validate downstream analysis methods.
 - **Block** – A group of experimental units arranged to increase balance and improve randomization.
 
+---
+## Guidance for required input
+The worklist template will not run unless certain fields are completed with the correct type of input. In Step 2 you fill out the plate layout template file. To correctly complete this step, specific input fields are required. Before moving on to Step 3, double check the following fields on the plate layout Excel file.
+ 
+### User Sheet
+ 
+| Field | Requirement |
+|---|---|
+| A6, A24, A42, A60 | Mandatory. Must be one of `R`, `G`, `B`, or `Y`. |
+| AE | Mandatory. Must be selected from the provided drop-down options. |
+| AF | Mandatory. Must be alphanumeric. |
+| AJ8 | Mandatory. Must be either `All` or a range of positive integers (e.g. `1-5`). |
+ 
+### Manager Sheet
+ 
+| Field | Requirement |
+|---|---|
+| Columns B–G | Mandatory for every row. |
+| Columns H-K | Optional. Defaults to match input from columns D-G if left blank. |
+| S2 | Optional. Defaults to `1 column` if left blank. |
+| S8 | Optional. Defaults to `10` if left blank. |
+ 
+If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
