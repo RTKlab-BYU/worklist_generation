@@ -18,10 +18,11 @@ from metadata_capture.vars import TEMPLATES
 from metadata_capture.excel_utils.excel_file_parser import AdvancedFileParser
 from metadata_capture.database_utils.upload_to_sqlite import upload_to_sqlite
 from metadata_capture.excel_utils.fill_conditions import fill_conditions_in_worklist
-from metadata_capture.sdrf_generator import generate_sdrf
 
 # Stage 3 imports
+import openpyxl
 import worklist_classes.main as worklist_main
+from metadata_capture.sdrf_generator import generate_sdrf_for_worklist
 
 
 def parse_args():
@@ -183,25 +184,34 @@ def stage_2_generate_worklist(metadata_excel_path: Path):
     print(f"\nMetadata captured!\nWorklist template created:\n  {output_path}")
     auto_open_file(output_path)
 
-    # --- SDRF export ---
-    sdrf_path = generate_sdrf(
-        project_id=project_id,
-        db_path="project.db",
-        output_dir=str(output_dir),
-    )
-    print(f"\nPartial SDRF-style file created based on uploaded metadata:\n  {sdrf_path}\n")
-    # print(f"\nProject ID: {project_id} (you will need this for stage 4)\n")
-
     print("\nNext step (you may copy and paste the command below, but remember to add your own output directory):")
     print(f"  python run.py -s 3 -w {output_path} -o <output_dir>\n")
 
     sys.exit(0)
 
 
+def get_project_id_from_worklist(worklist_excel_path: Path) -> int:
+    """
+    Read the project_id back out of the 'User' sheet, cell B4, where stage 2
+    writes it (fill_conditions_in_worklist). Reads via openpyxl directly
+    rather than pandas, so it's unaffected by header-row offsets and by the
+    sheet being protected/locked.
+    """
+    wb = openpyxl.load_workbook(worklist_excel_path, data_only=True)
+    if "User" not in wb.sheetnames:
+        raise ValueError(f"'User' sheet not found in {worklist_excel_path}")
+    ws = wb["User"]
+    label = ws.cell(row=4, column=1).value
+    project_id = ws.cell(row=4, column=2).value
+    if project_id is None or (label and "Project ID" not in str(label)):
+        return None
+    return int(project_id)
+
+
 # Stage 3
 def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
     """
-    Generate LC and MS worklist files.
+    Generate LC and MS worklist files, and the SDRF for the project.
     """
     print("\n=== STAGE 3: Generate LC/MS Worklists ===\n")
 
@@ -211,7 +221,9 @@ def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    ms_pd, lc_pd, ms_filename, lc_filename = worklist_main.main(
+    project_id = get_project_id_from_worklist(worklist_excel_path)
+
+    ms_pd, lc_pd, ms_filename, lc_filename, filenames, condition_names, rep_numbers = worklist_main.main(
         str(worklist_excel_path)
     )
 
@@ -224,6 +236,20 @@ def stage_3_generate_lcms(worklist_excel_path: Path, output_dir: Path):
     print("\nWorklists generated:")
     print(f"  MS → {ms_path}")
     print(f"  LC → {lc_path}")
+
+    # --- SDRF export (moved from stage 2) ---
+    if project_id is None:
+        print("  SDRF → skipped (no Project ID found in worklist)")
+    else:
+        sdrf_path = generate_sdrf_for_worklist(
+            project_id=project_id,
+            filenames=filenames,
+            condition_names=condition_names,
+            rep_numbers=rep_numbers,
+            db_path="project.db",
+            output_dir=str(output_dir),
+        )
+        print(f"  SDRF → {sdrf_path}")
 
     sys.exit(0)
 

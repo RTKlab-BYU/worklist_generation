@@ -1,0 +1,247 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 31
+Name: RTKLab
+Description: testing
+Created: 2026-07-07 15:34:56
+Independent Variables:
+  None
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### a
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### b
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### c
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### apple
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### e
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### f
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### g
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+
+
+### bananas
+
+  [SAMPLE IDENTIFICATION]
+    Species: People
+    Sex: M
+    Age: 3
+    Gene: denim
+    Tissue: kleenex
+    Cell Type: red
+    Cell Line: wavy
+    Passage Number: 5
+    Treatment: nice
+    Treatment Period: long
+
+  [SAMPLE PREP]
+    Type: not mine
+    Cell Sorter: 4
+    LCM: yes
+    Sample Injection Ammount: 300
+    Reagent Dispenser: yes
+    Enzyme: 2
+    Digestion Duration: fivever
+    Digestion Buffer: 3
+    Storage Conidtion: 4
+    Storage Temperature: 5
+    Storage Buffer: 6
+    Storage Volume: 7
+

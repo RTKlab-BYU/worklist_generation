@@ -124,13 +124,13 @@ class AdvancedFileParser(ExcelFileParser):
             val = self.ws.cell(row=row_number, column=col).value
 
             if index == 0:
-                if not val:
+                if val is None:
                     break
                 first_val = val
                 values.add(val)
 
             # THE VALUE WILL DEFAULT TO THE FIRST COLUMN IF THE OTHER COLUMNS ARE LEFT BLANK
-            elif not val:
+            elif val is None:
                 val = first_val
 
             if val not in values:

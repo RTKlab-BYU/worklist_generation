@@ -73,6 +73,8 @@ def fill_conditions_in_worklist(
         sheet.cell(row=row, column=32).value = group
 
     sheet.cell(row=3, column=2).value = project_name
+    sheet.cell(row=4, column=1).value = "Project ID:"
+    sheet.cell(row=4, column=2).value = project_id
 
     wb.save(output_path)
     print(f"Saved filled worklist to: {output_path}")

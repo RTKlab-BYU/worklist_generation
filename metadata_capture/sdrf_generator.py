@@ -23,6 +23,25 @@ from pathlib import Path
 
 
 # ---------------------------------------------------------------------------
+# Template label -> canonical SDRF-Proteomics characteristics name.
+# Our metadata template uses human-readable labels (e.g. "Species", "Tissue")
+# that don't match the SDRF-Proteomics controlled vocabulary for the fields
+# that ARE part of that controlled vocabulary. Everything not listed here is
+# passed through unchanged as a free-form characteristics[...] column, which
+# the spec permits.
+# ---------------------------------------------------------------------------
+SDRF_LABEL_TRANSLATION: dict[str, str] = {
+    "species": "organism",
+    "tissue": "organism part",
+}
+
+
+def _sdrf_characteristics_name(label: str) -> str:
+    lowered = label.lower()
+    return SDRF_LABEL_TRANSLATION.get(lowered, lowered)
+
+
+# ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
 
@@ -197,6 +216,148 @@ def generate_sdrf(
             row.append(sub.get(key, "not available"))
 
         # comments
+        row.append(project["project_name"] or "")
+        row.append(project["description"] or "")
+        row.append(project["created_at"] or "")
+
+        rows.append(row)
+
+    # -----------------------------------------------------------------------
+    # Write TSV
+    # -----------------------------------------------------------------------
+    if output_filename is None:
+        safe_name = (project["project_name"] or "project").replace(" ", "_")
+        output_filename = f"{safe_name}_project_{project_id}.sdrf.tsv"
+
+    output_path = os.path.join(output_dir, output_filename)
+
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f, delimiter="\t")
+        writer.writerow(headers)
+        writer.writerows(rows)
+
+    return os.path.abspath(output_path)
+
+
+def generate_sdrf_for_worklist(
+    project_id: int,
+    filenames: list[str],
+    condition_names: list[str],
+    rep_numbers: list,
+    db_path: str = "project.db",
+    output_dir: str = "output",
+    output_filename: str | None = None,
+) -> str:
+    """
+    Build an SDRF-Proteomics TSV with ONE ROW PER RAW FILE (as opposed to
+    generate_sdrf(), which emits one row per group). Intended for stage 3,
+    once the actual raw filenames exist.
+
+    Parameters
+    ----------
+    project_id       : integer PK of the project in project_data
+    filenames        : raw MS filenames, e.g. from Output.create_filenames()
+    condition_names  : group/condition name for each filename, same length
+                        and order as `filenames`. Conditions not found in
+                        group_data (e.g. QC, Library, TrueBlank, Preblank)
+                        are still included as rows, with "not applicable"
+                        in every characteristics/factor value column.
+    rep_numbers      : replicate number for each filename, same length and
+                        order as `filenames`, e.g. from
+                        Output.create_filenames().
+    db_path          : path to the SQLite database file
+    output_dir       : directory where the .sdrf.tsv will be saved
+    output_filename  : override the default filename; must end in .sdrf.tsv
+
+    Returns
+    -------
+    Absolute path to the generated file.
+    """
+    if not os.path.exists(db_path):
+        raise FileNotFoundError(f"Database not found: {db_path}")
+    if len(filenames) != len(condition_names) or len(filenames) != len(rep_numbers):
+        raise ValueError(
+            f"filenames ({len(filenames)}), condition_names "
+            f"({len(condition_names)}), and rep_numbers ({len(rep_numbers)}) "
+            "must all be the same length."
+        )
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    with sqlite3.connect(db_path) as conn:
+        cur = conn.cursor()
+
+        project = _fetch_project(cur, project_id)
+        groups  = _fetch_groups(cur, project_id)
+
+        # group_rows: {group_name: {(category, label): value}}
+        group_rows: dict[str, dict[tuple[str, str], str]] = {}
+        all_keys: list[tuple[str, str]] = []
+        seen_keys: set[tuple[str, str]] = set()
+
+        for g in groups:
+            sub = _fetch_sub_data(cur, g["group_id"])
+            group_rows[g["group_name"]] = {}
+            for item in sub:
+                key = (item["category"], item["label"])
+                group_rows[g["group_name"]][key] = item["value"]
+                if key not in seen_keys:
+                    all_keys.append(key)
+                    seen_keys.add(key)
+
+    ind_labels: set[str] = _parse_independent_variables(
+        project["independent_variable"]
+    )
+
+    # -----------------------------------------------------------------------
+    # Build column headers
+    # -----------------------------------------------------------------------
+    # Anchor columns: "technology type" MUST immediately follow "assay name"
+    # per the MAGE-TAB/SDRF spec. Data-file-level comment columns come after.
+    headers: list[str] = [
+        "source name",
+        "assay name",
+        "technology type",
+        "comment[data file]",
+        "comment[technical replicate]",
+    ]
+
+    char_keys: list[tuple[str, str]] = []
+    for key in all_keys:
+        _cat, label = key
+        headers.append(f"characteristics[{_sdrf_characteristics_name(label)}]")
+        char_keys.append(key)
+
+    fv_keys: list[tuple[str, str]] = []
+    for key in all_keys:
+        _cat, label = key
+        if label in ind_labels:
+            headers.append(f"factor value[{_sdrf_characteristics_name(label)}]")
+            fv_keys.append(key)
+
+    headers += ["comment[project name]", "comment[project description]", "comment[created at]"]
+
+    # -----------------------------------------------------------------------
+    # Build rows  (one row per raw file)
+    # -----------------------------------------------------------------------
+    rows: list[list[str]] = []
+
+    for filename, condition, rep in zip(filenames, condition_names, rep_numbers):
+        sub = group_rows.get(condition)  # None for QC/Library/TrueBlank/Preblank/etc.
+
+        row: list[str] = []
+        row.append(condition)                                  # source name
+        row.append(condition)                                  # assay name
+        row.append("proteomic profiling by mass spectrometry") # technology type
+        row.append(filename)                                   # comment[data file]
+        row.append(str(rep))                                   # comment[technical replicate]
+
+        if sub is None:
+            row.extend(["not applicable"] * (len(char_keys) + len(fv_keys)))
+        else:
+            row.extend(sub.get(key, "not available") for key in char_keys)
+            row.extend(sub.get(key, "not available") for key in fv_keys)
+
         row.append(project["project_name"] or "")
         row.append(project["description"] or "")
         row.append(project["created_at"] or "")

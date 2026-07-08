@@ -21,6 +21,8 @@ class Output:
     def create_filenames(self):
         # creates a list of filenames
         filenames = []
+        condition_names = []  # parallel list: condition/group name for each filename, for SDRF generation
+        rep_numbers = []      # parallel list: replicate number for each filename, for SDRF generation
         TB_method_found = False # in a 2 column system we need to store the msmethod for a TrueBlank for later
 
         if self.lc_number == 1:
@@ -44,15 +46,17 @@ class Output:
                 if condition == "TrueBlank":
                     TB_method = self.msmethods[index]
                     TB_method_found = True
+            condition_names.append(condition)
+            rep_numbers.append(self.reps[index])
         for run_num, (_, row) in enumerate(df.iterrows(), start=1):
             joined = "_".join(str(x).strip().replace(" ", "_") for x in row if pd.notna(x))
             if self.ms_type == True:
                 joined += f"_run{run_num}"
             filenames.append(joined)
-            
+
         if TB_method_found == True:
-            return filenames, TB_method
-        return filenames, None
+            return filenames, TB_method, condition_names, rep_numbers
+        return filenames, None, condition_names, rep_numbers
 
     def create_instrument_methods(self, methodpaths, methods, csv_file):
         inst_methods = []
@@ -136,7 +140,7 @@ class Output:
         return pd.DataFrame(rows)
     
     def putout(self):
-        filenames, TB_method = self.create_filenames()
+        filenames, TB_method, condition_names, rep_numbers = self.create_filenames()
         # Create and export MS CSV
         ms_pd = self.final_csv_format_as_pd("MS", filenames.copy(), self.well_conditions.copy(), self.positions.copy(), self.inj_vols.copy(), TB_method)
         # Create and export LC CSV
@@ -146,4 +150,6 @@ class Output:
         ms_filename = f"{self.nbcode}_MS.csv"
         lc_filename = f"{self.nbcode}_LC.csv"
 
-        return ms_pd, lc_pd, ms_filename, lc_filename
+        # filenames/condition_names/rep_numbers are returned (not just used internally) so that
+        # SDRF generation in stage 3 can map each raw file to its group's metadata and replicate number.
+        return ms_pd, lc_pd, ms_filename, lc_filename, filenames, condition_names, rep_numbers
