@@ -9,7 +9,7 @@ This walkthrough guides you through an example experiment to demonstate how to u
 - [Glossary](#glossary)
 - [Guidance for BIG experiments](#guidance-for-big-experiments)
 - [Guidance for required input](#guidance-for-required-input)
-- [Guidance for non-samples like QC, Library, etc. ](#guidance-for-non-samples-inputs)
+- [Guidance for non-samples like QC, Library, etc. ](#guidance-for-non-sample-inputs)
 
 ## Project Description
 The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected, sorted with FACS and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
