@@ -53,7 +53,7 @@ After you have specified the number of condition, you will be prompted to enter 
 When you finish entering this information, the program will give you a metadata Excell template file, where you enter the rest of the metadata. The Excel filepath will be shown in the terminal and can be found in the folder in which you downloaded the worklist generator with a path similar to this one:
 
 ```
-C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\excel_utils\outputs\20260314_175710_Mock_B_T_Cells_Exp.xlsm
+./worklist_git/metadata_capture/excel_utils/outputs/20260314_175710_Mock_B_T_Cells_Exp.xlsm
 ```
 
 We recommend copying the text under **“Next step:”**.
@@ -87,7 +87,7 @@ The user page shows the plate layout. You will need to enter exactly where each 
 For the excel sheet used in this example open:
 
 ```
-\worklist_git\metadata_capture\excel_utils\outputs\20260314_175710_Mock_B_T_Cells_Exp.xlsm
+./worklist_git/metadata_capture/excel_utils/outputs/20260314_175710_Mock_B_T_Cells_Exp.xlsm
 ```
 
 #### Columns AD–AG
@@ -284,11 +284,11 @@ If any mandatory field is missing or improperly formatted, the program will be u
 
 ## Guidance for non-sample inputs
 
-When you enter data about your experiment, the focus is on the main sample conditions. But the WLG understands that other things need to be acquired as part of an experiment as well — QC, System Validation, Blanks, TrueBlanks, and Library. Here is how to enter that info.
+When you enter data about your experiment, the focus is on the main sample conditions, e.g. B and T cells from different human subjects. But the WorklistGenerator understands that other samples need to be acquired as part of an experiment as well — QC, System Validation, Blanks, and Library. Here is how to enter that information and get those samples scheduled within the worklist.
 
-You will remember that in Step 2 there is a place to define non-sample condition rows on the Manager sheet (columns B–K, same as any other condition). If you want a QC that runs every 10 samples and a different QC that runs every 20, those should be entered as two separate condition rows: label one `QC` and the other `SystemValidation`. `SystemValidation` runs on its own frequency (Column Q, Row 8) that is separate from the regular `QC` run frequency (Column Q, Row 9) — they are not the same list and are not interchangeable, even though both are "QC-like" in purpose.
+You will remember that in Step 2 there is a place to define non-sample condition rows on the Manager sheet (columns B–K, same as any other condition). For example, if you two different kinds of QC samples which should be run on different schedules, here is how to enter that information. If your first QC that runs every 10 samples and a different QC that runs every 20, those should be entered as two separate condition rows: label one `QC` and the other `SystemValidation`. `SystemValidation` runs on its own frequency (Column Q, Row 8) that is separate from the regular `QC` run frequency (Column Q, Row 9) — they are not the same list and are not interchangeable, even though both are "QC-like" in the philosophical sense.
 
-A `Library` is only run at the beginning or the end of the worklist (set by Column Q, Row 5), never scattered between condition blocks. Because Library wells may carry slightly higher load amounts, the program always inserts TrueBlank wells around the Library block automatically, to keep the LC column clear before the main sample runs begin — you do not need to reserve extra TrueBlank wells yourself for this purpose, beyond making sure at least one TrueBlank condition exists (User Sheet, AJ Row 5).
+In SCP, it is common to run a larger input sample to help get good IDs. Most people call this a 'library'. In the WorklistGenerator, A `Library` is only run at the beginning or the end of the worklist (set by Column Q, Row 5), never scattered between condition blocks. Because Library wells may carry slightly higher load amounts, the program always inserts TrueBlank wells around the Library block automatically, to keep the LC column clear before the main sample runs begin — you do not need to reserve extra TrueBlank wells yourself for this purpose, beyond making sure at least one TrueBlank condition exists (User Sheet, AJ Row 5).
 
 `QC`, `WetQC`, `Blank`, and `TrueBlank` each have an option for how their wells are split relative to the sample blocks, which you specify per-row under the **NonCondition** columns on the Manager Sheet:
 
