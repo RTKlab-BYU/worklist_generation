@@ -281,3 +281,6 @@ The worklist template will not run unless certain fields are completed with the 
 | S8 | Optional. Defaults to `10` if left blank. |
  
 If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
+
+## Guidance for non-samples
+here is stuff
