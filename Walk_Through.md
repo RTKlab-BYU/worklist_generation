@@ -159,9 +159,9 @@ Column L lets you input the number of samples in a well. The worklist will treat
 
 #### QC Before / After / Between
 
-Non condition wells are seperated into groups that run before all conditions, in blocks between the condition blocks and after the conditions. The number of wells wanted to run in each group should be entered in columns N, O, and P for before, after and between respectively.
+Non condition wells are seperated into groups that run before all conditions, in blocks between the condition blocks and after the conditions. The number of wells wanted to run in each group should be entered in columns O, P, and Q for before, after and between respectively.
 
-#### Column Q Settings
+#### Column S Settings
 
 - **Row 2:** Select one- or two-column system
 - **Row 5:** Library placement (beginning or end)
@@ -282,5 +282,33 @@ The worklist template will not run unless certain fields are completed with the 
  
 If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
 
-## Guidance for non-samples
-in a single cell dataset, there are sometimes when we
+## Guidance for non-sample inputs
+
+When you enter data about your experiment, the focus is on the main sample conditions. But the WLG understands that other things need to be acquired as part of an experiment as well — QC, System Validation, Blanks, TrueBlanks, and Library. Here is how to enter that info.
+
+You will remember that in Step 2 there is a place to define non-sample condition rows on the Manager sheet (columns B–K, same as any other condition). If you want a QC that runs every 10 samples and a different QC that runs every 20, those should be entered as two separate condition rows: label one `QC` and the other `SystemValidation`. `SystemValidation` runs on its own frequency (Column Q, Row 8) that is separate from the regular `QC` run frequency (Column Q, Row 9) — they are not the same list and are not interchangeable, even though both are "QC-like" in purpose.
+
+A `Library` is only run at the beginning or the end of the worklist (set by Column Q, Row 5), never scattered between condition blocks. Because Library wells may carry slightly higher load amounts, the program always inserts TrueBlank wells around the Library block automatically, to keep the LC column clear before the main sample runs begin — you do not need to reserve extra TrueBlank wells yourself for this purpose, beyond making sure at least one TrueBlank condition exists (User Sheet, AJ Row 5).
+
+`QC`, `WetQC`, `Blank`, and `TrueBlank` each have an option for how their wells are split relative to the sample blocks, which you specify per-row under the **NonCondition** columns on the Manager Sheet:
+
+| Column | Label | Meaning |
+|---|---|---|
+| O | Beginning NonCondition | Number of wells of this type to run before all condition blocks |
+| P | Ending NonCondition | Number of wells of this type to run after all condition blocks |
+| Q | Between NonCondition | Remaining wells of this type, distributed in blocks between condition blocks |
+
+Any wells left over after filling the Beginning and Ending counts are automatically treated as "Between" — you don't need to calculate that number yourself, just fill in how many you want before and after, and the rest are placed between blocks.
+
+Note that `Library` and `SystemValidation` do **not** use the O–Q NonCondition columns. Their placement is controlled instead by the global settings on Column Q (library placement in Row 5, and system validation frequency in Row 8) rather than by per-row before/after/between counts.
+
+### Manager Sheet — Non-sample condition summary
+
+| Field | Requirement |
+|---|---|
+| Well label (Column B) for a QC row | Must be exactly `QC` to be treated as a regular QC condition. |
+| Well label (Column B) for a validation row | Must be exactly `SystemValidation` to be treated as a system-validation condition, run at its own frequency (Column Q, Row 8), separate from regular QC frequency (Column Q, Row 9). |
+| Well label (Column B) for a library row | Must be exactly `Library`. Placed only at the beginning or end of the worklist (Column Q, Row 5), never between condition blocks. |
+| Well label (Column B) for a blank row | Must be exactly `Blank` (or `TrueBlank`) to be treated as blank/clearing wells. |
+| Columns O, P, Q (per QC/WetQC/Blank/TrueBlank row) | Optional. O = number run before all conditions, P = number run after all conditions, Q = remaining wells run in blocks between conditions. Not used for `Library` or `SystemValidation` rows. |
+| At least one `TrueBlank` well (User Sheet, AJ Row 5) | Mandatory if using Library runs or a two-experiment split — the program automatically inserts TrueBlank wells around Library blocks. |
