@@ -191,5 +191,3 @@ class CustomFileParser(ExcelFileParser):
 
     def _parse_file(self) -> ProjectMetadata:
         pass
-    
-

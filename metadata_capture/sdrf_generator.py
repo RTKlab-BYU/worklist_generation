@@ -227,7 +227,8 @@ def generate_sdrf(
     # -----------------------------------------------------------------------
     if output_filename is None:
         safe_name = (project["project_name"] or "project").replace(" ", "_")
-        output_filename = f"{safe_name}_project_{project_id}.sdrf.tsv"
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"{safe_name}_project_{project_id}_{ts}.sdrf.tsv"
 
     output_path = os.path.join(output_dir, output_filename)
 
@@ -312,30 +313,34 @@ def generate_sdrf_for_worklist(
     # -----------------------------------------------------------------------
     # Build column headers
     # -----------------------------------------------------------------------
-    # Anchor columns: "technology type" MUST immediately follow "assay name"
-    # per the MAGE-TAB/SDRF spec. Data-file-level comment columns come after.
-    headers: list[str] = [
-        "source name",
-        "assay name",
-        "technology type",
-        "comment[data file]",
-        "comment[technical replicate]",
-    ]
-
+    # Per the MAGE-TAB/SDRF spec:
+    #   - "source name" is followed by the sample's "characteristics[...]" columns
+    #   - "assay name" MUST be immediately followed by "technology type"
+    #   - data-file comment columns (comment[data file], etc.) follow that
+    #   - "factor value[...]" columns MUST be the last columns in the file
     char_keys: list[tuple[str, str]] = []
+    char_headers: list[str] = []
     for key in all_keys:
         _cat, label = key
-        headers.append(f"characteristics[{_sdrf_characteristics_name(label)}]")
+        char_headers.append(f"characteristics[{_sdrf_characteristics_name(label)}]")
         char_keys.append(key)
 
     fv_keys: list[tuple[str, str]] = []
+    fv_headers: list[str] = []
     for key in all_keys:
         _cat, label = key
         if label in ind_labels:
-            headers.append(f"factor value[{_sdrf_characteristics_name(label)}]")
+            fv_headers.append(f"factor value[{_sdrf_characteristics_name(label)}]")
             fv_keys.append(key)
 
-    headers += ["comment[project name]", "comment[project description]", "comment[created at]"]
+    headers: list[str] = (
+        ["source name"]
+        + char_headers
+        + ["assay name", "technology type"]
+        + ["comment[data file]", "comment[technical replicate]"]
+        + ["comment[project name]", "comment[project description]", "comment[created at]"]
+        + fv_headers
+    )
 
     # -----------------------------------------------------------------------
     # Build rows  (one row per raw file)
@@ -345,22 +350,26 @@ def generate_sdrf_for_worklist(
     for filename, condition, rep in zip(filenames, condition_names, rep_numbers):
         sub = group_rows.get(condition)  # None for QC/Library/TrueBlank/Preblank/etc.
 
-        row: list[str] = []
-        row.append(condition)                                  # source name
+        row: list[str] = [condition]  # source name
+
+        if sub is None:
+            row.extend(["not applicable"] * len(char_keys))
+        else:
+            row.extend(sub.get(key, "not available") for key in char_keys)
+
         row.append(condition)                                  # assay name
         row.append("proteomic profiling by mass spectrometry") # technology type
         row.append(filename)                                   # comment[data file]
         row.append(str(rep))                                   # comment[technical replicate]
 
-        if sub is None:
-            row.extend(["not applicable"] * (len(char_keys) + len(fv_keys)))
-        else:
-            row.extend(sub.get(key, "not available") for key in char_keys)
-            row.extend(sub.get(key, "not available") for key in fv_keys)
-
         row.append(project["project_name"] or "")
         row.append(project["description"] or "")
         row.append(project["created_at"] or "")
+
+        if sub is None:
+            row.extend(["not applicable"] * len(fv_keys))
+        else:
+            row.extend(sub.get(key, "not available") for key in fv_keys)
 
         rows.append(row)
 

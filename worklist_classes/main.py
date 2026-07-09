@@ -14,4 +14,4 @@ def main(input_filename):
     return ms_pd, lc_pd, ms_filename, lc_filename, filenames, condition_names, rep_numbers
 
 if __name__ == "__main__":
-    main("worklist_template0821.xlsx")
+    main()

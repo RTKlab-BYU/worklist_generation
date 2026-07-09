@@ -36,9 +36,11 @@ class Blocker:
     def generate_seed(self, run_seed=None):
         # Prioritize an explicitly passed argument, then the instance seed, then a random integer
         chosen_seed = run_seed if run_seed is not None else self.run_seed
-        
-        # If both are None (or empty/falsy), generate a random one
-        random.seed(chosen_seed := chosen_seed or random.randrange(sys.maxsize))
+
+        if chosen_seed is None:
+            chosen_seed = random.randrange(sys.maxsize)
+
+        random.seed(chosen_seed)
         print(f"Random seed set to: {chosen_seed}")
 
     def safe_int(self, val, default=0):
