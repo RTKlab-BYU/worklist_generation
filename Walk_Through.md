@@ -177,7 +177,7 @@ Non condition wells are seperated into groups that run before all conditions, in
 - **Row 12:** LC machine type
   - Adjusts output format.
 
-The final filled-in Excell file for the mock experiment can be seen [here](./examples/b_and_t_cells_filled.xlsx)
+The final filled-in Excel file for the mock experiment can be seen [here](./examples/b_and_t_cells_filled.xlsx)
 ---
 
 ## Step 3:
