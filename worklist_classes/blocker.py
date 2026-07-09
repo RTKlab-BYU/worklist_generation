@@ -36,10 +36,8 @@ class Blocker:
     def generate_seed(self, run_seed=None):
         # Prioritize an explicitly passed argument, then the instance seed, then a random integer
         chosen_seed = run_seed if run_seed is not None else self.run_seed
-
         if chosen_seed is None:
             chosen_seed = random.randrange(sys.maxsize)
-
         random.seed(chosen_seed)
         print(f"Random seed set to: {chosen_seed}")
 

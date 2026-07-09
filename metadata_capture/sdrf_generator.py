@@ -359,7 +359,9 @@ def generate_sdrf_for_worklist(
 
         row.append(condition)                                  # assay name
         row.append("proteomic profiling by mass spectrometry") # technology type
-        row.append(filename)                                   # comment[data file]
+        row.append(
+            filename if filename.endswith(".raw") else f"{filename}.raw"
+            )                                                  # comment[data file]
         row.append(str(rep))                                   # comment[technical replicate]
 
         row.append(project["project_name"] or "")
