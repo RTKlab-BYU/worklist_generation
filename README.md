@@ -6,8 +6,7 @@
 - [Installation Options](#installation-options)
 - [Virtual Environment](#create-and-activate-virtual-environment-optional)
 - [Requirements](#install-requirements)
-- [Command‑Line Usage](#command-line-usage)
-- [Glossary](#glossary)
+- [Run the Program](#run-the-program)
 - [FAQ](#faq)
 - [Cite & Acknowledge](#cite--acknowledge)
 
@@ -68,7 +67,8 @@ Run the following to install the required packages:
 pip install -r requirements.txt
 ```
 ---
-## Command‑Line Usage
+## Run the program
+The WorklistGenerator is a command line program and therefore runs through a terminal. Below is a brief display of the three main steps. Extensive detail is given in a [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md)
 
 ### 1. Generate metadata sheet
    ```bash
@@ -100,13 +100,13 @@ A: Yes. A step‑by‑step walkthrough is available in the [Walk‑Through guide
  
 A: A complete list of required fields is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
  
-**Q: How should batching be handled for experiments with more than three plates?**
+**Q: How should batching be handled for experiments with more than four plates?**
  
-A: Guidance on batching strategy for experiments spanning more than three plates is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
+A: Guidance on batching strategy for experiments spanning more than four plates is provided in the [Walk‑Through guide](https://github.com/RTKlab-BYU/worklist_generation/blob/master/Walk_Through.md).
 
 **Q: How should high‑input samples be handled?**
  
-A: Samples with a high potential for carry‑over can be accommodated in one of two ways. First, they may be designated as `Library` values, which are grouped into a single contiguous block at either the beginning or the end of the worklist and, by default, are always followed by a `TrueBlank`. Second, they may be designated as `QC` values; in this case, the user specifies the desired number of `QC` replicates and adds a `Blank` and/or `TrueBlank` condition, which will always be scheduled to run immediately after the specified number of `QC` replicates.
+A: Samples with a high potential for carry‑over can be accommodated in one of two ways. First, they may be designated as `Library` values, which are grouped into a single contiguous block at either the beginning or the end of the run and, by default, are always followed by a `TrueBlank`. Second, they may be designated as `QC` values; in this case, the user specifies the desired number of `QC` replicates and adds a `Blank` and/or `TrueBlank` condition, which will always be scheduled to run immediately after the specified number of `QC` replicates.
  
 **Q: Can a worklist be reproduced on a different computer?**
  

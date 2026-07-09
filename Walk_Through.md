@@ -1,33 +1,41 @@
 # Walkthrough: Mock Experiment B and T Cells
 
-This walkthrough guides you through an example experiment to show how the templates may be filled out and the output that they give after the program has been installed. To install the program, see the README file.
+This walkthrough guides you through an example experiment to demonstate how to use the WorklistGenerator. The program gathers data primarily through a series of Excell template files, which the program generates and the user fills out. This walk through uses a mock experiment for single cell proteomics.
+
+- [Project Description](#project-description)
+- [Step 1: Capturing basic meta-data](#step-1)
+- [Step 2: Specifying plate layout](#step-2)
+- [Step 3: Genenrating the worklist](#step-3)
+- [Glossary](#glossary)
+- [Guidance for BIG experiments](#guidance-for-big-experiments)
+- [Guidance for required input](#guidance-for-required-input)
+- [Guidance for non-samples like QC, Library, etc. ](#guidance-for-non-samples)
 
 ## Project Description
+The mock experiment is a simple example of an A/B study design where there are two groups of human subjects (healthy and diseased). The goal of the experiment is to identify changes in B and T cells between the conditions. As can be seen in the image below, there are six subjects in each condition; all subjects are female. We assume that cells have been collected, sorted with FACS and put on 384 well-plates and now the users wants to generate a randomized run ordering. 
 
 ![experiment_design](./images/figure-WLG_6sub.png)
-This mock experiment follows the pattern of an experiment looking for the difference between healthy and diseased, B and T cells across 6 individuals. Half of the individuals are male, and half are female.
-![experiment_design](./images/figure-WLG_6sub.png)
-
 
 ---
 
-## Step 1: Create Metadata Excel Sheet
+## Step 1
+In this step, we will capture some basic metadata. There are three substeps
+1. Use a commandline interface to enter some meta-data
+2. Receive a metadata Excel template
+3. Enter information in the template about the different experimental/biological conditions.
 
-In the first step, enter metadata about the different conditions.
-
-In the terminal enter:
+We start in the terminal, by entering the following command:
 
 ```bash
 python run.py -s 1
 ```
 
-The terminal will then ask a series of questions. The inputs for this experiment will be shown.
-
+The terminal will then ask a series of questions. We have the terminal prompt below in bold, and example answers following. 
 - **What is your project name:** Mock B+T Cells Exp
 - **What is your project description:** The mock experiment from the paper, with parameters as outlined in the paper
 - **How many conditions does your project have:** 12
 
-### Conditions
+After you have specified the number of condition, you will be prompted to enter a name/label for each. Below we use 'H' or 'D' to indicate healthy and diseased; a numeral represents the index of the subject with their condition group; then a 'B' or 'T' to specify the cell type. For the mock experiment, we entered:
 
 1. H1B  
 2. H1T  
@@ -42,7 +50,7 @@ The terminal will then ask a series of questions. The inputs for this experiment
 11. D6B  
 12. D6T
 
-The metadata excel filepath will be shown in the terminal and can be found in the folder in which you downloaded the worklist generator with a path similar to this one:
+When you finish entering this information, the program will give you a metadata Excell template file, where you enter the rest of the metadata. The Excel filepath will be shown in the terminal and can be found in the folder in which you downloaded the worklist generator with a path similar to this one:
 
 ```
 C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\excel_utils\outputs\20260314_175710_Mock_B_T_Cells_Exp.xlsm
@@ -50,25 +58,25 @@ C:\Users\<user>\OneDrive\Desktop\<folder>\.venv\worklist_git\metadata_capture\ex
 
 We recommend copying the text under **“Next step:”**.
 
----
-
-### Fill Metadata Sheet
-
-Remember that not all cells need to be filled out.
+The last part of step 1 is to fill out the metadata into the template. 
 
 ---
 
 ## Step 2: 
 
-In this step we return the filled-in metadata excel file and receive a new template. This new template is where we enter the plate information.
+In this step, we will capture the information about sample placement in well plates. It has three substeps
+1. Return the filled-in metadata excel file 
+2. Receive a plate layout template. 
+3. Fill in the plate layout template.
 
+We start in the terminal, returning the filled out metadata file. Do this by entering the following command:
 ```bash
-python run.py -s 2 -m path/to/excel
+python run.py -s 2 -m /path/to/metadata_excel_file
 ```
 
-Running this command will create the worklist template and open that file in excel for you. You can see the example template here:
+The WorklistGenerator will read the metadata file and create a customized template for your experiment. It will save the plate layout template and open that file in excel for you. You can see the example template here:
 [Mock Experiment](./examples/mock_b_and_t_cells_exp.xlsx)
-___
+The plate layout template has two tabs that each need to be filled in. One is about the samples on a plate, we call this the 'User Page', and one is about the LC-MS method files that you want to use in analyzing the samples. We call this the 'Manager Page'. If you have questions about specific fields, please refer to [Guidance for required input](#guidance-for-required-input) for more details.
 
 ### Fill User Page
 
@@ -169,41 +177,20 @@ Non condition wells are seperated into groups that run before all conditions, in
 
 ---
 
-## Required Fields
- 
-The worklist template will not run unless certain fields are completed with the correct type of input. Before moving on to Step 3, double check the following fields on the worklist excel file.
- 
-### User Sheet
- 
-| Field | Requirement |
-|---|---|
-| A6, A24, A42, A60 | Mandatory. Must be one of `R`, `G`, `B`, or `Y`. |
-| AE | Mandatory. Must be selected from the provided drop-down options. |
-| AF | Mandatory. Must be alphanumeric. |
-| AJ8 | Mandatory. Must be either `All` or a range of positive integers (e.g. `1-5`). |
- 
-### Manager Sheet
- 
-| Field | Requirement |
-|---|---|
-| Columns B–G | Mandatory for every row. |
-| Columns H-K | Optional. Defaults to match input from columns D-G if left blank. |
-| S2 | Optional. Defaults to `1 column` if left blank. |
-| S8 | Optional. Defaults to `10` if left blank. |
- 
-If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
- 
----
-
 ## Step 3:
 
-In this step we return the filled-in worklist excel file and receive our newly generated LC and MS worklist files.
+In this final step, we return our information and recieve our newly generated LC and MS worklist files. In the command line, please enter
 
 ```bash
-python run.py -s 3 -w path/to/excel -o output_directory/
+python run.py -s 3 -w /path/to/plate_layout_excel_file -o output_directory/
 ```
 
-These files may be give directly to the MS controller (e.g. Xcalibur for Thermo instrumentation).
+In the specified output directory, you will find the files below. These files may be give directly to the MS controller (e.g. Xcalibur for Thermo instrumentation).
+1. **Experiment Summary** (from metadata sheet)
+2. **LC Worklist**
+3. **MS Worklist**
+
+
 ___
 ### Clean Up
 
@@ -235,3 +222,62 @@ Both worklists will be saved to the folder specified by the user in step 3.
 - **Library (Lib)** – Wells used to train/validate downstream analysis methods.
 - **Block** – A group of experimental units arranged to increase balance and improve randomization.
 
+---
+## Guidance for BIG experiments
+
+**Definition:** For the purposes of this guide, a **BIG experiment** is any experiment that exceeds the LC stage's capacity of **3 plates**. If your experiment fits on 3 or fewer plates, it runs as a single batch and the multi-batch guidance below does not apply to you.
+
+**Key principles for BIG experiments:**
+
+- Your main experimental hypothesis needs to be represented in every batch.
+- You cannot split your hypothesis across batches, as this creates a confounding factor.
+- You cannot put, e.g., all "healthy" plates in one batch and all "diseased" plates in another.
+- Evenly space your experimental/biological factors out across all batches.
+
+### LC stage capacity and batches
+
+The LC system's autosampler stages a limited number of well-plates at once depending on your instrument configuration. WorkListGenerator can only randomize samples within a single batch of staged plates. If your experiment requires more plates than the stage holds, the additional plates must be run as a separate batch, loaded and run at a later time.
+
+For the purposes of this guide, we'll assume a stage capacity of **3 plates per batch**. If your experiment has 3 or fewer plates, it fits in a single batch. If it has more than 3 plates, plan on multiple batches from the start, before you fill out plate layouts.
+
+### Why exceeding the 3-plate limit requires careful experimental design
+
+Because randomization only happens within a batch, splitting plates into separate batches is a source of potential batch effects. If an experimental or biological factor is not distributed across all batches, that factor becomes confounded with whatever technical variation exists between batches.
+
+**Do not stratify any biological or experimental factor across batches.** For example, for a 6-plate BIG experiment split into 2 batches of 3:
+
+- **Incorrect:** Batch 1 = all 3 "healthy" plates, Batch 2 = all 3 "diseased" plates. Any batch effect between the two runs is now indistinguishable from the disease effect you're trying to measure.
+- **Correct:** Each batch contains a balanced mix of conditions — e.g., each batch has both healthy and diseased subjects, and (where applicable) a mix of cell types, sexes, time points, etc.
+
+This applies to every experimental factor you care about, not just the primary variable of interest — subject, condition, treatment, cell type, sex, time point, and so on should all be spread as evenly as possible across batches.
+
+### Practical steps for BIG experiments
+
+1. **Determine your batch count first.** Divide your total plate count by the stage capacity (3) to know how many batches you'll need.
+2. **Balance every factor across batches before finalizing plate layouts.** Assign subjects/conditions to specific plates such that each batch is a representative "mini-experiment" of the whole design.
+3. **Run each batch as its own WorkListGenerator session.** Randomization and blocking are computed independently per batch.
+4. **Keep QC/library/blank spacing consistent across batches.** Each batch should independently follow the same QC frequency and library conventions described elsewhere in this guide, so that batches remain comparable to one another.
+5. **Document the batch assignment.** Record which subjects/samples went into which batch as part of your metadata.
+---
+## Guidance for required input
+The worklist template will not run unless certain fields are completed with the correct type of input. In Step 2 you fill out the plate layout template file. To correctly complete this step, specific input fields are required. Before moving on to Step 3, double check the following fields on the plate layout Excel file.
+ 
+### User Sheet
+ 
+| Field | Requirement |
+|---|---|
+| A6, A24, A42, A60 | Mandatory. Must be one of `R`, `G`, `B`, or `Y`. |
+| AE | Mandatory. Must be selected from the provided drop-down options. |
+| AF | Mandatory. Must be alphanumeric. |
+| AJ8 | Mandatory. Must be either `All` or a range of positive integers (e.g. `1-5`). |
+ 
+### Manager Sheet
+ 
+| Field | Requirement |
+|---|---|
+| Columns B–G | Mandatory for every row. |
+| Columns H-K | Optional. Defaults to match input from columns D-G if left blank. |
+| S2 | Optional. Defaults to `1 column` if left blank. |
+| S8 | Optional. Defaults to `10` if left blank. |
+ 
+If any mandatory field is missing or improperly formatted, the program will be unable to generate the LC and MS worklists in Step 3.
