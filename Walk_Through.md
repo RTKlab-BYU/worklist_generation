@@ -69,6 +69,8 @@ In this step, we will capture the information about sample placement in well pla
 2. Receive a plate layout template. 
 3. Fill in the plate layout template.
 
+There are examples of all these files (templates and filled-out) in the 'examples' [folder here on Git](./examples) 
+
 We start in the terminal, returning the filled out metadata file. Do this by entering the following command:
 ```bash
 python run.py -s 2 -m /path/to/metadata_excel_file
@@ -175,6 +177,7 @@ Non condition wells are seperated into groups that run before all conditions, in
 - **Row 12:** LC machine type
   - Adjusts output format.
 
+The final filled-in Excell file for the mock experiment can be seen [here](./examples/b_and_t_cells_filled.xlsx)
 ---
 
 ## Step 3:
