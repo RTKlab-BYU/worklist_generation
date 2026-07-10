@@ -238,9 +238,7 @@ Both worklists will be saved to the folder specified by the user in step 3.
 
 ### LC stage capacity and batches
 
-The LC system's autosampler stages a limited number of well-plates at once depending on your instrument configuration. WorkListGenerator can only randomize samples within a single batch of staged plates. If your experiment requires more plates than the stage holds, the additional plates must be run as a separate batch, loaded and run at a later time.
-
-For the purposes of this guide, we'll assume a stage capacity of **3 plates per batch**. If your experiment has 3 or fewer plates, it fits in a single batch. If it has more than 3 plates, plan on multiple batches from the start, before you fill out plate layouts.
+The LC system's autosampler stages a limited number of well-plates at once depending on your instrument configuration. WorkListGenerator can only randomize samples within a single group of staged plates. For this tutorial, the term 'batch' means the set of plates put onto an autosampler at one time. If your experiment requires more plates than the stage holds, the additional plates must be run as a separate batch, loaded and run at a later time.
 
 ### Why exceeding the 3-plate limit requires careful experimental design
 
