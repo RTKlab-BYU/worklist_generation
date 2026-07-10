@@ -240,20 +240,21 @@ Both worklists will be saved to the folder specified by the user in step 3.
 
 The LC system's autosampler stages a limited number of well-plates at once depending on your instrument configuration. WorkListGenerator can only randomize samples within a single group of staged plates. For this tutorial, the term 'batch' means the set of plates put onto an autosampler at one time. If your experiment requires more plates than the stage holds, the additional plates must be run as a separate batch, loaded and run at a later time.
 
-### Why exceeding the 3-plate limit requires careful experimental design
+### Why exceeding the 4-plate limit requires careful experimental design
 
 Because randomization only happens within a batch, splitting plates into separate batches is a source of potential batch effects. If an experimental or biological factor is not distributed across all batches, that factor becomes confounded with whatever technical variation exists between batches.
 
-**Do not stratify any biological or experimental factor across batches.** For example, for a 6-plate BIG experiment split into 2 batches of 3:
+### How we split the mock experiment
+In the mock experiment associated with this paper, the number of single cells we want to analyze will fit on 6 384 well-plates. That exceeds the software limit of 4. So we need to create two batches. We chose to split this BIG experiment into 2 batches of 3 plates each. It is possible to organize samples several ways into these two batches. It would be bad to have the sample splitting confound the biological question. Remembering that our biological question is how are cells different in health and disease, we advise the following:
 
-- **Incorrect:** Batch 1 = all 3 "healthy" plates, Batch 2 = all 3 "diseased" plates. Any batch effect between the two runs is now indistinguishable from the disease effect you're trying to measure.
-- **Correct:** Each batch contains a balanced mix of conditions — e.g., each batch has both healthy and diseased subjects, and (where applicable) a mix of cell types, sexes, time points, etc.
+- **Incorrect Sample Distribution:** Batch 1 = all 3 "healthy" plates, Batch 2 = all 3 "diseased" plates. Any technical batch effect between the two set of runs is now indistinguishable from the disease effect.
+- **Correct Sample Distribution:** Each batch contains a balanced mix of conditions. We chose to put cells from one healthy and one diseased subject on each plate. Now the two batches of 3 plates each have three healthy people and 3 diseased people. 
 
 This applies to every experimental factor you care about, not just the primary variable of interest — subject, condition, treatment, cell type, sex, time point, and so on should all be spread as evenly as possible across batches.
 
 ### Practical steps for BIG experiments
 
-1. **Determine your batch count first.** Divide your total plate count by the stage capacity (3) to know how many batches you'll need.
+1. **Determine your batch count first.** Divide your total plate count by the stage capacity (e.g. 4) to know how many batches you'll need.
 2. **Balance every factor across batches before finalizing plate layouts.** Assign subjects/conditions to specific plates such that each batch is a representative "mini-experiment" of the whole design.
 3. **Run each batch as its own WorkListGenerator session.** Randomization and blocking are computed independently per batch.
 4. **Keep QC/library/blank spacing consistent across batches.** Each batch should independently follow the same QC frequency and library conventions described elsewhere in this guide, so that batches remain comparable to one another.
