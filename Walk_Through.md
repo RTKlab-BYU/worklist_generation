@@ -233,8 +233,7 @@ Both worklists will be saved to the folder specified by the user in step 3.
 **Key principles for BIG experiments:**
 
 - Your main experimental hypothesis needs to be represented in every batch.
-- You cannot split your hypothesis across batches, as this creates a confounding factor.
-- You cannot put, e.g., all "healthy" plates in one batch and all "diseased" plates in another.
+- Do not segregate your hypothesis across batches in a way that creates an artificial confounding factor. For example, do not put all "healthy" samples into one batch and all "diseased" samples in another.
 - Evenly space your experimental/biological factors out across all batches.
 
 ### LC stage capacity and batches
