@@ -228,7 +228,7 @@ Both worklists will be saved to the folder specified by the user in step 3.
 ---
 ## Guidance for BIG experiments
 
-**Definition:** For the purposes of this guide, a **BIG experiment** is any experiment that exceeds the LC stage's capacity. The WorklistGenerator has a max of **4 plates**, although we personally own both a 3 plate and a 4 plate configuration. If your experiment fits on 3 or fewer plates, it runs as a single batch and the multi-batch guidance below does not apply to you.
+**Definition:** For the purposes of this guide, a **BIG experiment** is any experiment that exceeds the LC stage's capacity. The WorklistGenerator has a max of **4 plates**, although we personally own both a 3 plate and a 4 plate configuration. If your experiment fits on 4 or fewer plates, it runs as a single batch and the multi-batch guidance below does not apply to you.
 
 **Key principles for BIG experiments:**
 
