@@ -239,7 +239,7 @@ class Blocker:
     def column_sorter(self, wells_list, conditions, num_to_run, lc_number, lib_placement, cond_range1, found_TB, two_xp_TB, found_sysvalid=False, sysvalid_condition=None):
         
         column1, column2, extras = [], [], [] # these are the odds ones out to attach at the end to run anyways if wanted
-        self.sample_leftovers = []  # sample wells left over from odd per-condition counts; re-inserted post-block in block()
+        self.sample_leftovers = []  # real sample wells left over from odd per-condition counts; re-inserted post-block in block()
         nonsample_before, nonsample_after, nonsample_other = [], [], []
         QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
         
@@ -774,11 +774,18 @@ class Blocker:
         else:  # default After
             return two_xp_flat_list + to_add
 
-    def split_sysvalid_by_type(self, SysValid_list):
+    def split_sysvalid_by_type(self, SysValid_list, full_conditions):
         groups = defaultdict(list)
         for well in SysValid_list:
             groups[well[0]].append(well)
-        return list(groups.values())
+
+        # Order the groups by where each SystemValidation condition appears in the conditions dict,
+        # rather than by order on the plate in. full_conditions preserves the dict's original key order.
+        ordered_ids = [key for key, v in full_conditions.items() if v[0] == "SystemValidation" and key in groups]
+        # Defensive fallback: include any group ids not found above (shouldn't normally happen)
+        ordered_ids += [key for key in groups if key not in ordered_ids]
+
+        return [groups[key] for key in ordered_ids]
 
     def pop_all_columns_per_group(self, sysvalid_groups, new_flat_list, missing_SV):
         """For each group, insert lc_number copies before moving to the next group."""
@@ -808,7 +815,7 @@ class Blocker:
             well.append('SysQC')
 
         # Split into per-type groups (one group per unique first element)
-        sysvalid_groups = self.split_sysvalid_by_type(SysValid_list)
+        sysvalid_groups = self.split_sysvalid_by_type(SysValid_list, full_conditions)
 
         new_flat_list = []
 
