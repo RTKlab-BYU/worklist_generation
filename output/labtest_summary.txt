@@ -1,0 +1,40 @@
+============================================================
+PROJECT SUMMARY
+============================================================
+
+Project ID: 33
+Name: Labtest
+Description: Demo test for lab meeting
+Created: 2026-07-30 11:11:19
+Independent Variables:
+  SAMPLE IDENTIFICATION
+    Cell Line
+
+------------------------------------------------------------
+GROUPS
+------------------------------------------------------------
+
+
+### a
+
+  [SAMPLE IDENTIFICATION]
+    Cell Line: dafjlsdkfj
+
+
+### b
+
+  [SAMPLE IDENTIFICATION]
+    Cell Line: jkafl;sdjf;l
+
+
+### c
+
+  [SAMPLE IDENTIFICATION]
+    Cell Line: a;lfskajsd
+
+
+### d
+
+  [SAMPLE IDENTIFICATION]
+    Cell Line: dafjlsdkfj
+

@@ -3,7 +3,11 @@ from metadata_capture.project_dataclasses.project_type import ProjectType
 
 
 def get_project_outline() -> ProjectOutline:
-    name = input("What is your project name: ")
+    while True:
+        name = input("What is your project name: ").strip()
+        if name:
+            break
+        print("Please enter a project name.")
     description = input("What is your project description: ")
     while True:
         try:

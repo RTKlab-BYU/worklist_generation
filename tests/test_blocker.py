@@ -32,7 +32,7 @@ def make_blocker(
     lib_same="YES",
     even="YES",
     qc_frequency=2,
-    inj_vol=[1]*50,
+    inj_vol=[1]*150,
 ):
     all_conditions = all_conditions or {1: cond_row("Sample")}
     conditions = [all_conditions]
@@ -416,7 +416,7 @@ def test_block_end_to_end_two_column_inserts_systemvalidation_in_pairs():
         lib_same="YES",
         even="YES",
         qc_frequency=2,
-        inj_vol=[1]*50,
+        inj_vol=[1]*150,
     )
 
     well_conditions, block_runs, *_ = blocker.block()

@@ -30,15 +30,16 @@ class Blocker:
         self.qc_frequency = parser_output[15]
         self.inj_vol = parser_output[16]
         self.run_seed = parser_output[17] if len(parser_output) > 17 else None
+        self.sample_leftovers = []  # populated by column_sorter(), consumed by insert_leftover_wells()
 
         self.generate_seed(self.run_seed)  # Set the random seed for reproducibility
 
     def generate_seed(self, run_seed=None):
         # Prioritize an explicitly passed argument, then the instance seed, then a random integer
         chosen_seed = run_seed if run_seed is not None else self.run_seed
-        if chosen_seed is None:
-            chosen_seed = random.randrange(sys.maxsize)
-        random.seed(chosen_seed)
+        
+        # If both are None (or empty/falsy), generate a random one
+        random.seed(chosen_seed := chosen_seed or random.randrange(sys.maxsize))
         print(f"Random seed set to: {chosen_seed}")
 
     def safe_int(self, val, default=0):
@@ -238,6 +239,7 @@ class Blocker:
     def column_sorter(self, wells_list, conditions, num_to_run, lc_number, lib_placement, cond_range1, found_TB, two_xp_TB, found_sysvalid=False, sysvalid_condition=None):
         
         column1, column2, extras = [], [], [] # these are the odds ones out to attach at the end to run anyways if wanted
+        self.sample_leftovers = []  # sample wells left over from odd per-condition counts; re-inserted post-block in block()
         nonsample_before, nonsample_after, nonsample_other = [], [], []
         QC_num, wet_QC_num, Blank_num, TrueBlank_num, Lib_num, SysValid_num = [], [], [], [], [], []
         
@@ -345,7 +347,12 @@ class Blocker:
         def add_to_columns(wells):
             if lc_number == 2:
                 if len(wells) % 2:
-                    extras.append(wells[-1:])
+                    # Odd well count: can't split evenly between the two columns here
+                    # without breaking the column1/column2 count-parity that blocker()
+                    # and zipper() rely on. Instead of dropping it, stash it and pair it
+                    # with a TrueBlank *after* blocks are built (see block()), so it
+                    # doesn't skew the block-size math.
+                    self.sample_leftovers.append(wells[-1])
                     wells = wells[:-1]
                 even = True
                 for w in wells:
@@ -428,6 +435,27 @@ class Blocker:
 
         num_of_blocks = len(both_blocks[0]) if both_blocks else 0
         return both_blocks, num_of_blocks
+
+    def insert_leftover_wells(self, both_blocks, num_blocks, leftovers, two_xp_TB):
+        """Re-insert sample wells that were set aside in add_to_columns because their
+        condition had an odd total well count (so they couldn't be split evenly between
+        column1 and column2). Each leftover well is dropped into a random block on one
+        column, paired with a TrueBlank in the same block index on the other column, so
+        column lengths stay matched for zipper() and no extra wells are silently dropped.
+        Done after blocker() builds the blocks so it can't skew the block-size math
+        (which is based on the minimum well count per condition)."""
+        if not leftovers or num_blocks == 0 or len(both_blocks) < 2:
+            return both_blocks
+        sample_blocks1, sample_blocks2 = both_blocks[0], both_blocks[1]
+        for well in leftovers:
+            idx = random.randint(0, num_blocks - 1)
+            if random.random() < 0.5:
+                sample_blocks1[idx].append(well)
+                sample_blocks2[idx].append([two_xp_TB, self.TB_location])
+            else:
+                sample_blocks2[idx].append(well)
+                sample_blocks1[idx].append([two_xp_TB, self.TB_location])
+        return both_blocks
 
     def nonsample_blocker(self, lc_number, nonsample_other, num_of_blocks, conditions, total_wells):
         """ Will divide the QC, Blanks, Trueblanks etc, reserved to be between the runs, into blocks
@@ -861,6 +889,7 @@ class Blocker:
                 nonsample_before, nonsample_after, nonsample_other, column1, column2, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat, conditions,
                                                                                         self.num_to_run, self.lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition)
                 both_blocks, num_blocks = self.blocker(conditions, self.even, column1, column2)
+                both_blocks = self.insert_leftover_wells(both_blocks, num_blocks, self.sample_leftovers, two_xp_TB)
             nonsample_blocks = self.nonsample_blocker(self.lc_number, nonsample_other, num_blocks, conditions, len(all_wells_flat))
             sample_blocks = self.zipper(both_blocks)
             non_flat_list = self.combine_samples_and_nonsamples(nonsample_before, nonsample_after, sample_blocks, nonsample_blocks, self.qc_frequency, conditions)
