@@ -91,7 +91,14 @@ def _validate_file_names(df, label, twocol_2xp):
         print(len(blocks))
 
         all_conditions = set(c for conditions in blocks.values() for c in conditions)
+        def block_num(block_id):
+            m = re.search(r"\d+", block_id)
+            return int(m.group()) if m else -1
+        last_block_id = max(blocks, key=block_num)
+
         for block_id, conditions in blocks.items():
+            if block_id == last_block_id:
+                continue
             missing = all_conditions - set(conditions)
             assert not missing, (
                 f"{label}{label_suffix}: Block '{block_id}' is missing conditions: {missing}"
@@ -101,8 +108,11 @@ def _validate_file_names(df, label, twocol_2xp):
     block_files = [fn for fn in file_names if block_pattern.search(fn)]
 
     if twocol_2xp:
-        check_block_completeness(block_files[0::2], label_suffix=" (experiment 1)")
-        check_block_completeness(block_files[1::2], label_suffix=" (experiment 2)")
+        ch_pattern = re.compile(r"_ch(\d)_", re.IGNORECASE)
+        exp1_files = [fn for fn in block_files if (m := ch_pattern.search(fn)) and m.group(1) == "1"]
+        exp2_files = [fn for fn in block_files if (m := ch_pattern.search(fn)) and m.group(1) == "2"]
+        check_block_completeness(exp1_files, label_suffix=" (experiment 1)")
+        check_block_completeness(exp2_files, label_suffix=" (experiment 2)")
     else:
         check_block_completeness(block_files)
 

@@ -406,7 +406,16 @@ class Blocker:
                 random.shuffle(block)
                 sample_blocks.append(block)
 
-            if even.upper() == "NO":
+            if even.upper() == "YES":
+                # Collect all wells beyond sample_block_num per sample into one extra block appended after the regular ones.
+                leftover_block = []
+                for sample in sample_dict:
+                    leftover_block.extend(grouped.get(sample, []))
+                if leftover_block:
+                    random.shuffle(leftover_block)
+                    sample_blocks.append(leftover_block)
+
+            elif even.upper() == "NO":
                 for sample in sample_dict:
                     leftovers = grouped.get(sample, [])
                     if not leftovers:
@@ -928,11 +937,11 @@ class Blocker:
                 all_wells_flat2.append([two_xp_TB, "R5"])
 
             # sort the wells in groups so they can be processed according to run type
-            nonsample_before1, nonsample_after1, nonsample_other1, exp1col1, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat1, conditions1,
-                                                                        self.num_to_run, lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
+            nonsample_before1, nonsample_after1, nonsample_other1, exp1col1, sysvalid_list, separate_lib1 = self.column_sorter(all_wells_flat1, conditions1, self.num_to_run, lc_number, self.lib_placement,                                                       
+                                                                        self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
             both_blocks1, num_blocks1 = self.blocker(conditions1, self.even, exp1col1)
-            nonsample_before2, nonsample_after2, nonsample_other2, exp2col1, sysvalid_list, separate_lib2 = self.column_sorter(all_wells_flat2, conditions2,
-                                                                        self.num_to_run, lc_number, self.lib_placement, self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
+            nonsample_before2, nonsample_after2, nonsample_other2, exp2col1, sysvalid_list, separate_lib2 = self.column_sorter(all_wells_flat2, conditions2, self.num_to_run, lc_number, self.lib_placement,
+                                                                        self.cond_range1, found_TB, two_xp_TB, found_sysvalid, sysvalid_condition) # cond_range1 IS CORRECT!!! It checks of cond_range1.upper() == "ALL"
             both_blocks2, num_blocks2 = self.blocker(conditions2, self.even, exp2col1)
 
             nonsample_blocks1 = self.nonsample_blocker(lc_number, nonsample_other1, num_blocks1, conditions1, len(all_wells_flat1))
